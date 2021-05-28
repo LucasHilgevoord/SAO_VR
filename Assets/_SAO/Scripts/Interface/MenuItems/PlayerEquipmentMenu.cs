@@ -24,9 +24,17 @@ namespace PlayerInterface
 
         private EquipmentMenuItem lastOpened;
 
-
         private float toggleDuration = 0.3f;
         private bool isEnabled;
+
+        private void Awake()
+        {
+            EquipmentMenuItem.EquipmentItemPressed += OnDescriptionItemClicked;
+        }
+        private void OnDestroy()
+        {
+            EquipmentMenuItem.EquipmentItemPressed -= OnDescriptionItemClicked;
+        }
 
         private void Start()
         {
@@ -40,18 +48,7 @@ namespace PlayerInterface
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.P))
-            {
                 OnDescriptionItemClicked(null, !isEnabled);
-            }
-        }
-
-        private void Awake()
-        {
-            EquipmentMenuItem.EquipmentItemPressed += OnDescriptionItemClicked;
-        }
-        private void OnDestroy()
-        {
-            EquipmentMenuItem.EquipmentItemPressed -= OnDescriptionItemClicked;
         }
 
         public override void OpenMenu()
@@ -113,6 +110,8 @@ namespace PlayerInterface
             content.position = contentPos;
 
             title.text = data.title;
+            Debug.Log(icon);
+            Debug.Log(data.iconSpriteOff);
             icon.sprite = data.iconSpriteOff;
 
             desc.text = data.description;
