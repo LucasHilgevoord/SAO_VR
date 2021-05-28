@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SlashHitTest
+  m_Shader: {fileID: -6465566751694194690, guid: 46ee82c24a59ee64bb27f058584dc51d,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - HitGridTex:
+        m_Texture: {fileID: 2800000, guid: ae9e23b17bc3da9438f3b8223c217537, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - MainTex:
+        m_Texture: {fileID: 2800000, guid: d491734441f6dae47a996975e531aefd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - SplatTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Splatmap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_4E80C286:
+        m_Texture: {fileID: 2800000, guid: ae9e23b17bc3da9438f3b8223c217537, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_673DC259:
+        m_Texture: {fileID: 2800000, guid: 8b6a144f46cdba743a45781d7a8e3f67, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_E8C0F8F8:
+        m_Texture: {fileID: 2800000, guid: d491734441f6dae47a996975e531aefd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - BrushSize: 100
+    - BrushStrenght: 1
+    - OutlineThickness: 0.005
+    - Vector1_7C2EADC4: 0.06
+    - Vector1_B3863282: 0
+    - Vector1_C6DBFF2E: 0
+    m_Colors:
+    - Color_323B358: {r: 0.97647053, g: 0.9411765, b: 0.92941177, a: 1}
+    - Color_688C7B94: {r: 1, g: 1, b: 1, a: 1}
+    - Color_79F9AA0B: {r: 0.9433962, g: 0.71212804, b: 0.6897472, a: 1}
+    - Color_BAAEAC45: {r: 1, g: 0, b: 0, a: 1}
+    - Coordinate: {r: 0.1722366, g: 0.7491626, b: 0, a: 0}
+    - DrawColor: {r: 1, g: 0, b: 0, a: 0}
+    - HitGridTiling: {r: 50, g: 50, b: 0, a: 0}
+    - MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - OutlineColor: {r: 1, g: 0, b: 0, a: 1}
+    - Vector2_B2D3E864: {r: 30, g: 30, b: 0, a: 0}
