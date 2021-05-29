@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class CharacterSelectionManager : MonoBehaviour
 {
@@ -24,9 +23,6 @@ public class CharacterSelectionManager : MonoBehaviour
 
     [Header("Character Creation")]
     [SerializeField] private GameObject characterCreation;
-    [SerializeField] private Volume postProcessingVolume;
-    [SerializeField] private VolumeProfile CharacterCreatorProfile;
-    private VolumeProfile previousProfile;
 
     private void Awake()
     {
@@ -50,10 +46,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private bool UserDataAvailable()
     {
-        // TESTING
-        return false;
-
-
+        return true;
         if (PlayerPrefs.GetString("playerName", "") == "")
         {
             Debug.Log("No player data found!");
@@ -119,16 +112,12 @@ public class CharacterSelectionManager : MonoBehaviour
         OverlayEffects.fadeInComplete -= OnFadeInCompleted;
         characterCreation.SetActive(true);
 
-        // Set the post processing
-        previousProfile = postProcessingVolume.profile;
-        postProcessingVolume.profile = CharacterCreatorProfile;
-
         OverlayEffects.Instance.FadeOutOverlay(3f, Color.black, 0.5f);
     }
 
     private void OnFadeOutCompleted() 
-    {
-         
+    { 
+
     }
     #endregion
 }

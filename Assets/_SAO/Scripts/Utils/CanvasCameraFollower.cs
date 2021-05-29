@@ -5,16 +5,19 @@ using UnityEngine;
 public class CanvasCameraFollower : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private float distance = 2;
-    [SerializeField] private float lerpSpeed = 0.05f;
+    private float distance;
+    private float lerpSpeed = 0.3f;
 
-    private float maxHeightDistance = 1;
+    private void Start()
+    {
+        distance = Vector3.Distance(playerCamera.transform.position, this.transform.position);
+    }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Vector3 newPos = playerCamera.transform.position + playerCamera.transform.forward * distance;
         this.transform.position = Vector3.Lerp(this.transform.position, newPos, lerpSpeed);
 
-        this.transform.LookAt(2 * transform.position - playerCamera.transform.position);
+        //this.transform.LookAt(playerCamera.transform, Vector3.up);
     }
 }
