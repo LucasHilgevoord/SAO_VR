@@ -34,6 +34,14 @@ namespace PlayerInterface
             }
         }
 
+        internal void ToggleCatogoryMenu(bool enable)
+		{
+            if (enable)
+                categorieMenu.OpenMenu();
+            else
+                categorieMenu.CloseMenu();
+        }
+
         /// <summary>
         /// Methode to add/remove (sub)menu's from the open (sub)menu list.
         /// Used to know the road that the user has taken in the interface.
