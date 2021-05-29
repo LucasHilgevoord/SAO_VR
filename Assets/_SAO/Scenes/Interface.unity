@@ -2122,18 +2122,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 178670071}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &290763987 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 11450312, guid: dc06161b6d97feb419f45f03b62e14b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 392362242}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &296122978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2620,6 +2608,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317481429}
   m_CullTransparentMesh: 0
+--- !u!114 &329154878 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11401046, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 392362242}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &333870303
 GameObject:
   m_ObjectHideFlags: 0
@@ -9435,9 +9435,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interfaceManager: {fileID: 1304015290}
   skeleton:
-    actionPath: /actions/default/in/SkeletonLeftHand
+    actionPath: /actions/default/in/SkeletonRightHand
     needsReinit: 0
-  leftHand: {fileID: 290763987}
+  leftHand: {fileID: 329154878}
 --- !u!1 &1304015288
 GameObject:
   m_ObjectHideFlags: 0
@@ -14019,7 +14019,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 2001742207}
-  distance: 0
 --- !u!1 &2061214489
 GameObject:
   m_ObjectHideFlags: 0
