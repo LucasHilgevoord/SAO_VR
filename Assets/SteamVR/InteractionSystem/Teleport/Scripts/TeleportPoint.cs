@@ -136,12 +136,12 @@ namespace Valve.VR.InteractionSystem
 
 			if ( highlight )
 			{
-				pointIcon.gameObject.SetActive( true );
+				//pointIcon.gameObject.SetActive( true );
 				animation.Play();
 			}
 			else
 			{
-				pointIcon.gameObject.SetActive( false );
+				//pointIcon.gameObject.SetActive( false );
 				animation.Stop();
 			}
 		}

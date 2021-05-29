@@ -77,7 +77,7 @@ namespace PlayerInterface
             ToggleActions();
         }
 
-        internal void Interact()
+        public void Interact()
         {
             ToggleItem();
 
@@ -91,5 +91,6 @@ namespace PlayerInterface
         {
             Interact();
         }
-    }
+
+	}
 }

@@ -61,7 +61,7 @@ public class InterfaceGesture : MonoBehaviour
 		{
 			//Debug.Log("Cool, gesture recognized");
 			// Only check the start position once
-			if (!hand.appearGestureStarted)
+			if (!hand.appearGestureStarted || hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).y > startFingerPosY)
 			{
 				//Debug.Log("Gesture start pos set");
 				hand.appearGestureStarted = true;
