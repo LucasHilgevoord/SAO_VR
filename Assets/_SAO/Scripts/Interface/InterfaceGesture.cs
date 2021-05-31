@@ -71,7 +71,6 @@ public class InterfaceGesture : MonoBehaviour
 			// Check if we reached the requested distance before the timer runs out
 			if (hand.curTimeRemaining > 0)
 			{
-
 				hand.curTimeRemaining -= Time.deltaTime;
 
 				float currentIndexTipY = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).y;

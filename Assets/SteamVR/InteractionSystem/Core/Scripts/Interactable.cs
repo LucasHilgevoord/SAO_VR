@@ -92,7 +92,7 @@ namespace Valve.VR.InteractionSystem
         public bool isHovering { get; protected set; }
         public bool wasHovering { get; protected set; }
 
-        public UnityEvent OnHoverEnd;
+        public UnityEvent OnHoverBegin;
 
         private void Awake()
         {
@@ -259,6 +259,9 @@ namespace Valve.VR.InteractionSystem
                 CreateHighlightRenderers();
                 UpdateHighlightRenderers();
             }
+
+            if(hand)
+            OnHoverBegin?.Invoke();
         }
 
 
@@ -279,7 +282,7 @@ namespace Valve.VR.InteractionSystem
                     Destroy(highlightHolder);
             }
 
-            OnHoverEnd?.Invoke();
+            
         }
 
         protected virtual void Update()

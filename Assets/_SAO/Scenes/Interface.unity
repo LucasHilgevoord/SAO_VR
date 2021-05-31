@@ -3071,6 +3071,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11401046, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: useHoverSphere
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401046, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: fingerJointHoverRadius
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 11450312, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: useHoverSphere
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11450312, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: fingerJointHover
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11450312, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: fingerJointHoverRadius
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 11461462, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3770,6 +3790,26 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: hideHandOnAttach
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: highlightOnHover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: handFollowTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: useHandObjectAttachmentPoint
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c548e473261854b93b5338a4ba91f4, type: 3}
 --- !u!224 &491503519 stripped
@@ -3784,7 +3824,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 491503518}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 908230149}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de3f26d7b2417294ba72e8cb0d13edd8, type: 3}
@@ -6807,78 +6847,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 595146273}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &908230149 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3697916663762206294, guid: e8c548e473261854b93b5338a4ba91f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 491503518}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &908230154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 908230149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activateActionSetOnAttach:
-    actionSetPath: 
-  hideHandOnAttach: 1
-  hideSkeletonOnAttach: 0
-  hideControllerOnAttach: 0
-  handAnimationOnPickup: 0
-  setRangeOfMotionOnPickup: -1
-  useHandObjectAttachmentPoint: 1
-  attachEaseIn: 0
-  snapAttachEaseInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  snapAttachEaseInTime: 0.15
-  snapAttachEaseInCompleted: 0
-  skeletonPoser: {fileID: 0}
-  handFollowTransform: 1
-  highlightOnHover: 1
-  hideHighlight: []
-  hoverPriority: 0
-  OnHoverEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 491503522}
-        m_MethodName: Interact
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &917184047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 93b6d701171f9a7479be8027418b2af0,
@@ -7596,6 +7564,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: hideHandOnAttach
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: highlightOnHover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: handFollowTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: useHandObjectAttachmentPoint
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c548e473261854b93b5338a4ba91f4, type: 3}
 --- !u!224 &996060097 stripped
@@ -7800,6 +7788,26 @@ PrefabInstance:
     - target: {fileID: 3697916663762206295, guid: e8c548e473261854b93b5338a4ba91f4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: hideHandOnAttach
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: highlightOnHover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: handFollowTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: useHandObjectAttachmentPoint
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -11584,6 +11592,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: hideHandOnAttach
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: highlightOnHover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: handFollowTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: useHandObjectAttachmentPoint
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c548e473261854b93b5338a4ba91f4, type: 3}
 --- !u!224 &1644485520 stripped
@@ -11740,6 +11768,26 @@ PrefabInstance:
     - target: {fileID: 3697916663762206295, guid: e8c548e473261854b93b5338a4ba91f4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: hideHandOnAttach
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: highlightOnHover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: handFollowTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393789222894632163, guid: e8c548e473261854b93b5338a4ba91f4,
+        type: 3}
+      propertyPath: useHandObjectAttachmentPoint
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12922,50 +12970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d36e95a6ff2e2c44a2394acc383fe4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateActionSetOnAttach:
-    actionSetPath: 
-  hideHandOnAttach: 1
-  hideSkeletonOnAttach: 0
-  hideControllerOnAttach: 0
-  handAnimationOnPickup: 0
-  setRangeOfMotionOnPickup: -1
-  useHandObjectAttachmentPoint: 1
-  attachEaseIn: 0
-  snapAttachEaseInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  snapAttachEaseInTime: 0.15
-  snapAttachEaseInCompleted: 0
-  skeletonPoser: {fileID: 0}
-  handFollowTransform: 1
-  highlightOnHover: 1
-  hideHighlight: []
-  hoverPriority: 0
-  OnHoverEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  menuItem: {fileID: 0}
 --- !u!114 &1820601303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13018,7 +13022,7 @@ MonoBehaviour:
   highlightOnHover: 1
   hideHighlight: []
   hoverPriority: 0
-  OnHoverEnd:
+  OnHoverBegin:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1823093334 stripped
