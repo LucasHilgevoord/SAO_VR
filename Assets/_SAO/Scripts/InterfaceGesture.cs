@@ -35,6 +35,7 @@ public class InterfaceGesture : MonoBehaviour
 
 	private void Update()
 	{
+		return;
 		CheckAppearGesture(leftHand);
 		CheckAppearGesture(rightHand);
 
@@ -50,8 +51,6 @@ public class InterfaceGesture : MonoBehaviour
 		if (hand.hand.mainRenderModel == null)
 			return;
 
-		//Debug.Log(skeleton.indexCurl + " | " + skeleton.middleCurl + " | " + skeleton.ringCurl + " | " + skeleton.pinkyCurl + " | " + skeleton.thumbCurl);
-
 		if (!openedInterface &&
 			CheckCurlMin(hand.skeleton.indexCurl, 0.05f) &&
 			CheckCurlMin(hand.skeleton.middleCurl, 0.15f) &&
@@ -59,11 +58,9 @@ public class InterfaceGesture : MonoBehaviour
 			CheckCurlMax(hand.skeleton.pinkyCurl, 0.5f) &&
 			CheckCurlMax(hand.skeleton.thumbCurl, 0.6f))
 		{
-			//Debug.Log("Cool, gesture recognized");
 			// Only check the start position once
 			if (!hand.appearGestureStarted)
 			{
-				//Debug.Log("Gesture start pos set");
 				hand.appearGestureStarted = true;
 				startFingerPosY = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).y;
 			}
@@ -112,11 +109,9 @@ public class InterfaceGesture : MonoBehaviour
 			CheckCurlMin(hand.skeleton.pinkyCurl, 0.1f) &&
 			CheckCurlMin(hand.skeleton.thumbCurl, 0.1f))
 		{
-			//Debug.Log("Closing gesture detected");
 			// Only check the start position once
 			if (!hand.dismissGestureStarted)
 			{
-				//Debug.Log("Dismiss start pos set");
 				hand.dismissGestureStarted = true;
 				startFingerPosX = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).x;
 			}
@@ -128,7 +123,6 @@ public class InterfaceGesture : MonoBehaviour
 				float currentIndexTipX = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).x;
 				if (Mathf.Abs(startFingerPosX - currentIndexTipX) > minTriggerDistance)
 				{
-					//Debug.Log("GO AWAY BALLS");
 					interfaceManager.ToggleCatogoryMenu(false);
 					openedInterface = false;
 					hand.dismissGestureStarted = false;
@@ -136,10 +130,7 @@ public class InterfaceGesture : MonoBehaviour
 				}
 			}
 			else
-			{
-				Debug.Log("Time ran out!");
 				hand.curTimeRemaining = maxTime;
-			}
 		}
 	}
 }

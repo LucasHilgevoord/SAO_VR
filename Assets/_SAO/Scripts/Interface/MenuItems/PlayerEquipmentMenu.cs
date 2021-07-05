@@ -110,8 +110,6 @@ namespace PlayerInterface
             content.position = contentPos;
 
             title.text = data.title;
-            Debug.Log(icon);
-            Debug.Log(data.iconSpriteOff);
             icon.sprite = data.iconSpriteOff;
 
             desc.text = data.description;

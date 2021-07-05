@@ -12,7 +12,7 @@ public class OverlayEffects : Singleton<OverlayEffects>
 
     [SerializeField] private Image overlay;
 
-    public void FadeInOverlay(float duration, Color color, float delay = 0)
+    public void FadeInOverlay(float duration, Color color, float delay = 0, Action callback = null)
     {
         overlay.gameObject.SetActive(true);
         DOTween.Kill(overlay);
@@ -21,10 +21,15 @@ public class OverlayEffects : Singleton<OverlayEffects>
         myColor.a = 0;
 
         overlay.color = myColor;
-        overlay.DOFade(1, duration).SetDelay(delay).SetEase(Ease.Linear).OnComplete(()=> { fadeInComplete.Invoke(); });
+        overlay.DOFade(1, duration).SetDelay(delay).SetEase(Ease.Linear)
+            .OnComplete(()=> 
+            { 
+                fadeInComplete.Invoke(); 
+                callback?.Invoke(); 
+            });
     }
 
-    public void FadeOutOverlay(float duration, Color color, float delay = 0)
+    public void FadeOutOverlay(float duration, Color color, float delay = 0, Action callback = null)
     {
         DOTween.Kill(overlay);
         Color myColor = color;
@@ -35,6 +40,7 @@ public class OverlayEffects : Singleton<OverlayEffects>
         {
             fadeOutComplete?.Invoke();
             overlay.gameObject.SetActive(false);
+            callback?.Invoke();
         });
     }
 }

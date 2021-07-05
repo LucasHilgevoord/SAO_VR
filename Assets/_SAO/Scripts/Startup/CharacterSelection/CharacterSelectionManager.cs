@@ -10,22 +10,24 @@ public class CharacterSelectionManager : MonoBehaviour
     public static event Action CharacterSelected;
 
     [Header("Data check")]
-    [SerializeField] private CanvasGroup myCanvasGroup;
+    public CanvasGroup myCanvasGroup;
 
     private Vector3 presetHeaderScale = new Vector3(0, 1, 1);
-    [SerializeField] private GameObject headerBox;
-    [SerializeField] private CanvasGroup headerBoxCanvasGroup;
+    public GameObject headerBox;
+    public CanvasGroup headerBoxCanvasGroup;
 
     private Vector3 presetBodyScale = new Vector3(1, 0, 1);
-    [SerializeField] private GameObject bodyBox;
-    [SerializeField] private CanvasGroup bodyBoxCanvasGroup;
+    public GameObject bodyBox;
+    public CanvasGroup bodyBoxCanvasGroup;
 
     private float scaleDuration = 0.2f;
 
     [Header("Character Creation")]
-    [SerializeField] private GameObject characterCreation;
-    [SerializeField] private Volume postProcessingVolume;
-    [SerializeField] private VolumeProfile CharacterCreatorProfile;
+    public GameObject characterCreation;
+    public NameHandler nameHandler;
+    public GameObject mainLightSource;
+    public Volume postProcessingVolume;
+    public VolumeProfile CharacterCreatorProfile;
     private VolumeProfile previousProfile;
 
     private void Awake()
@@ -52,7 +54,6 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         // TESTING
         return false;
-
 
         if (PlayerPrefs.GetString("playerName", "") == "")
         {
@@ -110,25 +111,43 @@ public class CharacterSelectionManager : MonoBehaviour
     #region Character Creation
     private void StartCharacterCreation()
     {
-        OverlayEffects.fadeInComplete += OnFadeInCompleted;
-        OverlayEffects.Instance.FadeInOverlay(1f, Color.black);
+        OverlayEffects.Instance.FadeInOverlay(1f, Color.black, 0, EnableCharacterCreator);
     }
 
-    private void OnFadeInCompleted()
+    private void EnableCharacterCreator()
     {
-        OverlayEffects.fadeInComplete -= OnFadeInCompleted;
         characterCreation.SetActive(true);
 
-        // Set the post processing
+        // Set the visuals of the scene
         previousProfile = postProcessingVolume.profile;
         postProcessingVolume.profile = CharacterCreatorProfile;
+        mainLightSource.SetActive(false);
 
-        OverlayEffects.Instance.FadeOutOverlay(3f, Color.black, 0.5f);
+        OverlayEffects.Instance.FadeOutOverlay(3f, Color.black, 0.5f, ()=> { StartCoroutine(ShowNameInput()); });
     }
 
-    private void OnFadeOutCompleted() 
+    private IEnumerator ShowNameInput()
     {
-         
+        yield return new WaitForSeconds(0.5f);
+
+        nameHandler.gameObject.SetActive(true);
+        NameHandler.CredentialsAccepted += OnCredentialsAccepted;
     }
+
+    private void OnCredentialsAccepted()
+    {
+        NameHandler.CredentialsAccepted -= OnCredentialsAccepted;
+        OverlayEffects.Instance.FadeInOverlay(1f, new Color(0.5f, 0.5f, 0.5f), 0, DisableCharacterCreator);
+    }
+
+    private void DisableCharacterCreator()
+    {
+        // Set the visuals of the scene
+        postProcessingVolume.profile = previousProfile;
+        mainLightSource.SetActive(true);
+
+        OverlayEffects.Instance.FadeOutOverlay(0f, new Color(0.5f, 0.5f, 0.5f), 0.5f, () => {  });
+    }
+
     #endregion
 }

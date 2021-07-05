@@ -7,6 +7,9 @@ namespace PlayerInterface
 {
     public class InterfaceManager : MonoBehaviour
     {
+        public static event Action CatogoryMenuOpened;
+        public static event Action CatogoryMenuClosed;
+
         /// <summary>
         /// List of all the opened sub-menu's
         /// </summary>
@@ -24,22 +27,24 @@ namespace PlayerInterface
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.X))
-            {
-                categorieMenu.OpenMenu();
-            }
+                ToggleCatogoryMenu(true);
 
             if (Input.GetKeyDown(KeyCode.C))
-            {
-                categorieMenu.CloseMenu();
-            }
+                ToggleCatogoryMenu(false);
         }
 
         internal void ToggleCatogoryMenu(bool enable)
 		{
             if (enable)
+            {
+                CatogoryMenuOpened?.Invoke();
                 categorieMenu.OpenMenu();
+            }
             else
+            {
+                CatogoryMenuClosed?.Invoke();
                 categorieMenu.CloseMenu();
+            }
         }
 
         /// <summary>

@@ -2608,18 +2608,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317481429}
   m_CullTransparentMesh: 0
---- !u!114 &329154878 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 11401046, guid: dc06161b6d97feb419f45f03b62e14b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 392362242}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29e3e4511966ba94d8ba0b98c6c62f82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &333870303
 GameObject:
   m_ObjectHideFlags: 0
@@ -4777,6 +4765,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 719127850}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &726202940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 110716, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 392362242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &726202943 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 496744, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 392362242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &726202944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726202940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &731560783
 GameObject:
   m_ObjectHideFlags: 0
@@ -9434,10 +9465,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interfaceManager: {fileID: 1304015290}
-  skeleton:
-    actionPath: /actions/default/in/SkeletonRightHand
-    needsReinit: 0
-  leftHand: {fileID: 329154878}
+  leftHand:
+    skeleton:
+      actionPath: 
+      needsReinit: 0
+    hand: {fileID: 0}
+  rightHand:
+    skeleton:
+      actionPath: 
+      needsReinit: 0
+    hand: {fileID: 0}
 --- !u!1 &1304015288
 GameObject:
   m_ObjectHideFlags: 0
@@ -13729,12 +13766,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 392362242}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &2001742207 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2014920, guid: dc06161b6d97feb419f45f03b62e14b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 392362242}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2001742208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14013,12 +14044,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035677835}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4f5ca8e23004c544965288792842478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 2001742207}
+  target: {fileID: 726202943}
+  distance: 0.5
+  lerpSpeed: 0.05
 --- !u!1 &2061214489
 GameObject:
   m_ObjectHideFlags: 0
