@@ -16,9 +16,24 @@ public class AudioManager : Singleton<AudioManager>
     /// <summary> List of all useable AudioClips </summary>
     [SerializeField] private List<AudioClip> clips;
 
+    internal override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this.gameObject);
+
+        SceneLoader.SwitchSceneComplete += OnSceneSwitched;
+    }
+
+    private void OnDestroy()
+    {
+        SceneLoader.SwitchSceneComplete -= OnSceneSwitched;
+    }
+
     private void Start()
     {
         // Assign all the preset AudioSources from the gameObject
+        FindAudioListener();
+
         audioSources = new List<AudioSource>(this.GetComponents<AudioSource>());
         presetAudioSourcesAmount = audioSources.Count;
     }
@@ -131,4 +146,11 @@ public class AudioManager : Singleton<AudioManager>
             Destroy(source);
         }
     }
+
+    /// <summary>
+    /// Method to set the audioListener
+    /// </summary>
+    private void FindAudioListener(AudioListener listener = null) { audioListener = listener != null ? listener : Camera.main.GetComponent<AudioListener>(); }
+
+    private void OnSceneSwitched(SceneType type) { FindAudioListener(); }
 }

@@ -12,6 +12,12 @@ public class OverlayEffects : Singleton<OverlayEffects>
 
     [SerializeField] private Image overlay;
 
+    internal override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     public void FadeInOverlay(float duration, Color color, float delay = 0, Action callback = null)
     {
         overlay.gameObject.SetActive(true);
@@ -24,7 +30,7 @@ public class OverlayEffects : Singleton<OverlayEffects>
         overlay.DOFade(1, duration).SetDelay(delay).SetEase(Ease.Linear)
             .OnComplete(()=> 
             { 
-                fadeInComplete.Invoke(); 
+                fadeInComplete?.Invoke(); 
                 callback?.Invoke(); 
             });
     }

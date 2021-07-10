@@ -10,7 +10,6 @@ public class NameHandler : MonoBehaviour
 {
     public static event Action CredentialsAccepted;
 
-    [SerializeField] private Transform window;
     [SerializeField] private CanvasGroup myCanvasGroup;
 
     private Vector3 presetSize = new Vector3(1, 0, 1);
@@ -42,14 +41,18 @@ public class NameHandler : MonoBehaviour
 
     private void OpenWindow()
     {
-        window.localScale = presetSize;
-        window.DOScale(Vector3.one, windowToggleDuration);
+        transform.localScale = presetSize;
+        transform.DOScale(Vector3.one, windowToggleDuration);
     }
 
     private void CloseWindow()
     {
-        window.DOScale(presetSize, windowToggleDuration);
-        myCanvasGroup.DOFade(0, windowToggleDuration).OnComplete(() => { CredentialsAccepted?.Invoke(); });
+        transform.DOScale(presetSize, windowToggleDuration);
+        myCanvasGroup.DOFade(0, windowToggleDuration).OnComplete(() => 
+        {
+            CredentialsAccepted?.Invoke();
+            transform.gameObject.SetActive(false);
+        });
     }
 
     private void ConfirmCredentials()

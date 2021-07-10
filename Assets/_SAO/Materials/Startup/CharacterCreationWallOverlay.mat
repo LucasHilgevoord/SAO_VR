@@ -27,7 +27,7 @@ Material:
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3100
   stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
@@ -94,7 +94,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - AlbedoColor: {r: 0.8773585, g: 0.624911, b: 0.7627144, a: 0.6627451}
+    - AlbedoColor: {r: 0.8773585, g: 0.624911, b: 0.7627144, a: 0.31764707}
     - ScrollSpeed: {r: 0, g: -0.05, b: 0, a: 0}
     - Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 0.8820755, b: 0.9210537, a: 0.14901961}

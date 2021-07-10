@@ -13,7 +13,7 @@ public class EnterSAO : MonoBehaviour
     [SerializeField] private Camera mainCamera;
 
     private Color backgroundColor = new Color(0.5f, 0.5f, 0.5f);
-    private float recolorDuration = 0.2f;
+    private float recolorDuration = 0.5f;
 
     [Header("Welcome Text")]
     [SerializeField] private Transform welcomeText;
@@ -96,5 +96,8 @@ public class EnterSAO : MonoBehaviour
         //groundMat.DOColor(Color.white, bloomingDuration * 2);
         bloomElement.transform.DOLocalMove(new Vector3(0, 0, -2070), bloomingDuration).SetDelay(bloomingDuration * 0.2f);
         FadeBackground(Color.white, bloomingDuration);
+
+        yield return new WaitForSeconds(bloomingDuration * 2);
+        SceneLoader.Instance.LoadScene((int)SceneType.Interface, true, Color.white);
     }
 }

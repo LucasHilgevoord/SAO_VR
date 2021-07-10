@@ -22,21 +22,29 @@ public class VoiceRecognition : MonoBehaviour
 
     public static event Action PhraseTriggered;
 
-    void Start()
+    internal bool Init()
     {
-        List<string> allKeywords = new List<string>();
-        foreach (Keyword keyword in keywords)
+        if (PhraseRecognitionSystem.isSupported)
         {
-            foreach (string word in keyword.keywordDifferences)
-                allKeywords.Add(word);
+            List<string> allKeywords = new List<string>();
+            foreach (Keyword keyword in keywords)
+            {
+                foreach (string word in keyword.keywordDifferences)
+                    allKeywords.Add(word);
 
-            if (allKeywords.Contains(keyword.keyword) == false)
-                allKeywords.Add(keyword.keyword);
+                if (allKeywords.Contains(keyword.keyword) == false)
+                    allKeywords.Add(keyword.keyword);
+            }
+
+            m_Recognizer = new KeywordRecognizer(allKeywords.ToArray());
+            m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
+            m_Recognizer.Start();
+            return true;
+        } else
+        {
+            Debug.Log("Speech recognition is not supported on this machine");
+            return false;
         }
-
-        m_Recognizer = new KeywordRecognizer(allKeywords.ToArray());
-        m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
-        m_Recognizer.Start();
     }
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)

@@ -111,7 +111,7 @@ public class CharacterSelectionManager : MonoBehaviour
     #region Character Creation
     private void StartCharacterCreation()
     {
-        OverlayEffects.Instance.FadeInOverlay(1f, Color.black, 0, EnableCharacterCreator);
+        OverlayEffects.Instance.FadeInOverlay(1f, Color.white, 0, EnableCharacterCreator);
     }
 
     private void EnableCharacterCreator()
@@ -123,7 +123,7 @@ public class CharacterSelectionManager : MonoBehaviour
         postProcessingVolume.profile = CharacterCreatorProfile;
         mainLightSource.SetActive(false);
 
-        OverlayEffects.Instance.FadeOutOverlay(3f, Color.black, 0.5f, ()=> { StartCoroutine(ShowNameInput()); });
+        OverlayEffects.Instance.FadeOutOverlay(3f, Color.white, 0.5f, ()=> { StartCoroutine(ShowNameInput()); });
     }
 
     private IEnumerator ShowNameInput()
@@ -137,7 +137,7 @@ public class CharacterSelectionManager : MonoBehaviour
     private void OnCredentialsAccepted()
     {
         NameHandler.CredentialsAccepted -= OnCredentialsAccepted;
-        OverlayEffects.Instance.FadeInOverlay(1f, new Color(0.5f, 0.5f, 0.5f), 0, DisableCharacterCreator);
+        OverlayEffects.Instance.FadeInOverlay(1f, Color.white, 0, DisableCharacterCreator);
     }
 
     private void DisableCharacterCreator()
@@ -145,8 +145,9 @@ public class CharacterSelectionManager : MonoBehaviour
         // Set the visuals of the scene
         postProcessingVolume.profile = previousProfile;
         mainLightSource.SetActive(true);
+        characterCreation.SetActive(false);
 
-        OverlayEffects.Instance.FadeOutOverlay(0f, new Color(0.5f, 0.5f, 0.5f), 0.5f, () => {  });
+        OverlayEffects.Instance.FadeOutOverlay(1f, Color.white, 0.5f, () => { CharacterSelected?.Invoke(); });
     }
 
     #endregion

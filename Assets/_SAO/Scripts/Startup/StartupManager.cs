@@ -13,6 +13,7 @@ public class StartupManager : MonoBehaviour
     [SerializeField] private ParticleSystem bgParticles;
 
     [Header("Sequence Elements")]
+    [SerializeField] private VoiceRecognition voiceRecognition;
     [SerializeField] private ParticleSystem linkStartParticles;
     [SerializeField] private StatusCircleManager statusCircles;
     [SerializeField] private LanguageManager languages;
@@ -28,8 +29,15 @@ public class StartupManager : MonoBehaviour
 
     private void Start()
     {
-        if (useVoiceTrigger == false)
-            StartStartupSequence();
+        if (useVoiceTrigger && voiceRecognition.Init() == true)
+        {
+            // Wait until the system has recognized the keywords
+        }
+        else
+        {
+            // Speech recognition is not supported
+
+        }
     }
 
     private void OnVoiceTriggerReceived() 
@@ -134,16 +142,20 @@ public class StartupManager : MonoBehaviour
     private void StartCharacterSelection()
     {
         Debug.Log("Started Sequence: Character Selection");
+        CharacterSelectionManager.CharacterSelected += OnCharacterSelectionCompleted;
         characterSelection.gameObject.SetActive(true);
     }
 
     private void OnCharacterSelectionCompleted()
     {
-
+        Debug.Log("Completed Sequence: Character Selection");
+        CharacterSelectionManager.CharacterSelected -= OnCharacterSelectionCompleted;
+        TimeSequence(0.5f, characterSelection.gameObject);
     }
 
     private void StartEnteringSAO()
     {
+        Debug.Log("Started Sequence: Enter SAO");
         enterSAO.gameObject.SetActive(true);
         enterSAO.StartSequence();
     }
