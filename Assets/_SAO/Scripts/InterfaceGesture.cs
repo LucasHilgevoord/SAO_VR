@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using Valve.VR;
-using Valve.VR.InteractionSystem;
+//using Valve.VR.InteractionSystem;
 
 [Serializable]
 public class HandGesture
 {
-	public SteamVR_Action_Skeleton skeleton;
-	public Hand hand;
+	//public SteamVR_Action_Skeleton skeleton;
+	//public Hand hand;
 	internal bool appearGestureStarted;
 	internal bool dismissGestureStarted;
 	internal float curTimeRemaining;
@@ -18,119 +18,119 @@ public class HandGesture
 
 public class InterfaceGesture : MonoBehaviour
 {
-	public InterfaceManager interfaceManager;
-	public HandGesture leftHand, rightHand;
-	private float startFingerPosY;
-	private float startFingerPosX;
+	//public InterfaceManager interfaceManager;
+	//public HandGesture leftHand, rightHand;
+	//private float startFingerPosY;
+	//private float startFingerPosX;
 
-	private float maxTime = 3;
-	private float minTriggerDistance = 0.2f;
-	private bool openedInterface;
+	//private float maxTime = 3;
+	//private float minTriggerDistance = 0.2f;
+	//private bool openedInterface;
 
-	private void Start()
-	{
-		leftHand.curTimeRemaining = maxTime;
-		rightHand.curTimeRemaining = maxTime;
-	}
+	//private void Start()
+	//{
+	//	leftHand.curTimeRemaining = maxTime;
+	//	rightHand.curTimeRemaining = maxTime;
+	//}
 
-	private void Update()
-	{
-		return;
-		CheckAppearGesture(leftHand);
-		CheckAppearGesture(rightHand);
+	//private void Update()
+	//{
+	//	return;
+	//	CheckAppearGesture(leftHand);
+	//	CheckAppearGesture(rightHand);
 
-		CheckDismissGesture(leftHand);
-		CheckDismissGesture(rightHand);
-	}
+	//	CheckDismissGesture(leftHand);
+	//	CheckDismissGesture(rightHand);
+	//}
 
-	private bool CheckCurlMin(float curl, float minCurl) { return curl <= minCurl; }
-	private bool CheckCurlMax(float curl, float maxCurl) { return curl >= maxCurl; }
+	//private bool CheckCurlMin(float curl, float minCurl) { return curl <= minCurl; }
+	//private bool CheckCurlMax(float curl, float maxCurl) { return curl >= maxCurl; }
 
-	private void CheckAppearGesture(HandGesture hand)
-	{
-		if (hand.hand.mainRenderModel == null)
-			return;
+	//private void CheckAppearGesture(HandGesture hand)
+	//{
+	//	if (hand.hand.mainRenderModel == null)
+	//		return;
 
-		if (!openedInterface &&
-			CheckCurlMin(hand.skeleton.indexCurl, 0.05f) &&
-			CheckCurlMin(hand.skeleton.middleCurl, 0.15f) &&
-			CheckCurlMax(hand.skeleton.ringCurl, 0.5f) &&
-			CheckCurlMax(hand.skeleton.pinkyCurl, 0.5f) &&
-			CheckCurlMax(hand.skeleton.thumbCurl, 0.6f))
-		{
-			// Only check the start position once
-			if (!hand.appearGestureStarted)
-			{
-				hand.appearGestureStarted = true;
-				startFingerPosY = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).y;
-			}
+	//	if (!openedInterface &&
+	//		CheckCurlMin(hand.skeleton.indexCurl, 0.05f) &&
+	//		CheckCurlMin(hand.skeleton.middleCurl, 0.15f) &&
+	//		CheckCurlMax(hand.skeleton.ringCurl, 0.5f) &&
+	//		CheckCurlMax(hand.skeleton.pinkyCurl, 0.5f) &&
+	//		CheckCurlMax(hand.skeleton.thumbCurl, 0.6f))
+	//	{
+	//		// Only check the start position once
+	//		if (!hand.appearGestureStarted)
+	//		{
+	//			hand.appearGestureStarted = true;
+	//			startFingerPosY = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).y;
+	//		}
 
-			// Check if we reached the requested distance before the timer runs out
-			if (hand.curTimeRemaining > 0)
-			{
+	//		// Check if we reached the requested distance before the timer runs out
+	//		if (hand.curTimeRemaining > 0)
+	//		{
 
-				hand.curTimeRemaining -= Time.deltaTime;
+	//			hand.curTimeRemaining -= Time.deltaTime;
 
-				float currentIndexTipY = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).y;
-				if (Mathf.Abs(startFingerPosY - currentIndexTipY) > minTriggerDistance && currentIndexTipY < startFingerPosY)
-				{
-					interfaceManager.ToggleCatogoryMenu(true);
-					openedInterface = true;
-					hand.appearGestureStarted = false;
-					hand.curTimeRemaining = maxTime;
-				}
-			}
-			else
-			{
-				Debug.Log("Time ran out!");
-				hand.curTimeRemaining = maxTime;
-				//gestureStarted = false;
-			}
-		}
-		else
-		{
-			hand.appearGestureStarted = false;
-		}
+	//			float currentIndexTipY = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).y;
+	//			if (Mathf.Abs(startFingerPosY - currentIndexTipY) > minTriggerDistance && currentIndexTipY < startFingerPosY)
+	//			{
+	//				interfaceManager.ToggleCatogoryMenu(true);
+	//				openedInterface = true;
+	//				hand.appearGestureStarted = false;
+	//				hand.curTimeRemaining = maxTime;
+	//			}
+	//		}
+	//		else
+	//		{
+	//			Debug.Log("Time ran out!");
+	//			hand.curTimeRemaining = maxTime;
+	//			//gestureStarted = false;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		hand.appearGestureStarted = false;
+	//	}
 
-		if (Input.GetKeyDown(KeyCode.G))
-		{
-			hand.appearGestureStarted = false;
-			openedInterface = false;
-			interfaceManager.ToggleCatogoryMenu(false);
-		}
-	}
+	//	if (Input.GetKeyDown(KeyCode.G))
+	//	{
+	//		hand.appearGestureStarted = false;
+	//		openedInterface = false;
+	//		interfaceManager.ToggleCatogoryMenu(false);
+	//	}
+	//}
 
-	private void CheckDismissGesture(HandGesture hand)
-	{
-		if (openedInterface &&
-			CheckCurlMin(hand.skeleton.indexCurl, 0.1f) &&
-			CheckCurlMin(hand.skeleton.middleCurl, 0.1f) &&
-			CheckCurlMin(hand.skeleton.ringCurl, 0.1f) &&
-			CheckCurlMin(hand.skeleton.pinkyCurl, 0.1f) &&
-			CheckCurlMin(hand.skeleton.thumbCurl, 0.1f))
-		{
-			// Only check the start position once
-			if (!hand.dismissGestureStarted)
-			{
-				hand.dismissGestureStarted = true;
-				startFingerPosX = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).x;
-			}
+	//private void CheckDismissGesture(HandGesture hand)
+	//{
+	//	if (openedInterface &&
+	//		CheckCurlMin(hand.skeleton.indexCurl, 0.1f) &&
+	//		CheckCurlMin(hand.skeleton.middleCurl, 0.1f) &&
+	//		CheckCurlMin(hand.skeleton.ringCurl, 0.1f) &&
+	//		CheckCurlMin(hand.skeleton.pinkyCurl, 0.1f) &&
+	//		CheckCurlMin(hand.skeleton.thumbCurl, 0.1f))
+	//	{
+	//		// Only check the start position once
+	//		if (!hand.dismissGestureStarted)
+	//		{
+	//			hand.dismissGestureStarted = true;
+	//			startFingerPosX = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).x;
+	//		}
 
-			if (hand.curTimeRemaining > 0)
-			{
-				hand.curTimeRemaining -= Time.deltaTime;
+	//		if (hand.curTimeRemaining > 0)
+	//		{
+	//			hand.curTimeRemaining -= Time.deltaTime;
 
-				float currentIndexTipX = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).x;
-				if (Mathf.Abs(startFingerPosX - currentIndexTipX) > minTriggerDistance)
-				{
-					interfaceManager.ToggleCatogoryMenu(false);
-					openedInterface = false;
-					hand.dismissGestureStarted = false;
-					hand.curTimeRemaining = maxTime;
-				}
-			}
-			else
-				hand.curTimeRemaining = maxTime;
-		}
-	}
+	//			float currentIndexTipX = hand.hand.mainRenderModel.GetBonePosition((int)SteamVR_Skeleton_JointIndexEnum.indexTip).x;
+	//			if (Mathf.Abs(startFingerPosX - currentIndexTipX) > minTriggerDistance)
+	//			{
+	//				interfaceManager.ToggleCatogoryMenu(false);
+	//				openedInterface = false;
+	//				hand.dismissGestureStarted = false;
+	//				hand.curTimeRemaining = maxTime;
+	//			}
+	//		}
+	//		else
+	//			hand.curTimeRemaining = maxTime;
+	//	}
+	//}
 }

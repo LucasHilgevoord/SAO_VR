@@ -2,15 +2,24 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Default Grass
-  m_Shader: {fileID: 4800000, guid: 8b3898feb1c663b44bd2242beb1f553d, type: 3}
-  m_ShaderKeywords: MATERIAL_QUALITY_HIGH _ALPHATEST _COLOR_TINT _INTERACTION_OFF
-    _LIGHTING_QUALITY_LOW _TRANSLUCENCY _WIND_BAKED
+  m_Shader: {fileID: -6465566751694194690, guid: 8b3898feb1c663b44bd2242beb1f553d,
+    type: 3}
+  m_ValidKeywords:
+  - _ALPHATEST
+  - _COLOR_TINT
+  - _LIGHTING_QUALITY_LOW
+  - _TRANSLUCENCY
+  - _WIND_BAKED
+  m_InvalidKeywords:
+  - MATERIAL_QUALITY_HIGH
+  - _INTERACTION_OFF
+  - _OVERLAY_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -77,6 +86,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AlphaTest: 1
     - _AlphaTestThreshold: 0.5
@@ -142,3 +152,4 @@ Material:
     - _TranslucencyColor: {r: 1, g: 1, b: 1, a: 1}
     - _TrunkBendFactor: {r: 1, g: 0, b: 0, a: 0}
     - _WindFade: {r: 50, g: 20, b: 0, a: 0}
+  m_BuildTextureStacks: []
