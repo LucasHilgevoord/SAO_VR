@@ -12,8 +12,9 @@
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
-/[Aa]ssets/Plugins/
+# /[Aa]ssets/Plugins/
 /[Pp]rojectSettings/AssetStoreTools*
+*.csproj
 
 # ==================================== #
 # Compiled files #
