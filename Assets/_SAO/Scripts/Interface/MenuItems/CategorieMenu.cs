@@ -51,11 +51,11 @@ namespace PlayerInterface
                 StartCoroutine(OpenMenuItem(items[i], delay));
             }
 
-            AudioManager.Instance.PlayAudio("interface_open");
+            AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_open");
         }
 
         /// <summary>
-        /// Methode to smoothly visialize the opening of the menu
+        /// Method to smoothly visialize the opening of the menu
         /// </summary>
         /// <param name="item">Menu item to move</param>
         /// <param name="delay">Delay before moving</param>
@@ -97,7 +97,7 @@ namespace PlayerInterface
         }
 
         /// <summary>
-        /// Methode to smoothly visialize the closing of the menu
+        /// Method to smoothly visialize the closing of the menu
         /// </summary>
         /// <param name="item">Menu item to move</param>
         /// <param name="delay">Delay before moving</param>

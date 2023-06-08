@@ -48,7 +48,7 @@ namespace PlayerInterface
         }
 
         /// <summary>
-        /// Methode to add/remove (sub)menu's from the open (sub)menu list.
+        /// Method to add/remove (sub)menu's from the open (sub)menu list.
         /// Used to know the road that the user has taken in the interface.
         /// </summary>
         /// <param name="isOpen">The state of the (sub)menu</param>
@@ -60,7 +60,7 @@ namespace PlayerInterface
         }
 
         /// <summary>
-        /// Methode that handles ... whenever the (sub)menu is fully opened/closed
+        /// Method that handles ... whenever the (sub)menu is fully opened/closed
         /// </summary>
         /// <param name="isOpen">The state of the (sub)menu</param>
         /// <param name="menu">Which (sub)menu has been interacted with</param>

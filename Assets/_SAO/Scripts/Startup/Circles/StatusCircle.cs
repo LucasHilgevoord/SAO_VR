@@ -20,6 +20,7 @@ public class StatusCircle : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlayAudio(AudioGroupType.Startup, "config_circles");
         StartRotate();
     }
 
@@ -36,7 +37,7 @@ public class StatusCircle : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode to start rotating all the circle elements
+    /// Method to start rotating all the circle elements
     /// </summary>
     private void StartRotate()
     {
@@ -52,7 +53,7 @@ public class StatusCircle : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode to stop rotating all the circle elements
+    /// Method to stop rotating all the circle elements
     /// </summary>
     private void StopRotate()
     {
@@ -61,7 +62,7 @@ public class StatusCircle : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode to set the status label to OK and making it green
+    /// Method to set the status label to OK and making it green
     /// </summary>
     public void SetStatusComplete()
     {
@@ -74,7 +75,7 @@ public class StatusCircle : MonoBehaviour
     }
 
     /// <summary>
-    /// Methode to turn all the circles green.
+    /// Method to turn all the circles green.
     /// </summary>
     public void SetStatusFinished()
     {

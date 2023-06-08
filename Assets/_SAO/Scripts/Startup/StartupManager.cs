@@ -7,6 +7,7 @@ public class StartupManager : MonoBehaviour
 {
     [Header("Config")]
     [SerializeField] private int currentSequence = -1;
+    [SerializeField] private bool skipStartup;
     [SerializeField] private bool useVoiceTrigger = true;
 
     [Header("World Elements")]
@@ -29,15 +30,36 @@ public class StartupManager : MonoBehaviour
 
     private void Start()
     {
+        // Ignore the startup sequence and go directly to the game
+        if (skipStartup)
+        {
+            SceneLoader.Instance.LoadScene((int)SceneType.Interface, true, Color.white);
+            return;
+        }
+
+        // Check a voice trigger is availabe and enabled to start the sequence,
         if (useVoiceTrigger && voiceRecognition.Init() == true)
         {
             // Wait until the system has recognized the keywords
+            Debug.Log("Waiting for voice trigger!");
         }
-        else
+        else if ((useVoiceTrigger == false || voiceRecognition.Init() == false) && currentSequence == 0)
         {
             // Speech recognition is not supported
-
+            int randomNumber = UnityEngine.Random.Range(0, 2);
+            string linkStartVoice = randomNumber == 0 ? "link_start_kirito" : "link_start_asuna";
+            float audioDur = AudioManager.Instance.PlayAudio(AudioGroupType.Startup, linkStartVoice);
+            StartCoroutine(DelayStartSequence(audioDur - 0.5f));
+        } else
+        {
+            StartStartupSequence();
         }
+    }
+
+    private IEnumerator DelayStartSequence(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        StartStartupSequence();
     }
 
     private void OnVoiceTriggerReceived() 
@@ -101,6 +123,7 @@ public class StartupManager : MonoBehaviour
     private void StartLinkStartParticles()
     {
         Debug.Log("Started Sequence: LinkStart Particles");
+        AudioManager.Instance.PlayAudio(AudioGroupType.Startup, "startup_particles");
         linkStartParticles.gameObject.SetActive(true);
         TimeSequence(linkStartParticles.main.duration + 2, linkStartParticles.gameObject, -0.5f);
     }

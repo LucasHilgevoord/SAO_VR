@@ -54,7 +54,7 @@ namespace PlayerInterface
         }
 
         /// <summary>
-        /// Methode to fade out the not active items and show only the active one
+        /// Method to fade out the not active items and show only the active one
         /// </summary>
         internal virtual void FadeOutInactiveItems()
         {

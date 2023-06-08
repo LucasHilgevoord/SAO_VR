@@ -1,9 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AudioGroupType
+{
+    Global,
+    Background,
+    Startup,
+    Interface
+}
+
 public class AudioManager : Singleton<AudioManager>
 {
+    public static event Action Initialized;
+
     /// <summary> The AudioListener which will receive the audio </summary>
     public AudioListener audioListener;
 
@@ -14,49 +25,51 @@ public class AudioManager : Singleton<AudioManager>
     private int presetAudioSourcesAmount;
 
     /// <summary> List of all useable AudioClips </summary>
-    [SerializeField] private List<AudioClip> clips;
+    [SerializeField] private List<AudioGroup> audioGroups;
 
     internal override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this.gameObject);
 
-        SceneLoader.SwitchSceneComplete += OnSceneSwitched;
-    }
-
-    private void OnDestroy()
-    {
-        SceneLoader.SwitchSceneComplete -= OnSceneSwitched;
+        // Assign all the preset AudioSources from the gameObject
+        audioSources = new List<AudioSource>(this.GetComponents<AudioSource>());
+        presetAudioSourcesAmount = audioSources.Count;
+        Initialized?.Invoke();
     }
 
     private void Start()
     {
-        // Assign all the preset AudioSources from the gameObject
-        FindAudioListener();
-
-        audioSources = new List<AudioSource>(this.GetComponents<AudioSource>());
-        presetAudioSourcesAmount = audioSources.Count;
+        
     }
 
     /// <summary>
-    /// Methode to play a specific audioclip
+    /// Method to play a specific audioclip
     /// </summary>
     /// <param name="clipName">Name of the clip</param>
     /// <param name="volume">Volume of the source</param>
     /// <param name="pitch">Pitch of the source</param>
     /// <param name="delay">Delay before playing</param>
     /// <param name="loop">Should the clip be looped</param>
-    public void PlayAudio(string clipName, float volume = 1, float pitch = 1, float delay = 0, bool loop = false)
+    public float PlayAudio(AudioGroupType audioGroup, string clipName, Action completeCallback = null, float volume = 1, float pitch = 1, float delay = 0, bool loop = false)
     {
-        AudioSource mySource = GetAvailableSource();
-        AudioClip clip = null;
+        // Search for the audiolistener if there is none assigned
+        if (audioListener == null) { FindAudioListener(); }
+
+        AudioSource audioSource = GetAvailableSource();
+        if (audioSource == null) { throw new ObjectUnavailableException("No audioSource available!"); }
+
+        // Iterate over assigned audioGroups to find the list with the desired clip
+        AudioGroup group = audioGroups.Find(g => g.id == audioGroup.ToString().ToLower());
+        if (group == null) { throw new KeyNotFoundException("There is no audioGroup with the id: " + audioGroup.ToString().ToLower()); }
 
         // Iterate over the clips to find the right clip
-        for (int i = 0; i < clips.Count; i++)
+        AudioClip clip = null;
+        for (int i = 0; i < group.audioClips.Count; i++)
         {
-            if (clips[i].name == clipName)
+            if (group.audioClips[i].name == clipName)
             {
-                clip = clips[i];
+                clip = group.audioClips[i];
                 break;
             }
         }
@@ -64,22 +77,23 @@ public class AudioManager : Singleton<AudioManager>
         if (clip != null)
         {
             // Play the clip and assign all attributes
-            mySource.PlayOneShot(clip, volume);
-            mySource.pitch = pitch;
-            mySource.loop = loop;
+            audioSource.PlayOneShot(clip, volume);
+            audioSource.pitch = pitch;
+            audioSource.loop = loop;
 
-            StartCoroutine(WaitForAudioFinish(mySource, clip.length));
+            StartCoroutine(WaitForAudioFinish(audioSource, clip.length, completeCallback));
         } else
-        {
             throw new KeyNotFoundException("No clip found with the name: " + clipName);
-        }
+
+        // Return the lenght of the clip
+        return clip.length;
     }
 
     /// <summary>
-    /// Methode to stop a specific audioclip
+    /// Method to stop a specific audioclip
     /// </summary>
     /// <param name="clipName">Name of the clip</param>
-    public void StopAudio(string clipName)
+    public void StopAudio(string clipName, Action callback)
     {
         AudioSource source = null;
 
@@ -94,7 +108,7 @@ public class AudioManager : Singleton<AudioManager>
         {
             // Stop the AudioSource
             source.Stop();
-            AudioFinished(source);
+            AudioFinished(source, callback);
         } else
         {
             throw new KeyNotFoundException("No audioSource found which is currently playing: " + clipName);
@@ -102,7 +116,7 @@ public class AudioManager : Singleton<AudioManager>
     }
 
     /// <summary>
-    /// Methode to find/create an AudioSource which is not yet in use
+    /// Method to find/create an AudioSource which is not yet in use
     /// </summary>
     /// <returns>Available AudioSource</returns>
     private AudioSource GetAvailableSource()
@@ -122,22 +136,22 @@ public class AudioManager : Singleton<AudioManager>
     }
 
     /// <summary>
-    /// Methode which waits until the AudioSource is done playing
+    /// Method which waits until the AudioSource is done playing
     /// </summary>
     /// <param name="source">AudioSource which should be waited on</param>
     /// <param name="clipLenght">Duration of the clip</param>
     /// <returns>Finished AudioSource</returns>
-    private IEnumerator WaitForAudioFinish(AudioSource source, float clipLenght)
+    private IEnumerator WaitForAudioFinish(AudioSource source, float clipLenght, Action completeCallback)
     {
         yield return new WaitForSeconds(clipLenght);
-        AudioFinished(source);
+        AudioFinished(source, completeCallback);
     }
 
     /// <summary>
-    /// Methode which removes unnecessary AudioSource Components from the gameObject
+    /// Method which removes unnecessary AudioSource Components from the gameObject
     /// </summary>
     /// <param name="source">AudioSource which is done playing</param>
-    private void AudioFinished(AudioSource source)
+    private void AudioFinished(AudioSource source, Action completeCallback)
     {
         // Remove the AudioSource if there are too many sources present
         if (audioSources.Count > presetAudioSourcesAmount)
@@ -145,12 +159,13 @@ public class AudioManager : Singleton<AudioManager>
             audioSources.Remove(source);
             Destroy(source);
         }
+
+        // Call the complete callback if assigned
+        if (completeCallback != null) { completeCallback?.Invoke(); }
     }
 
     /// <summary>
     /// Method to set the audioListener
     /// </summary>
     private void FindAudioListener(AudioListener listener = null) { audioListener = listener != null ? listener : Camera.main.GetComponent<AudioListener>(); }
-
-    private void OnSceneSwitched(SceneType type) { FindAudioListener(); }
 }

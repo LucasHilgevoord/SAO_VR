@@ -66,7 +66,7 @@ namespace PlayerInterface
         }
 
         /// <summary>
-        /// Methode to disable/enable the collider/object to work around the tween delay issue
+        /// Method to disable/enable the collider/object to work around the tween delay issue
         /// </summary>
         /// <param name="item"></param>
         /// <param name="enabled"></param>
@@ -78,7 +78,7 @@ namespace PlayerInterface
         }
 
         /// <summary>
-        /// Methode to disable all the items at the same time, this way the layoutgroup won't move them
+        /// Method to disable all the items at the same time, this way the layoutgroup won't move them
         /// </summary>
         /// <param name="delay"></param>
         /// <returns></returns>
@@ -116,7 +116,7 @@ namespace PlayerInterface
 
 
         /// <summary>
-        /// Methode to show the line with arrow
+        /// Method to show the line with arrow
         /// </summary>
         internal void ShowLineArrow()
         {
@@ -129,7 +129,7 @@ namespace PlayerInterface
         }
 
         /// <summary>
-        /// Methode to hide the line with arrow
+        /// Method to hide the line with arrow
         /// </summary>
         internal void HideLineArrow()
         {

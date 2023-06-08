@@ -67,7 +67,7 @@ namespace PlayerInterface
         }
 
         /// <summary>
-        /// Methode to fire all actions after the item has been clicked
+        /// Method to fire all actions after the item has been clicked
         /// </summary>
         public virtual void ToggleItem()
         {
@@ -82,7 +82,7 @@ namespace PlayerInterface
             ToggleItem();
 
             // TODO: Create a enum/dictionary with all sound names
-            AudioManager.Instance.PlayAudio("interface_button_press");
+            AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_button_press");
 
             MenuItemPressed?.Invoke(this, isSelected);
         }
