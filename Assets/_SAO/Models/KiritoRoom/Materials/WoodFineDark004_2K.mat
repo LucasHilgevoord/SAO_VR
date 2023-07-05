@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GradientRamp:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 4688755503179690766}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -112,7 +112,7 @@ Material:
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
-    - _CameraDistanceImpact: 0.5
+    - _CameraDistanceImpact: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -145,7 +145,7 @@ Material:
     - _OutlineDepthOffset: 0
     - _OutlineEnabled: 1
     - _OutlineScale: 1
-    - _OutlineWidth: 1
+    - _OutlineWidth: 0.2
     - _OverrideBakedGi: 0
     - _OverrideLightAttenuation: 0
     - _OverrideLightmapDir: 0
@@ -181,3 +181,50 @@ Material:
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
+--- !u!28 &4688755503179690766
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: z__GradientRampTex{"mode":0,"colorKeys":[{"color":{"r":1.0,"g":0.9148468971252441,"b":0.5801886916160584,"a":1.0},"time":0.0},{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 2
+  m_Width: 256
+  m_Height: 1
+  m_CompleteImageSize: 1024
+  m_MipsStripped: 0
+  m_TextureFormat: 5
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMasterTextureLimit: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 1024
+  _typelessdata: ffffe994ffffe994ffffe995ffffea95ffffea96ffffea96ffffea96ffffea97ffffea97ffffea98ffffea98ffffea99ffffea99ffffea99ffffea9affffeb9affffeb9bffffeb9bffffeb9cffffeb9cffffeb9cffffeb9dffffeb9dffffeb9effffeb9effffeb9effffeb9fffffec9fffffeca0ffffeca0ffffeca1ffffeca1ffffeca1ffffeca2ffffeca2ffffeca3ffffeca3ffffeca3ffffeda4ffffeda4ffffeda5ffffeda5ffffeda6ffffeda6ffffeda6ffffeda7ffffeda7ffffeda8ffffeda8ffffeda9ffffeea9ffffeea9ffffeeaaffffeeaaffffeeabffffeeabffffeeabffffeeacffffeeacffffeeadffffeeadffffeeaeffffefaeffffefaeffffefafffffefafffffefb0ffffefb0ffffefb0ffffefb1ffffefb1ffffefb2ffffefb2fffff0b3fffff0b3fffff0b3fffff0b4fffff0b4fffff0b5fffff0b5fffff0b6fffff0b6fffff0b6fffff0b7fffff0b7fffff1b8fffff1b8fffff1b8fffff1b9fffff1b9fffff1bafffff1bafffff1bbfffff1bbfffff1bbfffff1bcfffff1bcfffff2bdfffff2bdfffff2befffff2befffff2befffff2bffffff2bffffff2c0fffff2c0fffff2c0fffff2c1fffff2c1fffff3c2fffff3c2fffff3c3fffff3c3fffff3c3fffff3c4fffff3c4fffff3c5fffff3c5fffff3c5fffff3c6fffff4c6fffff4c7fffff4c7fffff4c8fffff4c8fffff4c8fffff4c9fffff4c9fffff4cafffff4cafffff4cbfffff4cbfffff5cbfffff5ccfffff5ccfffff5cdfffff5cdfffff5cdfffff5cefffff5cefffff5cffffff5cffffff5d0fffff5d0fffff6d0fffff6d1fffff6d1fffff6d2fffff6d2fffff6d3fffff6d3fffff6d3fffff6d4fffff6d4fffff6d5fffff6d5fffff7d5fffff7d6fffff7d6fffff7d7fffff7d7fffff7d8fffff7d8fffff7d8fffff7d9fffff7d9fffff7dafffff8dafffff8dafffff8dbfffff8dbfffff8dcfffff8dcfffff8ddfffff8ddfffff8ddfffff8defffff8defffff8dffffff9dffffff9e0fffff9e0fffff9e0fffff9e1fffff9e1fffff9e2fffff9e2fffff9e2fffff9e3fffff9e3fffff9e4fffffae4fffffae5fffffae5fffffae5fffffae6fffffae6fffffae7fffffae7fffffae7fffffae8fffffae8fffffae9fffffbe9fffffbeafffffbeafffffbeafffffbebfffffbebfffffbecfffffbecfffffbedfffffbedfffffbedfffffceefffffceefffffceffffffceffffffceffffffcf0fffffcf0fffffcf1fffffcf1fffffcf2fffffcf2fffffcf2fffffdf3fffffdf3fffffdf4fffffdf4fffffdf5fffffdf5fffffdf5fffffdf6fffffdf6fffffdf7fffffdf7fffffdf7fffffef8fffffef8fffffef9fffffef9fffffefafffffefafffffefafffffefbfffffefbfffffefcfffffefcfffffefcfffffffdfffffffdfffffffefffffffeffffffffffffffff
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
