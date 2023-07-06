@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 9f9e59521b5bf6f42abf7c977e89628b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Matras
     second: {fileID: 2100000, guid: 7ea5fb2d68054da429b105899ab5f887, type: 2}
   - first:
@@ -34,6 +39,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: bed_frame
     second: {fileID: 2100000, guid: f8aa80f3800ab6741a4b55acbe9926e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bed_handles
+    second: {fileID: 2100000, guid: 025751c52b1c28a45a246ddf06506aca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blanket
+    second: {fileID: 2100000, guid: dc3967491d23c7c4ab6e3fe4c30e2f97, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -114,6 +129,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: lamp_top
     second: {fileID: 2100000, guid: 41f32de8a5d3d7542a182f19734689a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pillow
+    second: {fileID: 2100000, guid: 741c5faefaa6cf746add30abc121cdc9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: plant_pot
+    second: {fileID: 2100000, guid: 7fef632ba48002842af174e56015de8e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
