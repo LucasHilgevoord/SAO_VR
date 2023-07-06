@@ -381,29 +381,14 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>E:\Program Files\Unity\Versions\2021.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
+    <Reference Include="VisualDesignCafe.Threading">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Threading.dll</HintPath>
+    </Reference>
     <Reference Include="VisualDesignCafe.Rendering.Nature">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.Nature.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.Editor.Events">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.PackageManager\VisualDesignCafe.Editor.Events.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Unsafe">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Memory">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets\Plugins\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Rendering.Nature.Editor">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.Nature.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Rendering">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Threading">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Threading.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.ShaderX">
       <HintPath>Assets\Visual Design Cafe\ShaderX\Plugins\VisualDesignCafe.ShaderX.dll</HintPath>
@@ -429,8 +414,14 @@
     <Reference Include="VisualDesignCafe.Nature">
       <HintPath>Assets\Visual Design Cafe\Nature Shaders\Plugins\VisualDesignCafe.Nature.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualDesignCafe.Memory">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Memory.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
@@ -444,11 +435,20 @@
     <Reference Include="VisualDesignCafe.Pooling">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Pooling.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Plugins\DOTween\DOTween.dll</HintPath>
+    </Reference>
     <Reference Include="VisualDesignCafe.Editor.Community">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.PackageManager\VisualDesignCafe.Editor.Community.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.Editor.ShaderX">
       <HintPath>Assets\Visual Design Cafe\ShaderX\Plugins\VisualDesignCafe.Editor.ShaderX.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualDesignCafe.Rendering.Nature.Editor">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.Nature.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualDesignCafe.Rendering">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>E:\Program Files\Unity\Versions\2021.3.6f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>

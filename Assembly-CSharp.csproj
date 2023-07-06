@@ -56,94 +56,94 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\RequiredAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\ValidatorAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Utils\InterfaceFollower.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\CharacterSelection\CharacterSelectionManager.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\MenuItems\EquipmentMenuItem.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\MetaAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ICustomAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Data\EquipmentList.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\Circles\StatusCircle.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\SpecialCaseDrawerAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\ResizableTextAreaAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\InfoBoxAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\DropdownAttribute.cs" />
+    <Compile Include="Assets\Quibli\Post Process\Scripts\QuibliPostProcess.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\ReorderableListAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\IGroupAttribute.cs" />
+    <Compile Include="Assets\Quibli\Post Process\Effects\Scripts\ColorGrading.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\EnumFlagsAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\ShowAssetPreviewAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\Managers\InterfaceManager.cs" />
+    <Compile Include="Assets\Quibli\Scripts\Mesh Generators\CurveRenderer.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\Elements\Map\MapHandler.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\Final\EnterSAO.cs" />
+    <Compile Include="Assets\Quibli\Post Process\Scripts\CompoundPass.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\MinValueAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Preboot.cs" />
     <Compile Include="Assets\_SAO\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\DisableIfAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\Languages\LanguageButton.cs" />
     <Compile Include="Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\NatureRenderer.SRP.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\MenuItems\PlayerEquipmentMenu.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\Initialize\VoiceRecognition.cs" />
     <Compile Include="Assets\_SAO\Scripts\Utils\SceneLoader.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\ValidateInputAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Camera\OverlayEffects.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\ShowIfAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Utils\Exceptions\ObjectUnavailableException.cs" />
     <Compile Include="Assets\_SAO\Scripts\InterfaceGesture.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\ReadOnlyAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\ShowNonSerializedFieldAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\ProgressBarAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\Expandable.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\ButtonAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\Login\LoginManager.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\DrawerAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\CurveRangeAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\MenuItems\SubMenu.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\StartupManager.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\MenuItems\CategorieMenu.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\MenuItems\Submenus\EquipmentSubmenu.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\TagAttribute.cs" />
+    <Compile Include="Assets\Quibli\Post Process\Scripts\CompoundRenderer.cs" />
     <Compile Include="Assets\_SAO\Scripts\Shader\SwordSlashHitEffect.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\EnableIfAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\OnValueChangedAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\HideIfAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\MaxValueAttribute.cs" />
+    <Compile Include="Assets\Quibli\Scripts\Mesh Generators\GrassMeshGenerator.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\AnimatorParamAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\ShowNativePropertyAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Utils\Singleton.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\MenuItems\MenuItem.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\BoxGroupAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\Utility\EColor.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\InputAxisAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\EnableIfAttributeBase.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\SceneAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Data\EquipmentData.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\MenuItems\DynamicSubMenu.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\Menu.cs" />
+    <Compile Include="Assets\Quibli\Post Process\Effects\Scripts\StylizedDetail.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\Managers\MenuEvents.cs" />
     <Compile Include="Assets\_SAO\Scripts\Interface\Managers\AudioManager.cs" />
     <Compile Include="Assets\_SAO\Scripts\Wearable\Wearer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\Utility\EConditionOperator.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\MinMaxSliderAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\FoldoutAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\Languages\LanguageManager.cs" />
     <Compile Include="Assets\_SAO\Scripts\Wearable\Wearable.cs" />
+    <Compile Include="Assets\Quibli\Scripts\Mesh Generators\FoliageGenerator.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\LabelAttribute.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\ShowIfAttributeBase.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\HorizontalLineAttribute.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\CharacterSelection\NameHandler.cs" />
     <Compile Include="Assets\_SAO\Scripts\Startup\Circles\StatusCircleManager.cs" />
-    <Compile Include="Assets\_SAO\Audio\AudioGroups\AudioGroup.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\DropdownAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\CurveRangeAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\MinMaxSliderAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\EnableIfAttributeBase.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\ReadOnlyAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\ShowNonSerializedFieldAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\HideIfAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\MaxValueAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\RequiredAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\MetaAttribute.cs" />
-    <Compile Include="Assets\Quibli\Post Process\Scripts\QuibliPostProcess.cs" />
-    <Compile Include="Assets\Quibli\Post Process\Scripts\CompoundPass.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\FoldoutAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\EnumFlagsAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\SceneAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\ValidateInputAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\Utility\EColor.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\MinValueAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\ProgressBarAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ICustomAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\ShowAssetPreviewAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\ValidatorAttributes\ValidatorAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\ReorderableListAttribute.cs" />
-    <Compile Include="Assets\Quibli\Scripts\Mesh Generators\FoliageGenerator.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\AllowNestingAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\Expandable.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\LabelAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\TagAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\DisableIfAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\ShowIfAttributeBase.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\IGroupAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\Utility\EConditionOperator.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\SpecialCaseDrawerAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\ButtonAttribute.cs" />
-    <Compile Include="Assets\Quibli\Post Process\Effects\Scripts\ColorGrading.cs" />
-    <Compile Include="Assets\Quibli\Post Process\Effects\Scripts\StylizedDetail.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\ShowIfAttribute.cs" />
-    <Compile Include="Assets\Quibli\Scripts\Mesh Generators\GrassMeshGenerator.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\AnimatorParamAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\InfoBoxAttribute.cs" />
-    <Compile Include="Assets\Quibli\Post Process\Scripts\CompoundRenderer.cs" />
-    <Compile Include="Assets\Quibli\Scripts\Mesh Generators\CurveRenderer.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\HorizontalLineAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\InputAxisAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\ResizableTextAreaAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\EnableIfAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\BoxGroupAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes_SpecialCase\ShowNativePropertyAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\MetaAttributes\OnValueChangedAttribute.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Core\DrawerAttributes\DrawerAttribute.cs" />
+    <Compile Include="Assets\_SAO\Audio\AudioGroups\AudioGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
@@ -442,29 +442,14 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>E:\Program Files\Unity\Versions\2021.3.6f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
+    <Reference Include="VisualDesignCafe.Threading">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Threading.dll</HintPath>
+    </Reference>
     <Reference Include="VisualDesignCafe.Rendering.Nature">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.Nature.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.Editor.Events">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.PackageManager\VisualDesignCafe.Editor.Events.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Unsafe">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Memory">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets\Plugins\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Rendering.Nature.Editor">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.Nature.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Rendering">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Threading">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Threading.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.ShaderX">
       <HintPath>Assets\Visual Design Cafe\ShaderX\Plugins\VisualDesignCafe.ShaderX.dll</HintPath>
@@ -490,8 +475,14 @@
     <Reference Include="VisualDesignCafe.Nature">
       <HintPath>Assets\Visual Design Cafe\Nature Shaders\Plugins\VisualDesignCafe.Nature.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualDesignCafe.Memory">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Memory.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
@@ -505,11 +496,20 @@
     <Reference Include="VisualDesignCafe.Pooling">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Pooling.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Plugins\DOTween\DOTween.dll</HintPath>
+    </Reference>
     <Reference Include="VisualDesignCafe.Editor.Community">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.PackageManager\VisualDesignCafe.Editor.Community.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.Editor.ShaderX">
       <HintPath>Assets\Visual Design Cafe\ShaderX\Plugins\VisualDesignCafe.Editor.ShaderX.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualDesignCafe.Rendering.Nature.Editor">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.Nature.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualDesignCafe.Rendering">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>E:\Program Files\Unity\Versions\2021.3.6f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>

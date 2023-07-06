@@ -56,77 +56,57 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Visual Design Cafe\ShaderX\Scripts\Editor\TemplateXImporterWrapper.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
-    <Compile Include="Assets\Visual Design Cafe\ShaderX\Scripts\Editor\ShaderXImporterEditorWrapper.cs" />
-    <Compile Include="Assets\Visual Design Cafe\ShaderX\Scripts\Editor\ShaderXImporterWrapper.cs" />
-    <Compile Include="Assets\Quibli\Utils\Readme\Editor\ReadmeEditor.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ExpandablePropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Scripts\Editor\MaterialVector2Drawer.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers_SpecialCase\ReorderableListPropertyDrawer.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\TagPropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\PropertyDrawerBase.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\DecoratorDrawers\InfoBoxDecoratorDrawer.cs" />
     <Compile Include="Assets\Quibli\Utils\Readme\Editor\NetworkManager.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\AllowNestingPropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Scripts\Editor\Tooltips.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ReadOnlyPropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Utils\Readme\Editor\Readme.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyValidators\ValidateInputPropertyValidator.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\EnumFlagsPropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Scripts\Editor\QuibliEditor.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\DecoratorDrawers\HorizontalLineDecoratorDrawer.cs" />
-    <Compile Include="Assets\Quibli\Scripts\Editor\MaterialMinMaxDrawer.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyValidators\MinValuePropertyValidator.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyValidators\MaxValuePropertyValidator.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ProgressBarPropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\Utility\PropertyUtility.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\Utility\ReflectionUtility.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ResizableTextAreaPropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Scripts\Editor\MaterialGradientDrawer.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ScenePropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\ExternalCustomInspector.cs" />
+    <Compile Include="Assets\Visual Design Cafe\ShaderX\Scripts\Editor\TemplateXImporterWrapper.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ShowAssetPreviewPropertyDrawer.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyValidators\RequiredPropertyValidator.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers_SpecialCase\SpecialCasePropertyDrawerBase.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\MinMaxSliderPropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\AnimatorParamPropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\Utility\ExternalCustomEditorGUI.cs" />
-    <Compile Include="Assets\Quibli\Scripts\Editor\CustomDrawersShaderEditor.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\CurveRangePropertyDrawer.cs" />
-    <Compile Include="Assets\Quibli\Post Process\Editor\QSettingsEditor.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\InputAxisPropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Scripts\Editor\QuibliEditor.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\Utility\ExternalCustomEditorGUI.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\CurveRangePropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ReadOnlyPropertyDrawer.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\Utility\SavedBool.cs" />
+    <Compile Include="Assets\Quibli\Utils\Readme\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyValidators\ValidateInputPropertyValidator.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\EnumFlagsPropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ProgressBarPropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Scripts\Editor\MaterialGradientDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\AnimatorParamPropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\DropdownPropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Scripts\Editor\MaterialVector2Drawer.cs" />
+    <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\Utility\PropertyUtility.cs" />
+    <Compile Include="Assets\Quibli\Scripts\Editor\Tooltips.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ResizableTextAreaPropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\Readme\Editor\Readme.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\ExternalCustomInspector.cs" />
+    <Compile Include="Assets\Quibli\Scripts\Editor\CustomDrawersShaderEditor.cs" />
+    <Compile Include="Assets\Quibli\Post Process\Editor\QSettingsEditor.cs" />
+    <Compile Include="Assets\Quibli\Scripts\Editor\MaterialMinMaxDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\Utility\ReflectionUtility.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers_SpecialCase\SpecialCasePropertyDrawerBase.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyValidators\MinValuePropertyValidator.cs" />
+    <Compile Include="Assets\Visual Design Cafe\ShaderX\Scripts\Editor\ShaderXImporterEditorWrapper.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\Utility\ButtonUtility.cs" />
     <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyValidators\PropertyValidatorBase.cs" />
-    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\DropdownPropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\DecoratorDrawers\HorizontalLineDecoratorDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyValidators\MaxValuePropertyValidator.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\ScenePropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers_SpecialCase\ReorderableListPropertyDrawer.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\DecoratorDrawers\InfoBoxDecoratorDrawer.cs" />
+    <Compile Include="Assets\Visual Design Cafe\ShaderX\Scripts\Editor\ShaderXImporterWrapper.cs" />
+    <Compile Include="Assets\Quibli\Utils\EditorAttributes\Editor\PropertyDrawers\PropertyDrawerBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Editor\x64\Bakery\frender.dll" />
-    <None Include="Assets\Editor\x64\Bakery\optix.1.dll" />
-    <None Include="Assets\Editor\x64\Bakery\d3dcompiler_47.dll" />
     <None Include="Assets\Editor\x64\Bakery\shaderSrc\ftrace.cginc" />
-    <None Include="Assets\Editor\x64\Bakery\cudnn64_7.dll" />
     <None Include="Assets\Editor\x64\Bakery\shaderSrc\ftTransformFarSphere.compute" />
-    <None Include="Assets\Editor\x64\Bakery\uvrepack.dll" />
-    <None Include="Assets\Editor\x64\Bakery\tbb.dll" />
-    <None Include="Assets\Editor\x64\Bakery\alphabuffergen.dll" />
-    <None Include="Assets\Editor\x64\Bakery\cudart64_91.dll" />
-    <None Include="Assets\Editor\x64\Bakery\halffloat2vb.dll" />
     <None Include="Assets\Editor\x64\Bakery\ftAtlas.shader" />
-    <None Include="Assets\Editor\x64\Bakery\optix.51.dll" />
     <None Include="Assets\Editor\x64\Bakery\shaderSrc\ftCullFarSphere.compute" />
-    <None Include="Assets\Editor\x64\Bakery\simpleProgressBar.dll" />
     <None Include="Assets\Editor\x64\Bakery\ftChecker.shader" />
-    <None Include="Assets\Editor\x64\Bakery\optix_denoiser.6.0.0.dll" />
-    <None Include="Assets\Editor\x64\Bakery\lmrebake.dll" />
-    <None Include="Assets\Editor\x64\Bakery\optix_denoiser.51.dll" />
-    <None Include="Assets\Editor\x64\Bakery\OpenImageDenoise.dll" />
-    <None Include="Assets\Editor\x64\Bakery\cudart64_90.dll" />
-    <None Include="Assets\Editor\x64\Bakery\optix.6.0.0.dll" />
-    <None Include="Assets\Editor\x64\Bakery\cudart32_91.dll" />
-    <None Include="Assets\Editor\x64\Bakery\uvgbuffergen.dll" />
-    <None Include="Assets\Editor\x64\Bakery\tbbmalloc.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -381,50 +361,23 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>E:\Program Files\Unity\Versions\2021.3.6f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="VisualDesignCafe.Threading">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Threading.dll</HintPath>
+    </Reference>
     <Reference Include="VisualDesignCafe.Rendering.Nature">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.Nature.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.Editor.Events">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.PackageManager\VisualDesignCafe.Editor.Events.dll</HintPath>
     </Reference>
-    <Reference Include="log4netPlastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Plastic.Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>Assets\Plugins\DOTween\Editor\DOTweenEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Plastic.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="unityplastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Unsafe">
-      <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Memory">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>Assets\Plugins\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Rendering.Nature.Editor">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.Nature.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Rendering">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.dll</HintPath>
-    </Reference>
-    <Reference Include="VisualDesignCafe.Threading">
-      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Threading.dll</HintPath>
-    </Reference>
     <Reference Include="VisualDesignCafe.ShaderX">
       <HintPath>Assets\Visual Design Cafe\ShaderX\Plugins\VisualDesignCafe.ShaderX.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.Editor.PackageManager">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.PackageManager\VisualDesignCafe.Editor.PackageManager.dll</HintPath>
@@ -438,14 +391,32 @@
     <Reference Include="VisualDesignCafe.Editor.Web">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.PackageManager\VisualDesignCafe.Editor.Web.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="VisualDesignCafe.Packages">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.PackageManager\VisualDesignCafe.Packages.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets\Plugins\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.18\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.Nature">
       <HintPath>Assets\Visual Design Cafe\Nature Shaders\Plugins\VisualDesignCafe.Nature.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualDesignCafe.Memory">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Memory.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
@@ -459,11 +430,20 @@
     <Reference Include="VisualDesignCafe.Pooling">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Pooling.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Plugins\DOTween\DOTween.dll</HintPath>
+    </Reference>
     <Reference Include="VisualDesignCafe.Editor.Community">
       <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.PackageManager\VisualDesignCafe.Editor.Community.dll</HintPath>
     </Reference>
     <Reference Include="VisualDesignCafe.Editor.ShaderX">
       <HintPath>Assets\Visual Design Cafe\ShaderX\Plugins\VisualDesignCafe.Editor.ShaderX.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualDesignCafe.Rendering.Nature.Editor">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.Nature.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="VisualDesignCafe.Rendering">
+      <HintPath>Assets\Visual Design Cafe\Plugins\com.VisualDesignCafe.NatureRenderer\VisualDesignCafe.Rendering.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
