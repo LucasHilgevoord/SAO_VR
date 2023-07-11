@@ -7,8 +7,10 @@ using System;
 
 public enum SceneType
 {
-    Startup = 0,
-    Interface = 1
+    Preboot,
+    Bedroom,
+    Startup,
+    Interface
 }
 
 public class SceneLoader : Singleton<SceneLoader>
@@ -39,7 +41,7 @@ public class SceneLoader : Singleton<SceneLoader>
     /// Load the scene with the index given
     /// </summary>
     /// <param name="index"></param>
-    public void LoadScene(int index, bool fade, Color? fadeColor = null)
+    public void LoadScene(int index, bool fade, Color? fadeColor = null, float fadeDuration = 1)
     {
         // Check if we are not loading the same scene again
         if (lastLoadedScene == index)
@@ -54,7 +56,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
         if (fade)
         {
-            OverlayEffects.Instance.FadeInOverlay(1, fadeColor ?? Color.black, 0, () =>
+            OverlayEffects.Instance.FadeInOverlay(fadeDuration, fadeColor ?? Color.black, 0, () =>
             {
                 loadRoutine = StartCoroutine(LoadSceneRoutine(index, fade, fadeColor));
             });

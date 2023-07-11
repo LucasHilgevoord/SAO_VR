@@ -102,6 +102,26 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: clock_frame
+    second: {fileID: 2100000, guid: bbb5f1828f1f41346aece151e674d679, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: clock_mirror
+    second: {fileID: 2100000, guid: 251871ee89f4ab94b80573c020c9c1cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: closet_door
+    second: {fileID: 2100000, guid: 355de73d99076994c87ecab0f00873f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: closet_handle
+    second: {fileID: 2100000, guid: 25615ed1998ad444a8a9c0c3d9c66c5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: computer_screen
     second: {fileID: 2100000, guid: c997c228a7ba1d247b3779b7996ec7da, type: 2}
   - first:
@@ -122,6 +142,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: door_window
+    second: {fileID: 2100000, guid: 2debc96439ee20a4aacccd649e7a7a6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: lamp
     second: {fileID: 2100000, guid: 3dd2e8ebbffc5b24abd959e23be02a6e, type: 2}
   - first:
@@ -129,6 +154,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: lamp_top
     second: {fileID: 2100000, guid: 41f32de8a5d3d7542a182f19734689a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: photo_photo
+    second: {fileID: 2100000, guid: a271aa247b117d7418a6af05473bb95c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

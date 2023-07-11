@@ -14,6 +14,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material.002
     second: {fileID: 2100000, guid: 64b7633b2d38591408bf71d7a98e4a47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nervegear_inside
+    second: {fileID: 2100000, guid: b8b42c5bbf3575742a9d138bff1f20d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nervegear_outside
+    second: {fileID: 2100000, guid: 2f263d2860bab394dada7f515ddd1784, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -98,7 +108,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.00014999999
+    globalScale: 0.015
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

@@ -20,7 +20,7 @@ public class Preboot : MonoBehaviour
     {
         if (audioManagerInitialized)
         {
-            SceneLoader.Instance.LoadScene((int)SceneType.Startup, false);
+            SceneLoader.Instance.LoadScene(1, false);
         }
     }
 

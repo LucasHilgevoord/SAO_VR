@@ -12,8 +12,8 @@ public class Wearer : MonoBehaviour
     private bool _isWearing;
 
 
-    // Update is called once per frame
-    void Update()
+    // FixedUpdate is called once per physics frame
+    void FixedUpdate()
     {
         if (!_isWearing)
         {
@@ -34,7 +34,8 @@ public class Wearer : MonoBehaviour
                 Wearable wearable = colliders[i].gameObject.GetComponent<Wearable>();
                 if (wearable != null)
                 {
-                    if (wearable.IsWearing == false)
+                    // Don't allow the player to wear something that is already being worn
+                    if (wearable.IsBeingWorn == false)
                     {
                         _isWearing = true;
                         wearable.StartWearing(transform);

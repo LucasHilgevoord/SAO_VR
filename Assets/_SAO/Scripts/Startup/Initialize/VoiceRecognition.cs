@@ -20,9 +20,9 @@ public class VoiceRecognition : MonoBehaviour
     private bool recognizedLink;
     private KeywordRecognizer m_Recognizer;
 
-    public static event Action PhraseTriggered;
+    public event Action PhraseTriggered;
 
-    internal bool Init()
+    internal bool Init(Action callback = null)
     {
         if (PhraseRecognitionSystem.isSupported)
         {
@@ -39,6 +39,8 @@ public class VoiceRecognition : MonoBehaviour
             m_Recognizer = new KeywordRecognizer(allKeywords.ToArray());
             m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
             m_Recognizer.Start();
+
+            PhraseTriggered = callback;
             return true;
         } else
         {

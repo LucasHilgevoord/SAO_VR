@@ -25,7 +25,7 @@ public class StartupManager : MonoBehaviour
     private void Awake()
     {
         LanguageManager.ClosedLanguages += OnLanguageSelected;
-        VoiceRecognition.PhraseTriggered += OnVoiceTriggerReceived;
+        voiceRecognition.PhraseTriggered += OnVoiceTriggerReceived;
     } 
 
     private void Start()
@@ -37,23 +37,23 @@ public class StartupManager : MonoBehaviour
             return;
         }
 
-        // Check a voice trigger is availabe and enabled to start the sequence,
-        if (useVoiceTrigger && voiceRecognition.Init() == true)
-        {
-            // Wait until the system has recognized the keywords
-            Debug.Log("Waiting for voice trigger!");
-        }
-        else if ((useVoiceTrigger == false || voiceRecognition.Init() == false) && currentSequence == 0)
-        {
-            // Speech recognition is not supported
-            int randomNumber = UnityEngine.Random.Range(0, 2);
-            string linkStartVoice = randomNumber == 0 ? "link_start_kirito" : "link_start_asuna";
-            float audioDur = AudioManager.Instance.PlayAudio(AudioGroupType.Startup, linkStartVoice);
-            StartCoroutine(DelayStartSequence(audioDur - 0.5f));
-        } else
-        {
-            StartStartupSequence();
-        }
+        //// Check a voice trigger is availabe and enabled to start the sequence,
+        //if (useVoiceTrigger && voiceRecognition.Init() == true)
+        //{
+        //    // Wait until the system has recognized the keywords
+        //    Debug.Log("Waiting for voice trigger!");
+        //}
+        //else if ((useVoiceTrigger == false || voiceRecognition.Init() == false) && currentSequence == 0)
+        //{
+        //    // Speech recognition is not supported
+        //    int randomNumber = UnityEngine.Random.Range(0, 2);
+        //    string linkStartVoice = randomNumber == 0 ? "link_start_kirito" : "link_start_asuna";
+        //    float audioDur = AudioManager.Instance.PlayAudio(AudioGroupType.Startup, linkStartVoice);
+        //    StartCoroutine(DelayStartSequence(audioDur - 0.5f));
+        //} else
+        //{
+        //    StartStartupSequence();
+        //}
     }
 
     private IEnumerator DelayStartSequence(float duration)
@@ -64,7 +64,7 @@ public class StartupManager : MonoBehaviour
 
     private void OnVoiceTriggerReceived() 
     {
-        VoiceRecognition.PhraseTriggered -= OnVoiceTriggerReceived;
+        voiceRecognition.PhraseTriggered -= OnVoiceTriggerReceived;
         StartStartupSequence(); 
     }
 
