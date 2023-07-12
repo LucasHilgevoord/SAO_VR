@@ -8,13 +8,11 @@ public class StartupManager : MonoBehaviour
     [Header("Config")]
     [SerializeField] private int currentSequence = -1;
     [SerializeField] private bool skipStartup;
-    [SerializeField] private bool useVoiceTrigger = true;
 
     [Header("World Elements")]
     [SerializeField] private ParticleSystem bgParticles;
 
     [Header("Sequence Elements")]
-    [SerializeField] private VoiceRecognition voiceRecognition;
     [SerializeField] private ParticleSystem linkStartParticles;
     [SerializeField] private StatusCircleManager statusCircles;
     [SerializeField] private LanguageManager languages;
@@ -25,7 +23,6 @@ public class StartupManager : MonoBehaviour
     private void Awake()
     {
         LanguageManager.ClosedLanguages += OnLanguageSelected;
-        voiceRecognition.PhraseTriggered += OnVoiceTriggerReceived;
     } 
 
     private void Start()
@@ -37,35 +34,7 @@ public class StartupManager : MonoBehaviour
             return;
         }
 
-        //// Check a voice trigger is availabe and enabled to start the sequence,
-        //if (useVoiceTrigger && voiceRecognition.Init() == true)
-        //{
-        //    // Wait until the system has recognized the keywords
-        //    Debug.Log("Waiting for voice trigger!");
-        //}
-        //else if ((useVoiceTrigger == false || voiceRecognition.Init() == false) && currentSequence == 0)
-        //{
-        //    // Speech recognition is not supported
-        //    int randomNumber = UnityEngine.Random.Range(0, 2);
-        //    string linkStartVoice = randomNumber == 0 ? "link_start_kirito" : "link_start_asuna";
-        //    float audioDur = AudioManager.Instance.PlayAudio(AudioGroupType.Startup, linkStartVoice);
-        //    StartCoroutine(DelayStartSequence(audioDur - 0.5f));
-        //} else
-        //{
-        //    StartStartupSequence();
-        //}
-    }
-
-    private IEnumerator DelayStartSequence(float duration)
-    {
-        yield return new WaitForSeconds(duration);
         StartStartupSequence();
-    }
-
-    private void OnVoiceTriggerReceived() 
-    {
-        voiceRecognition.PhraseTriggered -= OnVoiceTriggerReceived;
-        StartStartupSequence(); 
     }
 
     private void StartStartupSequence() { NextSequence(false); }
