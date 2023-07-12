@@ -19,8 +19,10 @@ public class VoiceRecognition : MonoBehaviour
     [SerializeField] private Keyword[] keywords;
     private bool recognizedLink;
     private KeywordRecognizer m_Recognizer;
-
     public event Action PhraseTriggered;
+
+    private bool _isSupported = false;
+    public bool IsSupported => _isSupported;
 
     internal bool Init(Action callback = null)
     {
@@ -41,10 +43,12 @@ public class VoiceRecognition : MonoBehaviour
             m_Recognizer.Start();
 
             PhraseTriggered = callback;
+            _isSupported = true;
             return true;
         } else
         {
             Debug.Log("Speech recognition is not supported on this machine");
+            _isSupported = false;
             return false;
         }
     }
