@@ -41,6 +41,6 @@ public class Nervegear : Wearable
         float audioDur = AudioManager.Instance.PlayAudio(AudioGroupType.Startup, linkStartVoice);
         
         yield return new WaitForSeconds(audioDur);
-        SceneLoader.Instance.LoadScene((int)SceneType.Startup, true, Color.black, 2);
+        SceneLoader.Instance.LoadScene((int)SceneType.Startup, true, Color.black, 1);
     }
 }

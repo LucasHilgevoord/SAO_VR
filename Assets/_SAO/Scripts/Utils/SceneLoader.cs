@@ -56,7 +56,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
         if (fade)
         {
-            OverlayEffects.Instance.FadeInOverlay(fadeDuration, fadeColor ?? Color.black, 0, () =>
+            OverlayEffects.Instance.FadeIn(fadeDuration, fadeColor ?? Color.black, 0, () =>
             {
                 loadRoutine = StartCoroutine(LoadSceneRoutine(index, fade, fadeColor));
             });
@@ -79,7 +79,7 @@ public class SceneLoader : Singleton<SceneLoader>
         SwitchSceneComplete?.Invoke((SceneType)lastLoadedScene);
 
         if (fade)
-            OverlayEffects.Instance.FadeOutOverlay(1, fadeColor ?? Color.black);
+            OverlayEffects.Instance.FadeOut(1, fadeColor ?? Color.black);
 
         loadRoutine = null;
     }

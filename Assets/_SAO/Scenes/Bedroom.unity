@@ -11721,6 +11721,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9014170783809206332, guid: 895f6f3c2d334633b5800312285058d2,
+        type: 3}
+      propertyPath: m_Name
+      value: VRCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 9032954039820430273, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
       propertyPath: m_Enabled
@@ -12945,7 +12950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a01d3d455eefc4fb5bf00ac75effcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectRadius: 0.15
+  _detectRadius: 0.05
   _positionOffset: {x: 0, y: 0, z: 0}
   _objectLayer:
     serializedVersion: 2
