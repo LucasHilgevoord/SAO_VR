@@ -46,7 +46,7 @@ public class NerveGear : Wearable
     private void StartInputCheck()
     {
         if (useVoiceTrigger) {
-            if (false)//voiceRecognition.Init(() => { StartCoroutine(StartEnteringSequence()); }) == true)
+            if (voiceRecognition.Init(() => { StartCoroutine(StartEnteringSequence()); }) == true)
             {
                 // Wait until the system has recognized the keywords
                 Debug.Log("Waiting for voice trigger!");

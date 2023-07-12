@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class LanguageManager : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class LanguageManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
         {
             if (currentLanguageIndex == languageButtons.Count - 1)
                 currentLanguageIndex = 0;
@@ -48,7 +49,7 @@ public class LanguageManager : MonoBehaviour
             SelectLanguage(languageButtons[currentLanguageIndex]);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
             if (currentLanguageIndex == 0)
                 currentLanguageIndex = languageButtons.Count - 1;
@@ -58,7 +59,7 @@ public class LanguageManager : MonoBehaviour
             SelectLanguage(languageButtons[currentLanguageIndex]);
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             ConfirmLanguage(languageButtons[currentLanguageIndex]);
         }
