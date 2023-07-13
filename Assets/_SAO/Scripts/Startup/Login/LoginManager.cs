@@ -53,6 +53,7 @@ public class LoginManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(SelectUserName());
+        yield return new WaitForSeconds(0.3f);
         yield return StartCoroutine(SelectPassword());
         yield return StartCoroutine(ConfirmCredentials());
     }
@@ -60,13 +61,13 @@ public class LoginManager : MonoBehaviour
     private IEnumerator SelectUserName()
     {
         string username = "*********";
-        yield return StartCoroutine(AnimateInput(_usernameInput, username, 0.1f));
+        yield return StartCoroutine(AnimateInput(_usernameInput, username, 0.05f));
     }
 
     private IEnumerator SelectPassword()
     {
         string password = "******";
-        yield return StartCoroutine(AnimateInput(_passwordInput, password, 0.1f));
+        yield return StartCoroutine(AnimateInput(_passwordInput, password, 0.05f));
     }
 
     private IEnumerator AnimateInput(InputField field, string input, float characterDelay)
