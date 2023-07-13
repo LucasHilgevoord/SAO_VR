@@ -20,11 +20,6 @@ public class StartupManager : MonoBehaviour
     [SerializeField] private CharacterSelectionManager characterSelection;
     [SerializeField] private EnterSAO enterSAO;
 
-    private void Awake()
-    {
-        LanguageManager.ClosedLanguages += OnLanguageSelected;
-    } 
-
     private void Start()
     {
         // Ignore the startup sequence and go directly to the game
@@ -34,10 +29,8 @@ public class StartupManager : MonoBehaviour
             return;
         }
 
-        StartStartupSequence();
+        NextSequence(false);
     }
-
-    private void StartStartupSequence() { NextSequence(false); }
 
     private void NextSequence(bool addIndex = true)
     {
@@ -108,6 +101,7 @@ public class StartupManager : MonoBehaviour
     {
         Debug.Log("Started Sequence: Languages");
         languages.gameObject.SetActive(true);
+        LanguageManager.ClosedLanguages += OnLanguageSelected;
     }
 
     private void OnLanguageSelected()

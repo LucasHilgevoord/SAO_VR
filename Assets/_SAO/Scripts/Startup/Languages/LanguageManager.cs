@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 
 public class LanguageManager : MonoBehaviour
 {
@@ -31,14 +32,22 @@ public class LanguageManager : MonoBehaviour
     private Color originalColor;
     private Color blinkColor = new Color(0, 0.93f, 1, 0.8f);
 
+    private List<UnityEngine.XR.InputDevice> devices = new List<UnityEngine.XR.InputDevice>();
+    private bool _allowInput = true;
+
+    private bool _chosenLanguage = false;
+
     private void Start()
     {
-        //StartLanguageSequence();
+        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.HeldInHand | InputDeviceCharacteristics.Controller, devices);
         StartCoroutine(WaitForCurvedUI());
     }
 
     private void Update()
     {
+        if (_chosenLanguage)
+            return;
+
         if (Keyboard.current.downArrowKey.wasPressedThisFrame)
         {
             if (currentLanguageIndex == languageButtons.Count - 1)
@@ -62,6 +71,33 @@ public class LanguageManager : MonoBehaviour
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {
             ConfirmLanguage(languageButtons[currentLanguageIndex]);
+        }
+
+        foreach (UnityEngine.XR.InputDevice controller in devices)
+        {
+            if (controller.isValid && _allowInput)
+            {
+                if (controller.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue))
+                {
+                    if (primary2DAxisValue.y > 0.5f)
+                    {
+                        currentLanguageIndex = (currentLanguageIndex - 1) % languageButtons.Count;
+                        SelectLanguage(languageButtons[currentLanguageIndex]);
+                        StartCoroutine(DelayInput());
+                    }
+                    else if (primary2DAxisValue.y < -0.5f)
+                    {
+                        currentLanguageIndex = (currentLanguageIndex + 1) % languageButtons.Count;
+                        SelectLanguage(languageButtons[currentLanguageIndex]);
+                        StartCoroutine(DelayInput());
+                    }
+                }
+
+                if (controller.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out bool primaryButtonValue) && primaryButtonValue)
+                {
+                    ConfirmLanguage(languageButtons[currentLanguageIndex]);
+                }
+            }
         }
     }
 
@@ -119,6 +155,12 @@ public class LanguageManager : MonoBehaviour
         scaleDelay += scaleDuration;
     }
 
+    private IEnumerator DelayInput()
+    {
+        _allowInput = false;
+        yield return new WaitForSeconds(0.2f);
+        _allowInput = true;
+    }
 
     public void SelectLanguage(LanguageButton language)
     {
@@ -155,6 +197,8 @@ public class LanguageManager : MonoBehaviour
 
     public void ConfirmLanguage(LanguageButton language)
     {
+        _chosenLanguage = true;
+        Debug.Log("CONFIRM");
         originalColor = language.box.color;
         originalColor.a = blinkColor.a;
 

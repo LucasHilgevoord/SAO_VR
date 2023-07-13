@@ -55,7 +55,7 @@ public class NerveGear : Wearable
             else
             {
                 // Speech recognition is not supported
-                _systemText.text = "<b>System Alert:</b>\r\nMicrophone is currently  unavailable. \r\nPlease press 'A' to enter \r\n'Sword Art Online'";
+                _systemText.text = "<b>System Alert:</b>\r\nMicrophone is currently unavailable. \r\nPlease press 'A' to enter \r\n'Sword Art Online'";
 
                 // Get the controllers
                 InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.HeldInHand | InputDeviceCharacteristics.Controller, devices);
@@ -75,10 +75,10 @@ public class NerveGear : Wearable
                 {
                     Debug.Log("A button was pressed");
                     StartCoroutine(StartEnteringSequence());
-                    yield break; // exit the coroutine if the button has been pressed
+                    yield break;
                 }
             }
-            yield return null; // yield execution back to the main thread until the next frame
+            yield return null;
         }
     }
 
