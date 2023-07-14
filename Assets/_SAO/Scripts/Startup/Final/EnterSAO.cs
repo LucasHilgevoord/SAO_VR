@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using ExternalPropertyAttributes;
 
 public class EnterSAO : MonoBehaviour
 {
@@ -21,11 +22,11 @@ public class EnterSAO : MonoBehaviour
     private Vector3 textEndPos = new Vector3(0, 0, -1);
     private float fadeDuration = 0.5f;
     private float moveDelay = 1;
-    private float moveDuration = 3;
+    private float moveDuration = 3f;
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem enterParticles;
-    private float particleDelay = 2;
+    private float particleDelay = 2.5f;
 
     [Header("Bloom Effect")]
     [SerializeField] private Volume postProcessingVolume;
@@ -40,23 +41,12 @@ public class EnterSAO : MonoBehaviour
         welcomeText.gameObject.SetActive(true);
         welcomeTextCanvasGroup.alpha = 0;
 
-        FadeBackground(backgroundColor);
+        mainCamera.DOColor(backgroundColor, recolorDuration);
         StartCoroutine(StartWelcomeAnimation());
         StartCoroutine(StartParticles());
-        StartCoroutine(StartBloomEffect());
+        //StartCoroutine(StartBloomEffect());
     }
-
-    private void FadeBackground(Color newColor, float delay = 0)
-    {
-        mainCamera.DOColor(newColor, recolorDuration).SetDelay(delay);
-
-        Color mycolor = RenderSettings.fogColor;
-        DOTween.To(() => mycolor, x => mycolor = x, newColor, recolorDuration).SetDelay(delay).OnUpdate(()=> 
-        {
-            RenderSettings.fogColor = mycolor;
-        });
-    }
-
+    
     private IEnumerator StartWelcomeAnimation()
     {
         yield return new WaitForSeconds(recolorDuration + 0.5f);
@@ -71,6 +61,17 @@ public class EnterSAO : MonoBehaviour
     {
         yield return new WaitForSeconds(particleDelay);
         enterParticles.gameObject.SetActive(true);
+
+        float fogDensity = RenderSettings.fogStartDistance;
+        DOTween.To(() => fogDensity, x => fogDensity = x, 0, 1f).SetDelay(enterParticles.main.duration * 0.5f).OnUpdate(() =>
+        {
+            RenderSettings.fogStartDistance = fogDensity;
+        }).OnComplete(()=>
+        {
+            SceneLoader.Instance.LoadScene((int)SceneType.Interface, true, Color.white, 0.75f);
+        });
+
+        
     }
 
     private IEnumerator StartBloomEffect()
@@ -95,7 +96,6 @@ public class EnterSAO : MonoBehaviour
         bloomElement.transform.DOScale(2, bloomingDuration * 2);
         //groundMat.DOColor(Color.white, bloomingDuration * 2);
         bloomElement.transform.DOLocalMove(new Vector3(0, 0, -2070), bloomingDuration).SetDelay(bloomingDuration * 0.2f);
-        FadeBackground(Color.white, bloomingDuration);
 
         yield return new WaitForSeconds(bloomingDuration * 2);
         SceneLoader.Instance.LoadScene((int)SceneType.Interface, true, Color.white);

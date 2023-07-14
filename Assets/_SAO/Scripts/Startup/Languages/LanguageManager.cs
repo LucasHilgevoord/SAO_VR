@@ -30,7 +30,7 @@ public class LanguageManager : MonoBehaviour
     private int xOffsetUnselected = 50;
 
     private Color originalColor;
-    private Color blinkColor = new Color(0, 0.93f, 1, 0.8f);
+    [SerializeField] private Color blinkColor = new Color(0, 0.93f, 1, 0.8f);
 
     private List<UnityEngine.XR.InputDevice> devices = new List<UnityEngine.XR.InputDevice>();
     private bool _allowInput = true;
@@ -48,7 +48,7 @@ public class LanguageManager : MonoBehaviour
         if (_chosenLanguage)
             return;
 
-        if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+        if (InputHandler.Instance.wasKeyPressedThisFrame(Key.DownArrow))
         {
             if (currentLanguageIndex == languageButtons.Count - 1)
                 currentLanguageIndex = 0;
@@ -58,7 +58,7 @@ public class LanguageManager : MonoBehaviour
             SelectLanguage(languageButtons[currentLanguageIndex]);
         }
 
-        if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+        if (InputHandler.Instance.wasKeyPressedThisFrame(Key.UpArrow))
         {
             if (currentLanguageIndex == 0)
                 currentLanguageIndex = languageButtons.Count - 1;
@@ -68,7 +68,7 @@ public class LanguageManager : MonoBehaviour
             SelectLanguage(languageButtons[currentLanguageIndex]);
         }
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (InputHandler.Instance.wasKeyPressedThisFrame(Key.Enter))
         {
             ConfirmLanguage(languageButtons[currentLanguageIndex]);
         }
