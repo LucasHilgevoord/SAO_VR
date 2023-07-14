@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CharacterCreationWallOverlay
+  m_Name: CreationOverlayPurple
   m_Shader: {fileID: -6465566751694194690, guid: a16eec14116a9ff41aa262ffea118fa8,
     type: 3}
   m_ValidKeywords: []
@@ -28,7 +28,7 @@ Material:
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3100
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -108,7 +108,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - AlbedoColor: {r: 0.8773585, g: 0.624911, b: 0.7627144, a: 0.31764707}
+    - AlbedoColor: {r: 0.8773585, g: 0.624911, b: 0.7627144, a: 0.28235295}
     - ScrollSpeed: {r: 0, g: -0.05, b: 0, a: 0}
     - Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 0.8820755, b: 0.9210537, a: 0.14901961}

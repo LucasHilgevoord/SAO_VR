@@ -10,8 +10,7 @@ using UnityEngine.XR;
 
 public class CharacterSelectionManager : MonoBehaviour
 {
-    public static event Action CharacterSelected;
-    
+    public event Action CharacterSelected;
     private List<UnityEngine.XR.InputDevice> devices = new List<UnityEngine.XR.InputDevice>();
     private bool _allowInput = true;
 
@@ -25,7 +24,7 @@ public class CharacterSelectionManager : MonoBehaviour
     public CanvasGroup bodyBoxCanvasGroup;
 
     private float scaleDuration = 0.2f;
-    
+
     private string _username;
     private string _gender;
     [SerializeField] private Color selectColor, unselectColor;
@@ -34,14 +33,10 @@ public class CharacterSelectionManager : MonoBehaviour
     [SerializeField] private Image _noBg;
     [SerializeField] private Image _usernameBg;
     private Image _selectedButton;
-    
-    [Header("Character Creation")]
-    public GameObject characterCreation;
-    public NameHandler nameHandler;
-    public GameObject mainLightSource;
-    public Volume postProcessingVolume;
-    public VolumeProfile CharacterCreatorProfile;
-    private VolumeProfile previousProfile;
+
+    [SerializeField] private CharacterCreation _characterCreation;
+
+    private bool _isCharacterSelection;
 
     private void Awake()
     {
@@ -83,6 +78,8 @@ public class CharacterSelectionManager : MonoBehaviour
     private void Update()
     {
 
+        if (!_isCharacterSelection) return;
+
         // Keyboard
         if (InputHandler.Instance.wasKeyPressedThisFrame(Key.RightArrow))
             SetSelectedButton(_noBg);
@@ -94,7 +91,6 @@ public class CharacterSelectionManager : MonoBehaviour
         // Controller
         foreach (UnityEngine.XR.InputDevice controller in devices)
         {
-            Debug.Log(controller);
             if (controller.isValid && _allowInput)
             {
                 if (controller.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue))
@@ -122,13 +118,13 @@ public class CharacterSelectionManager : MonoBehaviour
         if (_selectedButton == _yesBg)
             CloseCharacterSelection(() => { CharacterSelected?.Invoke(); });
         else if (_selectedButton == _noBg)
-            CloseCharacterSelection(StartCharacterCreation);
+            CloseCharacterSelection(StartCharacterCreation) ;
     }
 
     private void SetSelectedButton(Image button)
     {
         if (_selectedButton == button) return;
-        
+
         if (_selectedButton != null)
         {
             DOTween.Kill(_selectedButton);
@@ -155,9 +151,9 @@ public class CharacterSelectionManager : MonoBehaviour
         CheckUserData();
     }
 
-    #region Character Selection
     private void OpenCharacterSelection()
     {
+        _isCharacterSelection = true;
         myCanvasGroup.alpha = 1;
 
         // Assign preset values
@@ -193,49 +189,18 @@ public class CharacterSelectionManager : MonoBehaviour
                 callback?.Invoke();
         });
     }
-    #endregion
 
-    #region Character Creation
     private void StartCharacterCreation()
     {
-        OverlayEffects.Instance.FadeIn(1f, Color.white, 0, EnableCharacterCreator);
+        _isCharacterSelection = false;
+        _characterCreation.StartCharacterCreation();
+
+        _characterCreation.CharacterCreated += OnCharacterCreated;
     }
 
-    private void EnableCharacterCreator()
+    private void OnCharacterCreated()
     {
-        characterCreation.SetActive(true);
-
-        // Set the visuals of the scene
-        previousProfile = postProcessingVolume.profile;
-        postProcessingVolume.profile = CharacterCreatorProfile;
-        mainLightSource.SetActive(false);
-
-        OverlayEffects.Instance.FadeOut(3f, Color.white, 0.5f, ()=> { StartCoroutine(ShowNameInput()); });
+        _characterCreation.CharacterCreated -= OnCharacterCreated;
+        CharacterSelected?.Invoke();
     }
-
-    private IEnumerator ShowNameInput()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        nameHandler.gameObject.SetActive(true);
-        NameHandler.CredentialsAccepted += OnCredentialsAccepted;
-    }
-
-    private void OnCredentialsAccepted()
-    {
-        NameHandler.CredentialsAccepted -= OnCredentialsAccepted;
-        OverlayEffects.Instance.FadeIn(1f, Color.white, 0, DisableCharacterCreator);
-    }
-
-    private void DisableCharacterCreator()
-    {
-        // Set the visuals of the scene
-        postProcessingVolume.profile = previousProfile;
-        mainLightSource.SetActive(true);
-        characterCreation.SetActive(false);
-
-        OverlayEffects.Instance.FadeOut(1f, Color.white, 0.5f, () => { CharacterSelected?.Invoke(); });
-    }
-
-    #endregion
 }

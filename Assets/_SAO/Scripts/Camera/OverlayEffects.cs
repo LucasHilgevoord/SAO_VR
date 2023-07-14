@@ -76,6 +76,15 @@ public class OverlayEffects : Singleton<OverlayEffects>
         }
     }
 
+    public void FadeInOut(float duration, Color color, float delay = 0, Action callback = null)
+    {
+        FadeIn(duration, color, delay, () =>
+        {
+            callback?.Invoke();
+            FadeOut(duration, color, 1f, null);
+        });
+    }
+
     public void FadeIn(float duration, Color color, float delay = 0, Action callback = null)
     {
         _isFading = true;

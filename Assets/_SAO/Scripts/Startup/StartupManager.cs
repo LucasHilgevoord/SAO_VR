@@ -85,7 +85,7 @@ public class StartupManager : MonoBehaviour
     private void StartLinkStartParticles()
     {
         Debug.Log("Started Sequence: LinkStart Particles");
-        AudioManager.Instance.PlayAudio(AudioGroupType.Startup, "startup_particles");
+        //AudioManager.Instance.PlayAudio(AudioGroupType.Startup, "startup_particles");
         linkStartParticles.gameObject.SetActive(true);
         TimeSequence(linkStartParticles.main.duration + 2, linkStartParticles.gameObject, -0.5f);
     }
@@ -128,14 +128,14 @@ public class StartupManager : MonoBehaviour
     private void StartCharacterSelection()
     {
         Debug.Log("Started Sequence: Character Selection");
-        CharacterSelectionManager.CharacterSelected += OnCharacterSelectionCompleted;
+        characterSelection.CharacterSelected += OnCharacterSelectionCompleted;
         characterSelection.gameObject.SetActive(true);
     }
 
     private void OnCharacterSelectionCompleted()
     {
         Debug.Log("Completed Sequence: Character Selection");
-        CharacterSelectionManager.CharacterSelected -= OnCharacterSelectionCompleted;
+        characterSelection.CharacterSelected -= OnCharacterSelectionCompleted;
         TimeSequence(0.5f, characterSelection.gameObject);
     }
 

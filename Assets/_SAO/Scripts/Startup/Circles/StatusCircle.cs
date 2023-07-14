@@ -20,7 +20,7 @@ public class StatusCircle : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.Instance.PlayAudio(AudioGroupType.Startup, "config_circles");
+        //AudioManager.Instance.PlayAudio(AudioGroupType.Startup, "config_circles");
         StartRotate();
     }
 

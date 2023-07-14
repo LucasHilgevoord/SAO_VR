@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 using DG.Tweening;
 using System;
+using UnityEngine.InputSystem;
 
 public class NameHandler : MonoBehaviour
 {
@@ -25,9 +26,9 @@ public class NameHandler : MonoBehaviour
     private void Update()
     {
         // Testing
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (InputHandler.Instance.wasKeyPressedThisFrame(Key.Enter))
             ConfirmCredentials();
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (InputHandler.Instance.wasKeyPressedThisFrame(Key.Escape))
             RejectCredentials();
     }
 
