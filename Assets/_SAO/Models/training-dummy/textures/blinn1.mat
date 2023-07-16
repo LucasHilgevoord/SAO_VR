@@ -33,6 +33,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Splatmap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_4E80C286:
         m_Texture: {fileID: 2800000, guid: ae9e23b17bc3da9438f3b8223c217537, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -73,10 +77,24 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - BrushSize: 100
     - BrushStrenght: 1
+    - OutlineThickness: 0.005
+    - Vector1_7C2EADC4: 5
     - Vector1_B3863282: 0.5
     - _AlphaClip: 0
     - _Blend: 0
@@ -90,6 +108,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0
@@ -108,6 +127,7 @@ Material:
     - DrawColor: {r: 0, g: 0, b: 0, a: 0}
     - HitGridTiling: {r: 30, g: 30, b: 0, a: 0}
     - MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - OutlineColor: {r: 1, g: 0, b: 0, a: 1}
     - Vector2_B2D3E864: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
