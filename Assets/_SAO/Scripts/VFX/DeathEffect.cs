@@ -5,21 +5,23 @@ using UnityEngine.InputSystem;
 public class DeathEffect : MonoBehaviour
 {
     [SerializeField] private Renderer[] objectRenderers = new Renderer[0];
+    [SerializeField] private GameObject deathPrefab;
 
     private float currentColorChangeValue;
     private float targetColorChangeValue;
-    private ParticleSystem trianglePS;
-    private Mesh mesh;
+    //private ParticleSystem trianglePS;
+    //private Mesh mesh;
 
     private void Start()
 	{
-        trianglePS = gameObject.GetComponentInChildren<ParticleSystem>();
-        mesh = gameObject.GetComponent<Mesh>();
+        //trianglePS = gameObject.GetComponentInChildren<ParticleSystem>();
+        
+        /*mesh = gameObject.GetComponent<Mesh>();
 
         var sh = trianglePS.shape;
         sh.enabled = true;
         sh.shapeType = ParticleSystemShapeType.Mesh;
-        sh.mesh = mesh;
+        sh.mesh = mesh;*/
 	}
 
 	private void Update()
@@ -39,8 +41,8 @@ public class DeathEffect : MonoBehaviour
 
         if(currentColorChangeValue > 0.9f)
 		{
-            //Destroy(gameObject);
-            trianglePS.Play();
+            var deathTriangleVFX = Instantiate(deathPrefab, transform.position, transform.rotation) as GameObject;
+            Destroy(gameObject);
 		}
     }
 
