@@ -5,28 +5,28 @@ using UnityEngine.InputSystem;
 public class DeathEffect : MonoBehaviour
 {
     [SerializeField] private Renderer[] objectRenderers = new Renderer[0];
-    [SerializeField] private GameObject deathPrefab;
+    [SerializeField] private GameObject deathTriangleVFXPrefab;
 
     private float currentColorChangeValue;
     private float targetColorChangeValue;
-    //private ParticleSystem trianglePS;
-    //private Mesh mesh;
+    private ParticleSystem trianglePS;
+    private MeshRenderer meshRenderer;
 
     private void Start()
 	{
-        //trianglePS = gameObject.GetComponentInChildren<ParticleSystem>();
-        
-        /*mesh = gameObject.GetComponent<Mesh>();
+        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        trianglePS = deathTriangleVFXPrefab.GetComponent<ParticleSystem>();
 
         var sh = trianglePS.shape;
         sh.enabled = true;
-        sh.shapeType = ParticleSystemShapeType.Mesh;
-        sh.mesh = mesh;*/
-	}
+        sh.shapeType = ParticleSystemShapeType.MeshRenderer;
+        sh.meshRenderer = meshRenderer;
 
-	private void Update()
+        Debug.Log(sh.meshRenderer);
+    }
+
+    private void Update()
     {
-        Debug.Log(currentColorChangeValue);
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             TriggerDeathEffect();
@@ -41,9 +41,11 @@ public class DeathEffect : MonoBehaviour
 
         if(currentColorChangeValue > 0.9f)
 		{
-            var deathTriangleVFX = Instantiate(deathPrefab, transform.position, transform.rotation) as GameObject;
-            Destroy(gameObject);
-		}
+            var deathTriangleVFX = Instantiate(deathTriangleVFXPrefab, transform.position, transform.rotation);
+
+            gameObject.SetActive(false);
+            Destroy(gameObject,2f);
+        }
     }
 
     public void TriggerDeathEffect()
