@@ -11986,7 +11986,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &504992003
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12034,7 +12034,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504992002}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -32691,7 +32691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1435623596
 Transform:
   m_ObjectHideFlags: 0
@@ -38481,10 +38481,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f5ca8e23004c544965288792842478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  distance: 0.05
-  lerpSpeed: 0.05
-  followTarget: 0
+  _target: {fileID: 0}
+  _distance: 0.05
+  _lerpSpeed: 0.05
+  _followTarget: 0
+  _faceTargetOnStart: 0
 --- !u!1 &1629143212
 GameObject:
   m_ObjectHideFlags: 0
@@ -44000,6 +44001,11 @@ PrefabInstance:
     - target: {fileID: 7696548424635294051, guid: 895f6f3c2d334633b5800312285058d2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7873184977108000993, guid: 895f6f3c2d334633b5800312285058d2,
+        type: 3}
+      propertyPath: m_RequestedTrackingOriginMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8073169435168779140, guid: 895f6f3c2d334633b5800312285058d2,

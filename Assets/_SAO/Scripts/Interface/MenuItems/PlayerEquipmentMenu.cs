@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace PlayerInterface
@@ -47,7 +48,7 @@ namespace PlayerInterface
 
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            if (InputHandler.Instance.wasKeyPressedThisFrame(Key.P))
                 OnDescriptionItemClicked(null, !isEnabled);
         }
 

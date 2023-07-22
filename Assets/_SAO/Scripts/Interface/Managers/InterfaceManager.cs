@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PlayerInterface
 {
@@ -26,10 +26,10 @@ namespace PlayerInterface
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (InputHandler.Instance.wasKeyPressedThisFrame(Key.X))
                 ToggleCatogoryMenu(true);
 
-            if (Input.GetKeyDown(KeyCode.C))
+            if (InputHandler.Instance.wasKeyPressedThisFrame(Key.C))
                 ToggleCatogoryMenu(false);
         }
 

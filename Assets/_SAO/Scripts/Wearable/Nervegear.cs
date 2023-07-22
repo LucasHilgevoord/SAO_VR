@@ -56,11 +56,11 @@ public class NerveGear : Wearable
             {
                 // Speech recognition is not supported
                 _systemText.text = "<b>System Alert:</b>\r\nMicrophone is currently unavailable. \r\nPlease press 'A' to enter \r\n'Sword Art Online'";
-
-                // Get the controllers
-                InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.HeldInHand | InputDeviceCharacteristics.Controller, devices);
-                StartCoroutine(CheckForControllerInput());
             }
+
+            // Get the controllers
+            InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.HeldInHand | InputDeviceCharacteristics.Controller, devices);
+            StartCoroutine(CheckForControllerInput());
         }
         _systemText.gameObject.SetActive(true);
     }
