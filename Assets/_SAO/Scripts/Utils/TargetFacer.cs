@@ -13,11 +13,11 @@ public class TargetFacer : MonoBehaviour
     [SerializeField] private float _distance = 0.05f;
     [SerializeField] private Vector3 _positionOffset;
     [SerializeField] private Vector3 _rotationOffset;
+    [SerializeField] private Vector2 _limitPitch;
 
     
     [SerializeField] private bool _followTarget = true;
     [SerializeField] private bool _faceTarget = true;
-    [SerializeField] private bool _addInitialRotation = true;
 
     private void Start()
     {
@@ -30,24 +30,22 @@ public class TargetFacer : MonoBehaviour
     private void SnapToTarget(float lerpSpeed)
     {
         Vector3 newPos = (_target.position + _target.forward * _distance) + _positionOffset;
+        if (_limitPitch != Vector2.zero)
+        {
+            // Calculate the current pitch
+            float targetPitch = Mathf.Atan2(_target.rotation.z, _target.rotation.w) * Mathf.Rad2Deg;
+            float minYPos = _target.position.y + Mathf.Tan(_limitPitch.x * Mathf.Deg2Rad) * _distance + _positionOffset.y;
+            float maxYPos = _target.position.y + Mathf.Tan(_limitPitch.y * Mathf.Deg2Rad) * _distance + _positionOffset.y;
+            newPos.y = Mathf.Clamp(newPos.y, minYPos, maxYPos);
+        }
         this.transform.position = Vector3.Lerp(this.transform.position, newPos, lerpSpeed);
 
         if (_faceTarget)
         {
-            // Instead of using LookAt with a position, use LookRotation with a direction
             Vector3 lookDirection = _target.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-            
-            // Apply the initial rotation first, then set the Y rotation back to 180 degrees
             Quaternion rotationResult = Quaternion.Euler(_initialRotation.eulerAngles) * targetRotation;
-            rotationResult = Quaternion.Euler(rotationResult.eulerAngles.x + _rotationOffset.x, rotationResult.eulerAngles.y + _rotationOffset.y, rotationResult.eulerAngles.z + _rotationOffset.z);
-            transform.rotation = rotationResult;
-        }
-
-        if (_addInitialRotation)
-        {
-            // Simply add the initial rotation directly using Quaternion multiplication
-            Quaternion rotationResult = Quaternion.Euler(_initialRotation.eulerAngles) * transform.rotation;
+            rotationResult = Quaternion.Euler(rotationResult.eulerAngles + _rotationOffset);
             transform.rotation = rotationResult;
         }
     }
