@@ -28,14 +28,6 @@ public class EnterSAO : MonoBehaviour
     [SerializeField] private ParticleSystem enterParticles;
     private float particleDelay = 2.5f;
 
-    [Header("Bloom Effect")]
-    [SerializeField] private Volume postProcessingVolume;
-    [SerializeField] private VolumeProfile postProcessingProfile;
-    [SerializeField] private Image bloomElement;
-    [SerializeField] private Material groundMat;
-    private float bloomDelay = 2f;
-    private float bloomingDuration = 3;
-
     internal void StartSequence()
     {
         welcomeText.gameObject.SetActive(true);
@@ -44,7 +36,6 @@ public class EnterSAO : MonoBehaviour
         mainCamera.DOColor(backgroundColor, recolorDuration);
         StartCoroutine(StartWelcomeAnimation());
         StartCoroutine(StartParticles());
-        //StartCoroutine(StartBloomEffect());
     }
     
     private IEnumerator StartWelcomeAnimation()
@@ -72,32 +63,5 @@ public class EnterSAO : MonoBehaviour
         });
 
         
-    }
-
-    private IEnumerator StartBloomEffect()
-    {
-        yield return new WaitForSeconds(bloomDelay);
-        postProcessingVolume.profile = postProcessingProfile;
-
-        Bloom b;
-        postProcessingVolume.profile.TryGet(out b);
-       
-        float intentsity = 0;
-        DOTween.To(() => intentsity, x => intentsity = x, 10, bloomingDuration / 2).OnUpdate(() =>
-        {
-            b.intensity.value = intentsity;
-        });
-
-        bloomElement.gameObject.SetActive(true);
-
-
-        // Quick work around because only scaling does not work really well (0 -> 1 looks faster)
-        bloomElement.DOFade(1, bloomingDuration);
-        bloomElement.transform.DOScale(2, bloomingDuration * 2);
-        //groundMat.DOColor(Color.white, bloomingDuration * 2);
-        bloomElement.transform.DOLocalMove(new Vector3(0, 0, -2070), bloomingDuration).SetDelay(bloomingDuration * 0.2f);
-
-        yield return new WaitForSeconds(bloomingDuration * 2);
-        SceneLoader.Instance.LoadScene((int)SceneType.Interface, true, Color.white);
     }
 }

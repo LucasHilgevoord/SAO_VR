@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8317041eee140a38873daddb4b3a5f, type: 3}
   m_Name: StylizedDetailEffect
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.06
   blur:
     m_OverrideState: 1
-    m_Value: 0.6
+    m_Value: 0.15
   edgePreserve:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.99
   rangeStart:
-    m_OverrideState: 0
-    m_Value: 10
+    m_OverrideState: 1
+    m_Value: 0
   rangeEnd:
-    m_OverrideState: 0
-    m_Value: 30
+    m_OverrideState: 1
+    m_Value: 100
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.432
+    m_Value: 0.373
   smoothness:
     m_OverrideState: 0
     m_Value: 0.2

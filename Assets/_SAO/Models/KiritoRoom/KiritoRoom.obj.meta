@@ -132,6 +132,21 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: computer_screen_00
+    second: {fileID: 2100000, guid: b4a7f1ff657f61a4dbd49d851bcf1d05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: computer_screen_01
+    second: {fileID: 2100000, guid: 35de9eeae3f3c67459f1b9339cd891fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: computer_screen_02
+    second: {fileID: 2100000, guid: cadc6566826e99b4aa83aa5926862a56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: curtain
     second: {fileID: 2100000, guid: 2bf4dc784f547bf47b5256b8eed21eeb, type: 2}
   - first:
@@ -147,6 +162,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: keyboard
+    second: {fileID: 2100000, guid: 320787f7aaa2651439756dd44d9863ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: lamp
     second: {fileID: 2100000, guid: 3dd2e8ebbffc5b24abd959e23be02a6e, type: 2}
   - first:
@@ -154,6 +174,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: lamp_top
     second: {fileID: 2100000, guid: 41f32de8a5d3d7542a182f19734689a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light_switch
+    second: {fileID: 2100000, guid: 14b7b75e017b5c74b9ecc8a90233f0a8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -169,6 +194,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: plant_pot
     second: {fileID: 2100000, guid: 7fef632ba48002842af174e56015de8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: radio
+    second: {fileID: 2100000, guid: d0fe00de56b053246afea82520eb6d56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: radio_antena
+    second: {fileID: 2100000, guid: 6d98a6adac059d246b3a4000f89a7636, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
