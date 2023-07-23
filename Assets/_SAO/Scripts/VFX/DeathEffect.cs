@@ -18,8 +18,6 @@ public class DeathEffect : MonoBehaviour
         trianglePS = deathTriangleVFXPrefab.GetComponent<ParticleSystem>();
 
         var sh = trianglePS.shape;
-        sh.enabled = true;
-        sh.shapeType = ParticleSystemShapeType.MeshRenderer;
         sh.meshRenderer = meshRenderer;
 
         Debug.Log(sh.meshRenderer);
@@ -36,10 +34,17 @@ public class DeathEffect : MonoBehaviour
 
         foreach (Renderer renderer in objectRenderers)
         {
-            renderer.material.SetFloat("_amount", currentColorChangeValue);
+            Material[] materials = renderer.materials;
+
+            for (int i = 0; i < materials.Length; i++)
+            {
+                materials[i].SetFloat("_amount", currentColorChangeValue);
+            }
+
+            renderer.materials = materials;
         }
 
-        if(currentColorChangeValue > 0.9f)
+        if(currentColorChangeValue > 0.95f)
 		{
             var deathTriangleVFX = Instantiate(deathTriangleVFXPrefab, transform.position, transform.rotation);
 
