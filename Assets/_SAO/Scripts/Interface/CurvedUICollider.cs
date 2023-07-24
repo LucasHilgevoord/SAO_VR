@@ -30,6 +30,7 @@ public class CurvedUICollider : MonoBehaviour
     public void Init(Vector3 size, out CurvedUICollider c) {
         boxCollider = gameObject.AddComponent<BoxCollider>();
         boxCollider.size = size;
+        boxCollider.isTrigger = true;
         c = this;
     }
 

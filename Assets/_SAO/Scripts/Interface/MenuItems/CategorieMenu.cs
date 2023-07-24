@@ -16,7 +16,7 @@ namespace PlayerInterface
         [SerializeField] private float appearDelay;
         [SerializeField] private float openSpeed;
         [SerializeField] private float closeSpeed;
-
+        
         private Coroutine[] openMenuRoutine;
         private Coroutine[] closeMenuRoutine;
 
@@ -60,7 +60,7 @@ namespace PlayerInterface
         /// <param name="item">Menu item to move</param>
         /// <param name="delay">Delay before moving</param>
         /// <returns></returns>
-        private IEnumerator OpenMenuItem(MenuItem item, float delay)
+        internal IEnumerator OpenMenuItem(MenuItem item, float delay)
         {
             yield return new WaitForSeconds(delay);
 

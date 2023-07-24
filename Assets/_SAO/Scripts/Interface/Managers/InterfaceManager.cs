@@ -18,6 +18,8 @@ namespace PlayerInterface
         [SerializeField] private CategorieMenu categorieMenu;
         [SerializeField] private MenuItem initialMenuItem;
 
+        private int _currentCategorieMenu;
+
         private void Awake()
         {
             Menu.MenuToggled += OnMenuToggled;
@@ -26,11 +28,18 @@ namespace PlayerInterface
 
         private void Update()
         {
+#if UNITY_EDITOR
             if (InputHandler.Instance.wasKeyPressedThisFrame(Key.X))
                 ToggleCatogoryMenu(true);
 
             if (InputHandler.Instance.wasKeyPressedThisFrame(Key.C))
                 ToggleCatogoryMenu(false);
+
+            if (InputHandler.Instance.wasKeyPressedThisFrame(Key.DownArrow))
+            {
+                
+            }
+#endif
         }
 
         internal void ToggleCatogoryMenu(bool enable)
