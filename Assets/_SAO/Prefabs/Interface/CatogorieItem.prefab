@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3697916663762206293}
   - component: {fileID: 3697916663762206292}
   - component: {fileID: 3465127471094943950}
-  - component: {fileID: 4854598443613605254}
   - component: {fileID: 491503522}
   m_Layer: 5
   m_Name: CatogorieItem
@@ -31,6 +30,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.9019608}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -89,19 +90,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!65 &4854598443613605254
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3697916663762206294}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 100, y: 100, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &491503522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,9 +106,15 @@ MonoBehaviour:
   title: {fileID: 0}
   box: {fileID: 0}
   selectArrow: {fileID: 0}
+  titleString: 
   iconSpriteOn: {fileID: 0}
   iconSpriteOff: {fileID: 0}
   canvasGroup: {fileID: 3465127471094943950}
-  actions:
+  myCollider: {fileID: 0}
+  OnEnableEvents:
     m_PersistentCalls:
       m_Calls: []
+  OnDisableEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  _colliderSize: {x: 100, y: 100, z: 3}

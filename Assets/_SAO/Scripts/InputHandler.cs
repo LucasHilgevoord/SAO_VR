@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.XR;
 
 public class InputHandler : Singleton<InputHandler>
@@ -30,5 +31,15 @@ public class InputHandler : Singleton<InputHandler>
     internal bool wasKeyPressedThisFrame(Key key)
     {
         return _keyboard[key].wasPressedThisFrame;
+    }
+
+    internal bool WasLMousePressedThisFrame()
+    {
+        return Mouse.current.leftButton.wasPressedThisFrame;
+    }
+
+    internal Vector2 GetMousePos()
+    {
+        return Mouse.current.position.ReadValue();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 namespace CurvedUI
 {
@@ -28,11 +29,11 @@ namespace CurvedUI
         void Update()
         {
 
-            front.position = front.position.ModifyX(initFG.x + Input.mousePosition.x.Remap(0, Screen.width, -change, change));
-            back.position = back.position.ModifyX(initBG.x - Input.mousePosition.x.Remap(0, Screen.width, -change, change));
+            front.position = front.position.ModifyX(initFG.x + Mouse.current.delta.x.ReadValue().Remap(0, Screen.width, -change, change));
+            back.position = back.position.ModifyX(initBG.x - Mouse.current.delta.x.ReadValue().Remap(0, Screen.width, -change, change));
 
-            front.position = front.position.ModifyY(initFG.y + Input.mousePosition.y.Remap(0, Screen.height, -change, change) * (Screen.height / Screen.width));
-            back.position = back.position.ModifyY(initBG.y - Input.mousePosition.y.Remap(0, Screen.height, -change, change) * (Screen.height / Screen.width));
+            front.position = front.position.ModifyY(initFG.y + Mouse.current.delta.y.ReadValue().Remap(0, Screen.height, -change, change) * (Screen.height / Screen.width));
+            back.position = back.position.ModifyY(initBG.y - Mouse.current.delta.y.ReadValue().Remap(0, Screen.height, -change, change) * (Screen.height / Screen.width));
 
         }
     }

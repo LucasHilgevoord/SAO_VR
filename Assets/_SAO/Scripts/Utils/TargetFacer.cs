@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using static UnityEngine.GraphicsBuffer;
 
 public class TargetFacer : MonoBehaviour
@@ -30,14 +31,14 @@ public class TargetFacer : MonoBehaviour
     private void SnapToTarget(float lerpSpeed)
     {
         Vector3 newPos = (_target.position + _target.forward * _distance) + _positionOffset;
-        if (_limitPitch != Vector2.zero)
-        {
-            // Calculate the current pitch
-            float targetPitch = Mathf.Atan2(_target.rotation.z, _target.rotation.w) * Mathf.Rad2Deg;
-            float minYPos = _target.position.y + Mathf.Tan(_limitPitch.x * Mathf.Deg2Rad) * _distance + _positionOffset.y;
-            float maxYPos = _target.position.y + Mathf.Tan(_limitPitch.y * Mathf.Deg2Rad) * _distance + _positionOffset.y;
-            newPos.y = Mathf.Clamp(newPos.y, minYPos, maxYPos);
-        }
+        //if (_limitPitch != Vector2.zero)
+        //{
+        //    // Calculate the current pitch
+        //    float targetPitch = Mathf.Atan2(_target.rotation.z, _target.rotation.w) * Mathf.Rad2Deg;
+        //    float minYPos = _target.position.y + Mathf.Tan(_limitPitch.x * Mathf.Deg2Rad) * _distance + _positionOffset.y;
+        //    float maxYPos = _target.position.y + Mathf.Tan(_limitPitch.y * Mathf.Deg2Rad) * _distance + _positionOffset.y;
+        //    newPos.y = Mathf.Clamp(newPos.y, minYPos, maxYPos);
+        //}
         this.transform.position = Vector3.Lerp(this.transform.position, newPos, lerpSpeed);
 
         if (_faceTarget)

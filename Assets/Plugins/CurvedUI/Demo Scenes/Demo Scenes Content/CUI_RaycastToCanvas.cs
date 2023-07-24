@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 namespace CurvedUI
 {
@@ -19,7 +20,7 @@ namespace CurvedUI
         {
 
             Vector2 pos = Vector2.zero;
-            mySettings.RaycastToCanvasSpace(Camera.main.ScreenPointToRay(Input.mousePosition), out pos);
+            mySettings.RaycastToCanvasSpace(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out pos);
             this.transform.localPosition = pos;
 
         }

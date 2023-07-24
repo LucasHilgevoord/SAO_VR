@@ -28,11 +28,24 @@ namespace PlayerInterface
         public UnityEvent OnEnableEvents;
         public UnityEvent OnDisableEvents;
 
+        private CurvedUICollider _curvedUICollider;
+        [SerializeField] private Vector3 _colliderSize;
+
         public void Initialize(string title, Sprite iconOn, Sprite iconOff)
         {
             titleString = title;
             iconSpriteOn = iconOn;
             iconSpriteOff = iconOff;
+        }
+
+        private void CreateCurvedUICollider()
+        {
+            GameObject newObject = new GameObject("CurvedUI Collider");
+            newObject.transform.parent = transform;
+            newObject.transform.localScale = Vector3.one;
+            newObject.AddComponent<RectTransform>();
+            newObject.AddComponent<CurvedUICollider>().Init(_colliderSize, out _curvedUICollider);
+            _curvedUICollider.InteractionDetected += Interact;
         }
 
         public void Start()
@@ -41,6 +54,7 @@ namespace PlayerInterface
                 title.text = titleString;
 
             icon.sprite = iconSpriteOff;
+            CreateCurvedUICollider();
         }
 
         /// <summary>
@@ -80,10 +94,7 @@ namespace PlayerInterface
         internal void Interact()
         {
             ToggleItem();
-
-            // TODO: Create a enum/dictionary with all sound names
             AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_button_press");
-
             MenuItemPressed?.Invoke(this, isSelected);
         }
 
