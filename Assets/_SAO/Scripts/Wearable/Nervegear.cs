@@ -37,7 +37,7 @@ public class NerveGear : Wearable
         while (true)
         {
             _blink = !_blink;
-            string timeFormat = _blink ? "HH mm" : "HH:mm";
+            string timeFormat = _blink ? "hh mm" : "hh:mm";
             _timeText.text = DateTime.Now.ToString(timeFormat);
             yield return new WaitForSeconds(_blinkInterval);
         }
