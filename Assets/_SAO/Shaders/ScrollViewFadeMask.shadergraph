@@ -122,6 +122,9 @@
         },
         {
             "m_Id": "b09de352dd7a4ff59f72b1a70a5980b3"
+        },
+        {
+            "m_Id": "501bef3523e74a78aa9bb4e584cb341a"
         }
     ],
     "m_GroupDatas": [],
@@ -536,8 +539,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 1446.0,
-            "y": 143.0
+            "x": 1684.0,
+            "y": 123.00000762939453
         },
         "m_Blocks": [
             {
@@ -553,8 +556,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 1446.0,
-            "y": 343.0
+            "x": 1684.0,
+            "y": 323.0000305175781
         },
         "m_Blocks": [
             {
@@ -805,6 +808,21 @@
         "z": 0.0,
         "w": 0.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "1d5bfce5e4574991b17ff5cfb8c6aecb",
+    "m_Id": 0,
+    "m_DisplayName": "_Stencil",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -1371,6 +1389,41 @@
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "501bef3523e74a78aa9bb4e584cb341a",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 314.9999694824219,
+            "y": 1158.0,
+            "width": 106.0,
+            "height": 34.0001220703125
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "1d5bfce5e4574991b17ff5cfb8c6aecb"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "8c4b4f94bb5f178e8b80cce595df3c48"
     }
 }
 
@@ -2163,7 +2216,7 @@
     "m_CustomSlotLabel": "",
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "hlslDeclarationOverride": 1,
     "m_Hidden": false,
     "m_Value": 0.0,
     "m_FloatType": 0,
