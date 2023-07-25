@@ -33,7 +33,7 @@ namespace PlayerInterface
                 // Assigning starting values
                 items[i].gameObject.SetActive(true);
                 items[i].canvasGroup.alpha = 0;
-                items[i].myCollider.enabled = false;
+                //items[i].myCollider.enabled = false;
 
                 // Visualize the items
                 items[i].canvasGroup.DOFade(1, fadeDuration).SetDelay(spawnDelay * i);
@@ -74,7 +74,7 @@ namespace PlayerInterface
         {
             yield return new WaitForSeconds(delay);
 
-            item.myCollider.enabled = enabled;
+            //item.myCollider.enabled = enabled;
         }
 
         /// <summary>
