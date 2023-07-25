@@ -43,11 +43,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BottomMask: 0
+    - _BottomMask: -1
     - _CanvasScale: 50
     - _CenterAlphaOffsetY: 200
     - _OffsetX: -391.8574
-    - _OffsetY: -165.26044
-    - _TopMask: 0
+    - _OffsetY: -164.92213
+    - _TopMask: -1
     m_Colors: []
   m_BuildTextureStacks: []

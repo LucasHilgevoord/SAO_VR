@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using CurvedUI;
 using Object = UnityEngine.Object;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 
 //per SDK
 #if CURVEDUI_UNITY_XR
@@ -37,7 +38,7 @@ using Valve.VR;
 
 [ExecuteInEditMode]
 #if CURVEDUI_UNITY_XR
-public class CurvedUIInputModule : BaseInputModule {
+public class CurvedUIInputModule : XRUIInputModule {
 #else
 public class CurvedUIInputModule : StandaloneInputModule {
 #endif

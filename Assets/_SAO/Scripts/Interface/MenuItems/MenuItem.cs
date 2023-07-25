@@ -20,6 +20,8 @@ namespace PlayerInterface
 
         public CanvasGroup canvasGroup;
         public Collider myCollider;
+        private CurvedUICollider _curvedUICollider;
+        [SerializeField] private Vector3 _colliderSize;
 
         internal bool isSelected;
         private Color selectedColor = new Color(0.92f, 0.67f, 0.05f, 0.9f);
@@ -28,8 +30,6 @@ namespace PlayerInterface
         public UnityEvent OnEnableEvents;
         public UnityEvent OnDisableEvents;
 
-        private CurvedUICollider _curvedUICollider;
-        [SerializeField] private Vector3 _colliderSize;
 
         public void Initialize(string title, Sprite iconOn, Sprite iconOff)
         {
@@ -50,11 +50,14 @@ namespace PlayerInterface
 
         public void Start()
         {
+            Button button = GetComponent<Button>();
+            if (button != null) { button.onClick.AddListener(Interact); }
+
             if (title != null && titleString != "")
                 title.text = titleString;
 
             icon.sprite = iconSpriteOff;
-            CreateCurvedUICollider();
+            //CreateCurvedUICollider();
         }
 
         /// <summary>

@@ -43,7 +43,7 @@ public class TargetFacer : MonoBehaviour
 
         if (_faceTarget)
         {
-            Vector3 lookDirection = _target.position - transform.position;
+            Vector3 lookDirection = _target.position - (transform.position - _positionOffset);
             Quaternion targetRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
             Quaternion rotationResult = Quaternion.Euler(_initialRotation.eulerAngles) * targetRotation;
             rotationResult = Quaternion.Euler(rotationResult.eulerAngles + _rotationOffset);
