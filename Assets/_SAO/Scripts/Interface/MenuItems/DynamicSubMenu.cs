@@ -25,12 +25,15 @@ namespace PlayerInterface
         { 
             FillMenuItems();
             SetPadding();
+
+            scrollView.gameObject.SetActive(false);
         }
 
         public override void OpenMenu()
         {
             ShowLineArrow();
             content.gameObject.SetActive(true);
+            scrollView.gameObject.SetActive(true);
             float offsetY = worldUICanvas.InverseTransformPoint(scrollView.TransformPoint(scrollView.position)).y;
             scrollViewFadeMat.SetFloat("_OffsetY", -offsetY);
             base.OpenMenu();
@@ -40,6 +43,7 @@ namespace PlayerInterface
         {
             HideLineArrow();
             content.gameObject.SetActive(true);
+            scrollView.gameObject.SetActive(false);
             base.CloseMenu();
         }
 
