@@ -473,7 +473,128 @@ MonoBehaviour:
   - Assets/_SAO/Models/KiritoRoom/nervegear.fbx
   - Assets/Plugins/VRUI - Material Design/Assets/Models/vrui-cylinder.fbx
   - Assets/Plugins/VRUI - Material Design/Assets/Models/vrui-carat.fbx
-  uvOverlapAssetList: 00000000ffffffff0101000001010000000000000000000001010000ffffffff0000000000000000010100000101000000000000ffffffff010100000000000001010000010100000101000000000000000000000101000001010000010100000101000001010000000000000000000001010000010100000000000000000000ffffffff0000000001010000000000000000000000000000ffffffff00000000ffffffff0000000000000000000000000000000000000000ffffffff010100000000000001010000ffffffff00000000000000000101000000000000000000000000000000000000010100000101000000000000ffffffff00000000000000000101000000000000000000000101000001010000010100000101000001010000010100000000000000000000
+  - Assets/Plugins/AllSkyFree/AllSkyDemoEnvironment/AllSky_DemoEnvironment.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Hands Interaction Demo/Runtime/Models/Primitives/Cone.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_12_Capsule.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Bush_1.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Stones_1.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Dead_Bush.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_02_NoiseSphere.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Starter Assets/Models/Primitive_Torus.fbx
+  - Assets/Plugins/StylizedWildAnimalsPack/Models/Boar.fbx
+  - Assets/Bakery/examples/content/logolight.FBX
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Starter Assets/Models/XRControllerRight.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Bicycle.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_Cloud_02.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Broadleaf_5.fbx
+  - Assets/Plugins/Quibli/Demos/Nature/Models/NatureScene_Ground.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/SampleScene_Tree_Trunk.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Rock_1.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Building_Decoration_Cords_1.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Particle Meshes/MeshParticle_CrossPlanes.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Birch_2.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Pillar_deco_3.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Broadleaf_1.fbx
+  - Assets/Plugins/Quibli/Demos/Mugs/Mugs-Models/Mug.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Fir_4.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Pillar_deco_2.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_DeadTree_1.fbx
+  - Assets/Plugins/Quibli/Demos/Plants/Models/Plants_Ground_Stripe.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Road_Sign_2.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Reeds.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_11_RoundedCubeDome.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Mushroom.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Vase04.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Starter Assets/Models/Primitive_Pyramid.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Pillar_part_9.fbx
+  - Assets/_SAO/Models/TownSquare/TownSquare.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Hands Interaction Demo/Runtime/Models/Primitives/Disc.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Birch_1.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Birch_3.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Flowers.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Building_Decoration_Cords_2.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Road_Sign_1.fbx
+  - Assets/_SAO/Models/training-dummy/source/dummy.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_DeadTree_3.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Birch_4.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Grass_Sprout_01.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Vase06.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Vase02.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Grass_1.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Hands Interaction Demo/Runtime/Models/VirtualTabletop.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_DeadTree_2.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_08_Drops_1.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Branch_1.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Bush_3.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_10_SeparateSpheres.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Cliff_2.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Grass_2.fbx
+  - Assets/_SAO/Models/TownSquare/TownSquareback.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Broadleaf_3.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Vase05_Teapot.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Hands Interaction Demo/Runtime/Models/Frame.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_03_Dome.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_09_MBallBubbles.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_04_HalfEllipsis.fbx
+  - Assets/_SAO/Models/stylized-sword-and-shield-lowpoly/source/Stylized sword and
+    shield.fbx
+  - Assets/Plugins/Quibli/Demos/Nature/Models/NatureScene_Car.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Cliff_1.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Wire_Roll.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Fir_1.fbx
+  - Assets/Plugins/AllSkyFree/AllSkyDemoEnvironment/AllSky_DemoEnvironment_Light.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Rock_2.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_05_MBall.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Broadleaf_2.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Trash_Bin.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_Cloud_03.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Vase01.fbx
+  - Assets/Plugins/Quibli/Demos/Nature/Models/NatureScene_ElectricityPylon.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Fir_3.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Mug.fbx
+  - Assets/_SAO/Models/Elucidator/elucidator.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/SampleScene_Tree_Trunk_2.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/CityScene_TreeTrunk.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_06_MballSquare.fbx
+  - Assets/Plugins/Quibli/Demos/Nature/Models/NatureScene_ElectricityPole.fbx
+  - Assets/Plugins/Quibli/Demos/Nature/Models/NatureScene_FenceStick.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Starter Assets/Models/PushButton.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_07_MballCapsules.fbx
+  - Assets/Plugins/Quibli/Demos/Nature/Models/NatureScene_Rock_Simple.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Fir_2.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Starter Assets/Models/Primitive_Wedge.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Reedmace.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Particle Meshes/MeshParticle_Octagon.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Birch_5.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Mushrooms.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Hands Interaction Demo/Runtime/Models/Primitives/Cube.fbx
+  - Assets/_SAO/Models/Town Center Monument/TownSquareMonument.fbx
+  - Assets/Plugins/StylizedWildAnimalsPack/Models/Bear.fbx
+  - Assets/Plugins/AllSkyFree/AllSkyDemoEnvironment/AllSky_DemoEnvironment02.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_DeadTree_5.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_01_Blobs.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Fir_5.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_WaterLily.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Vase03.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Road_Sign_3.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Road_Sign_4.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Spoon.fbx
+  - Assets/_SAO/Models/HollowCylinder.fbx
+  - Assets/Plugins/Quibli/Demos/[Common]/Models/_Foliage Carrier Meshes/MeshCarrier_Cloud_01.fbx
+  - Packages/com.unity.render-pipelines.core/Editor/Resources/DebugProbe.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Starter Assets/Models/XRControllerLeft.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Broadleaf_4.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_DeadTree_4.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Bush_2.fbx
+  - Assets/Plugins/Quibli/Demos/City/Models/Scooter.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Rock_3.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Vase05_TeapotLid.fbx
+  - Assets/Plugins/StylizedWildAnimalsPack/Models/Wolf.fbx
+  - Assets/Plugins/AZURE Nature/Models/AN_Branch_2.fbx
+  - Assets/Plugins/StylizedWildAnimalsPack/Models/Goat.fbx
+  - Assets/Samples/XR Interaction Toolkit/2.3.2/Hands Interaction Demo/Runtime/Models/Primitives/Cylinder.fbx
+  - Assets/Plugins/Quibli/Demos/Kitchenware/Kitchenware Models Shared/Kitchenware_Vase07.fbx
+  uvOverlapAssetList: 00000000000000000101000001010000000000000000000001010000ffffffff0000000000000000010100000101000000000000ffffffff010100000000000001010000010100000101000000000000000000000101000001010000010100000101000001010000000000000000000001010000010100000000000000000000ffffffff0000000001010000000000000000000000000000ffffffff00000000ffffffff0000000000000000000000000000000000000000ffffffff010100000000000001010000ffffffff00000000000000000101000000000000000000000000000000000000010100000101000000000000ffffffff00000000000000000101000000000000000000000101000001010000010100000101000001010000010100000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000101000001010000ffffffff000000000000000000000000010100000101000001010000000000000000000000000000ffffffff0000000001010000000000000101000001010000010100000101000001010000000000000000000000000000010100000101000000000000000000000101000001010000010100000101000000000000000000000101000000000000000000000101000001010000000000000101000000000000010100000101000001010000010100000101000000000000000000000101000000000000ffffffff0000000000000000000000000101000000000000000000000000000001010000ffffffff0000000000000000ffffffff00000000000000000000000000000000010100000000000000000000ffffffff010100000000000000000000ffffffff0000000000000000000000000101000000000000000000000101000000000000010100000000000000000000000000000000000000000000010100000000000001010000010100000000000000000000ffffffff00000000010100000000000000000000000000000101000001010000000000000000000000000000000000000000000000000000
   xatlasWarningShown: 0
   foundCompatibleSetup: 1
   gpuName: NVIDIA GeForce GTX 1070
