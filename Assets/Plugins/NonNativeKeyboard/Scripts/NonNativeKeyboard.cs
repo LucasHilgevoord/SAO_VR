@@ -276,7 +276,8 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
             InputField.keyboardType = (TouchScreenKeyboardType)(int.MaxValue);
 
             // Keep keyboard deactivated until needed
-            gameObject.SetActive(false);
+            // DISABLED because we use this in the character creation name stuff
+            //gameObject.SetActive(false);
         }
 
 
@@ -334,7 +335,9 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         protected void OnDisable()
         {            
             m_LastKeyboardLayout = LayoutType.Alpha;
-            Clear();
+
+            // Disabled because we still need it in the character creation
+            //Clear();
         }
 
 

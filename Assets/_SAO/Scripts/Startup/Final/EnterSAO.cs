@@ -51,6 +51,7 @@ public class EnterSAO : MonoBehaviour
     private IEnumerator StartParticles()
     {
         yield return new WaitForSeconds(particleDelay);
+        Debug.Log(enterParticles);
         enterParticles.gameObject.SetActive(true);
 
         float fogDensity = RenderSettings.fogStartDistance;
@@ -59,6 +60,8 @@ public class EnterSAO : MonoBehaviour
             RenderSettings.fogStartDistance = fogDensity;
         }).OnComplete(()=>
         {
+            DOTween.KillAll(true);
+            Debug.Log(SceneLoader.Instance);
             SceneLoader.Instance.LoadScene((int)SceneType.Interface, true, Color.white, 0.75f);
         });
 

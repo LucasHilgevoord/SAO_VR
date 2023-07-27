@@ -35,17 +35,11 @@ public class CharacterSelectionManager : MonoBehaviour
     private Image _selectedButton;
 
     [SerializeField] private CharacterCreation _characterCreation;
-
     private bool _isCharacterSelection;
 
     private void Awake()
     {
         StartCoroutine(WaitForCurvedUI());
-    }
-
-    private void Start()
-    {
-        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.HeldInHand | InputDeviceCharacteristics.Controller, devices);
     }
 
     private void CheckUserData()
@@ -60,24 +54,13 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private bool UserDataAvailable()
     {
-        _username = PlayerPrefs.GetString("playerName", "");
-        _gender = PlayerPrefs.GetString("playerGender", "");
-
-        // TESTING
-        _username = "Kirito";
-        _gender = "(M)";
-        if (_username == "")
-        {
-            Debug.Log("No player data found!");
-            return false;
-        }
-
+        _username = PlayerPrefs.GetString("playerName", "Kirito");
+        _gender = PlayerPrefs.GetString("playerGender", "(X)");
         return true;
     }
 
     private void Update()
     {
-
         if (!_isCharacterSelection) return;
 
         // Keyboard
@@ -89,7 +72,7 @@ public class CharacterSelectionManager : MonoBehaviour
             OnEnterPress();
 
         // Controller
-        foreach (UnityEngine.XR.InputDevice controller in devices)
+        foreach (UnityEngine.XR.InputDevice controller in InputHandler.Instance.GetDevices())
         {
             if (controller.isValid && _allowInput)
             {

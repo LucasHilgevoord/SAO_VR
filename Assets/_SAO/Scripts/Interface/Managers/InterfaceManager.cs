@@ -18,6 +18,7 @@ namespace PlayerInterface
         [SerializeField] private CategorieMenu categorieMenu;
         [SerializeField] private MenuItem initialMenuItem;
 
+        private bool _isOpen;
         private int _currentCategorieMenu;
 
         private void Awake()
@@ -35,15 +36,16 @@ namespace PlayerInterface
             if (InputHandler.Instance.wasKeyPressedThisFrame(Key.C))
                 ToggleCatogoryMenu(false);
 
-            if (InputHandler.Instance.wasKeyPressedThisFrame(Key.DownArrow))
+            if (InputHandler.Instance.WasControllerButtonPressedThisFrame(ControllerButton.B))
             {
-                
+                ToggleCatogoryMenu(true);
             }
 #endif
         }
 
         internal void ToggleCatogoryMenu(bool enable)
 		{
+            if (enable == _isOpen) return;
             if (enable)
             {
                 CatogoryMenuOpened?.Invoke();
@@ -54,6 +56,7 @@ namespace PlayerInterface
                 CatogoryMenuClosed?.Invoke();
                 categorieMenu.CloseMenu();
             }
+            _isOpen = enable;
         }
 
         /// <summary>

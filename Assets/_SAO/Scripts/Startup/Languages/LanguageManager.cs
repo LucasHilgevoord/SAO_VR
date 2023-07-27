@@ -39,7 +39,6 @@ public class LanguageManager : MonoBehaviour
 
     private void Start()
     {
-        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.HeldInHand | InputDeviceCharacteristics.Controller, devices);
         StartCoroutine(WaitForCurvedUI());
     }
 
@@ -73,7 +72,7 @@ public class LanguageManager : MonoBehaviour
             ConfirmLanguage(languageButtons[currentLanguageIndex]);
         }
 
-        foreach (UnityEngine.XR.InputDevice controller in devices)
+        foreach (UnityEngine.XR.InputDevice controller in InputHandler.Instance.GetDevices())
         {
             if (controller.isValid && _allowInput)
             {

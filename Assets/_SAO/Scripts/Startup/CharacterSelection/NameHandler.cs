@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using UnityEngine.InputSystem;
+using TMPro;
+using Microsoft.MixedReality.Toolkit.Experimental.UI;
 
 public class NameHandler : MonoBehaviour
 {
@@ -15,21 +17,42 @@ public class NameHandler : MonoBehaviour
 
     private Vector3 presetSize = new Vector3(1, 0, 1);
     private float windowToggleDuration = 0.2f;
+    [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private TextMeshProUGUI _usernameLabel;
+    [SerializeField] private NonNativeKeyboard _keyboard;
 
-    public InputField inputField; 
+    [SerializeField] private Button _confirmButton;
 
     private void Awake()
     {
         StartCoroutine(WaitForCurvedUI());
+        _keyboard.OnKeyboardValueKeyPressed += OnKeyboardKeyPressed;
+    }
+
+    private void OnDisable()
+    {
+        _keyboard.OnKeyboardValueKeyPressed -= OnKeyboardKeyPressed;
+    }
+
+    private void OnKeyboardKeyPressed(KeyboardValueKey obj)
+    {
+        Debug.Log(obj.Value);
     }
 
     private void Update()
     {
         // Testing
-        if (InputHandler.Instance.wasKeyPressedThisFrame(Key.Enter))
-            ConfirmCredentials();
-        if (InputHandler.Instance.wasKeyPressedThisFrame(Key.Escape))
-            RejectCredentials();
+        //if (InputHandler.Instance.wasKeyPressedThisFrame(Key.Enter))
+        //    ConfirmCredentials();
+        //if (InputHandler.Instance.wasKeyPressedThisFrame(Key.Escape))
+        //    RejectCredentials();
+
+        if (_usernameLabel.text == "") {
+            _confirmButton.interactable = false;
+        } else
+        {
+            _confirmButton.interactable = true;
+        }
     }
 
     private IEnumerator WaitForCurvedUI()
@@ -44,6 +67,7 @@ public class NameHandler : MonoBehaviour
     {
         transform.localScale = presetSize;
         transform.DOScale(Vector3.one, windowToggleDuration);
+        _keyboard.gameObject.SetActive(true);
     }
 
     private void CloseWindow()
@@ -56,13 +80,21 @@ public class NameHandler : MonoBehaviour
         });
     }
 
-    private void ConfirmCredentials()
+    public void ConfirmCredentials()
     {
-        PlayerPrefs.SetString("playerName", inputField.text);
+        Debug.Log("Name: " + _usernameLabel.text);
+        PlayerPrefs.SetString("playerName", _usernameLabel.text);
+        StartCoroutine(Confirm());
+    }
+
+    private IEnumerator Confirm()
+    {
+        _keyboard.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
         CloseWindow();
     }
 
-    private void RejectCredentials()
+    public void RejectCredentials()
     {
         inputField.text = "";
     }
