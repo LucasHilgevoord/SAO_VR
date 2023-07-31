@@ -29,7 +29,7 @@ namespace PlayerInterface
 
         private void Update()
         {
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
             if (InputHandler.Instance.wasKeyPressedThisFrame(Key.X))
                 ToggleCatogoryMenu(true);
 
@@ -40,7 +40,11 @@ namespace PlayerInterface
             {
                 ToggleCatogoryMenu(true);
             }
-#endif
+            if (InputHandler.Instance.WasControllerButtonPressedThisFrame(ControllerButton.Trigger))
+            {
+                ToggleCatogoryMenu(true);
+            }
+            //#endif
         }
 
         internal void ToggleCatogoryMenu(bool enable)

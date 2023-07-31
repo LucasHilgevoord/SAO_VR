@@ -39,8 +39,11 @@ public class Wearable : MonoBehaviour
 
     public virtual void StartWearing(Transform parent)
     {
+        Debug.Log("ah?");
         _grabInteractable.enabled = false;
         _rigidbody.isKinematic = true;
+        _rigidbody.interpolation = RigidbodyInterpolation.None;
+
         foreach (Collider collider in colliders)
         {
             collider.enabled = false;
