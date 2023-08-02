@@ -83,7 +83,7 @@ public class NameHandler : MonoBehaviour
     public void ConfirmCredentials()
     {
         Debug.Log("Name: " + _usernameLabel.text);
-        PlayerPrefs.SetString("playerName", _usernameLabel.text);
+        PlayerPrefs.SetString("username", _usernameLabel.text);
         StartCoroutine(Confirm());
     }
 

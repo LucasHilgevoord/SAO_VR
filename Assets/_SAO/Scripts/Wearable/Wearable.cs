@@ -34,7 +34,6 @@ public class Wearable : MonoBehaviour
     void Update()
     {
         // Check if the object is picked up, we don't want to be worn if we are not grabbed
-        
     }
 
     public virtual void StartWearing(Transform parent)

@@ -19,7 +19,7 @@ namespace PlayerInterface
         [SerializeField] private Material scrollViewFadeMat;
 
         private int minCellsForOffset = 6;
-        [SerializeField] private int maxItems = -1;
+        //[SerializeField] private int maxItems = -1;
 
         public void Start() 
         { 

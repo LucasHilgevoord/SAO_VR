@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace PlayerInterface
@@ -51,7 +52,9 @@ namespace PlayerInterface
         public void Start()
         {
             Button button = GetComponent<Button>();
-            if (button != null) { button.onClick.AddListener(Interact); }
+            if (button != null) {
+                button.onClick.AddListener(Interact); 
+            }
 
             if (title != null && titleString != "")
                 title.text = titleString;
@@ -71,7 +74,7 @@ namespace PlayerInterface
             icon.sprite = isSelected ? iconSpriteOn : iconSpriteOff;
         }
 
-        internal void ToggleActions()
+        public void ToggleActions()
         {
             if (isSelected)
             {
@@ -94,16 +97,11 @@ namespace PlayerInterface
             ToggleActions();
         }
 
-        internal void Interact()
+        public void Interact()
         {
             ToggleItem();
-            AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_button_press");
+            //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_button_press");
             MenuItemPressed?.Invoke(this, isSelected);
-        }
-
-        private void OnMouseDown()
-        {
-            Interact();
         }
     }
 }

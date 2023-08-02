@@ -54,7 +54,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private bool UserDataAvailable()
     {
-        _username = PlayerPrefs.GetString("playerName", "Kirito");
+        _username = PlayerPrefs.GetString("username", "Kirito");
         _gender = PlayerPrefs.GetString("playerGender", "(X)");
         return true;
     }

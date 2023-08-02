@@ -14,6 +14,18 @@ namespace PlayerInterface
 
         private Coroutine disableItemsRoutine;
 
+        private void Start()
+        {
+            // Disable all items
+            foreach (MenuItem item in items)
+            {
+                item.gameObject.SetActive(false);
+            }
+
+            // Disable lineArrow
+            lineArrow.SetActive(false);
+        }
+
         public override void OpenMenu()
         {
             base.OpenMenu();

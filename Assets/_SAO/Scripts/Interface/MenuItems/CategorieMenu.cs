@@ -49,10 +49,9 @@ namespace PlayerInterface
 
                 // Start the moving animation
                 StartCoroutine(OpenMenuItem(items[i], delay));
-                Debug.Log("OPEN");
             }
 
-            AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_open");
+            //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_open");
         }
 
         /// <summary>

@@ -9,6 +9,8 @@ namespace PlayerInterface
 {
     public class PlayerEquipmentMenu : Menu
     {
+        [SerializeField] private Text username;
+
         [Header("Player Equipment")]
         [SerializeField] private GameObject window;
         [SerializeField] private CanvasGroup windowCanvasGroup;
@@ -39,6 +41,7 @@ namespace PlayerInterface
 
         private void Start()
         {
+            username.text = PlayerPrefs.GetString("username", "Kirito");
             descWindow.anchoredPosition = new Vector3(0, descWindow.rect.height, 0);
             descCanvasGroup.alpha = 0;
 
