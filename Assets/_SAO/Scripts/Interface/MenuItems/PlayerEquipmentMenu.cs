@@ -15,6 +15,7 @@ namespace PlayerInterface
         [SerializeField] private GameObject window;
         [SerializeField] private CanvasGroup windowCanvasGroup;
         private float openingDuration = 0.5f;
+        [SerializeField] private SlotHandler _slotHandler;
 
         [Header("Description Window")]
         [SerializeField] private RectTransform descWindow;
@@ -66,7 +67,9 @@ namespace PlayerInterface
 
             // Opening the window
             window.transform.DOScale(Vector3.one, openingDuration);
-            windowCanvasGroup.DOFade(1, openingDuration);
+            windowCanvasGroup.DOFade(1, openingDuration).OnComplete(() => {
+                _slotHandler.ShowSlots();
+            });
         }
 
         public override void CloseMenu()
