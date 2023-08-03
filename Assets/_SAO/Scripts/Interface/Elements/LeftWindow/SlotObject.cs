@@ -6,53 +6,20 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum SlotType
-{
-    Skill,
-    Arm,
-    Chest,
-    Wrist,
-    Hand,
-    Leg
-}
-
-public enum SlotSide
-{
-    None,
-    Left,
-    Right,
-    Top,
-    Bottom
-}
-
-[Serializable]
-public class Slot
-{
-    public SlotType slotType;
-    public SlotSide slotSide;
-
-    public Slot(SlotType type, SlotSide side = SlotSide.None)
-    {
-        slotType = type;
-        slotSide = side;
-    }
-}
-
 public class SlotObject : MonoBehaviour
 {
-    [SerializeField] private Slot _slotType;
-    public Slot Type => _slotType;
+    [SerializeField] private PlayerWindowSlot _slotType;
+    public PlayerWindowSlot Type => _slotType;
 
     [Header("Components")]
     [SerializeField] private Image _icon;
     [SerializeField] private Image _smallIcon;
     [SerializeField] private LineRenderer _line;
+    [SerializeField] private Sprite _selectedSprite, _deselectedSprite;
 
     private Vector3[] _linePositions;
-    private float _lineSpeed = 1f;
+    private float _lineSpeed = .2f;
     private Vector3 _iconPosition;
-
-    public bool test;
 
     private void Start()
     {
@@ -81,7 +48,6 @@ public class SlotObject : MonoBehaviour
     {
         if (InputHandler.Instance.wasKeyPressedThisFrame(UnityEngine.InputSystem.Key.M))
         {
-            Hide();
         }
     }
 
@@ -196,8 +162,20 @@ public class SlotObject : MonoBehaviour
         }
     }
 
-    internal void HighlightSlot()
+    internal void Select()
     {
+        _line.gameObject.SetActive(false);
+        _smallIcon.gameObject.SetActive(false);
+        _icon.sprite = _selectedSprite;
+        _icon.transform.DOScale(1.5f, 0.5f);
     }
-        
+
+    internal void Deselect()
+    {
+        _icon.transform.DOScale(1f, 0.5f).OnComplete(()=> {
+            _icon.sprite = _deselectedSprite;
+            _line.gameObject.SetActive(true);
+            _smallIcon.gameObject.SetActive(true);
+        });
+    }
 }

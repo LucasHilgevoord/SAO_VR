@@ -5,6 +5,7 @@ using UnityEngine;
 public class SlotHandler : MonoBehaviour
 {
     [SerializeField] private List<SlotObject> _slots;
+    [SerializeField] private List<SlotObject> _selectedSlots;
     private float _slotAppearDelay = 0.1f;
 
     private void Start()
@@ -16,7 +17,7 @@ public class SlotHandler : MonoBehaviour
     {
         if (InputHandler.Instance.wasKeyPressedThisFrame(UnityEngine.InputSystem.Key.N))
         {
-            
+            SelectSlots(new PlayerWindowSlot[] { new PlayerWindowSlot(SlotType.Skill)});
         }
     }
     
@@ -37,21 +38,62 @@ public class SlotHandler : MonoBehaviour
         }
     }
 
-    private void HighlightSlots(Slot[] slotTypes)
+    public void SelectSlot(int typeIndex)
     {
-        List<SlotObject> selectedSlots = new List<SlotObject>();
-        foreach (Slot type in slotTypes)
+        // convert the single int to a list of PlayerWindowSlot
+        SelectSlots(new PlayerWindowSlot[] { new PlayerWindowSlot((SlotType)typeIndex, SlotSide.None)});
+    }
+
+    public void SelectSlots(int[][] slotTypes)
+    {
+        // Convert the int array to a PlayerWindowSlot array
+        PlayerWindowSlot[] slots = new PlayerWindowSlot[slotTypes.Length];
+        for (int i = 0; i < slotTypes.Length; i++)
         {
+            slots[i] = new PlayerWindowSlot((SlotType)slotTypes[i][0], (SlotSide)slotTypes[i][1]);
+        }
+    }
+
+    internal void SelectSlots(PlayerWindowSlot[] slotTypes)
+    {   
+        // Check which slots to highlight
+        _selectedSlots = new List<SlotObject>();
+        foreach (PlayerWindowSlot type in slotTypes)
+        {
+            Debug.Log(type.slotType);
             foreach (SlotObject slot in _slots)
             {
-                if (selectedSlots.Contains(slot)) { continue; }
-
-                if (slot.Type.slotType == type.slotType && (slot.Type.slotSide == SlotSide.None || slot.Type.slotSide == type.slotSide))
+                if (_selectedSlots.Contains(slot)) { Debug.Log("contains"); continue; }
+                if (slot.Type.slotType == type.slotType && (type.slotSide == SlotSide.None || slot.Type.slotSide == type.slotSide))
                 {
-                    selectedSlots.Add(slot);
+                    Debug.Log("Added");
+                    _selectedSlots.Add(slot);
                     continue;
                 }
             }
+        }
+
+        StartCoroutine(SelectCoroutine());
+    }
+
+    private IEnumerator SelectCoroutine()
+    {
+        for (int i = 0; i < _slots.Count; i++)
+        {
+            if (!_selectedSlots.Contains(_slots[i]))
+                _slots[i].Hide();
+
+            if (!_selectedSlots.Contains(_slots[i + 1]))
+                _slots[i + 1].Hide();
+            
+            i++;
+            yield return new WaitForSeconds(_slotAppearDelay);
+        }
+        
+        yield return new WaitForSeconds(.5f);
+        foreach (SlotObject slot in _selectedSlots)
+        {
+            slot.Select();
         }
     }
 }

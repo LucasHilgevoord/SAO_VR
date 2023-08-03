@@ -297,7 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5592257900349627604}
-  - component: {fileID: 1880105447027937916}
+  - component: {fileID: 6874419849913277060}
   m_Layer: 5
   m_Name: SkillSlot
   m_TagString: Untagged
@@ -328,7 +328,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 35.5, y: 35.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1880105447027937916
+--- !u!114 &6874419849913277060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -340,8 +340,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885d2cc4eaf106f4ca70fd3f0ad789f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slotType: 0
-  _slotSide: 0
+  _slotType:
+    slotType: 0
+    slotSide: 0
   _icon: {fileID: 5592257900186747232}
   _smallIcon: {fileID: 5592257898953339803}
   _line: {fileID: 5592257900016503641}
+  _selectedSprite: {fileID: 21300000, guid: bb4e99b2df4ee96439f87c01d242d929, type: 3}
+  _deselectedSprite: {fileID: 21300000, guid: 6385f40ee4b501245b77035f29ee40b4, type: 3}

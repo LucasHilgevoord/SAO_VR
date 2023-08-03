@@ -141,5 +141,11 @@ namespace PlayerInterface
                 descCanvasGroup.DOFade(0, toggleDuration);
             }
         }
+
+        public void SelectSlot(int typeIndex)
+        {
+            // Only choosing one slottype is currently available, not sure how to specify the side as well.
+            _slotHandler.SelectSlot(typeIndex);
+        }
     }
 }
