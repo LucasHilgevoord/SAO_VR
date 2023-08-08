@@ -20,17 +20,13 @@ namespace PlayerInterface
         [SerializeField] private Canvas interfaceCanvas;
         [SerializeField] private CategorieMenu categorieMenu;
         [SerializeField] private MenuItem initialMenuItem;
-
         private bool _isOpen;
-        private int _currentCategorieMenu;
 
         private Coroutine _lerpInterfaceRoutine;
-        private float _moveTime = 1f;
-        private float _interfaceInitHeight;
+        private float _moveTime = 0.7f;
 
         private void Awake()
         {
-            _interfaceInitHeight = categorieMenu.transform.localPosition.y;
             MenuItem.IsPressed += OnMenuItemPressed;
         }
 
@@ -120,8 +116,6 @@ namespace PlayerInterface
 
         private IEnumerator LerpToNewPos()
         {
-            ChangeAnchorPoint();
-
             // Find the correct position to go to
             Vector2 pos = Vector2.zero;
             for (int i = 0; i < openMenus.Count; i++)
@@ -137,59 +131,6 @@ namespace PlayerInterface
                 transform.localPosition = nextPos;
                 elapsedTime += Time.deltaTime;
                 yield return null;
-            }
-        }
-
-        private void ChangeAnchorPoint()
-        {
-            // Change the anchorPoints for each menu
-            //for (int i = openMenus.Count - 1; i >= 0; i--)
-            //{
-            //    if (openMenus[i].subMenu == null) continue;
-
-            //    RectTransform rect = openMenus[i].subMenu.GetComponent<RectTransform>();
-            //    Vector2 oldPosition = rect.anchoredPosition;
-            //    Vector2 oldPivot = rect.pivot;
-
-            //    if (i == openMenus.Count - 1)
-            //    {
-            //        // Change anchor points to center
-            //        rect.anchorMin = new Vector2(.5f, .5f);
-            //        rect.anchorMax = new Vector2(.5f, .5f);
-            //        rect.pivot = new Vector2(.5f, .5f);
-            //    }
-            //    else
-            //    {
-            //        // Set anchor points to right center
-            //        rect.anchorMin = new Vector2(0f, 0.5f);
-            //        rect.anchorMax = new Vector2(0f, 0.5f);
-
-            //        // Set pivot to right center
-            //        rect.pivot = new Vector2(0f, 0.5f);
-            //    }
-
-            //    // Calculate the new position based on the old position, size delta, and pivot
-            //    Vector2 newPosition = oldPosition - rect.sizeDelta / 2 * (oldPivot - rect.pivot);
-
-            //    // Set the new anchored position
-            //    rect.anchoredPosition = newPosition;
-            //}
-        }
-
-        /// <summary>
-        /// Method that handles ... whenever the (sub)menu is fully opened/closed
-        /// </summary>
-        /// <param name="isOpen">The state of the (sub)menu</param>
-        /// <param name="menu">Which (sub)menu has been interacted with</param>
-        private void OnMenuToggleComplete(bool isOpen, Menu menu)
-        {
-            if (isOpen)
-            {
-                //if (menu == categorieMenu)
-                //    initialMenuItem.Interact();
-            } else
-            {
-
             }
         }
     }
