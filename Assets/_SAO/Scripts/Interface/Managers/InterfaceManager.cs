@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace PlayerInterface
         private bool _isOpen;
         private int _currentCategorieMenu;
 
+        private Coroutine _lerpInterfaceRoutine;
         private float _moveTime = 1f;
         private float _interfaceInitHeight;
 
@@ -40,23 +42,19 @@ namespace PlayerInterface
             // Check if the item is part of a submenu of one of the already selected menuItems
             for (int i = 0; i < openMenus.Count; i++)
             {
-                // Check all the submenu's which are part of the item
-                for (int j = 0; j < openMenus[i].subMenus.Count; j++) // Change i to j here
+                // If it is part of a menu, then the menus after that should be closed and the new menu should be opened
+                if (openMenus[i].subMenu == null) { continue; }
+                if (openMenus[i].subMenu.items.Contains(newItem))
                 {
-                    // If it is part of a menu, then the menus after that should be closed and the new menu should be opened
-                    if (openMenus[i].subMenus[j].items.Contains(newItem))
+                    // The item is part of a submenu which is open, disable all the submenus after that
+                    for (int j = openMenus.Count - 1; j > i; j--)
                     {
-                        // The item is part of a submenu which is open, disable all the submenus after that
-                        for (int k = openMenus.Count - 1; k > i; k--)
-                        {
-                            openMenus[k].Deselect();
-                            openMenus.RemoveAt(k); // Change Remove to RemoveAt here
-                        }
-                        isPartOfMenu = true;
-                        break;
+                        openMenus[j].Deselect();
+                        openMenus.RemoveAt(j); // Change Remove to RemoveAt here
                     }
+                    isPartOfMenu = true;
+                    break;
                 }
-                if (isPartOfMenu) break;
             }
 
             if (!isPartOfMenu)
@@ -79,6 +77,9 @@ namespace PlayerInterface
                 openMenus.Remove(newItem);
                 newItem.Deselect();
             }
+
+            if (_lerpInterfaceRoutine != null) StopCoroutine(_lerpInterfaceRoutine);
+            _lerpInterfaceRoutine = StartCoroutine(LerpToNewPos());
         }
 
         private void Update()
@@ -117,35 +118,18 @@ namespace PlayerInterface
             }
         }
 
-        /// <summary>
-        /// Method to add/remove (sub)menu's from the open (sub)menu list.
-        /// Used to know the road that the user has taken in the interface.
-        /// </summary>
-        /// <param name="isOpen">The state of the (sub)menu</param>
-        /// <param name="menu">Which (sub)menu has been interacted with</param>
-        //private void OnMenuToggled(bool isOpen, Menu menu)
-        //{
-        //    Debug.Log(menu.transform.name + " OPEN: " + isOpen);
-
-        //    if (isOpen)
-        //    {
-        //        openMenus.Add(menu);
-        //        menu.OpenMenu();
-        //        // Lerp categoryMenuRect to new pos
-        //        //StartCoroutine(LerpToNewPos(menu.transform.position));
-        //    }
-        //    else openMenus.Remove(menu);
-        //}
-
         private IEnumerator LerpToNewPos()
         {
+            ChangeAnchorPoint();
+
+            // Find the correct position to go to
             Vector2 pos = Vector2.zero;
             for (int i = 0; i < openMenus.Count; i++)
             {
-                pos.x -= openMenus[i].transform.localPosition.x;
-                Debug.Log(openMenus[i].name + " | " + pos);
+                if (openMenus[i].subMenu != null)
+                    pos.x -= openMenus[i].subMenu.transform.localPosition.x;
             }
-            Debug.Log("Lerp");
+
             float elapsedTime = 0f;
             while (elapsedTime < _moveTime)
             {
@@ -154,6 +138,42 @@ namespace PlayerInterface
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+        }
+
+        private void ChangeAnchorPoint()
+        {
+            // Change the anchorPoints for each menu
+            //for (int i = openMenus.Count - 1; i >= 0; i--)
+            //{
+            //    if (openMenus[i].subMenu == null) continue;
+
+            //    RectTransform rect = openMenus[i].subMenu.GetComponent<RectTransform>();
+            //    Vector2 oldPosition = rect.anchoredPosition;
+            //    Vector2 oldPivot = rect.pivot;
+
+            //    if (i == openMenus.Count - 1)
+            //    {
+            //        // Change anchor points to center
+            //        rect.anchorMin = new Vector2(.5f, .5f);
+            //        rect.anchorMax = new Vector2(.5f, .5f);
+            //        rect.pivot = new Vector2(.5f, .5f);
+            //    }
+            //    else
+            //    {
+            //        // Set anchor points to right center
+            //        rect.anchorMin = new Vector2(0f, 0.5f);
+            //        rect.anchorMax = new Vector2(0f, 0.5f);
+
+            //        // Set pivot to right center
+            //        rect.pivot = new Vector2(0f, 0.5f);
+            //    }
+
+            //    // Calculate the new position based on the old position, size delta, and pivot
+            //    Vector2 newPosition = oldPosition - rect.sizeDelta / 2 * (oldPivot - rect.pivot);
+
+            //    // Set the new anchored position
+            //    rect.anchoredPosition = newPosition;
+            //}
         }
 
         /// <summary>

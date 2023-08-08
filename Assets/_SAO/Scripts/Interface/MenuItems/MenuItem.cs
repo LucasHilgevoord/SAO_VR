@@ -28,7 +28,7 @@ namespace PlayerInterface
 
         [Header(" Links")]
         /// Submenu's that will be opened when this item is selected
-        public List<Menu> subMenus;
+        public SubMenu subMenu;
         internal bool isSelected;
         
         public void Initialize(string title, Sprite iconOn, Sprite iconOff)
@@ -85,9 +85,9 @@ namespace PlayerInterface
             // Start the OnSelectEvents
             OnSelectEvents?.Invoke();
 
-            // Open the submenu's
-            foreach (Menu menu in subMenus)
-                menu.OpenMenu();
+            // Open the submenu
+            if (subMenu != null)
+                subMenu.OpenMenu();
         }
 
         public void Deselect()
@@ -101,9 +101,9 @@ namespace PlayerInterface
             // Start the OnDeselectEvents
             OnDeselectEvents?.Invoke();
 
-            // Open the submenu's
-            foreach (Menu menu in subMenus)
-                menu.CloseMenu();
+            // Close the submenu's
+            if (subMenu != null)
+                subMenu.CloseMenu();
         }
 
         public void Interact()

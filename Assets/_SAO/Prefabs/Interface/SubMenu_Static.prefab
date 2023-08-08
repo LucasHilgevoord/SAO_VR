@@ -78,10 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c19d4d884b3e641859b3a14aa90245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuID: 
   items: []
   lineArrow: {fileID: 6952227160077672100}
   lineArrowCanvas: {fileID: 6911219692862687785}
-  spawnDelay: 0.2
 --- !u!114 &1551345860242999382
 MonoBehaviour:
   m_ObjectHideFlags: 0

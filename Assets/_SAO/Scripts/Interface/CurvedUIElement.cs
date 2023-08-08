@@ -18,8 +18,8 @@ public class CurvedUIElement : MonoBehaviour
         pos.z = zPos;
         transform.localPosition = pos;
 
-        Vector3 rot = transform.localRotation.eulerAngles;
+        Vector3 rot = transform.rotation.eulerAngles;
         rot.y = yRot;
-        transform.localRotation = Quaternion.Euler(rot);
+        transform.rotation = Quaternion.Euler(rot);
     }
 }
