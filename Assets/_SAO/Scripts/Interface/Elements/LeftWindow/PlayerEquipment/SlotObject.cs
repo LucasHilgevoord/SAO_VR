@@ -16,10 +16,12 @@ public class SlotObject : MonoBehaviour
     [SerializeField] private Image _smallIcon;
     [SerializeField] private LineRenderer _line;
     [SerializeField] private Sprite _selectedSprite, _deselectedSprite;
+    private bool _isSelected;
 
     private Vector3[] _linePositions;
-    private float _lineSpeed = .2f;
+    private float _lineSpeed = .1f;
     private Vector3 _iconPosition;
+    private Coroutine _showRoutine, _hideRoutine;
 
     private void Start()
     {
@@ -29,6 +31,17 @@ public class SlotObject : MonoBehaviour
             _linePositions[i] = _line.GetPosition(i);
         }
 
+        HideVisuals();
+        _iconPosition = _icon.transform.localPosition;
+    }
+
+    private void OnDisable()
+    {
+        HideVisuals();
+    }
+
+    internal void HideVisuals()
+    {
         Color iconAlpha = _icon.color;
         iconAlpha.a = 0;
         _icon.color = iconAlpha;
@@ -40,8 +53,6 @@ public class SlotObject : MonoBehaviour
         _line.gameObject.SetActive(false);
         _icon.gameObject.SetActive(false);
         _smallIcon.gameObject.SetActive(false);
-
-        _iconPosition = _icon.transform.localPosition;
     }
 
     private void Update()
@@ -53,6 +64,9 @@ public class SlotObject : MonoBehaviour
 
     internal void Show()
     {
+        if (_hideRoutine != null)
+            StopCoroutine(_hideRoutine);
+        
         _line.gameObject.SetActive(false);
         _smallIcon.gameObject.SetActive(false);
 
@@ -63,7 +77,7 @@ public class SlotObject : MonoBehaviour
         _line.positionCount = 1;
         _icon.DOFade(1, 0.5f).OnComplete(() => {
             _line.gameObject.SetActive(true);
-            StartCoroutine(MoveLineCoroutineQueue());
+            _showRoutine = StartCoroutine(MoveLineCoroutineQueue());
         });
     }
 
@@ -99,8 +113,11 @@ public class SlotObject : MonoBehaviour
 
     internal void Hide()
     {
+        if (_showRoutine != null)
+            StopCoroutine(_showRoutine);
+
         // Move the _icon over the path of the line
-        StartCoroutine(MoveIconCoroutineQueue());
+        _hideRoutine = StartCoroutine(MoveIconCoroutineQueue());
     }
 
     private IEnumerator MoveIconCoroutineQueue()
@@ -164,6 +181,9 @@ public class SlotObject : MonoBehaviour
 
     internal void Select()
     {
+        if (_isSelected) return;
+
+        _isSelected = true;
         _line.gameObject.SetActive(false);
         _smallIcon.gameObject.SetActive(false);
         _icon.sprite = _selectedSprite;
@@ -172,7 +192,10 @@ public class SlotObject : MonoBehaviour
 
     internal void Deselect()
     {
-        _icon.transform.DOScale(1f, 0.5f).OnComplete(()=> {
+        if (!_isSelected) { return; }
+
+        _isSelected = false;
+        _icon.transform.DOScale(1f, 0.5f).OnComplete(() => {
             _icon.sprite = _deselectedSprite;
             _line.gameObject.SetActive(true);
             _smallIcon.gameObject.SetActive(true);

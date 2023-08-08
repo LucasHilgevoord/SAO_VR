@@ -7,15 +7,8 @@ namespace PlayerInterface
 {
     public class Menu : MonoBehaviour
     {
-        /// <summary>
-        /// Event which contents if a menu will open or close
-        /// </summary>
-        public static Action<bool, Menu> MenuToggled;
-
-        /// <summary>
-        /// Event which contents if a menu has fully opened or closed;
-        /// </summary>
-        public static Action<bool, Menu> MenuToggleComplete;
+        [SerializeField] private string menuID;
+        public string MenuID => menuID;
 
         public List<MenuItem> items = new List<MenuItem>();
         internal MenuItem currentSelected;
@@ -27,12 +20,19 @@ namespace PlayerInterface
         /// <summary>
         /// Open the menu
         /// </summary>
-        public virtual void OpenMenu() { MenuToggled?.Invoke(true, this); }
+        public virtual void OpenMenu() {  }
 
         /// <summary>
         /// Close the menu
         /// </summary>
-        public virtual void CloseMenu() { MenuToggled?.Invoke(false, this); }
+        public virtual void CloseMenu() {
+            // Close the current selected items
+            foreach (MenuItem item in items)
+            {
+                if (item.isSelected)
+                    item.Deselect();
+            }
+        }
 
         internal virtual void OnMenuItemPressed(MenuItem item, bool isSelected)
         {
@@ -46,7 +46,7 @@ namespace PlayerInterface
 
             // Case: There is already an item open, close the already opened item
             if (currentSelected != null && isSelected)
-                currentSelected.ToggleItem();
+                currentSelected.Interact();
 
             previousSelected = currentSelected;
             currentSelected = item;

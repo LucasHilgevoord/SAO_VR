@@ -14,6 +14,8 @@ namespace PlayerInterface
         public override void ToggleItem()
         {
             base.ToggleItem();
+
+            // Fire event so the equipment can be displayed
             EquipmentItemPressed?.Invoke(this, isSelected);
         }
     }

@@ -65,7 +65,6 @@ namespace PlayerInterface
 
             //totalTopPadding = -totalTopPadding;
             layoutGroup.padding.top = (int)totalTopPadding;
-            Debug.Log(totalTopPadding);
         }
 
         internal virtual void FillMenuItems() { }

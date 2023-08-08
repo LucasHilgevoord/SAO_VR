@@ -1,37 +1,36 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace PlayerInterface
 {
     public class MenuItem : MonoBehaviour
     {
-        public System.Action<MenuItem, bool> MenuItemPressed;
+        [Header(" Actions when triggered")]
+        public static Action<MenuItem, bool> IsPressed;
+        public UnityEvent OnSelectEvents;
+        public UnityEvent OnDeselectEvents;
 
-        [SerializeField] private Image icon;
-        public Text title;
+        [Header(" References")]
+        [SerializeField] private Text titleLabel;
+        [SerializeField] private string titleString;
 
-        [SerializeField] private Image box;
+        [SerializeField] private Image background;
         [SerializeField] private Image selectArrow;
-
-        public string titleString;
-        public Sprite iconSpriteOn;
-        public Sprite iconSpriteOff;
-
-        public CanvasGroup canvasGroup;
-        public Collider myCollider;
-        private CurvedUICollider _curvedUICollider;
-        [SerializeField] private Vector3 _colliderSize;
-
-        internal bool isSelected;
         private Color selectedColor = new Color(0.92f, 0.67f, 0.05f, 0.9f);
 
-        [Header("Actions when triggered")]
-        public UnityEvent OnEnableEvents;
-        public UnityEvent OnDisableEvents;
+        public CanvasGroup canvasGroup;
+        [SerializeField] private Image iconImage;
+        [SerializeField] private Sprite iconSpriteOn;
+        [SerializeField] private Sprite iconSpriteOff;
 
-
+        [Header(" Links")]
+        /// Submenu's that will be opened when this item is selected
+        public List<Menu> subMenus;
+        internal bool isSelected;
+        
         public void Initialize(string title, Sprite iconOn, Sprite iconOff)
         {
             titleString = title;
@@ -39,28 +38,20 @@ namespace PlayerInterface
             iconSpriteOff = iconOff;
         }
 
-        private void CreateCurvedUICollider()
-        {
-            GameObject newObject = new GameObject("CurvedUI Collider");
-            newObject.transform.parent = transform;
-            newObject.transform.localScale = Vector3.one;
-            newObject.AddComponent<RectTransform>();
-            newObject.AddComponent<CurvedUICollider>().Init(_colliderSize, out _curvedUICollider);
-            _curvedUICollider.InteractionDetected += Interact;
-        }
-
         public void Start()
         {
+            // Add the event trigger to the menu item
             Button button = GetComponent<Button>();
             if (button != null) {
                 button.onClick.AddListener(Interact); 
             }
 
-            if (title != null && titleString != "")
-                title.text = titleString;
+            // Set the title label to the correct name if it is not empty
+            if (!string.IsNullOrEmpty(titleString))
+                titleLabel.text = titleString;
 
-            icon.sprite = iconSpriteOff;
-            //CreateCurvedUICollider();
+            // Start the icon with the off sprite
+            iconImage.sprite = iconSpriteOff;
         }
 
         /// <summary>
@@ -69,21 +60,9 @@ namespace PlayerInterface
         public void ToggleVisuals(bool isSelected)
         {
             if (selectArrow != null) selectArrow.color = isSelected ? selectedColor : Color.white;
-            if (title != null) title.color = isSelected ? Color.white : Color.black;
-            if (box != null) box.color = isSelected ? selectedColor : Color.white;
-            icon.sprite = isSelected ? iconSpriteOn : iconSpriteOff;
-        }
-
-        public void ToggleActions()
-        {
-            if (isSelected)
-            {
-                OnEnableEvents?.Invoke();
-            }
-            else
-            {
-                OnDisableEvents?.Invoke();
-            }
+            if (titleLabel != null) titleLabel.color = isSelected ? Color.white : Color.black;
+            if (background != null) background.color = isSelected ? selectedColor : Color.white;
+            iconImage.sprite = isSelected ? iconSpriteOn : iconSpriteOff;
         }
 
         /// <summary>
@@ -93,15 +72,52 @@ namespace PlayerInterface
         {
             isSelected = !isSelected;
             ToggleVisuals(isSelected);
+        }
 
-            ToggleActions();
+        public void Select()
+        {
+            // Make sure the item is selected
+            isSelected = true;
+
+            // Show the right visuals
+            ToggleVisuals(isSelected);
+
+            // Start the OnSelectEvents
+            OnSelectEvents?.Invoke();
+
+            // Open the submenu's
+            foreach (Menu menu in subMenus)
+                menu.OpenMenu();
+        }
+
+        public void Deselect()
+        {
+            // Make sure the item is deselected
+            isSelected = false;
+
+            // Show the right visuals
+            ToggleVisuals(isSelected);
+
+            // Start the OnDeselectEvents
+            OnDeselectEvents?.Invoke();
+
+            // Open the submenu's
+            foreach (Menu menu in subMenus)
+                menu.CloseMenu();
         }
 
         public void Interact()
         {
-            ToggleItem();
+            //if (!isSelected) { 
+            //    SelectItem(); 
+            //} else
+            //{
+            //    DeselectItem();
+            //}
+
             //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_button_press");
-            MenuItemPressed?.Invoke(this, isSelected);
+            isSelected = !isSelected;
+            IsPressed?.Invoke(this, isSelected);
         }
     }
 }

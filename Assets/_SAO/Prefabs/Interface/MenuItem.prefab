@@ -92,22 +92,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3f26d7b2417294ba72e8cb0d13edd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 4955837544829464348}
-  title: {fileID: 4955837543858372033}
-  box: {fileID: 4955837544695669684}
-  selectArrow: {fileID: 4955837544871237939}
+  OnSelectEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeselectEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  titleLabel: {fileID: 4955837543858372033}
   titleString: 
+  background: {fileID: 4955837544695669684}
+  selectArrow: {fileID: 4955837544871237939}
+  canvasGroup: {fileID: 5117638464765505901}
+  iconImage: {fileID: 4955837544829464348}
   iconSpriteOn: {fileID: 0}
   iconSpriteOff: {fileID: 0}
-  canvasGroup: {fileID: 5117638464765505901}
-  myCollider: {fileID: 0}
-  _colliderSize: {x: 250, y: 70, z: 0}
-  OnEnableEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDisableEvents:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!225 &5117638464765505901
 CanvasGroup:
   m_ObjectHideFlags: 0

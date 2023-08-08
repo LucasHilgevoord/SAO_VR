@@ -16,9 +16,6 @@ namespace PlayerInterface
         [SerializeField] private float appearDelay;
         [SerializeField] private float openSpeed;
         [SerializeField] private float closeSpeed;
-        
-        private Coroutine[] openMenuRoutine;
-        private Coroutine[] closeMenuRoutine;
 
         private void Start()
         {
@@ -32,7 +29,7 @@ namespace PlayerInterface
 
             for (int i = items.Count - 1; i >= 0; i--)
             {
-                items[i].MenuItemPressed += OnMenuItemPressed;
+                //items[i].IsPressed += OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup);
                 DOTween.Kill(items[i].transform);
 
@@ -67,12 +64,7 @@ namespace PlayerInterface
             //TODO: This can be done easier with: Dotween.SetSpeedBased
             float dur = Vector3.Distance(item.transform.position, Vector3.zero) / openSpeed;
             item.canvasGroup.DOFade(1, dur * 2);
-
-            item.transform.DOLocalMove(Vector3.zero, dur).OnComplete(() => 
-            {
-                if (item == items[0])
-                    MenuToggleComplete?.Invoke(true, this);
-            });
+            item.transform.DOLocalMove(Vector3.zero, dur);
         }
 
         public override void CloseMenu()
@@ -81,7 +73,7 @@ namespace PlayerInterface
 
             for (int i = 0; i < items.Count; i++)
             {
-                items[i].MenuItemPressed -= OnMenuItemPressed;
+                //items[i].IsPressed -= OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup);
                 DOTween.Kill(items[i].transform);
 
@@ -109,12 +101,7 @@ namespace PlayerInterface
             //TODO: This can be done easier with: Dotween.SetSpeedBased
             float dur = Vector3.Distance(Vector3.zero, transform.TransformPoint(pos)) / closeSpeed;
             item.canvasGroup.DOFade(0, dur * 0.8f);
-
-            item.transform.DOLocalMove(pos, dur).OnComplete(() =>
-            {
-                if (item == items[0])
-                    MenuToggleComplete?.Invoke(false, this);
-            });
+            item.transform.DOLocalMove(pos, dur);
         }
     }
 }

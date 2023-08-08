@@ -1,3 +1,5 @@
+using DG.Tweening;
+using PlayerInterface;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +8,11 @@ public class SlotHandler : MonoBehaviour
 {
     [SerializeField] private List<SlotObject> _slots;
     [SerializeField] private List<SlotObject> _selectedSlots;
-    private float _slotAppearDelay = 0.1f;
+    private string _toggledMenu;
 
-    private void Start()
-    {
-        
-    }
+    private float _slotAppearDelay = 0.05f;
+    [SerializeField] private Material _lineMat;
+    private Coroutine _showSlotsCoroutine;
 
     private void Update()
     {
@@ -21,9 +22,12 @@ public class SlotHandler : MonoBehaviour
         }
     }
     
-    internal void ShowSlots()
+    internal void ShowAllSlots()
     {
-        StartCoroutine(ShowSlotsCoroutine());
+        Color c = _lineMat.color;
+        c.a = 1;
+        _lineMat.color = c;
+        _showSlotsCoroutine = StartCoroutine(ShowSlotsCoroutine());
     }
 
     private IEnumerator ShowSlotsCoroutine()
@@ -36,6 +40,16 @@ public class SlotHandler : MonoBehaviour
             i++;
             yield return new WaitForSeconds(_slotAppearDelay);
         }
+    }
+
+    public void DeselectAllSlots()
+    {
+        foreach (SlotObject slot in _selectedSlots)
+        {
+            slot.Deselect();
+        }
+        _selectedSlots.Clear();
+        ShowAllSlots();
     }
 
     public void SelectSlot(int typeIndex)
@@ -60,13 +74,11 @@ public class SlotHandler : MonoBehaviour
         _selectedSlots = new List<SlotObject>();
         foreach (PlayerWindowSlot type in slotTypes)
         {
-            Debug.Log(type.slotType);
             foreach (SlotObject slot in _slots)
             {
                 if (_selectedSlots.Contains(slot)) { Debug.Log("contains"); continue; }
                 if (slot.Type.slotType == type.slotType && (type.slotSide == SlotSide.None || slot.Type.slotSide == type.slotSide))
                 {
-                    Debug.Log("Added");
                     _selectedSlots.Add(slot);
                     continue;
                 }
@@ -95,5 +107,10 @@ public class SlotHandler : MonoBehaviour
         {
             slot.Select();
         }
+    }
+
+    internal void FadeLine(float duration, float alpha)
+    {
+        _lineMat.DOFade(alpha, duration);
     }
 }

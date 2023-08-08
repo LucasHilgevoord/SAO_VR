@@ -9,9 +9,7 @@ namespace PlayerInterface
     {
         [SerializeField] private GameObject lineArrow;
         [SerializeField] private CanvasGroup lineArrowCanvas;
-
-        [SerializeField] private float spawnDelay = 0.2f;
-
+        private float spawnDelay = 0.1f;
         private Coroutine disableItemsRoutine;
 
         private void Start()
@@ -39,7 +37,7 @@ namespace PlayerInterface
 
             for (int i = 0; i < items.Count; i++)
             {
-                items[i].MenuItemPressed += OnMenuItemPressed;
+                //items[i].IsPressed += OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup, true);
 
                 // Assigning starting values
@@ -49,7 +47,6 @@ namespace PlayerInterface
 
                 // Visualize the items
                 items[i].canvasGroup.DOFade(1, fadeDuration).SetDelay(spawnDelay * i);
-                StartCoroutine(ToggleCollider(spawnDelay * i, items[i], true));
             }
         }
 
@@ -66,27 +63,14 @@ namespace PlayerInterface
             // Hide the items
             for (int i = items.Count - 1; i >= 0; i--)
             {
-                items[i].MenuItemPressed -= OnMenuItemPressed;
+                //items[i].IsPressed -= OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup, true);
 
                 items[i].canvasGroup.DOFade(0, fadeDuration / 2).SetDelay(spawnDelay * (items.Count - i) / 2);
-                StartCoroutine(ToggleCollider(spawnDelay * i, items[i], false));
             }
 
             // Disable the items after all the items are hidden
             disableItemsRoutine = StartCoroutine(DisableItems((fadeDuration / 2) + (spawnDelay * (items.Count - 1))));
-        }
-
-        /// <summary>
-        /// Method to disable/enable the collider/object to work around the tween delay issue
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="enabled"></param>
-        private IEnumerator ToggleCollider(float delay, MenuItem item, bool enabled)
-        {
-            yield return new WaitForSeconds(delay);
-
-            //item.myCollider.enabled = enabled;
         }
 
         /// <summary>
@@ -102,7 +86,6 @@ namespace PlayerInterface
                 items[i].gameObject.SetActive(false);
 
             disableItemsRoutine = null;
-            MenuToggleComplete?.Invoke(false, this);
         }
 
         internal override void OnMenuItemPressed(MenuItem item, bool isSelected)

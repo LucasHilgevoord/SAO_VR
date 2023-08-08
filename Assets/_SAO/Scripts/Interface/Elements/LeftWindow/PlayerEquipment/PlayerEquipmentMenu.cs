@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,7 +59,7 @@ namespace PlayerInterface
 
         public override void OpenMenu()
         {
-            base.OpenMenu();
+            //base.OpenMenu();
             DOTween.Kill(window.transform, true);
             DOTween.Kill(windowCanvasGroup, true);
 
@@ -68,8 +69,20 @@ namespace PlayerInterface
             // Opening the window
             window.transform.DOScale(Vector3.one, openingDuration);
             windowCanvasGroup.DOFade(1, openingDuration).OnComplete(() => {
-                _slotHandler.ShowSlots();
+                _slotHandler.ShowAllSlots();
             });
+
+            // TODO Wait until the slots are fully initialized
+            // TODO Then, set open to true
+            // TODO Then, Don't allow selecting slots before fully open
+
+            // Start listening to if a menu is being opened
+                
+        }
+
+        private void OnMenuItemOpened()
+        {
+            // TODO Toggle slots based on which item it is.
         }
 
         public override void CloseMenu()
@@ -80,12 +93,8 @@ namespace PlayerInterface
             DOTween.Kill(windowCanvasGroup);
 
             // Closing the window
-            windowCanvasGroup.DOFade(0, openingDuration);
-            window.transform.DOScale(Vector3.one, openingDuration).OnComplete(()=>
-            {
-                window.transform.localScale = Vector3.zero;
-                window.SetActive(false);
-            });
+            windowCanvasGroup.DOFade(0, openingDuration).OnComplete(()=> { window.SetActive(false); });
+            _slotHandler.FadeLine(openingDuration, 0);
         }
 
         private void OnDescriptionItemClicked(EquipmentMenuItem item, bool enable)
