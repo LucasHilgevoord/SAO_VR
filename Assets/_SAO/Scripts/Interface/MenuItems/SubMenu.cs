@@ -12,6 +12,16 @@ namespace PlayerInterface
         private float spawnDelay = 0.1f;
         private Coroutine disableItemsRoutine;
 
+        private void OnEnable()
+        {
+            MenuItem.IsPressed += OnMenuItemPressed;
+        }
+
+        private void OnDisable()
+        {
+            MenuItem.IsPressed -= OnMenuItemPressed;
+        }
+
         private void Start()
         {
             // Disable all items
@@ -22,6 +32,28 @@ namespace PlayerInterface
 
             // Disable lineArrow
             lineArrow.SetActive(false);
+        }
+
+
+        internal virtual void OnMenuItemPressed(MenuItem item, bool isSelected)
+        {
+            if (!items.Contains(item)) { return; }
+
+            if (isSelected == false)
+            {
+                // Show the line left to the submenu
+                ShowLineArrow();
+            } else
+            {
+                // Hide the line left to the submenu
+                HideLineArrow();
+            }
+
+            // Disable the arrow of all the items
+            foreach (MenuItem i in items)
+            {
+                i.EnableArrowImage(isSelected);
+            }
         }
 
         public override void OpenMenu()
@@ -87,28 +119,6 @@ namespace PlayerInterface
 
             disableItemsRoutine = null;
         }
-
-        internal override void OnMenuItemPressed(MenuItem item, bool isSelected)
-        {
-            if (item == currentSelected && isSelected == false)
-            {
-                // Case: Item is closed so nothing is selected anymore
-                ShowLineArrow();
-
-                base.OnMenuItemPressed(item, isSelected);
-                return;
-            }
-            
-            if (currentSelected == null)
-            {
-                // Case: Nothing is selected but an item will open now
-                HideLineArrow();
-            }
-
-            base.OnMenuItemPressed(item, isSelected);
-        }
-
-
 
         /// <summary>
         /// Method to show the line with arrow

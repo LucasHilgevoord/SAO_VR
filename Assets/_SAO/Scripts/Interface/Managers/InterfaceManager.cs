@@ -19,11 +19,10 @@ namespace PlayerInterface
 
         [SerializeField] private Canvas interfaceCanvas;
         [SerializeField] private CategorieMenu categorieMenu;
-        [SerializeField] private MenuItem initialMenuItem;
         private bool _isOpen;
 
         private Coroutine _lerpInterfaceRoutine;
-        private float _moveTime = 0.7f;
+        private float _moveTime = 2f;
 
         private void Awake()
         {

@@ -25,6 +25,7 @@ namespace PlayerInterface
         [SerializeField] private Image iconImage;
         [SerializeField] private Sprite iconSpriteOn;
         [SerializeField] private Sprite iconSpriteOff;
+        [SerializeField] private bool useArrow;
 
         [Header(" Links")]
         /// Submenu's that will be opened when this item is selected
@@ -52,6 +53,12 @@ namespace PlayerInterface
 
             // Start the icon with the off sprite
             iconImage.sprite = iconSpriteOff;
+            
+            if (selectArrow != null)
+            {
+                useArrow = selectArrow.IsActive();
+                selectArrow.gameObject.SetActive(false);
+            }
         }
 
         /// <summary>
@@ -108,16 +115,15 @@ namespace PlayerInterface
 
         public void Interact()
         {
-            //if (!isSelected) { 
-            //    SelectItem(); 
-            //} else
-            //{
-            //    DeselectItem();
-            //}
-
             //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_button_press");
             isSelected = !isSelected;
             IsPressed?.Invoke(this, isSelected);
+        }
+
+        internal void EnableArrowImage(bool enable)
+        {
+            if (useArrow)
+                selectArrow.gameObject.SetActive(enable);
         }
     }
 }

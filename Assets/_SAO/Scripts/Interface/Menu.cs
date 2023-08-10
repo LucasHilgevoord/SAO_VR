@@ -34,24 +34,25 @@ namespace PlayerInterface
             }
         }
 
-        internal virtual void OnMenuItemPressed(MenuItem item, bool isSelected)
-        {
-            // Case: Item is closed so nothing is selected anymore
-            if (item == currentSelected && isSelected == false)
-            {
-                currentSelected = null;
-                EnableFullAlpha();
-                return;
-            }
+        //internal virtual void OnMenuItemPressed(MenuItem item, bool isSelected)
+        //{
+        //    Debug.Log("AAAAAH");
+        //    // Case: Item is closed so nothing is selected anymore
+        //    if (item == currentSelected && isSelected == false)
+        //    {
+        //        currentSelected = null;
+        //        EnableFullAlpha();
+        //        return;
+        //    }
 
-            // Case: There is already an item open, close the already opened item
-            if (currentSelected != null && isSelected)
-                currentSelected.Interact();
+        //    // Case: There is already an item open, close the already opened item
+        //    if (currentSelected != null && isSelected)
+        //        currentSelected.Interact();
 
-            previousSelected = currentSelected;
-            currentSelected = item;
-            FadeOutInactiveItems();
-        }
+        //    previousSelected = currentSelected;
+        //    currentSelected = item;
+        //    FadeOutInactiveItems();
+        //}
 
         /// <summary>
         /// Method to fade out the not active items and show only the active one

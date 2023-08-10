@@ -16,7 +16,8 @@ namespace PlayerInterface
         [SerializeField] private float appearDelay;
         [SerializeField] private float openSpeed;
         [SerializeField] private float closeSpeed;
-
+        [SerializeField] private MenuItem initialMenuItem;
+        
         private void Start()
         {
             foreach (MenuItem item in items)
@@ -27,9 +28,9 @@ namespace PlayerInterface
         {
             base.OpenMenu();
 
+            //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_open");
             for (int i = items.Count - 1; i >= 0; i--)
             {
-                //items[i].IsPressed += OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup);
                 DOTween.Kill(items[i].transform);
 
@@ -47,8 +48,7 @@ namespace PlayerInterface
                 // Start the moving animation
                 StartCoroutine(OpenMenuItem(items[i], delay));
             }
-
-            //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_open");
+            StartCoroutine(OpenFirstItem(1.25f));
         }
 
         /// <summary>
@@ -65,6 +65,12 @@ namespace PlayerInterface
             float dur = Vector3.Distance(item.transform.position, Vector3.zero) / openSpeed;
             item.canvasGroup.DOFade(1, dur * 2);
             item.transform.DOLocalMove(Vector3.zero, dur);
+        }
+
+        private IEnumerator OpenFirstItem(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            initialMenuItem.Interact();
         }
 
         public override void CloseMenu()
