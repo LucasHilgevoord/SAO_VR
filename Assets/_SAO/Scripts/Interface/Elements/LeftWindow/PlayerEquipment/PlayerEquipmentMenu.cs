@@ -32,11 +32,11 @@ namespace PlayerInterface
         private float toggleDuration = 0.3f;
         private bool isEnabled;
 
-        private void Awake()
+        private void OnEnable()
         {
             EquipmentMenuItem.EquipmentItemPressed += OnDescriptionItemClicked;
         }
-        private void OnDestroy()
+        private void OnDisable()
         {
             EquipmentMenuItem.EquipmentItemPressed -= OnDescriptionItemClicked;
         }
