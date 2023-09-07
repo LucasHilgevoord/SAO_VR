@@ -39,12 +39,12 @@ namespace PlayerInterface
             base.OpenMenu();
         }
 
-        public override void CloseMenu()
+        public override IEnumerator CloseMenu()
         {
-            HideLineArrow();
             content.gameObject.SetActive(true);
+            yield return StartCoroutine(base.CloseMenu());
+            HideLineArrow();
             scrollView.gameObject.SetActive(false);
-            base.CloseMenu();
         }
 
         private void SetPadding()

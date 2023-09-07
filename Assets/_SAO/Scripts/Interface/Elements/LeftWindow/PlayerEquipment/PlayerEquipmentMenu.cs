@@ -85,9 +85,9 @@ namespace PlayerInterface
             // TODO Toggle slots based on which item it is.
         }
 
-        public override void CloseMenu()
+        public override IEnumerator CloseMenu()
         {
-            base.CloseMenu();
+            yield return StartCoroutine(base.CloseMenu());
 
             DOTween.Kill(window.transform);
             DOTween.Kill(windowCanvasGroup);

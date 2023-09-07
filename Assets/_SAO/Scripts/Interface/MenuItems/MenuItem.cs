@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -97,8 +98,12 @@ namespace PlayerInterface
                 subMenu.OpenMenu();
         }
 
-        public void Deselect()
+        public IEnumerator Deselect()
         {
+            // Close the submenu's
+            if (subMenu != null)
+                yield return StartCoroutine(subMenu.CloseMenu());
+
             // Make sure the item is deselected
             isSelected = false;
 
@@ -107,10 +112,6 @@ namespace PlayerInterface
 
             // Start the OnDeselectEvents
             OnDeselectEvents?.Invoke();
-
-            // Close the submenu's
-            if (subMenu != null)
-                subMenu.CloseMenu();
         }
 
         public void Interact()

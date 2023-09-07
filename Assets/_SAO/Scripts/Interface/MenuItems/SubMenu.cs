@@ -9,8 +9,9 @@ namespace PlayerInterface
     {
         [SerializeField] private GameObject lineArrow;
         [SerializeField] private CanvasGroup lineArrowCanvas;
-        private float spawnDelay = 0.1f;
-        private Coroutine disableItemsRoutine;
+        private float spawnDelay = 0.05f;
+        private float hideDelay = 0.05f;
+        private Coroutine closeMenuCoroutine;
 
         private void OnEnable()
         {
@@ -64,8 +65,8 @@ namespace PlayerInterface
             ShowLineArrow();
             EnableFullAlpha();
 
-            if (disableItemsRoutine != null)
-                StopCoroutine(disableItemsRoutine);
+            if (closeMenuCoroutine != null)
+                StopCoroutine(closeMenuCoroutine);
 
             for (int i = 0; i < items.Count; i++)
             {
@@ -82,42 +83,37 @@ namespace PlayerInterface
             }
         }
 
-        public override void CloseMenu()
+        public override IEnumerator CloseMenu()
         {
-            base.CloseMenu();
+            yield return StartCoroutine(base.CloseMenu());
+            closeMenuCoroutine = StartCoroutine(HideItems());
+            yield return closeMenuCoroutine;
 
+        }
+
+        private IEnumerator HideItems()
+        {
             HideLineArrow();
 
             // Disable everything from the current item that is open
             if (currentSelected != null)
                 currentSelected.ToggleItem();
 
+            Debug.Log("start");
+
             // Hide the items
             for (int i = items.Count - 1; i >= 0; i--)
             {
                 //items[i].IsPressed -= OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup, true);
-
-                items[i].canvasGroup.DOFade(0, fadeDuration / 2).SetDelay(spawnDelay * (items.Count - i) / 2);
+                yield return new WaitForSeconds(hideDelay);
+                items[i].canvasGroup.DOFade(0, hideDuration);
             }
+            yield return new WaitForSeconds(hideDuration);
 
-            // Disable the items after all the items are hidden
-            disableItemsRoutine = StartCoroutine(DisableItems((fadeDuration / 2) + (spawnDelay * (items.Count - 1))));
-        }
-
-        /// <summary>
-        /// Method to disable all the items at the same time, this way the layoutgroup won't move them
-        /// </summary>
-        /// <param name="delay"></param>
-        /// <returns></returns>
-        private IEnumerator DisableItems(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-
+            Debug.Log("end");
             for (int i = 0; i < items.Count; i++)
                 items[i].gameObject.SetActive(false);
-
-            disableItemsRoutine = null;
         }
 
         /// <summary>

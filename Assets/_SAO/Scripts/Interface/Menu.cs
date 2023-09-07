@@ -2,6 +2,7 @@
 using System;
 using DG.Tweening;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace PlayerInterface
 {
@@ -16,21 +17,24 @@ namespace PlayerInterface
 
         private float fadeOutAlpha = 0.2f;
         internal float fadeDuration = 0.2f;
+        internal float hideDuration = 0.1f;
 
         /// <summary>
         /// Open the menu
         /// </summary>
         public virtual void OpenMenu() {  }
 
+
         /// <summary>
         /// Close the menu
         /// </summary>
-        public virtual void CloseMenu() {
+        /// <returns>Close duration</returns>
+        public virtual IEnumerator CloseMenu() {
             // Close the current selected items
             foreach (MenuItem item in items)
             {
                 if (item.isSelected)
-                    item.Deselect();
+                    yield return StartCoroutine(item.Deselect());
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,15 @@ namespace PlayerInterface
         [SerializeField] private float openSpeed;
         [SerializeField] private float closeSpeed;
         [SerializeField] private MenuItem initialMenuItem;
-        
+
+        private void Awake()
+        {
+        }
+
+        private void OnDestroy()
+        {
+        }
+
         private void Start()
         {
             foreach (MenuItem item in items)
@@ -73,9 +82,9 @@ namespace PlayerInterface
             initialMenuItem.Interact();
         }
 
-        public override void CloseMenu()
+        public override IEnumerator CloseMenu()
         {
-            base.CloseMenu();
+            yield return StartCoroutine(base.CloseMenu());
 
             for (int i = 0; i < items.Count; i++)
             {
@@ -108,6 +117,24 @@ namespace PlayerInterface
             float dur = Vector3.Distance(Vector3.zero, transform.TransformPoint(pos)) / closeSpeed;
             item.canvasGroup.DOFade(0, dur * 0.8f);
             item.transform.DOLocalMove(pos, dur);
+        }
+
+        internal void OnCategoryItemSelected(int index)
+        {
+            // Put the menu items in the right position, the selected item should be on top, the item below the second one is now the second one and so on
+            List<MenuItem> itemsCopy = new List<MenuItem>();
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                int newIndex = (i + index) % items.Count;
+                itemsCopy.Add(items[newIndex]);
+            }
+
+            items = itemsCopy;
+            for (int i = 0; i < items.Count; i++)
+            {
+                itemsCopy[i].transform.parent.SetSiblingIndex(i);
+            }
         }
     }
 }

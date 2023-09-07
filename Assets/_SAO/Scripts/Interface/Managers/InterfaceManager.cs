@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
 
 namespace PlayerInterface
 {
@@ -24,6 +25,10 @@ namespace PlayerInterface
         private Coroutine _lerpInterfaceRoutine;
         private float _moveTime = 2f;
 
+        private float _closeSideDelay = 0f;
+
+        private bool _allowInteraction = true;
+
         private void Awake()
         {
             MenuItem.IsPressed += OnMenuItemPressed;
@@ -32,6 +37,12 @@ namespace PlayerInterface
         private void OnMenuItemPressed(MenuItem newItem, bool isSelected)
         {
             Debug.Log("OnMenuItemPressed " + newItem.name + " " + isSelected);
+            StartCoroutine(CloseSides(newItem, isSelected));
+        }
+        
+        private IEnumerator CloseSides(MenuItem newItem, bool isSelected)
+        {
+            _allowInteraction = false;
             bool isPartOfMenu = false;
 
             // Check if the item is part of a submenu of one of the already selected menuItems
@@ -41,11 +52,14 @@ namespace PlayerInterface
                 if (openMenus[i].subMenu == null) { continue; }
                 if (openMenus[i].subMenu.items.Contains(newItem))
                 {
-                    // The item is part of a submenu which is open, disable all the submenus after that
+                    // The item is part of the same submenu of the previous item
                     for (int j = openMenus.Count - 1; j > i; j--)
                     {
-                        openMenus[j].Deselect();
-                        openMenus.RemoveAt(j); // Change Remove to RemoveAt here
+                        yield return StartCoroutine(openMenus[j].Deselect());
+                        openMenus.RemoveAt(j);
+
+                        if (_lerpInterfaceRoutine != null) StopCoroutine(_lerpInterfaceRoutine);
+                        _lerpInterfaceRoutine = StartCoroutine(LerpToNewPos());
                     }
                     isPartOfMenu = true;
                     break;
@@ -57,8 +71,13 @@ namespace PlayerInterface
                 // If it is not part of a menu then it is part of the categorie menu and the categorie menu should be closed and the new menu should be opened
                 for (int i = openMenus.Count - 1; i >= 0; i--)
                 {
-                    openMenus[i].Deselect();
+                    if (openMenus[i] == null) { continue; }
+                    Debug.Log("1) Deselect: " + openMenus[i].name);
+                    yield return StartCoroutine(openMenus[i].Deselect());
                     openMenus.RemoveAt(i);
+
+                    if (_lerpInterfaceRoutine != null) StopCoroutine(_lerpInterfaceRoutine);
+                    _lerpInterfaceRoutine = StartCoroutine(LerpToNewPos());
                 }
             }
 
@@ -66,15 +85,22 @@ namespace PlayerInterface
             {
                 openMenus.Add(newItem);
                 newItem.Select();
+                
+                if (categorieMenu.items.Contains(newItem))
+                    categorieMenu.OnCategoryItemSelected(categorieMenu.items.FindIndex(x => x.Equals(newItem)));
             }
             else
             {
+                Debug.Log("2) Deselect: " + newItem.name);
+                yield return StartCoroutine(newItem.Deselect());
                 openMenus.Remove(newItem);
-                newItem.Deselect();
             }
 
             if (_lerpInterfaceRoutine != null) StopCoroutine(_lerpInterfaceRoutine);
             _lerpInterfaceRoutine = StartCoroutine(LerpToNewPos());
+            yield return _lerpInterfaceRoutine;
+
+            _allowInteraction = true;
         }
 
         private void Update()

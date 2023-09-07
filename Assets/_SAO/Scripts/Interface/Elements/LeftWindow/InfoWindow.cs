@@ -32,7 +32,7 @@ public class InfoWindow : MonoBehaviour
         if (menu != null && menu != _currentMenu)
         {
             if (_currentMenu != null)
-                _currentMenu.CloseMenu();
+                StartCoroutine(_currentMenu.CloseMenu());
 
             _currentMenu = menu;
             _currentMenu.OpenMenu();
@@ -47,7 +47,7 @@ public class InfoWindow : MonoBehaviour
     public void CloseMenu()
     {
         if (_currentMenu != null)
-            _currentMenu.CloseMenu();
+            StartCoroutine(_currentMenu.CloseMenu());
 
         _currentMenu = null;
     }
