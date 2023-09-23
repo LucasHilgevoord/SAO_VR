@@ -36,7 +36,6 @@ namespace PlayerInterface
 
         private void OnMenuItemPressed(MenuItem newItem, bool isSelected)
         {
-            Debug.Log("OnMenuItemPressed " + newItem.name + " " + isSelected);
             StartCoroutine(CloseSides(newItem, isSelected));
         }
         

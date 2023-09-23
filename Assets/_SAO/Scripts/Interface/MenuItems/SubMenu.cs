@@ -99,8 +99,6 @@ namespace PlayerInterface
             if (currentSelected != null)
                 currentSelected.ToggleItem();
 
-            Debug.Log("start");
-
             // Hide the items
             for (int i = items.Count - 1; i >= 0; i--)
             {
@@ -110,8 +108,6 @@ namespace PlayerInterface
                 items[i].canvasGroup.DOFade(0, hideDuration);
             }
             yield return new WaitForSeconds(hideDuration);
-
-            Debug.Log("end");
             for (int i = 0; i < items.Count; i++)
                 items[i].gameObject.SetActive(false);
         }

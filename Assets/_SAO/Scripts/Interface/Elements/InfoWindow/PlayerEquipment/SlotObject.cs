@@ -85,6 +85,7 @@ public class SlotObject : MonoBehaviour
     {
         for (int i = 1; i < _linePositions.Length; i++)
         {
+            Debug.Log(i);
             _line.positionCount++;
             _line.SetPosition(_line.positionCount - 1, _line.GetPosition(_line.positionCount - 2));
             yield return StartCoroutine(MoveLineCoroutine(_linePositions[i]));

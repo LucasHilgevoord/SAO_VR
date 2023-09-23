@@ -109,6 +109,23 @@ public class SlotHandler : MonoBehaviour
         }
     }
 
+    internal void HideAllSlots()
+    {
+        StartCoroutine(HideSlotsCoroutine());
+    }
+
+    private IEnumerator HideSlotsCoroutine()
+    {
+        for (int i = 0; i < _slots.Count; i++)
+        {
+            // Show two at the time
+            _slots[i].Hide();
+            _slots[i + 1].Hide();
+            i++;
+            yield return new WaitForSeconds(_slotAppearDelay);
+        }
+    }
+
     internal void FadeLine(float duration, float alpha)
     {
         _lineMat.DOFade(alpha, duration);
