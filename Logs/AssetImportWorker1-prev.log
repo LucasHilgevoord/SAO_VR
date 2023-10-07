@@ -1,0 +1,296 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.6f1 (7da38d85baf6) revision 8233869'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Enterprise' Language: 'en' Physical Memory: 16307 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.6f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker1
+-projectPath
+E:/Personal Unity/SAO_VR
+-logFile
+Logs/AssetImportWorker1.log
+-srvPort
+50294
+Successfully changed project path to: E:/Personal Unity/SAO_VR
+E:/Personal Unity/SAO_VR
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 95.93 ms, found 11 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.6f1 (7da38d85baf6)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/Personal Unity/SAO_VR/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1070 (ID=0x1b81)
+    Vendor:   NVIDIA
+    VRAM:     8081 MB
+    Driver:   31.0.15.3734
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56956
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.007281 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 84.99 ms, found 11 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.517 seconds
+Domain Reload Profiling:
+	ReloadAssembly (517ms)
+		BeginReloadAssembly (58ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (370ms)
+			LoadAssemblies (56ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (77ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (20ms)
+			SetupLoadedEditorAssemblies (231ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (85ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (106ms)
+				ProcessInitializeOnLoadMethodAttributes (33ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.009377 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 81.69 ms, found 11 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Package Manager log level set to [2]
+Mono: successfully reloaded assembly
+- Completed reload, in  1.272 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1272ms)
+		BeginReloadAssembly (98ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (22ms)
+		EndReloadAssembly (1097ms)
+			LoadAssemblies (84ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (191ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (52ms)
+			SetupLoadedEditorAssemblies (738ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (10ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (82ms)
+				BeforeProcessingInitializeOnLoad (91ms)
+				ProcessInitializeOnLoadAttributes (459ms)
+				ProcessInitializeOnLoadMethodAttributes (86ms)
+				AfterProcessingInitializeOnLoad (10ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 1.97 ms, found 11 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4821 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 55 unused Assets / (359.8 KB). Loaded Objects now: 5311.
+Memory consumption went from 222.1 MB to 221.7 MB.
+Total: 3.584000 ms (FindLiveObjects: 0.361400 ms CreateObjectMapping: 0.126100 ms MarkObjects: 2.813300 ms  DeleteObjects: 0.281900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1112583.534862 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Birch_3.prefab
+  artifactKey: Guid(ccb309186cfeb104da864accb1759a08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Birch_3.prefab using Guid(ccb309186cfeb104da864accb1759a08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa552e5e2a5572a6fd6ff63333087a10') in 0.276636 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Broadleaf_5.prefab
+  artifactKey: Guid(3b54291338335ae48b5f5b5f3b6eb606) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Broadleaf_5.prefab using Guid(3b54291338335ae48b5f5b5f3b6eb606) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '159569fda44a3bc34dfc2cce3cf6836d') in 0.028911 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Branch_1.prefab
+  artifactKey: Guid(6756589c55dd2ed498b5f79e8e42f246) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Branch_1.prefab using Guid(6756589c55dd2ed498b5f79e8e42f246) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd438838c281ffaefc8a41a44206f9e81') in 0.014897 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_DeadTree_3.prefab
+  artifactKey: Guid(8d4855178e0394e46b0c27815c97106b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_DeadTree_3.prefab using Guid(8d4855178e0394e46b0c27815c97106b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfd390a9667a20b40492df8cdf5a7e56') in 0.016173 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Grass_2.prefab
+  artifactKey: Guid(b483676b3404a4544b5c5897dceee4f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Grass_2.prefab using Guid(b483676b3404a4544b5c5897dceee4f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d6b0325cd55af9892ed0dcc83df1d13') in 0.016154 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Bush_1.prefab
+  artifactKey: Guid(e3d69b0fca7ac7342a49b39bb048c811) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Bush_1.prefab using Guid(e3d69b0fca7ac7342a49b39bb048c811) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acda975bb6b907c5c6b7d16aef95d117') in 0.016410 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Bush_2.prefab
+  artifactKey: Guid(0763e557dfa7dc54798bfd19e2fcb0e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Bush_2.prefab using Guid(0763e557dfa7dc54798bfd19e2fcb0e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64fd402e7e26868da984edef60c09229') in 0.016445 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Fir_1.prefab
+  artifactKey: Guid(81a4ae3b32471cc469f44a6af7acd727) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Fir_1.prefab using Guid(81a4ae3b32471cc469f44a6af7acd727) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2e3c01818bb7aa8193be61706025931') in 0.022966 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Grass_1.prefab
+  artifactKey: Guid(163a834aa7eb225438cf1cc2bf8540b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Grass_1.prefab using Guid(163a834aa7eb225438cf1cc2bf8540b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72e21b479acda7a657bce6b90b1ce247') in 0.015179 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Birch_5.prefab
+  artifactKey: Guid(e43d88a1db43bc841ade02c7f22aa796) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Birch_5.prefab using Guid(e43d88a1db43bc841ade02c7f22aa796) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83f7856779b6149c2aa8e25f77b34601') in 0.020214 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_DeadTree_2.prefab
+  artifactKey: Guid(83aed9be4a2dee941bf97a1456580908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_DeadTree_2.prefab using Guid(83aed9be4a2dee941bf97a1456580908) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10911bd1e10ad97b1f0b63c091e546a8') in 0.014032 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Broadleaf_4.prefab
+  artifactKey: Guid(bbe70efb5b465c945a55365ca5245b0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Broadleaf_4.prefab using Guid(bbe70efb5b465c945a55365ca5245b0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'faf5707e4a201b82691075e45af45dd8') in 0.017298 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Fir_3.prefab
+  artifactKey: Guid(0f9c006fb32f5154485a8e57fc34c0cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Fir_3.prefab using Guid(0f9c006fb32f5154485a8e57fc34c0cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c03ca0bf72f2181b55d910ac757a076') in 0.019613 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefabs/AN_Dead_Bush.prefab
+  artifactKey: Guid(bc5c481d3a398cb4e8fec578a74e4039) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefabs/AN_Dead_Bush.prefab using Guid(bc5c481d3a398cb4e8fec578a74e4039) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d693945ab7011e70a3f2edd2bb1d110') in 0.010005 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.007656 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefab Variations/Tree1.prefab
+  artifactKey: Guid(655e1b8189335024e87d882e41754004) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefab Variations/Tree1.prefab using Guid(655e1b8189335024e87d882e41754004) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9eb575dfe060f73c67a8c17be588620') in 0.018060 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Plugins/AZURE Nature/Models/AN_Branch_2.fbx
+  artifactKey: Guid(8f74c33089ff2474c987938281180dd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Models/AN_Branch_2.fbx using Guid(8f74c33089ff2474c987938281180dd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c9b1017882f54f21fa75dbb2964e39a6') in 0.764229 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Plugins/AZURE Nature/Models/AN_Birch_1.fbx
+  artifactKey: Guid(04850cc949957204c86d17b629b89288) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Models/AN_Birch_1.fbx using Guid(04850cc949957204c86d17b629b89288) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe8e4f3655a5c2a246676ea7f0ab43c6') in 0.710383 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Plugins/AZURE Nature/Models/AN_Birch_4.fbx
+  artifactKey: Guid(258fb5420c0d03b439e76f0d00100920) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Models/AN_Birch_4.fbx using Guid(258fb5420c0d03b439e76f0d00100920) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff706acdf67ce68f3b195f43f12d630a') in 0.049621 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefab Variations/Tree5.prefab
+  artifactKey: Guid(94f4a1df043459342959c02995985fdc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefab Variations/Tree5.prefab using Guid(94f4a1df043459342959c02995985fdc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '460f0d4a5d809e35a353add8fc1bd8d1') in 0.019276 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Plugins/AZURE Nature/Models/AN_Birch_5.fbx
+  artifactKey: Guid(3cd0315809607204795a427a688f78ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Models/AN_Birch_5.fbx using Guid(3cd0315809607204795a427a688f78ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2d0de6cda1a52fba3b17d8958492321') in 0.061408 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Plugins/AZURE Nature/Prefab Variations/Tree3.prefab
+  artifactKey: Guid(8e81d65b9a3798f4fa9bc87c50bc83ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Prefab Variations/Tree3.prefab using Guid(8e81d65b9a3798f4fa9bc87c50bc83ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aeefecc1f79986d22010238bf9f09206') in 0.018874 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Plugins/AZURE Nature/Textures/Terrain
+  artifactKey: Guid(94525de3c8f3ba640a455d4fea622a61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Textures/Terrain using Guid(94525de3c8f3ba640a455d4fea622a61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dccc43abbb5f1364ce20118228747de1') in 0.006941 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.020115 seconds.
+  path: Assets/Plugins/AZURE Nature/Textures/Terrain/Summer
+  artifactKey: Guid(a9585239efe0c1b48a579a07d7d8031e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/AZURE Nature/Textures/Terrain/Summer using Guid(a9585239efe0c1b48a579a07d7d8031e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd93f9c0a6b507d110beae45f08a0f5d') in 0.699716 seconds 
