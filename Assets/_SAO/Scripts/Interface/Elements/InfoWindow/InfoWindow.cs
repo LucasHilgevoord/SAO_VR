@@ -3,6 +3,7 @@ using PlayerInterface;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,12 +29,15 @@ public class InfoWindow : MonoBehaviour
     [SerializeField] private CanvasGroup headerCanvasGroup;
     [SerializeField] private Text username;
 
+    private void Awake()
+    {
+        InfoItem.OpenRequest += OpenInfoItem;
+    }
+
     private void Start()
     {
         username.text = PlayerPrefs.GetString("username", "Kirito");
         window.transform.localScale = Vector3.zero;
-
-        //OpenWindow();
     }
 
     private void Update()
@@ -49,34 +53,22 @@ public class InfoWindow : MonoBehaviour
         }
     }
 
-    public void OpenItem(InfoWindowMenus menuType)
+    public void OpenInfoItem(InfoItem item)
     {
-        InfoItem menu = null;
-        switch (menuType)
-        {
-            case InfoWindowMenus.PlayerEquipmentMenu:
-                menu = _playerEquipmentMenu;
-                break;
-            case InfoWindowMenus.PartyMenu:
-                break;
-            case InfoWindowMenus.Default:
-                menu = null;
-                break;
-            default:
-                break;
-        }
+        if (item != _currentMenu) { return; }
+        Action openMenu = () => { item.OpenWindow(); };
 
-        if (menu != _currentMenu)
+        if (!isOpen) { OpenWindow(openMenu); }
+        else
         {
+            // Close the previous one
             if (_currentMenu != null)
                 _currentMenu.CloseWindow();
 
-            _currentMenu = menu;
-            if (menu != null)
-            {
-                _currentMenu.gameObject.SetActive(true);
+            // Open the new one
+            _currentMenu = item;
+            if (item != null)
                 _currentMenu.OpenWindow();
-            }
         }
     }
 
@@ -114,19 +106,5 @@ public class InfoWindow : MonoBehaviour
 
         // Closing the window
         canvasGroup.DOFade(0, openingDuration).OnComplete(() => { window.SetActive(false); });
-    }
-    
-    public void OpenPlayerEquipmentMenu()
-    {
-        Action openMenu = () => { OpenItem(InfoWindowMenus.PlayerEquipmentMenu); };
-        if (!isOpen) { OpenWindow(openMenu); } else
-        {
-            openMenu?.Invoke();
-        }
-    }
-
-    public void OpenDefaultMenu()
-    {
-        OpenItem(InfoWindowMenus.Default);
     }
 }

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class DescriptionWindow : InfoItem
 {
-
     [Header("Description Window")]
     [SerializeField] private RectTransform descWindow;
     [SerializeField] private CanvasGroup descCanvasGroup;

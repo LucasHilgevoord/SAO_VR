@@ -8,7 +8,6 @@ namespace PlayerInterface
     public class PlayerEquipmentWindow : InfoItem
     {
         [Header("Player Equipment")]
-        [SerializeField] private CanvasGroup windowCanvasGroup;
         [SerializeField] private SlotHandler _slotHandler;
         private float openingDuration = 0.5f;
 
@@ -19,6 +18,7 @@ namespace PlayerInterface
 
         internal override void OpenWindow()
         {
+            window.gameObject.SetActive(true);
             windowCanvasGroup.DOFade(1, openingDuration).OnComplete(() => {
                 _slotHandler.ShowAllSlots();
             });
@@ -48,7 +48,7 @@ namespace PlayerInterface
 
             yield return new WaitForSeconds(1f);
             windowCanvasGroup.DOFade(0, openingDuration).OnComplete(() => {
-                gameObject.SetActive(false);
+                window.gameObject.SetActive(false);
             });
         }
 
