@@ -73,9 +73,12 @@ public class SlotObject : MonoBehaviour
         _icon.transform.localPosition = _iconPosition;
         _icon.gameObject.SetActive(true);
 
-
         _line.positionCount = 1;
+        _line.SetPosition(0, _linePositions[0]);
+
+        // First show the big icon
         _icon.DOFade(1, 0.5f).OnComplete(() => {
+            // Once the icon has been faded in, start the line from the big icon to the small icon
             _line.gameObject.SetActive(true);
             _showRoutine = StartCoroutine(MoveLineCoroutineQueue());
         });
