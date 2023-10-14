@@ -103,21 +103,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3f26d7b2417294ba72e8cb0d13edd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnSelectEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeselectEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  titleLabel: {fileID: 0}
-  titleString: 
-  background: {fileID: 0}
+  icon: {fileID: 3697916663762206292}
+  title: {fileID: 0}
+  box: {fileID: 0}
   selectArrow: {fileID: 0}
-  canvasGroup: {fileID: 3465127471094943950}
-  iconImage: {fileID: 3697916663762206292}
+  titleString: 
   iconSpriteOn: {fileID: 0}
   iconSpriteOff: {fileID: 0}
-  subMenus: []
+  canvasGroup: {fileID: 3465127471094943950}
+  myCollider: {fileID: 0}
+  _colliderSize: {x: 100, y: 100, z: 3}
+  OnEnableEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisableEvents:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5844445113949610691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +159,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3697916663762206292}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []

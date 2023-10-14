@@ -2,14 +2,20 @@
 using System;
 using DG.Tweening;
 using System.Collections.Generic;
-using System.Collections;
 
 namespace PlayerInterface
 {
     public class Menu : MonoBehaviour
     {
-        [SerializeField] private string menuID;
-        public string MenuID => menuID;
+        /// <summary>
+        /// Event which contents if a menu will open or close
+        /// </summary>
+        public static Action<bool, Menu> MenuToggled;
+
+        /// <summary>
+        /// Event which contents if a menu has fully opened or closed;
+        /// </summary>
+        public static Action<bool, Menu> MenuToggleComplete;
 
         public List<MenuItem> items = new List<MenuItem>();
         internal MenuItem currentSelected;
@@ -17,46 +23,35 @@ namespace PlayerInterface
 
         private float fadeOutAlpha = 0.2f;
         internal float fadeDuration = 0.2f;
-        internal float hideDuration = 0.1f;
 
         /// <summary>
         /// Open the menu
         /// </summary>
-        public virtual void OpenMenu() {  }
-
+        public virtual void OpenMenu() { MenuToggled?.Invoke(true, this); }
 
         /// <summary>
         /// Close the menu
         /// </summary>
-        /// <returns>Close duration</returns>
-        public virtual IEnumerator CloseMenu() {
-            // Close the current selected items
-            foreach (MenuItem item in items)
+        public virtual void CloseMenu() { MenuToggled?.Invoke(false, this); }
+
+        internal virtual void OnMenuItemPressed(MenuItem item, bool isSelected)
+        {
+            // Case: Item is closed so nothing is selected anymore
+            if (item == currentSelected && isSelected == false)
             {
-                if (item.isSelected)
-                    yield return StartCoroutine(item.Deselect());
+                currentSelected = null;
+                EnableFullAlpha();
+                return;
             }
+
+            // Case: There is already an item open, close the already opened item
+            if (currentSelected != null && isSelected)
+                currentSelected.ToggleItem();
+
+            previousSelected = currentSelected;
+            currentSelected = item;
+            FadeOutInactiveItems();
         }
-
-        //internal virtual void OnMenuItemPressed(MenuItem item, bool isSelected)
-        //{
-        //    Debug.Log("AAAAAH");
-        //    // Case: Item is closed so nothing is selected anymore
-        //    if (item == currentSelected && isSelected == false)
-        //    {
-        //        currentSelected = null;
-        //        EnableFullAlpha();
-        //        return;
-        //    }
-
-        //    // Case: There is already an item open, close the already opened item
-        //    if (currentSelected != null && isSelected)
-        //        currentSelected.Interact();
-
-        //    previousSelected = currentSelected;
-        //    currentSelected = item;
-        //    FadeOutInactiveItems();
-        //}
 
         /// <summary>
         /// Method to fade out the not active items and show only the active one

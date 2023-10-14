@@ -51,10 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cc66c3db67e3542a59534c360366c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuID: 
   items: []
   lineArrow: {fileID: 8243819251471346830}
   lineArrowCanvas: {fileID: 1847393937365136211}
+  spawnDelay: 0.1
   objectDataList: {fileID: 11400000, guid: 1bac7c8d482651c4299cd86db99149ba, type: 2}
   menuItemPrefab: {fileID: 3156925495635255956, guid: e2e5ad84a768aca41848654c38ee8835,
     type: 3}
@@ -63,6 +63,7 @@ MonoBehaviour:
   scrollView: {fileID: 8177844567195116271}
   worldUICanvas: {fileID: 0}
   scrollViewFadeMat: {fileID: 2100000, guid: e99fd46dbc95ea24ba29f29096486aae, type: 2}
+  maxItems: -1
 --- !u!114 &4810282024270214928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,8 +300,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15, y: 0}
-  m_SizeDelta: {x: 15, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8177844567774371634
 CanvasRenderer:

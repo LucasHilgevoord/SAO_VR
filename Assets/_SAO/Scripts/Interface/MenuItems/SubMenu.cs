@@ -9,53 +9,10 @@ namespace PlayerInterface
     {
         [SerializeField] private GameObject lineArrow;
         [SerializeField] private CanvasGroup lineArrowCanvas;
-        private float spawnDelay = 0.05f;
-        private float hideDelay = 0.05f;
-        private Coroutine closeMenuCoroutine;
 
-        private void OnEnable()
-        {
-            MenuItem.IsPressed += OnMenuItemPressed;
-        }
+        [SerializeField] private float spawnDelay = 0.2f;
 
-        private void OnDisable()
-        {
-            MenuItem.IsPressed -= OnMenuItemPressed;
-        }
-
-        private void Start()
-        {
-            // Disable all items
-            foreach (MenuItem item in items)
-            {
-                item.gameObject.SetActive(false);
-            }
-
-            // Disable lineArrow
-            lineArrow.SetActive(false);
-        }
-
-
-        internal virtual void OnMenuItemPressed(MenuItem item, bool isSelected)
-        {
-            if (!items.Contains(item)) { return; }
-
-            if (isSelected == false)
-            {
-                // Show the line left to the submenu
-                ShowLineArrow();
-            } else
-            {
-                // Hide the line left to the submenu
-                HideLineArrow();
-            }
-
-            // Disable the arrow of all the items
-            foreach (MenuItem i in items)
-            {
-                i.EnableArrowImage(isSelected);
-            }
-        }
+        private Coroutine disableItemsRoutine;
 
         public override void OpenMenu()
         {
@@ -65,12 +22,12 @@ namespace PlayerInterface
             ShowLineArrow();
             EnableFullAlpha();
 
-            if (closeMenuCoroutine != null)
-                StopCoroutine(closeMenuCoroutine);
+            if (disableItemsRoutine != null)
+                StopCoroutine(disableItemsRoutine);
 
             for (int i = 0; i < items.Count; i++)
             {
-                //items[i].IsPressed += OnMenuItemPressed;
+                items[i].MenuItemPressed += OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup, true);
 
                 // Assigning starting values
@@ -80,19 +37,14 @@ namespace PlayerInterface
 
                 // Visualize the items
                 items[i].canvasGroup.DOFade(1, fadeDuration).SetDelay(spawnDelay * i);
+                StartCoroutine(ToggleCollider(spawnDelay * i, items[i], true));
             }
         }
 
-        public override IEnumerator CloseMenu()
+        public override void CloseMenu()
         {
-            yield return StartCoroutine(base.CloseMenu());
-            closeMenuCoroutine = StartCoroutine(HideItems());
-            yield return closeMenuCoroutine;
+            base.CloseMenu();
 
-        }
-
-        private IEnumerator HideItems()
-        {
             HideLineArrow();
 
             // Disable everything from the current item that is open
@@ -102,15 +54,66 @@ namespace PlayerInterface
             // Hide the items
             for (int i = items.Count - 1; i >= 0; i--)
             {
-                //items[i].IsPressed -= OnMenuItemPressed;
+                items[i].MenuItemPressed -= OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup, true);
-                yield return new WaitForSeconds(hideDelay);
-                items[i].canvasGroup.DOFade(0, hideDuration);
+
+                items[i].canvasGroup.DOFade(0, fadeDuration / 2).SetDelay(spawnDelay * (items.Count - i) / 2);
+                StartCoroutine(ToggleCollider(spawnDelay * i, items[i], false));
             }
-            yield return new WaitForSeconds(hideDuration);
+
+            // Disable the items after all the items are hidden
+            disableItemsRoutine = StartCoroutine(DisableItems((fadeDuration / 2) + (spawnDelay * (items.Count - 1))));
+        }
+
+        /// <summary>
+        /// Method to disable/enable the collider/object to work around the tween delay issue
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="enabled"></param>
+        private IEnumerator ToggleCollider(float delay, MenuItem item, bool enabled)
+        {
+            yield return new WaitForSeconds(delay);
+
+            //item.myCollider.enabled = enabled;
+        }
+
+        /// <summary>
+        /// Method to disable all the items at the same time, this way the layoutgroup won't move them
+        /// </summary>
+        /// <param name="delay"></param>
+        /// <returns></returns>
+        private IEnumerator DisableItems(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
             for (int i = 0; i < items.Count; i++)
                 items[i].gameObject.SetActive(false);
+
+            disableItemsRoutine = null;
+            MenuToggleComplete?.Invoke(false, this);
         }
+
+        internal override void OnMenuItemPressed(MenuItem item, bool isSelected)
+        {
+            if (item == currentSelected && isSelected == false)
+            {
+                // Case: Item is closed so nothing is selected anymore
+                ShowLineArrow();
+
+                base.OnMenuItemPressed(item, isSelected);
+                return;
+            }
+            
+            if (currentSelected == null)
+            {
+                // Case: Nothing is selected but an item will open now
+                HideLineArrow();
+            }
+
+            base.OnMenuItemPressed(item, isSelected);
+        }
+
+
 
         /// <summary>
         /// Method to show the line with arrow

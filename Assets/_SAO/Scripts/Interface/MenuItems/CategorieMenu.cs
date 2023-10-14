@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,15 +16,9 @@ namespace PlayerInterface
         [SerializeField] private float appearDelay;
         [SerializeField] private float openSpeed;
         [SerializeField] private float closeSpeed;
-        [SerializeField] private MenuItem initialMenuItem;
-
-        private void Awake()
-        {
-        }
-
-        private void OnDestroy()
-        {
-        }
+        
+        private Coroutine[] openMenuRoutine;
+        private Coroutine[] closeMenuRoutine;
 
         private void Start()
         {
@@ -37,9 +30,9 @@ namespace PlayerInterface
         {
             base.OpenMenu();
 
-            //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_open");
             for (int i = items.Count - 1; i >= 0; i--)
             {
+                items[i].MenuItemPressed += OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup);
                 DOTween.Kill(items[i].transform);
 
@@ -56,8 +49,10 @@ namespace PlayerInterface
 
                 // Start the moving animation
                 StartCoroutine(OpenMenuItem(items[i], delay));
+                Debug.Log("OPEN");
             }
-            StartCoroutine(OpenFirstItem(1.25f));
+
+            AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_open");
         }
 
         /// <summary>
@@ -73,22 +68,21 @@ namespace PlayerInterface
             //TODO: This can be done easier with: Dotween.SetSpeedBased
             float dur = Vector3.Distance(item.transform.position, Vector3.zero) / openSpeed;
             item.canvasGroup.DOFade(1, dur * 2);
-            item.transform.DOLocalMove(Vector3.zero, dur);
+
+            item.transform.DOLocalMove(Vector3.zero, dur).OnComplete(() => 
+            {
+                if (item == items[0])
+                    MenuToggleComplete?.Invoke(true, this);
+            });
         }
 
-        private IEnumerator OpenFirstItem(float delay)
+        public override void CloseMenu()
         {
-            yield return new WaitForSeconds(delay);
-            initialMenuItem.Interact();
-        }
-
-        public override IEnumerator CloseMenu()
-        {
-            yield return StartCoroutine(base.CloseMenu());
+            base.CloseMenu();
 
             for (int i = 0; i < items.Count; i++)
             {
-                //items[i].IsPressed -= OnMenuItemPressed;
+                items[i].MenuItemPressed -= OnMenuItemPressed;
                 DOTween.Kill(items[i].canvasGroup);
                 DOTween.Kill(items[i].transform);
 
@@ -116,25 +110,12 @@ namespace PlayerInterface
             //TODO: This can be done easier with: Dotween.SetSpeedBased
             float dur = Vector3.Distance(Vector3.zero, transform.TransformPoint(pos)) / closeSpeed;
             item.canvasGroup.DOFade(0, dur * 0.8f);
-            item.transform.DOLocalMove(pos, dur);
-        }
 
-        internal void OnCategoryItemSelected(int index)
-        {
-            // Put the menu items in the right position, the selected item should be on top, the item below the second one is now the second one and so on
-            List<MenuItem> itemsCopy = new List<MenuItem>();
-
-            for (int i = 0; i < items.Count; i++)
+            item.transform.DOLocalMove(pos, dur).OnComplete(() =>
             {
-                int newIndex = (i + index) % items.Count;
-                itemsCopy.Add(items[newIndex]);
-            }
-
-            items = itemsCopy;
-            for (int i = 0; i < items.Count; i++)
-            {
-                itemsCopy[i].transform.parent.SetSiblingIndex(i);
-            }
+                if (item == items[0])
+                    MenuToggleComplete?.Invoke(false, this);
+            });
         }
     }
 }

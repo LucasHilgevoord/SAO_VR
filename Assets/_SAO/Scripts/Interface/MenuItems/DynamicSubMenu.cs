@@ -13,16 +13,16 @@ namespace PlayerInterface
         /// <summary> Location to create the menuItems. </summary>
         public Transform content;
         public VerticalLayoutGroup layoutGroup;
-
+        
         [SerializeField] private Transform scrollView;
         [SerializeField] private Transform worldUICanvas; // TODO: I don't want to set this manually
         [SerializeField] private Material scrollViewFadeMat;
 
         private int minCellsForOffset = 6;
-        //[SerializeField] private int maxItems = -1;
+        [SerializeField] private int maxItems = -1;
 
-        public void Start()
-        {
+        public void Start() 
+        { 
             FillMenuItems();
             SetPadding();
 
@@ -39,12 +39,12 @@ namespace PlayerInterface
             base.OpenMenu();
         }
 
-        public override IEnumerator CloseMenu()
+        public override void CloseMenu()
         {
-            content.gameObject.SetActive(true);
-            yield return StartCoroutine(base.CloseMenu());
             HideLineArrow();
+            content.gameObject.SetActive(true);
             scrollView.gameObject.SetActive(false);
+            base.CloseMenu();
         }
 
         private void SetPadding()
@@ -65,11 +65,27 @@ namespace PlayerInterface
 
             //totalTopPadding = -totalTopPadding;
             layoutGroup.padding.top = (int)totalTopPadding;
+            Debug.Log(totalTopPadding);
         }
 
         internal virtual void FillMenuItems() { }
 
-        internal override void OnMenuItemPressed(MenuItem item, bool isSelected) { }
+        internal override void OnMenuItemPressed(MenuItem item, bool isSelected)
+        {
+            // Case: Item is closed so nothing is selected anymore
+            if (item == currentSelected && isSelected == false)
+            {
+                currentSelected = null;
+                return;
+            }
+
+            // Case: There is already an item open, close the already opened item
+            if (currentSelected != null && isSelected)
+                currentSelected.ToggleItem();
+
+            previousSelected = currentSelected;
+            currentSelected = item;
+        }
 
     }
 }

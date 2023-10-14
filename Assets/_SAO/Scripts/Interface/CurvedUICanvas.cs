@@ -23,15 +23,10 @@ public class CurvedUICanvas : MonoBehaviour
         float angleRad = Mathf.Atan2(distanceFromCenter, CanvasWidth);
 
         // Calculate how much the element should be moved forward/backwards depending on the circular bending
-        position.z = (CanvasWidth * Mathf.Cos(angleRad) - CanvasWidth) * MapRange(Curve, -90f, 90f, -1f, 1f);
+        position.z = CanvasWidth * Mathf.Cos(angleRad) - CanvasWidth;
         zPos = position.z;
-        
+
         float angle = Curve / a;
         yRot = angle;
-    }
-
-    private float MapRange(float value, float fromMin, float fromMax, float toMin, float toMax)
-    {
-        return (value - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin;
     }
 }

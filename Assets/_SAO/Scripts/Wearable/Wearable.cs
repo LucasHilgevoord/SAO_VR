@@ -34,15 +34,13 @@ public class Wearable : MonoBehaviour
     void Update()
     {
         // Check if the object is picked up, we don't want to be worn if we are not grabbed
+        
     }
 
     public virtual void StartWearing(Transform parent)
     {
-        Debug.Log("ah?");
         _grabInteractable.enabled = false;
         _rigidbody.isKinematic = true;
-        _rigidbody.interpolation = RigidbodyInterpolation.None;
-
         foreach (Collider collider in colliders)
         {
             collider.enabled = false;
