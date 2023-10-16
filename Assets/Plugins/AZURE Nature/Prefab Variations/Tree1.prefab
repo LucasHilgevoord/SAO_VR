@@ -15,7 +15,12 @@ PrefabInstance:
     - target: {fileID: 309865362510848651, guid: da418bb638856e046abc0e29ca2b21f4,
         type: 3}
       propertyPath: m_Name
-      value: AN_Broadleaf_1_Green
+      value: Tree1
+      objectReference: {fileID: 0}
+    - target: {fileID: 309865362510848651, guid: da418bb638856e046abc0e29ca2b21f4,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3081419661670479053, guid: da418bb638856e046abc0e29ca2b21f4,
         type: 3}
@@ -75,6 +80,21 @@ PrefabInstance:
     - target: {fileID: 3609500132581494936, guid: da418bb638856e046abc0e29ca2b21f4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5493496072767285167, guid: da418bb638856e046abc0e29ca2b21f4,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947361670633112197, guid: da418bb638856e046abc0e29ca2b21f4,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475373586471417037, guid: da418bb638856e046abc0e29ca2b21f4,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7469386169834357681, guid: da418bb638856e046abc0e29ca2b21f4,

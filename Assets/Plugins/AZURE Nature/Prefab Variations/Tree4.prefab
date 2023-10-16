@@ -7,10 +7,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 642844291391591803, guid: 3b54291338335ae48b5f5b5f3b6eb606,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611799407460151377, guid: 3b54291338335ae48b5f5b5f3b6eb606,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2092523531238098457, guid: 3b54291338335ae48b5f5b5f3b6eb606,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4655554399499489375, guid: 3b54291338335ae48b5f5b5f3b6eb606,
         type: 3}
       propertyPath: m_Name
       value: Tree4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655554399499489375, guid: 3b54291338335ae48b5f5b5f3b6eb606,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8556984253747454540, guid: 3b54291338335ae48b5f5b5f3b6eb606,
         type: 3}
