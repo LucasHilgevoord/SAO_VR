@@ -57,11 +57,11 @@ LODGroup:
     fadeTransitionWidth: 0.365
     renderers:
     - renderer: {fileID: 663059740068159032}
-  - screenRelativeHeight: 0.07679819
+  - screenRelativeHeight: 0.08446465
     fadeTransitionWidth: 0.335
     renderers:
     - renderer: {fileID: 4924783690993936708}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &8055846937828117850
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +79,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7230871193285413673
 Transform:
   m_ObjectHideFlags: 0
@@ -162,7 +162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7956446415123548698
 Transform:
   m_ObjectHideFlags: 0
