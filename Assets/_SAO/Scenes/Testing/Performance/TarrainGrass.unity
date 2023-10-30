@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.120353945, g: 0.1858392, b: 0.33420923, a: 1}
+  m_IndirectSpecularColor: {r: 0.12035375, g: 0.18583941, b: 0.3342091, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -249,7 +249,7 @@ PrefabInstance:
     - target: {fileID: 3045455958965470099, guid: 1ff9b6e2db08ad5438a65917604cb117,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3045455958965470099, guid: 1ff9b6e2db08ad5438a65917604cb117,
         type: 3}
@@ -313,47 +313,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ff9b6e2db08ad5438a65917604cb117, type: 3}
---- !u!1001 &1939070918
+--- !u!1001 &2039152857
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3246502680596371263, guid: 45f8362ba510ec84f8625f37a5388865,
-        type: 3}
-      propertyPath: m_OcclusionCulling
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3849013801283211682, guid: 45f8362ba510ec84f8625f37a5388865,
         type: 3}
       propertyPath: m_Name
       value: VR Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5770554150408661171, guid: 45f8362ba510ec84f8625f37a5388865,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7599145705582590012, guid: 45f8362ba510ec84f8625f37a5388865,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7599145705582590012, guid: 45f8362ba510ec84f8625f37a5388865,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.62
+      value: -22.53229
       objectReference: {fileID: 0}
     - target: {fileID: 7599145705582590012, guid: 45f8362ba510ec84f8625f37a5388865,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 49.215256
+      value: 49.19747
       objectReference: {fileID: 0}
     - target: {fileID: 7599145705582590012, guid: 45f8362ba510ec84f8625f37a5388865,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -343.31
+      value: -315.69458
       objectReference: {fileID: 0}
     - target: {fileID: 7599145705582590012, guid: 45f8362ba510ec84f8625f37a5388865,
         type: 3}
@@ -389,16 +379,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8895396546350795995, guid: 45f8362ba510ec84f8625f37a5388865,
-        type: 3}
-      propertyPath: m_TrackingStateInput.m_Action.m_Id
-      value: 8cb1044e-12df-4695-b3d9-c3162388d4d0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8895396546350795995, guid: 45f8362ba510ec84f8625f37a5388865,
-        type: 3}
-      propertyPath: m_TrackingStateInput.m_Action.m_Name
-      value: Tracking State Input
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45f8362ba510ec84f8625f37a5388865, type: 3}
