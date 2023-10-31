@@ -18,6 +18,7 @@ namespace PlayerInterface
 
         internal override void OpenWindow()
         {
+            Debug.Log("ah");
             window.gameObject.SetActive(true);
             windowCanvasGroup.DOFade(1, openingDuration).OnComplete(() => {
                 _slotHandler.ShowAllSlots();

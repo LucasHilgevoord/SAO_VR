@@ -17,8 +17,6 @@ public enum InfoWindowMenus
 public class InfoWindow : MonoBehaviour
 {
     private bool isOpen;
-
-    [SerializeField] private PlayerEquipmentWindow _playerEquipmentMenu;
     [SerializeField] private DescriptionWindow _descriptionWindow;
     private InfoItem _currentMenu;
 
@@ -55,7 +53,7 @@ public class InfoWindow : MonoBehaviour
 
     public void OpenInfoItem(InfoItem item)
     {
-        if (item != _currentMenu) { return; }
+        if (item == _currentMenu) { return; }
         Action openMenu = () => { item.OpenWindow(); };
 
         if (!isOpen) { OpenWindow(openMenu); }
@@ -81,6 +79,7 @@ public class InfoWindow : MonoBehaviour
 
     private void OpenWindow(Action OnOpenComplete = null)
     {
+        Debug.Log("open window");
         DOTween.Kill(window.transform, true);
         DOTween.Kill(canvasGroup, true);
 
