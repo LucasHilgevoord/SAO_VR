@@ -8,18 +8,21 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/_SAO/Scenes/Preboot.unity
     guid: 61962177ab94d1d4ba2cf11ad34aeb39
-  - enabled: 1
+  - enabled: 0
     path: Assets/_SAO/Scenes/Bedroom.unity
     guid: dc332600d36ad834685dad9feb704011
-  - enabled: 1
+  - enabled: 0
     path: Assets/_SAO/Scenes/Startup.unity
     guid: 9cb46f535352ac14aa429ac754073201
-  - enabled: 1
+  - enabled: 0
     path: Assets/_SAO/Scenes/Interface.unity
     guid: 44ed56a862071ea4f8424b0b4ba923ff
+  - enabled: 1
+    path: Assets/_SAO/Scenes/Testing/Performance/TarrainGrass.unity
+    guid: 2b89824b59924a44cb15ded357c7ac3b
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: d52efc68b65e89e44be2084bc5c42112,
       type: 2}
