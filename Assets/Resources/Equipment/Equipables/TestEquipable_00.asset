@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: TestEquipable_00
   m_EditorClassIdentifier: 
   id: equipment_test_00
-  objectPrefab: {fileID: 0}
   title: Equipment Test 00
-  iconSpriteOn: {fileID: 21300000, guid: 4d2d63ddf439c0249899ae01ee9ee9ce, type: 3}
-  iconSpriteOff: {fileID: 21300000, guid: 65b95cc13be33974daf18cba044e8225, type: 3}
+  icon: {fileID: 21300000, guid: 65b95cc13be33974daf18cba044e8225, type: 3}
   description: This Equipment (00) is a wearable that has been created to test the
     inventory objects within the interface.
+  objectPrefab: {fileID: 0}
+  iconSpriteOn: {fileID: 21300000, guid: 4d2d63ddf439c0249899ae01ee9ee9ce, type: 3}
+  iconSpriteOff: {fileID: 21300000, guid: 65b95cc13be33974daf18cba044e8225, type: 3}

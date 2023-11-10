@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class DescriptionWindow : InfoItem
 {
     [Header("Description Window")]
-    [SerializeField] private RectTransform descWindow;
-    [SerializeField] private CanvasGroup descCanvasGroup;
     [SerializeField] private RectTransform content;
 
     [SerializeField] private Image icon;
@@ -19,52 +17,72 @@ public class DescriptionWindow : InfoItem
     private float toggleDuration = 0.3f;
     private bool isEnabled;
 
-    private EquipmentMenuItem lastOpened;
+    private DescriptionData lastOpened;
 
     private void Start()
     {
-        descWindow.anchoredPosition = new Vector3(0, descWindow.rect.height, 0);
-        descCanvasGroup.alpha = 0;
+        window.anchoredPosition = new Vector3(0, window.rect.height, 0);
+        windowCanvasGroup.alpha = 0;
+
+        EquipmentMenuItem.EquipmentItemPressed += OnDescriptionItemClicked;
     }
 
     internal override void OpenWindow()
     {
-        DOTween.Kill(descWindow);
-        DOTween.Kill(descCanvasGroup);
-        descWindow.DOAnchorPos(Vector3.zero, toggleDuration).SetEase(Ease.InOutSine);
-        descCanvasGroup.DOFade(1, toggleDuration * 2);
+        DOTween.Kill(window);
+        DOTween.Kill(windowCanvasGroup);
+        window.gameObject.SetActive(true);
+        window.DOAnchorPos(Vector3.zero, toggleDuration).SetEase(Ease.InOutSine);
+        windowCanvasGroup.DOFade(1, toggleDuration * 2);
     }
 
     internal override void CloseWindow()
     {
-        DOTween.Kill(descWindow);
-        DOTween.Kill(descCanvasGroup);
-        descWindow.DOAnchorPos(new Vector3(0, descWindow.rect.height, 0), toggleDuration).SetEase(Ease.InOutSine);
-        descCanvasGroup.DOFade(0, toggleDuration);
-    }
-
-    private void OnDescriptionItemClicked(EquipmentMenuItem item, bool enable)
-    { 
-        // Don't close when another item is selected which closes the older one
-        if (enable == false && item != lastOpened)
-            return;
-        
-        lastOpened = item;
-
-        // Don't close when another one is enabled
-        if (isEnabled != enable)
+        DOTween.Kill(window);
+        DOTween.Kill(windowCanvasGroup);
+        window.DOAnchorPos(new Vector3(0, window.rect.height, 0), toggleDuration).SetEase(Ease.InOutSine);
+        windowCanvasGroup.DOFade(0, toggleDuration).OnComplete(() =>
         {
-            isEnabled = enable;
-            if (isEnabled) { CloseWindow(); }
-            else { OpenWindow(); }
+            window.gameObject.SetActive(false);
+        });
+    }
+    private void OnDescriptionItemClicked(DescriptionData data, bool enable)
+    {
+        if (enable)
+        {
+            // Clicking on the same item that is already open should close it
+            if (data == lastOpened && isEnabled)
+            {
+                CloseWindow();
+                isEnabled = false;
+            }
+            else
+            {
+                // Assign new values and open the window
+                SetDescriptionData(data);
+                OpenWindow();
+                lastOpened = data;
+                isEnabled = true;
+            }
         }
+        else
+        {
+            // Clicking on the same item that is already closed should do nothing
+            if (data == lastOpened && !isEnabled)
+            {
+                return;
+            }
 
-        // Assign new values from the new item data
-        if (enable == true)
-            SetDescriptionData(item.equipmentData);
+            // Clicking on another item while the current one is open should close it
+            if (isEnabled)
+            {
+                CloseWindow();
+                isEnabled = false;
+            }
+        }
     }
 
-    private void SetDescriptionData(EquipmentData data)
+    private void SetDescriptionData(DescriptionData data)
     {
         if (data == null)
             return;
@@ -74,7 +92,7 @@ public class DescriptionWindow : InfoItem
         content.position = contentPos;
 
         title.text = data.title;
-        icon.sprite = data.iconSpriteOff;
+        icon.sprite = data.icon;
         desc.text = data.description;
 
         Vector2 fixedSizeDelta = content.sizeDelta;

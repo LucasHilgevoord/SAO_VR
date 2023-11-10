@@ -166,10 +166,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnSelectEvents:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 456493178394977242}
+        m_TargetAssemblyTypeName: PlayerInterface.EquipmentMenuItem, Assembly-CSharp
+        m_MethodName: SendDataEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeselectEvents:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 456493178394977242}
+        m_TargetAssemblyTypeName: PlayerInterface.EquipmentMenuItem, Assembly-CSharp
+        m_MethodName: SendDataEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   titleLabel: {fileID: 3156925495755348614}
   titleString: 
   background: {fileID: 3156925496928158963}
@@ -178,7 +202,8 @@ MonoBehaviour:
   iconImage: {fileID: 3156925496797513819}
   iconSpriteOn: {fileID: 0}
   iconSpriteOff: {fileID: 0}
-  subMenus: []
+  useArrow: 0
+  subMenu: {fileID: 0}
   equipmentData: {fileID: 0}
 --- !u!114 &3156925495755348614 stripped
 MonoBehaviour:

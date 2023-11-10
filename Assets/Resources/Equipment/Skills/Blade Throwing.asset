@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a696570dae8d3e48b61fce03ba45771, type: 3}
-  m_Name: One-Handed Straight Sword
+  m_Name: Blade Throwing
   m_EditorClassIdentifier: 
-  id: skill_one-handed_straight_sword
+  id: skill_blade_throwing
+  title: Blade Throwing
+  icon: {fileID: 21300000, guid: e0dc0bf462e886048bd061131fd613ac, type: 3}
+  description: Blade Throwing Description
   objectPrefab: {fileID: 0}
-  title: One-Handed Straight Sword
-  iconSpriteOn: {fileID: 21300000, guid: e660cecd19573ed41bfff0f6c7e0af83, type: 3}
-  iconSpriteOff: {fileID: 21300000, guid: d071fd145dd059640ba5a9c851f88266, type: 3}
-  description: One-Handed Straight Sword Description
+  iconSpriteOn: {fileID: 21300000, guid: e2fde1871d8641f408560e457ddac8eb, type: 3}
+  iconSpriteOff: {fileID: 21300000, guid: e0dc0bf462e886048bd061131fd613ac, type: 3}

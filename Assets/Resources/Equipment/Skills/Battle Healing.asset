@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a696570dae8d3e48b61fce03ba45771, type: 3}
-  m_Name: Blade Throwing
+  m_Name: Battle Healing
   m_EditorClassIdentifier: 
-  id: skill_blade_throwing
+  id: skill_battle_healing
+  title: Battle Healing
+  icon: {fileID: 21300000, guid: 0a1891e7c29e06c408f134d9980c7f1f, type: 3}
+  description: Battle Healing Description
   objectPrefab: {fileID: 0}
-  title: Blade Throwing
-  iconSpriteOn: {fileID: 21300000, guid: e2fde1871d8641f408560e457ddac8eb, type: 3}
-  iconSpriteOff: {fileID: 21300000, guid: e0dc0bf462e886048bd061131fd613ac, type: 3}
-  description: Blade Throwing Description
+  iconSpriteOn: {fileID: 21300000, guid: ee9cb1643161d9c49ab693898e4b041d, type: 3}
+  iconSpriteOff: {fileID: 21300000, guid: 0a1891e7c29e06c408f134d9980c7f1f, type: 3}

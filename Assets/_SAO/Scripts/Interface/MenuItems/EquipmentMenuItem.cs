@@ -8,15 +8,13 @@ namespace PlayerInterface
     public class EquipmentMenuItem : MenuItem
     {
         [Header("Equipment Item")]
-        public static Action<EquipmentMenuItem, bool> EquipmentItemPressed;
+        public static Action<DescriptionData, bool> EquipmentItemPressed;
         public EquipmentData equipmentData;
 
-        public override void ToggleItem()
+        public void SendDataEvent()
         {
-            base.ToggleItem();
-
-            // Fire event so the equipment can be displayed
-            EquipmentItemPressed?.Invoke(this, isSelected);
+            Debug.Log(isSelected);
+            EquipmentItemPressed?.Invoke(equipmentData, isSelected);
         }
     }
 }
