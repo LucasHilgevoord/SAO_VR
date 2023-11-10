@@ -24,9 +24,7 @@ namespace PlayerInterface
 
         private Coroutine _lerpInterfaceRoutine;
         private float _moveTime = 2f;
-
         private float _closeSideDelay = 0f;
-
         private bool _allowInteraction = true;
 
         private void Awake()

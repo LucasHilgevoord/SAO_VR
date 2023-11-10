@@ -13,12 +13,9 @@ namespace PlayerInterface
         /// <summary> Location to create the menuItems. </summary>
         public Transform content;
         public VerticalLayoutGroup layoutGroup;
-
         [SerializeField] private Transform scrollView;
-        [SerializeField] private Transform worldUICanvas; // TODO: I don't want to set this manually
-        [SerializeField] private Material scrollViewFadeMat;
 
-        private int minCellsForOffset = 6;
+        private int minCellsForOffset = 4;
         //[SerializeField] private int maxItems = -1;
 
         public void Start()
@@ -34,8 +31,6 @@ namespace PlayerInterface
             ShowLineArrow();
             content.gameObject.SetActive(true);
             scrollView.gameObject.SetActive(true);
-            float offsetY = worldUICanvas.InverseTransformPoint(scrollView.TransformPoint(scrollView.position)).y;
-            scrollViewFadeMat.SetFloat("_OffsetY", -offsetY);
             base.OpenMenu();
         }
 
@@ -49,22 +44,17 @@ namespace PlayerInterface
 
         private void SetPadding()
         {
-            if (items.Count > minCellsForOffset)
-                return;
-
-            int totalOffsetCells = minCellsForOffset - items.Count;
-
-            float totalTopPadding = 0;
-            float itemHeight = items[0].gameObject.GetComponent<RectTransform>().rect.height;
-
-            for (int i = 0; i < totalOffsetCells; i++)
+            if (items.Count <= minCellsForOffset)
             {
-                totalTopPadding += itemHeight;
-                totalTopPadding += layoutGroup.spacing;
-            }
+                float itemHeight = items[0].gameObject.GetComponent<RectTransform>().rect.height;
+                float itemSpacing = layoutGroup.spacing;
 
-            //totalTopPadding = -totalTopPadding;
-            layoutGroup.padding.top = (int)totalTopPadding;
+                float offset = scrollView.GetComponent<RectTransform>().rect.height / 2;
+                offset -= ((itemHeight / 2) * items.Count) + (itemSpacing * (items.Count - 1));
+                layoutGroup.padding.top = (int)offset;
+
+                ScaleLine(itemHeight * items.Count + itemSpacing * (items.Count - 1) + itemHeight);
+            }
         }
 
         internal virtual void FillMenuItems() { }

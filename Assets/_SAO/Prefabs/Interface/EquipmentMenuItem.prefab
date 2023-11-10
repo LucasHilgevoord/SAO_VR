@@ -122,21 +122,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EquipmentMenuItem
       objectReference: {fileID: 0}
-    - target: {fileID: 4955837543858372033, guid: 969ad06d97651244e8bcbf658969d5f8,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 2100000, guid: e99fd46dbc95ea24ba29f29096486aae, type: 2}
     - target: {fileID: 4955837544695669684, guid: 969ad06d97651244e8bcbf658969d5f8,
         type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: e99fd46dbc95ea24ba29f29096486aae, type: 2}
-    - target: {fileID: 4955837544829464348, guid: 969ad06d97651244e8bcbf658969d5f8,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 2100000, guid: e99fd46dbc95ea24ba29f29096486aae, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2109079031699993111, guid: 969ad06d97651244e8bcbf658969d5f8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 969ad06d97651244e8bcbf658969d5f8, type: 3}

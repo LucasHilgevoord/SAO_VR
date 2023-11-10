@@ -61,7 +61,7 @@ namespace PlayerInterface
                 // Start the moving animation
                 StartCoroutine(OpenMenuItem(items[i], delay));
             }
-            StartCoroutine(OpenFirstItem(1.25f));
+            StartCoroutine(OpenFirstItem(1f));
         }
 
         /// <summary>

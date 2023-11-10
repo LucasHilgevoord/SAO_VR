@@ -9,6 +9,7 @@ namespace PlayerInterface
     {
         [SerializeField] private GameObject lineArrow;
         [SerializeField] private CanvasGroup lineArrowCanvas;
+        [SerializeField] private RectTransform line;
         private float spawnDelay = 0.05f;
         private float hideDelay = 0.05f;
         private Coroutine closeMenuCoroutine;
@@ -138,6 +139,13 @@ namespace PlayerInterface
             {
                 lineArrow.SetActive(false);
             });
+        }
+
+        internal void ScaleLine(float height)
+        {
+            Vector2 sizeDelta = line.sizeDelta;
+            sizeDelta.y = height;
+            line.sizeDelta = sizeDelta;
         }
     }
 }
