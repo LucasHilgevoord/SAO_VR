@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 namespace PlayerInterface
 {
@@ -12,12 +13,14 @@ namespace PlayerInterface
         [SerializeField] private VerticalLayoutGroup vGroup;
 
         [SerializeField] private float itemHeight;
-        [SerializeField] private float startOffset;
+        [SerializeField] private float initOffset;
 
         [SerializeField] private float appearDelay;
         [SerializeField] private float openSpeed;
         [SerializeField] private float closeSpeed;
         [SerializeField] private MenuItem initialMenuItem;
+
+        [SerializeField] private RectMask2D moveSelectMask;
 
         private void Awake()
         {
@@ -29,6 +32,7 @@ namespace PlayerInterface
 
         private void Start()
         {
+            moveSelectMask.enabled = false;
             foreach (MenuItem item in items)
                 item.gameObject.SetActive(false);
         }
@@ -48,7 +52,7 @@ namespace PlayerInterface
                 items[i].canvasGroup.alpha = 0;
 
                 // Set the items on the right starting position
-                Vector3 startPos = new Vector3(0, (itemHeight * i) + (vGroup.spacing * i) + startOffset, 0);
+                Vector3 startPos = new Vector3(0, (itemHeight * i) + (vGroup.spacing * i) + initOffset, 0);
                 items[i].transform.localPosition = startPos;
 
                 // Decide the delay for appearing
@@ -96,7 +100,7 @@ namespace PlayerInterface
                 float delay = appearDelay * i;
 
                 // Get the starting position
-                Vector3 startPos = new Vector3(0, (itemHeight * i) + (vGroup.spacing * i) + startOffset, 0);
+                Vector3 startPos = new Vector3(0, (itemHeight * i) + (vGroup.spacing * i) + initOffset, 0);
 
                 // Start the moving animation
                 StartCoroutine(CloseMenuItem(items[i], delay, startPos));
@@ -119,22 +123,82 @@ namespace PlayerInterface
             item.transform.DOLocalMove(pos, dur);
         }
 
-        internal void OnCategoryItemSelected(int index)
+        internal void OnCategoryItemSelected(int selectedIndex)
         {
-            // Put the menu items in the right position, the selected item should be on top, the item below the second one is now the second one and so on
+            StartCoroutine(StartCategoryItemsMove(selectedIndex));
+        }
+
+        private IEnumerator StartCategoryItemsMove(int selectedIndex)
+        {
+            if (selectedIndex == 0) { yield return null; }
+
+            moveSelectMask.enabled = true;
+
+            List<GameObject> itemPlaceholders = new List<GameObject>();
+            float duration = 0.5f;
+
+            // Lerp with dotween all the items to the top until the selected item is on top
+            float offsetY = selectedIndex * (itemHeight + vGroup.spacing);
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                RectTransform item = items[i].GetComponent<RectTransform>();
+                item.GetComponent<CanvasGroup>().interactable = false;
+                GameObject clone = null;
+
+                if (i < selectedIndex)
+                {
+                    clone = Instantiate(items[i].gameObject, items[i].transform.position, items[i].transform.rotation, items[i].transform.parent);
+                    itemPlaceholders.Add(clone);
+
+                    // Place them below the last item
+                    clone.transform.localPosition = new Vector3(0, items.Count * -(itemHeight + vGroup.spacing), 0);
+
+                    RectTransform cloneRect = clone.GetComponent<RectTransform>();
+                    cloneRect.DOAnchorPosY(cloneRect.anchoredPosition.y + offsetY, duration);
+                }
+
+                item.DOAnchorPosY(item.anchoredPosition.y + offsetY, duration).OnComplete(() =>
+                {
+                    if (clone != null)
+                    {
+                        item.anchoredPosition = clone.GetComponent<RectTransform>().anchoredPosition;
+                        Destroy(clone);
+                    }
+
+                    // If this was the last item, Finalize the menu
+                    if (i == items.Count - 1)
+                    {
+                        Debug.Log("DONE");
+                        OnCategoryItemsMoveComplete(selectedIndex);
+                    }
+                });
+            }
+
+            yield return new WaitForSeconds(duration);
+            OnCategoryItemsMoveComplete(selectedIndex);
+        }
+
+        void OnCategoryItemsMoveComplete(int selectedIndex)
+        {
+            //Put the menu items in the right position, the selected item should be on top, the item below the second one is now the second one and so on
             List<MenuItem> itemsCopy = new List<MenuItem>();
 
             for (int i = 0; i < items.Count; i++)
             {
-                int newIndex = (i + index) % items.Count;
+                int newIndex = (i + selectedIndex) % items.Count;
                 itemsCopy.Add(items[newIndex]);
             }
 
             items = itemsCopy;
             for (int i = 0; i < items.Count; i++)
             {
-                itemsCopy[i].transform.parent.SetSiblingIndex(i);
+                items[i].GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+                items[i].transform.parent.SetSiblingIndex(i);
+                items[i].GetComponent<CanvasGroup>().interactable = true;
             }
+
+            moveSelectMask.enabled = false;
         }
     }
 }
