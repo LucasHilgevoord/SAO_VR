@@ -123,12 +123,7 @@ namespace PlayerInterface
             item.transform.DOLocalMove(pos, dur);
         }
 
-        internal void OnCategoryItemSelected(int selectedIndex)
-        {
-            StartCoroutine(StartCategoryItemsMove(selectedIndex));
-        }
-
-        private IEnumerator StartCategoryItemsMove(int selectedIndex)
+        internal IEnumerator OnCategoryItemSelected(int selectedIndex)
         {
             if (selectedIndex == 0) { yield return null; }
 
@@ -165,22 +160,11 @@ namespace PlayerInterface
                         item.anchoredPosition = clone.GetComponent<RectTransform>().anchoredPosition;
                         Destroy(clone);
                     }
-
-                    // If this was the last item, Finalize the menu
-                    if (i == items.Count - 1)
-                    {
-                        Debug.Log("DONE");
-                        OnCategoryItemsMoveComplete(selectedIndex);
-                    }
                 });
             }
 
             yield return new WaitForSeconds(duration);
-            OnCategoryItemsMoveComplete(selectedIndex);
-        }
 
-        void OnCategoryItemsMoveComplete(int selectedIndex)
-        {
             //Put the menu items in the right position, the selected item should be on top, the item below the second one is now the second one and so on
             List<MenuItem> itemsCopy = new List<MenuItem>();
 

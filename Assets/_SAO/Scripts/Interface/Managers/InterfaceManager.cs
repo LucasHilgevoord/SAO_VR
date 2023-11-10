@@ -82,11 +82,11 @@ namespace PlayerInterface
 
             if (isSelected)
             {
+                if (categorieMenu.items.Contains(newItem))
+                    yield return StartCoroutine(categorieMenu.OnCategoryItemSelected(categorieMenu.items.FindIndex(x => x.Equals(newItem))));
+
                 openMenus.Add(newItem);
                 newItem.Select();
-                
-                if (categorieMenu.items.Contains(newItem))
-                    categorieMenu.OnCategoryItemSelected(categorieMenu.items.FindIndex(x => x.Equals(newItem)));
             }
             else
             {
