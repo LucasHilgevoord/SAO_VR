@@ -91,7 +91,6 @@ namespace PlayerInterface
             ToggleVisuals(isSelected);
 
             // Start the OnSelectEvents
-            Debug.Log("ab");
             OnSelectEvents?.Invoke();
 
             // Open the submenu

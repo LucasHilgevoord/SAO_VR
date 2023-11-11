@@ -69,7 +69,6 @@ namespace PlayerInterface
                 for (int i = openMenus.Count - 1; i >= 0; i--)
                 {
                     if (openMenus[i] == null) { continue; }
-                    Debug.Log("1) Deselect: " + openMenus[i].name);
                     yield return StartCoroutine(openMenus[i].Deselect());
                     openMenus.RemoveAt(i);
 
