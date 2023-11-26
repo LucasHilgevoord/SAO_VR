@@ -26,7 +26,6 @@ namespace PlayerInterface
         [SerializeField] private Image iconImage;
         [SerializeField] private Sprite iconSpriteOn;
         [SerializeField] private Sprite iconSpriteOff;
-        [SerializeField] private bool useArrow;
 
         [Header(" Links")]
         /// Submenu's that will be opened when this item is selected
@@ -57,7 +56,6 @@ namespace PlayerInterface
             
             if (selectArrow != null)
             {
-                useArrow = selectArrow.IsActive();
                 selectArrow.gameObject.SetActive(false);
             }
         }
@@ -123,8 +121,7 @@ namespace PlayerInterface
 
         internal void EnableArrowImage(bool enable)
         {
-            if (useArrow)
-                selectArrow.gameObject.SetActive(enable);
+            selectArrow.gameObject.SetActive(enable);
         }
     }
 }

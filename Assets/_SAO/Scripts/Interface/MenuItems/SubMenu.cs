@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace PlayerInterface
 {
@@ -10,9 +11,15 @@ namespace PlayerInterface
         [SerializeField] private GameObject lineArrow;
         [SerializeField] private CanvasGroup lineArrowCanvas;
         [SerializeField] private RectTransform line;
+
+        [SerializeField] private bool centerItemOnSelect = true;
+        [SerializeField] private int centerItemIndex = 1;
+
         private float spawnDelay = 0.05f;
         private float hideDelay = 0.05f;
         private Coroutine closeMenuCoroutine;
+
+        private MenuItem currentSelectedItem, prevSelectedItem;
 
         private void OnEnable()
         {
@@ -51,10 +58,76 @@ namespace PlayerInterface
                 HideLineArrow();
             }
 
-            // Disable the arrow of all the items
+            // TODO: This system does not really work whenever there is no submenu existing..? and somehow only with the profile one.
+            // TODO: This stuff ugly, But it should handle that when one of the submenu's has been chosen, that it gets centered
+            if (currentSelectedItem != null)
+            {
+                // Wait until all their submenu's are closed.
+                prevSelectedItem = currentSelectedItem;
+                prevSelectedItem.OnDeselectEvents.AddListener(WaitUntilCenterSelectItem);
+            } else
+            {
+                CenterSelectedItem(item);
+                SetSideArrow(item, isSelected);
+            }
+
+            currentSelectedItem = isSelected ? item : null;
+        }
+
+        private void WaitUntilCenterSelectItem()
+        {
+            prevSelectedItem.OnDeselectEvents.RemoveListener(WaitUntilCenterSelectItem);
+            if (currentSelectedItem != null)
+            {
+                CenterSelectedItem(currentSelectedItem);
+                SetSideArrow(currentSelectedItem, currentSelectedItem.isSelected);
+            } else if (prevSelectedItem != null)
+            {
+                SetSideArrow(prevSelectedItem, prevSelectedItem.isSelected);
+            }
+        }
+
+        private void CenterSelectedItem(MenuItem item)
+        {
+            if (centerItemOnSelect)
+            {
+                // Find the index of the item that was pressed in the list of items
+                int selectedIndex = items.IndexOf(item);
+                int centerItemIndex = items.Count / 2;
+                List<MenuItem> itemsCopy = new List<MenuItem>();
+
+                // Move the selected item to the center
+                for (int i = 0; i < items.Count; i++)
+                {
+                    int newIndex = (i + selectedIndex) % items.Count;
+                    itemsCopy.Add(items[newIndex]);
+                }
+
+                items = itemsCopy;
+
+                // Find the new index of the selected item in the modified list
+                int newSelectedIndex = items.IndexOf(item);
+
+                // Calculate the offset needed to move the selected item to the center
+                int offset = centerItemIndex - newSelectedIndex;
+
+                // Adjust the list so that the selected item becomes the center item
+                for (int i = 0; i < items.Count; i++)
+                {
+                    int newIndex = (i + offset + items.Count) % items.Count;
+
+                    // SetSiblingIndex to rearrange the order of items
+                    items[i].transform.SetSiblingIndex(newIndex);
+                }
+            }
+        }
+
+        private void SetSideArrow(MenuItem item, bool isSelected)
+        {
+            // Set the side arrow for the items
             foreach (MenuItem i in items)
             {
-                i.EnableArrowImage(isSelected);
+                i.EnableArrowImage(item == i ? isSelected : false);
             }
         }
 
