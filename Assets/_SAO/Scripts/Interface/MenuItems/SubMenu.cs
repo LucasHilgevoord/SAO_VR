@@ -23,6 +23,7 @@ namespace PlayerInterface
 
         private void OnEnable()
         {
+            // Idk why I made this a static event
             MenuItem.IsPressed += OnMenuItemPressed;
         }
 

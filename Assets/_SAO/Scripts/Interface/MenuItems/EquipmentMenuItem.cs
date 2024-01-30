@@ -13,7 +13,6 @@ namespace PlayerInterface
 
         public void SendDataEvent()
         {
-            Debug.Log(isSelected);
             EquipmentItemPressed?.Invoke(equipmentData, isSelected);
         }
     }

@@ -10,6 +10,7 @@ namespace PlayerInterface
         {
             base.FillMenuItems();
             EquipmentList dataList = (EquipmentList)objectDataList;
+            AddBarrierItems(2);
 
             for (int i = 0; i < dataList.items.Count; i++)
             {
@@ -23,6 +24,8 @@ namespace PlayerInterface
                 itemPrefab.equipmentData = data;
                 items.Add(itemPrefab);
             }
+
+            AddBarrierItems(2);
         }
     }
 }

@@ -108,8 +108,12 @@ MonoBehaviour:
   lineArrow: {fileID: 8243819251471346830}
   lineArrowCanvas: {fileID: 1847393937365136211}
   line: {fileID: 2418328020823945086}
+  centerItemOnSelect: 1
+  centerItemIndex: 1
   objectDataList: {fileID: 11400000, guid: 1bac7c8d482651c4299cd86db99149ba, type: 2}
   menuItemPrefab: {fileID: 3156925495635255956, guid: e2e5ad84a768aca41848654c38ee8835,
+    type: 3}
+  itemBarrier: {fileID: 4955837543474087379, guid: b799cca7344e7e640b610ae9950b4be4,
     type: 3}
   content: {fileID: 8177844566637522986}
   layoutGroup: {fileID: 6133722151631509391}
@@ -179,7 +183,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 35
+    m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 5

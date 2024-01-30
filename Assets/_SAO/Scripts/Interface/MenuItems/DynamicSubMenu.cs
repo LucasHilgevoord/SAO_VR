@@ -8,7 +8,7 @@ namespace PlayerInterface
     public class DynamicSubMenu : SubMenu
     {
         public ScriptableObject objectDataList;
-        public GameObject menuItemPrefab;
+        public GameObject menuItemPrefab, itemBarrier;
 
         /// <summary> Location to create the menuItems. </summary>
         public Transform content;
@@ -22,6 +22,10 @@ namespace PlayerInterface
         {
             FillMenuItems();
             SetPadding();
+
+            int centerItem = items.Count / 2;
+            float scrollY = centerItem * (menuItemPrefab.GetComponent<RectTransform>().rect.height + layoutGroup.spacing);
+            content.localPosition = new Vector3(content.localPosition.x, scrollY, content.localPosition.z);
 
             scrollView.gameObject.SetActive(false);
         }
@@ -48,18 +52,29 @@ namespace PlayerInterface
             {
                 float itemHeight = items[0].gameObject.GetComponent<RectTransform>().rect.height;
                 float itemSpacing = layoutGroup.spacing;
-
-                float offset = scrollView.GetComponent<RectTransform>().rect.height / 2;
-                offset -= ((itemHeight / 2) * items.Count) + (itemSpacing * (items.Count - 1));
-                layoutGroup.padding.top = (int)offset;
-
                 ScaleLine(itemHeight * items.Count + itemSpacing * (items.Count - 1) + itemHeight);
+                
+                // Note: Not needed anymore after adding barrier items
+                //float offset = scrollView.GetComponent<RectTransform>().rect.height / 2;
+                //offset -= ((itemHeight / 2) * items.Count) + (itemSpacing * (items.Count - 1));
+                //layoutGroup.padding.top = (int)offset;
+            }
+        }
+
+        internal void AddBarrierItems(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Instantiate(itemBarrier, content);
             }
         }
 
         internal virtual void FillMenuItems() { }
 
-        internal override void OnMenuItemPressed(MenuItem item, bool isSelected) { }
+        internal override void OnMenuItemPressed(MenuItem item, bool isSelected) {
+            if (!items.Contains(item)) { return; }
+            Debug.Log("Item pressed + " + item.name);
+        }
 
     }
 }
