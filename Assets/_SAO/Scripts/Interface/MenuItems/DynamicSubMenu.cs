@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using static UnityEditor.Progress;
 
 namespace PlayerInterface
 {
@@ -24,10 +25,7 @@ namespace PlayerInterface
             FillMenuItems();
             SetPadding();
 
-            int centerItem = items.Count / 2;
-            float scrollY = centerItem * (menuItemPrefab.GetComponent<RectTransform>().rect.height + layoutGroup.spacing);
-            content.localPosition = new Vector3(content.localPosition.x, scrollY, content.localPosition.z);
-
+            ScrollToItem(items.Count / 2, true);
             scrollView.gameObject.SetActive(false);
         }
 
@@ -76,10 +74,13 @@ namespace PlayerInterface
             if (!items.Contains(item)) { return; }
             Debug.Log("Item pressed + " + item.name);
 
-            int pressedIndex = items.IndexOf(item);
-            float scrollY = pressedIndex * (menuItemPrefab.GetComponent<RectTransform>().rect.height + layoutGroup.spacing);
-            content.DOLocalMoveY(scrollY, 0.2f);
+            ScrollToItem(items.IndexOf(item));
         }
 
+        private void ScrollToItem(int index, bool snap = false)
+        {
+            float scrollY = index * (menuItemPrefab.GetComponent<RectTransform>().rect.height + layoutGroup.spacing);
+            content.DOLocalMoveY(scrollY, 0.2f, snap);
+        }
     }
 }
