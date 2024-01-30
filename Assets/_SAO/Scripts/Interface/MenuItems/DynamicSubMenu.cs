@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace PlayerInterface
 {
@@ -11,7 +12,7 @@ namespace PlayerInterface
         public GameObject menuItemPrefab, itemBarrier;
 
         /// <summary> Location to create the menuItems. </summary>
-        public Transform content;
+        public RectTransform content;
         public VerticalLayoutGroup layoutGroup;
         [SerializeField] private Transform scrollView;
 
@@ -74,6 +75,10 @@ namespace PlayerInterface
         internal override void OnMenuItemPressed(MenuItem item, bool isSelected) {
             if (!items.Contains(item)) { return; }
             Debug.Log("Item pressed + " + item.name);
+
+            int pressedIndex = items.IndexOf(item);
+            float scrollY = pressedIndex * (menuItemPrefab.GetComponent<RectTransform>().rect.height + layoutGroup.spacing);
+            content.DOLocalMoveY(scrollY, 0.2f);
         }
 
     }
