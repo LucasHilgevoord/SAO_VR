@@ -58,10 +58,11 @@ namespace PlayerInterface
                 // Decide the delay for appearing
                 float delay = appearDelay * (items.Count - i);
 
-                // Start the moving animation
-                StartCoroutine(OpenMenuItem(items[i], delay));
+                // Start the moving animation so they lerp from top to bottom
+                float dur = Vector3.Distance(items[i].transform.position, Vector3.zero) / openSpeed;
+                StartCoroutine(MoveMenuItemToPosition(items[i], delay, Vector3.zero, dur));
             }
-            StartCoroutine(OpenFirstItem(1f));
+            StartCoroutine(OpenInitialItem(1f));
         }
 
         /// <summary>
@@ -70,17 +71,16 @@ namespace PlayerInterface
         /// <param name="item">Menu item to move</param>
         /// <param name="delay">Delay before moving</param>
         /// <returns></returns>
-        internal IEnumerator OpenMenuItem(MenuItem item, float delay)
+        internal IEnumerator MoveMenuItemToPosition(MenuItem item, float delay, Vector3 pos, float duration)
         {
             yield return new WaitForSeconds(delay);
 
             //TODO: This can be done easier with: Dotween.SetSpeedBased
-            float dur = Vector3.Distance(item.transform.position, Vector3.zero) / openSpeed;
-            item.canvasGroup.DOFade(1, dur * 2);
-            item.transform.DOLocalMove(Vector3.zero, dur);
+            item.canvasGroup.DOFade(1, duration * 2);
+            item.transform.DOLocalMove(pos, duration);
         }
 
-        private IEnumerator OpenFirstItem(float delay)
+        private IEnumerator OpenInitialItem(float delay)
         {
             yield return new WaitForSeconds(delay);
             initialMenuItem.Interact();

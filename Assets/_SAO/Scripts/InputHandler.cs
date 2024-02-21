@@ -37,6 +37,55 @@ public class InputHandler : Singleton<InputHandler>
         SetDevices(null, 0);
     }
 
+    public void Update() {
+        // Raycast hit to check which object is hit
+        if (WasLMousePressedThisFrame() && false)
+        {
+
+            bool is2D = false;
+
+            if (is2D)
+            {
+                Vector2 mousePosition = GetMousePos();
+                Vector3 mousePosition3D = new Vector3(mousePosition.x, mousePosition.y, Camera.main.transform.position.z);
+
+                // Construct a ray from the camera to the mouse position
+                Ray ray = Camera.main.ScreenPointToRay(mousePosition3D);
+                Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100f, Color.red, 1f);
+
+                // Perform the 2D raycast
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+                if (hit.collider != null)
+                {
+                    // If hit, log the name of the collided object
+                    Debug.Log(hit.collider.gameObject.name);
+                }
+                else
+                {
+                    // If no hit, log "Nothing"
+                    Debug.Log("Nothing");
+                }
+            }
+            else
+            {
+                Ray ray = Camera.main.ScreenPointToRay(GetMousePos());
+                Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100f, Color.red, 1f);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.gameObject != null)
+                    {
+                        Debug.Log(hit.collider.gameObject.name);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Nothing");
+                }
+            }
+        }
+    }
+
     private void SetDevices(UnityEngine.InputSystem.InputDevice device, InputDeviceChange change)
     {
         _keyboard = Keyboard.current;

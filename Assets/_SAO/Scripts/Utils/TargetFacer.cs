@@ -53,7 +53,7 @@ public class TargetFacer : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 1, Color.red);
+        //Debug.DrawRay(transform.position, transform.forward * 1, Color.red);
         if (_followTarget)
             SnapToTarget(_lerpSpeed);
     }

@@ -34,6 +34,7 @@ namespace PlayerInterface
             ShowLineArrow();
             content.gameObject.SetActive(true);
             scrollView.gameObject.SetActive(true);
+            ScrollToItem(items.Count / 2, true);
             base.OpenMenu();
         }
 
@@ -72,8 +73,6 @@ namespace PlayerInterface
 
         internal override void OnMenuItemPressed(MenuItem item, bool isSelected) {
             if (!items.Contains(item)) { return; }
-            Debug.Log("Item pressed + " + item.name);
-
             ScrollToItem(items.IndexOf(item));
         }
 

@@ -15,8 +15,10 @@ namespace PlayerInterface
         public UnityEvent OnDeselectEvents;
 
         [Header(" References")]
+        public Button selectButton;
+
         [SerializeField] private Text titleLabel;
-        [SerializeField] private string titleString;
+        [SerializeField] internal string titleString;
 
         [SerializeField] private Image background;
         [SerializeField] private Image selectArrow;
@@ -24,29 +26,16 @@ namespace PlayerInterface
 
         public CanvasGroup canvasGroup;
         [SerializeField] private Image iconImage;
-        [SerializeField] private Sprite iconSpriteOn;
-        [SerializeField] private Sprite iconSpriteOff;
+        [SerializeField] internal Sprite iconSpriteOn;
+        [SerializeField] internal Sprite iconSpriteOff;
 
         [Header(" Links")]
         /// Submenu's that will be opened when this item is selected
         public SubMenu subMenu;
         internal bool isSelected;
-        
-        public void Initialize(string title, Sprite iconOn, Sprite iconOff)
-        {
-            titleString = title;
-            iconSpriteOn = iconOn;
-            iconSpriteOff = iconOff;
-        }
 
         public void Start()
         {
-            // Add the event trigger to the menu item
-            Button button = GetComponent<Button>();
-            if (button != null) {
-                button.onClick.AddListener(Interact); 
-            }
-
             // Set the title label to the correct name if it is not empty
             if (!string.IsNullOrEmpty(titleString))
                 titleLabel.text = titleString;
@@ -80,7 +69,7 @@ namespace PlayerInterface
             ToggleVisuals(isSelected);
         }
 
-        public void Select()
+        public virtual void Select()
         {
             // Make sure the item is selected
             isSelected = true;
@@ -91,7 +80,7 @@ namespace PlayerInterface
             // Start the OnSelectEvents
             OnSelectEvents?.Invoke();
 
-            // Open the submenu
+            // Open the submenu if there is one
             if (subMenu != null)
                 subMenu.OpenMenu();
         }
@@ -115,8 +104,9 @@ namespace PlayerInterface
         public void Interact()
         {
             //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_button_press");
-            isSelected = !isSelected;
-            IsPressed?.Invoke(this, isSelected);
+            
+            // Fire the event that this object has been clicked. The InterfaceManager will decide what to do with it and when.
+            IsPressed?.Invoke(this, !isSelected);
         }
 
         internal void EnableArrowImage(bool enable)
