@@ -10,7 +10,7 @@ namespace PlayerInterface
         public static Action<DescriptionData, bool> EquipmentItemPressed;
         public EquipmentData equipmentData;
 
-        public RectTransform optionsRect;
+        public ItemOptions options;
 
         public void Initialize(string title, Sprite iconOn, Sprite iconOff)
         {
@@ -29,11 +29,8 @@ namespace PlayerInterface
         /// Called from the inspector
         /// </summary>
         public void OpenOptions()
-        {
-            Debug.Log("Open Options " + gameObject.name);
-            selectButton.interactable = false;
-            optionsRect.gameObject.SetActive(true);
-            optionsRect.DOAnchorPosX(0, 0.25f);
+        { 
+            options.OpenOptions();
         }
 
         /// <summary>
@@ -43,10 +40,7 @@ namespace PlayerInterface
         public void CloseOptions()
         {
             // Disable button interaction
-            optionsRect.DOAnchorPosX(optionsRect.rect.width, 0.2f).OnComplete(() => {
-                optionsRect.gameObject.SetActive(false);
-                selectButton.interactable = true;
-            });
+            options.CloseOptions();
         }
     }
 }
