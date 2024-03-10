@@ -79,6 +79,7 @@ public class ItemOptions : MonoBehaviour
 
     public void Equip()
     {
+        // TODO: Does an item need to be removed from the inventory if it has been spawned? Or can you just recall it?
         if (!optionButtons[0].isSelected)
         {
             optionButtons[0].isSelected = true;
@@ -98,7 +99,11 @@ public class ItemOptions : MonoBehaviour
 
     public void Delete()
     {
+        // Disable the interaction
         item.Interact();
+        
+        // Delete the item
+        item.RemoveItem();
     }
 
     private void SelectButton(int index)
@@ -117,5 +122,10 @@ public class ItemOptions : MonoBehaviour
                 optionButtons[i].button.gameObject.SetActive(false);
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(optionsRect);
     }
 }

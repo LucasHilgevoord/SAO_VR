@@ -11,6 +11,7 @@ namespace PlayerInterface
         public EquipmentData equipmentData;
 
         public ItemOptions options;
+        public RectTransform visualsRect;
 
         public void Initialize(string title, Sprite iconOn, Sprite iconOff)
         {

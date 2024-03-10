@@ -13,6 +13,7 @@ namespace PlayerInterface
         public static Action<MenuItem, bool> IsPressed;
         public UnityEvent OnSelectEvents;
         public UnityEvent OnDeselectEvents;
+        public Action<MenuItem> DestroyItem;
 
         [Header(" References")]
         public Button selectButton;
@@ -112,6 +113,11 @@ namespace PlayerInterface
         internal void EnableArrowImage(bool enable)
         {
             selectArrow.gameObject.SetActive(enable);
+        }
+
+        internal virtual void RemoveItem() {
+            Debug.Log("RemoveItem");
+            DestroyItem?.Invoke(this);
         }
     }
 }

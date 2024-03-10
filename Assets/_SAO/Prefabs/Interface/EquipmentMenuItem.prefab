@@ -943,6 +943,12 @@ PrefabInstance:
     - {fileID: 2109079031699993111, guid: 969ad06d97651244e8bcbf658969d5f8, type: 3}
     - {fileID: 6057616889451307332, guid: 969ad06d97651244e8bcbf658969d5f8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 969ad06d97651244e8bcbf658969d5f8, type: 3}
+--- !u!224 &1287467231388093325 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9139787567178198218, guid: 969ad06d97651244e8bcbf658969d5f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8000940498244593479}
+  m_PrefabAsset: {fileID: 0}
 --- !u!225 &2885837521959179818 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 5117638464765505901, guid: 969ad06d97651244e8bcbf658969d5f8,
@@ -1033,6 +1039,7 @@ MonoBehaviour:
   subMenu: {fileID: 0}
   equipmentData: {fileID: 0}
   options: {fileID: 5174453949901511813}
+  visualsRect: {fileID: 1287467231388093325}
 --- !u!224 &3156925495635255957 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4955837543474087378, guid: 969ad06d97651244e8bcbf658969d5f8,

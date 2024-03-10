@@ -37,6 +37,11 @@ namespace PlayerInterface
             }
         }
 
+        public virtual void RemoveItem(MenuItem item)
+        {
+            items.Remove(item);
+        }
+
         /// <summary>
         /// Method to fade out the not active items and show only the active one
         /// </summary>

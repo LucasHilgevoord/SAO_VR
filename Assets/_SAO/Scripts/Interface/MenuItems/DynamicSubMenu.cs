@@ -76,7 +76,7 @@ namespace PlayerInterface
             ScrollToItem(items.IndexOf(item));
         }
 
-        private void ScrollToItem(int index, bool snap = false)
+        internal void ScrollToItem(int index, bool snap = false)
         {
             float scrollY = index * (menuItemPrefab.GetComponent<RectTransform>().rect.height + layoutGroup.spacing);
             content.DOLocalMoveY(scrollY, 0.2f, snap);
