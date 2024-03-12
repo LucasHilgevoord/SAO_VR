@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using static UnityEditor.Progress;
+using System;
 
 namespace PlayerInterface
 {
     public class DynamicSubMenu : SubMenu
     {
         public ScriptableObject objectDataList;
-        public GameObject menuItemPrefab, itemBarrier;
+        public GameObject menuItemPrefab, itemBarrier, emptyItem;
 
         /// <summary> Location to create the menuItems. </summary>
         public RectTransform content;
@@ -48,16 +49,11 @@ namespace PlayerInterface
 
         private void SetPadding()
         {
-            if (items.Count <= minCellsForOffset)
+            if (items.Count != 0 && items.Count <= minCellsForOffset)
             {
                 float itemHeight = items[0].gameObject.GetComponent<RectTransform>().rect.height;
                 float itemSpacing = layoutGroup.spacing;
                 ScaleLine(itemHeight * items.Count + itemSpacing * (items.Count - 1) + itemHeight);
-                
-                // Note: Not needed anymore after adding barrier items
-                //float offset = scrollView.GetComponent<RectTransform>().rect.height / 2;
-                //offset -= ((itemHeight / 2) * items.Count) + (itemSpacing * (items.Count - 1));
-                //layoutGroup.padding.top = (int)offset;
             }
         }
 
@@ -80,6 +76,18 @@ namespace PlayerInterface
         {
             float scrollY = index * (menuItemPrefab.GetComponent<RectTransform>().rect.height + layoutGroup.spacing);
             content.DOLocalMoveY(scrollY, 0.2f, snap);
+        }
+
+        public override void RemoveItem(MenuItem item)
+        {
+            base.RemoveItem(item);
+            SetPadding();
+
+            if (items.Count == 0)
+            {
+                GameObject o =Instantiate(emptyItem, content);
+                o.transform.SetSiblingIndex(2);
+            }
         }
     }
 }

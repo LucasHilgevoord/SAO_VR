@@ -115,6 +115,8 @@ MonoBehaviour:
     type: 3}
   itemBarrier: {fileID: 4955837543474087379, guid: b799cca7344e7e640b610ae9950b4be4,
     type: 3}
+  emptyItem: {fileID: 6590197446091588760, guid: 037e22337a1405249abe5ec5529dd1c5,
+    type: 3}
   content: {fileID: 8177844566637522986}
   layoutGroup: {fileID: 6133722151631509391}
   scrollView: {fileID: 8177844567195116271}

@@ -62,7 +62,7 @@ namespace PlayerInterface
             RectTransform visuals = ((EquipmentMenuItem)item).visualsRect;
             visuals.gameObject.AddComponent<LayoutElement>().ignoreLayout = true;
             visuals.SetParent(item.transform.parent);
-            visuals.DOAnchorPosY(200, 0.5f).OnComplete(()=> { Destroy(visuals.gameObject); });
+            visuals.DOAnchorPosY(300, 500f).SetSpeedBased().OnComplete(()=> { Destroy(visuals.gameObject); });
 
             // Remove the main item object
             Destroy(item.gameObject);
