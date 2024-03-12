@@ -13,11 +13,17 @@ namespace PlayerInterface
         public ItemOptions options;
         public RectTransform visualsRect;
 
-        public void Initialize(string title, Sprite iconOn, Sprite iconOff)
+        public void Initialize(EquipmentData data)
         {
-            titleString = title;
-            iconSpriteOn = iconOn;
-            iconSpriteOff = iconOff;
+            equipmentData = data;
+            titleString = equipmentData.title;
+            iconSpriteOn = equipmentData.iconSpriteOn;
+            iconSpriteOff = equipmentData.iconSpriteOff;
+
+            if (!equipmentData.removable)
+            {
+                options.DestroyButton(1);
+            }
         }
 
         public void SendDataEvent()

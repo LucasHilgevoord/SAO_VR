@@ -19,3 +19,4 @@ MonoBehaviour:
   objectPrefab: {fileID: 0}
   iconSpriteOn: {fileID: 21300000, guid: 9af82eed5e540ad4fa7736c475b89252, type: 3}
   iconSpriteOff: {fileID: 21300000, guid: 804b4dd963177db4e9f1f9cc5a9d138b, type: 3}
+  removable: 0

@@ -19,7 +19,7 @@ public class ItemOptions : MonoBehaviour
 {
     [SerializeField] private EquipmentMenuItem item;
     public RectTransform optionsRect;
-    public OptionButton[] optionButtons;
+    public List<OptionButton> optionButtons;
     public Image background, activeBackground;
 
     private GameObject spawnedItem;
@@ -106,12 +106,19 @@ public class ItemOptions : MonoBehaviour
         item.RemoveItem();
     }
 
+    internal void DestroyButton(int index)
+    {
+        Destroy(optionButtons[index].button.gameObject);
+        optionButtons.RemoveAt(index);
+        return;
+    }
+
     private void SelectButton(int index)
     {
         background.gameObject.SetActive(false);
         activeBackground.gameObject.SetActive(true);
         
-        for (int i = 0; i < optionButtons.Length; i++)
+        for (int i = 0; i < optionButtons.Count; i++)
         {
             if (i == index)
             {

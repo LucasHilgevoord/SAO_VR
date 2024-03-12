@@ -24,12 +24,10 @@ namespace PlayerInterface
                 newItem.name = data.title;
 
                 EquipmentMenuItem itemPrefab = newItem.GetComponent<EquipmentMenuItem>();
-                itemPrefab.Initialize(data.title, data.iconSpriteOn, data.iconSpriteOff);
-                itemPrefab.equipmentData = data;
+                itemPrefab.Initialize(data);
                 items.Add(itemPrefab);
 
                 itemPrefab.DestroyItem += OnItemDestroyed;
-                Debug.Log("Added " + itemPrefab.name);
             }
 
             AddBarrierItems(2);

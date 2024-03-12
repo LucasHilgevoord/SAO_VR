@@ -85,7 +85,7 @@ namespace PlayerInterface
 
             if (items.Count == 0)
             {
-                GameObject o =Instantiate(emptyItem, content);
+                GameObject o = Instantiate(emptyItem, content);
                 o.transform.SetSiblingIndex(2);
             }
         }

@@ -9,4 +9,9 @@ public class EquipmentData : DescriptionData
     [Header("Interface")]
     public Sprite iconSpriteOn;
     public Sprite iconSpriteOff; // TODO: Make custom GUI to show sprite
+
+    /// <summary>
+    /// Removable from inventory
+    /// </summary>
+    public bool removable = true;
 }
