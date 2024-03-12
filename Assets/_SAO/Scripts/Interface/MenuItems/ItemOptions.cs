@@ -30,8 +30,6 @@ public class ItemOptions : MonoBehaviour
     /// </summary>
     public void OpenOptions()
     {
-        Debug.Log("Open Options " + gameObject.name);
-
         // Check if it is equiped, if not, then reset the window
         if (!optionButtons[0].isSelected)
         {

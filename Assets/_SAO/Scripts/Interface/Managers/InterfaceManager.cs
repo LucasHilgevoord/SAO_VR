@@ -40,12 +40,12 @@ namespace PlayerInterface
         private IEnumerator UpdateOpenMenu(MenuItem newItem, bool isSelected)
         {
             _allowInteraction = false;
-            Debug.Log("Pressed item: " + newItem.name + " - isSelected: " + isSelected);
+            //Debug.Log("Pressed item: " + newItem.name + " - isSelected: " + isSelected);
 
             // Check if the item is part of a submenu of one of the already selected menuItems, if not close all so we can open the new one
             for (int i = 0; i < openItemList.Count; i++)
             {
-                Debug.Log("New tree check: Checking Item: " + i + " of " + (openItemList.Count - 1) + " | " + openItemList[i].gameObject.name);
+                //Debug.Log("New tree check: Checking Item: " + i + " of " + (openItemList.Count - 1) + " | " + openItemList[i].gameObject.name);
 
                 // If it is part of a menu, then the menus after that should be closed and the new menu should be opened
                 if (openItemList[i].subMenu == null) { continue; }
@@ -54,7 +54,7 @@ namespace PlayerInterface
                     // The item is part of the same submenu of the previous item
                     for (int j = openItemList.Count - 1; j > i; j--)
                     {
-                        Debug.Log("New Tree: Closing Item: " + j + " of " + (openItemList.Count - 1) + " | " + openItemList[j].gameObject.name);
+                        //Debug.Log("New Tree: Closing Item: " + j + " of " + (openItemList.Count - 1) + " | " + openItemList[j].gameObject.name);
                         yield return StartCoroutine(openItemList[j].Deselect());
                         openItemList.RemoveAt(j);
 
@@ -68,11 +68,11 @@ namespace PlayerInterface
             // Check if we pressed a category button, if there is no category open yet skip it
             if (openItemList.Count > 0 && categorieMenu.items.Contains(newItem))
             {
-                Debug.Log("Close current category (" + openItemList[0].gameObject.name + ") and open new category (" + newItem.gameObject.name + ")");
+                //Debug.Log("Close current category (" + openItemList[0].gameObject.name + ") and open new category (" + newItem.gameObject.name + ")");
                 // If it is not part of a menu then it is part of the categorie menu and the categorie menu should be closed and the new menu should be opened
                 for (int i = openItemList.Count - 1; i >= 0; i--)
                 {
-                    Debug.Log("Closing Item to open new category: " + openItemList[i].gameObject.name);
+                    //Debug.Log("Closing Item to open new category: " + openItemList[i].gameObject.name);
                     if (openItemList[i] == null) { continue; }
                     yield return StartCoroutine(openItemList[i].Deselect());
                     openItemList.RemoveAt(i);
