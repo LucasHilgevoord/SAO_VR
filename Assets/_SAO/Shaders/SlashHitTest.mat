@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -23,6 +23,8 @@ Material:
   m_Name: SlashHitTest
   m_Shader: {fileID: -6465566751694194690, guid: 46ee82c24a59ee64bb27f058584dc51d,
     type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -31,6 +33,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -62,6 +65,18 @@ Material:
         m_Texture: {fileID: 2800000, guid: d491734441f6dae47a996975e531aefd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - BrushSize: 100
@@ -70,6 +85,8 @@ Material:
     - Vector1_7C2EADC4: 0.06
     - Vector1_B3863282: 0
     - Vector1_C6DBFF2E: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
     m_Colors:
     - Color_323B358: {r: 0.97647053, g: 0.9411765, b: 0.92941177, a: 1}
     - Color_688C7B94: {r: 1, g: 1, b: 1, a: 1}

@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/_SAO/Scenes/Preboot.unity
     guid: 61962177ab94d1d4ba2cf11ad34aeb39
@@ -21,11 +18,11 @@ EditorBuildSettings:
     path: Assets/_SAO/Scenes/Interface.unity
     guid: 44ed56a862071ea4f8424b0b4ba923ff
   m_configObjects:
-    Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: d52efc68b65e89e44be2084bc5c42112,
+    Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 0ef3d045db7f1a549aae64b01fdc9328,
       type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: eb7704d010dbd43458ecaff01b3b03d3,
       type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 4f5af0126d1cfc24e9da159eb8c677de,
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 440793019d86263438c6318ee0b17e1f,
       type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: f959161071011d248b0b09b1cf5608fb,
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 0b8317610acf3bc47b17b0b8eab50eab,
       type: 2}
