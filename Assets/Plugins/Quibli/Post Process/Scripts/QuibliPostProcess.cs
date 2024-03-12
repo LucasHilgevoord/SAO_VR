@@ -1,9 +1,9 @@
+// QuibliPostProcess.cs(91,28): warning CS0618: 'ScriptableRenderer.cameraColorTargetHandle' is obsolete:
+// 'This rendering path is for compatibility mode only (when Render Graph is disabled). Use Render Graph API instead.'
+#pragma warning disable 0618
+
 using System;
 using System.Collections.Generic;
-
-// TODO: Remove for URP 13.
-// https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@13.1/manual/upgrade-guide-2022-1.html
-#pragma warning disable CS0618
 
 namespace UnityEngine.Rendering.Universal.PostProcessing {
 /// <summary>
@@ -49,11 +49,13 @@ public class QuibliPostProcess : ScriptableRendererFeature {
     private CompoundPass _beforePostProcess;
     private CompoundPass _afterPostProcess;
 
+#if !UNITY_2021_2_OR_NEWER
     /// <summary>
     /// A handle to the "_AfterPostProcessTexture" used as the target for the builtin post
     /// processing pass in the last camera in the camera stack.
     /// </summary>
     private RenderTargetHandle _afterPostProcessColor;
+#endif
 
     /// <summary>
     /// Injects the custom post-processing render passes.
@@ -123,8 +125,10 @@ public class QuibliPostProcess : ScriptableRendererFeature {
     /// Initializes the custom post-processing render passes.
     /// </summary>
     public override void Create() {
+#if !UNITY_2021_2_OR_NEWER
         // This is copied from the forward renderer.
         _afterPostProcessColor.Init("_AfterPostProcessTexture");
+#endif
         // Create the three render passes and send the custom post-processing renderer classes to each.
         Dictionary<string, CompoundRenderer> shared = new Dictionary<string, CompoundRenderer>();
         _afterOpaqueAndSky = new CompoundPass(InjectionPoint.AfterOpaqueAndSky,

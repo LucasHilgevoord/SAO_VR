@@ -55,7 +55,6 @@ namespace ExternalPropertyAttributes.Editor
 		static SpecialCaseDrawerAttributeExtensions()
 		{
 			_drawersByAttributeType = new Dictionary<Type, SpecialCasePropertyDrawerBase>();
-			_drawersByAttributeType[typeof(ReorderableListAttribute)] = ReorderableListPropertyDrawer.Instance;
 		}
 
 		public static SpecialCasePropertyDrawerBase GetDrawer(this SpecialCaseDrawerAttribute attr)

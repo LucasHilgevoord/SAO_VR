@@ -39,8 +39,6 @@ public class ColorGradingRenderer : CompoundRenderer {
         internal static readonly int Saturation = Shader.PropertyToID("_Saturation");
     }
 
-    public override bool visibleInSceneView => false;
-
     public override ScriptableRenderPassInput input =>
         ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Depth;
 
@@ -60,7 +58,7 @@ public class ColorGradingRenderer : CompoundRenderer {
         return shouldRenderEffect;
     }
 
-    public override void Render(CommandBuffer cmd, RenderTargetIdentifier source, RenderTargetIdentifier destination,
+    public override void Render(CommandBuffer cmd, RTHandle source, RTHandle destination,
                                 ref RenderingData renderingData, InjectionPoint injectionPoint) {
         RenderTextureDescriptor descriptor = GetTempRTDescriptor(renderingData);
 

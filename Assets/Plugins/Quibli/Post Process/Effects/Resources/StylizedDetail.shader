@@ -24,8 +24,6 @@
     #define FarStart        _CoCParams.x
     #define FarEnd          _CoCParams.y
 
-    #pragma vertex FullScreenTrianglePostProcessVertexProgram
-
 #define BLUR_KERNEL 1
 #if BLUR_KERNEL == 0
     // Offsets & coeffs for optimized separable bilinear 3-tap gaussian (5-tap equivalent)
@@ -144,6 +142,7 @@
             Name "Stylized Details"
 
             HLSLPROGRAM
+            #pragma vertex FullScreenTrianglePostProcessVertexProgram
             #pragma fragment CompositeFragmentProgram
             ENDHLSL
         }
@@ -153,6 +152,7 @@
             Name "Gaussian Blur Horizontal"
 
             HLSLPROGRAM
+            #pragma vertex FullScreenTrianglePostProcessVertexProgram
             #pragma fragment FragBlurH
             ENDHLSL
         }
@@ -162,6 +162,7 @@
             Name "Gaussian Blur Vertical"
 
             HLSLPROGRAM
+            #pragma vertex FullScreenTrianglePostProcessVertexProgram
             #pragma fragment FragBlurV
             ENDHLSL
         }

@@ -51,8 +51,7 @@
             float _NoiseAmount, _NoiseScale;
             float2 _NoiseSpeed;
 
-            sampler2D _CameraDepthTexture;
-            float4 _CameraDepthTexture_ST;
+            UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
 
             struct appdata
             {

@@ -49,19 +49,14 @@ Texture2D:
     path: 
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NatureScene_Pole 1
   m_Shader: {fileID: 4800000, guid: 2a230514c860643f69b6a4d1871d3825, type: 3}
-  m_ValidKeywords:
-  - DR_OUTLINE_ON
-  - _ALPHATEST_ON
-  - _DETAILMAPBLENDINGMODE_ADD
-  - _TEXTUREBLENDINGMODE_MULTIPLY
-  m_InvalidKeywords: []
+  m_ShaderKeywords: DR_OUTLINE_ON _ALPHATEST_ON _DETAILMAPBLENDINGMODE_ADD _TEXTUREBLENDINGMODE_MULTIPLY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -194,7 +189,6 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineDepthOffset: 0
     - _OutlineEnabled: 1
-    - _OutlineScale: 1
     - _OutlineWidth: 0.58
     - _OverrideBakedGi: 0
     - _OverrideLightAttenuation: 0

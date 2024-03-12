@@ -1,8 +1,16 @@
+// CompoundPass.cs(276,13): warning CS0618:
+// 'ScriptableRenderPass.Blit(CommandBuffer, RTHandle, RTHandle, Material, int)' is obsolete:
+// 'This rendering path is for compatibility mode only (when Render Graph is disabled). Use Render Graph API instead.'
+#pragma warning disable 618
+
+// CompoundPass.cs(197,26): warning CS0672: Member 'CompoundPass.Execute(ScriptableRenderContext, ref RenderingData)'
+// overrides obsolete member 'ScriptableRenderPass.Execute(ScriptableRenderContext, ref RenderingData)'.
+// Add the Obsolete attribute to 'CompoundPass.Execute(ScriptableRenderContext, ref RenderingData)'.
+#pragma warning disable 672
+
 using System.Collections.Generic;
 
-// TODO: Remove for URP 13.
-// https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@13.1/manual/upgrade-guide-2022-1.html
-#pragma warning disable CS0618
+// ReSharper disable InconsistentNaming
 
 namespace UnityEngine.Rendering.Universal.PostProcessing {
 /// <summary>
@@ -17,27 +25,27 @@ public class CompoundPass : ScriptableRenderPass {
     /// <summary>
     /// The pass name which will be displayed on the command buffer in the frame debugger.
     /// </summary>
-    private string m_PassName;
+    private readonly string m_PassName;
 
     /// <summary>
     /// List of all post process renderer instances.
     /// </summary>
-    private List<CompoundRenderer> m_PostProcessRenderers;
+    private readonly List<CompoundRenderer> m_PostProcessRenderers;
 
     /// <summary>
     /// List of all post process renderer instances that are active for the current camera.
     /// </summary>
-    private List<int> m_ActivePostProcessRenderers;
+    private readonly List<int> m_ActivePostProcessRenderers;
 
     /// <summary>
     /// Array of 2 intermediate render targets used to hold intermediate results.
     /// </summary>
-    private RenderTargetHandle[] m_Intermediate;
+    private readonly RTHandle[] m_Intermediate;
 
     /// <summary>
-    /// Indentifies whether the intermediate render targets are allocated or not.
+    /// Identifies whether the intermediate render targets are allocated or not.
     /// </summary>
-    private bool[] m_IntermediateAllocated;
+    private readonly bool[] m_IntermediateAllocated;
 
     /// <summary>
     /// The texture descriptor for the intermediate render targets.
@@ -47,17 +55,17 @@ public class CompoundPass : ScriptableRenderPass {
     /// <summary>
     /// The source of the color data for the render pass
     /// </summary>
-    private RenderTargetIdentifier m_Source;
+    private RTHandle m_Source;
 
     /// <summary>
     /// The destination of the color data for the render pass
     /// </summary>
-    private RenderTargetIdentifier m_Destination;
+    private RTHandle m_Destination;
 
     /// <summary>
     /// A list of profiling samplers, one for each post process renderer
     /// </summary>
-    private List<ProfilingSampler> m_ProfilingSamplers;
+    private readonly List<ProfilingSampler> m_ProfilingSamplers;
 
     /// <summary>
     /// Gets whether this render pass has any post process renderers to execute
@@ -104,9 +112,9 @@ public class CompoundPass : ScriptableRenderPass {
         }
 
         // Initialize the IDs and allocation state of the intermediate render targets
-        m_Intermediate = new RenderTargetHandle[2];
-        m_Intermediate[0].Init("_IntermediateRT0");
-        m_Intermediate[1].Init("_IntermediateRT1");
+        m_Intermediate = new RTHandle[2];
+        m_Intermediate[0] = RTHandles.Alloc("_IntermediateRT0", name: "_IntermediateRT0");
+        m_Intermediate[1] = RTHandles.Alloc("_IntermediateRT1", name: "_IntermediateRT1");
         m_IntermediateAllocated = new bool[2];
         m_IntermediateAllocated[0] = false;
         m_IntermediateAllocated[1] = false;
@@ -118,13 +126,13 @@ public class CompoundPass : ScriptableRenderPass {
     /// <param name="cmd">The command buffer to use for allocation</param>
     /// <param name="index">The intermediate RT index</param>
     /// <returns></returns>
-    private RenderTargetIdentifier GetIntermediate(CommandBuffer cmd, int index) {
+    private RTHandle GetIntermediate(CommandBuffer cmd, int index) {
         if (!m_IntermediateAllocated[index]) {
-            cmd.GetTemporaryRT(m_Intermediate[index].id, _intermediateDescriptor);
+            cmd.GetTemporaryRT(Shader.PropertyToID(m_Intermediate[index].name), _intermediateDescriptor);
             m_IntermediateAllocated[index] = true;
         }
 
-        return m_Intermediate[index].Identifier();
+        return m_Intermediate[index];
     }
 
     /// <summary>
@@ -134,7 +142,7 @@ public class CompoundPass : ScriptableRenderPass {
     private void CleanupIntermediate(CommandBuffer cmd) {
         for (int index = 0; index < 2; ++index) {
             if (m_IntermediateAllocated[index]) {
-                cmd.ReleaseTemporaryRT(m_Intermediate[index].id);
+                cmd.ReleaseTemporaryRT(Shader.PropertyToID(m_Intermediate[index].name));
                 m_IntermediateAllocated[index] = false;
             }
         }
@@ -145,9 +153,9 @@ public class CompoundPass : ScriptableRenderPass {
     /// </summary>
     /// <param name="source">Source render target</param>
     /// <param name="destination">Destination render target</param>
-    public void Setup(RenderTargetIdentifier source, RenderTargetIdentifier destination) {
-        this.m_Source = source;
-        this.m_Destination = destination;
+    public void Setup(RTHandle source, RTHandle destination) {
+        m_Source = source;
+        m_Destination = destination;
     }
 
     /// <summary>
@@ -168,7 +176,7 @@ public class CompoundPass : ScriptableRenderPass {
         for (int index = 0; index < m_PostProcessRenderers.Count; index++) {
             var ppRenderer = m_PostProcessRenderers[index];
             // Skips current renderer if "visibleInSceneView" = false and the current camera is a scene view camera.
-            if (isSceneView && !ppRenderer.visibleInSceneView) continue;
+            if ((isSceneView && !ppRenderer.visibleInSceneView) || renderingData.cameraData.isPreviewCamera) continue;
             // Setup the camera for the renderer and if it will render anything, add to active renderers and get
             // its required inputs.
             if (ppRenderer.Setup(in renderingData, _injectionPoint)) {
@@ -215,11 +223,18 @@ public class CompoundPass : ScriptableRenderPass {
             var rendererIndex = m_ActivePostProcessRenderers[index];
             var renderer = m_PostProcessRenderers[rendererIndex];
 
-            RenderTargetIdentifier source, destination;
+            RTHandle source, destination;
             if (index == 0) {
                 // If this is the first renderers then the source will be the external source (not intermediate).
                 source = m_Source;
                 if (m_ActivePostProcessRenderers.Count == 1) {
+
+/*
+#if UNITY_2023_1_OR_NEWER
+                    destination = m_Destination;
+#else
+*/
+
                     // There is only one renderer, check if the source is the same as the destination
                     if (m_Source == m_Destination) {
                         // Since we can't bind the same RT as a texture and a render target at the same time,
@@ -231,6 +246,9 @@ public class CompoundPass : ScriptableRenderPass {
                         // Otherwise, we can directly blit from source to destination.
                         destination = m_Destination;
                     }
+/*
+#endif
+*/
                 } else {
                     // If there is more than one renderer, we will need to the intermediate RT anyway.
                     destination = GetIntermediate(cmd, intermediateIndex);
@@ -256,7 +274,17 @@ public class CompoundPass : ScriptableRenderPass {
         }
 
         // If blit back is needed, blit from the intermediate RT to the destination (see above for explanation)
-        if (requireBlitBack) Blit(cmd, m_Intermediate[0].Identifier(), m_Destination);
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+        if (requireBlitBack) {
+#if UNITY_2022_3_OR_NEWER
+            if (m_Intermediate[0].rt == null) {
+                RenderingUtils.ReAllocateIfNeeded(ref m_Intermediate[0], _intermediateDescriptor,
+                                                  name: "_IntermediateRT0");
+            }
+#endif
+
+            Blit(cmd, m_Intermediate[0], m_Destination);
+        }
 
         // Release allocated Intermediate RTs.
         CleanupIntermediate(cmd);

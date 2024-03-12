@@ -28,11 +28,6 @@ namespace ExternalPropertyAttributes.Editor
 				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
 		}
 
-		private void OnDisable()
-		{
-			ReorderableListPropertyDrawer.Instance.ClearCache();
-		}
-
 		public override void OnInspectorGUI()
 		{
 			GetSerializedProperties(ref _serializedProperties);

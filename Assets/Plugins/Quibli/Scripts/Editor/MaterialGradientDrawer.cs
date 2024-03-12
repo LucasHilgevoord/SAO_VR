@@ -148,8 +148,14 @@ public class MaterialGradientDrawer : MaterialPropertyDrawer {
     }
 
     private Texture2D LoadTexture(string path, string name) {
-        return AssetDatabase.LoadAllAssetsAtPath(path)
-            .FirstOrDefault(asset => asset.name.StartsWith(name)) as Texture2D;
+        var assets = AssetDatabase.LoadAllAssetsAtPath(path);
+        if (assets == null) {
+            Debug.Log($"<b>[Quibli]</b> Failed to load assets at path \"{path}\".");
+            return null;
+        }
+
+        var first = assets.FirstOrDefault(asset => asset.name.StartsWith(name)) as Texture2D;
+        return first;
     }
 
     private void BakeGradient(Gradient gradient, Texture2D texture) {

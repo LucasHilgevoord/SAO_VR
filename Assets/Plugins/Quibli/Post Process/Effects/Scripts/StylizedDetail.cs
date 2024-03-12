@@ -40,8 +40,6 @@ public class StylizedDetailRenderer : CompoundRenderer {
         public static readonly int CoCParams = Shader.PropertyToID("_CoCParams");
     }
 
-    public override bool visibleInSceneView => false;
-
     public override ScriptableRenderPassInput input =>
         ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Depth;
 
@@ -61,7 +59,7 @@ public class StylizedDetailRenderer : CompoundRenderer {
         return shouldRenderEffect;
     }
 
-    public override void Render(CommandBuffer cmd, RenderTargetIdentifier source, RenderTargetIdentifier destination,
+    public override void Render(CommandBuffer cmd, RTHandle source, RTHandle destination,
                                 ref RenderingData renderingData, InjectionPoint injectionPoint) {
         const int downSample = 1;
 

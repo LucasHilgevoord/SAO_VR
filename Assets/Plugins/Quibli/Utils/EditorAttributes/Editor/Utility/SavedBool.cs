@@ -21,14 +21,14 @@ namespace ExternalPropertyAttributes.Editor
 				}
 
 				_value = value;
-				EditorPrefs.SetBool(_name, value);
+				EditorPrefs.SetBool("Ext_" + _name, value);
 			}
 		}
 
 		public SavedBool(string name, bool value)
 		{
 			_name = name;
-			_value = EditorPrefs.GetBool(name, value);
+			_value = EditorPrefs.GetBool("Ext_" + name, value);
 		}
 	}
 }

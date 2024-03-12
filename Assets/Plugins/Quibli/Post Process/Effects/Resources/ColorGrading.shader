@@ -18,8 +18,6 @@
     float _Vibrance;
     float _Saturation;
 
-    #pragma vertex FullScreenTrianglePostProcessVertexProgram
-
     // 4-point bezier: P = (1−t)^3*P1 + 3(1−t)^2*tP2 + 3(1−t)*t^2*P3 + t^3*P4
     // Interactive demo: https://javascript.info/bezier-curve
     inline float Bezier4(float t, float2 p1, float2 p2, float2 p3, float2 p4) {
@@ -147,6 +145,7 @@
             Name "Color Grading"
 
             HLSLPROGRAM
+            #pragma vertex FullScreenTrianglePostProcessVertexProgram
             #pragma fragment CompositeFragmentProgram
             ENDHLSL
         }

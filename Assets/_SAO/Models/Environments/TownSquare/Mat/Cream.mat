@@ -22,9 +22,12 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Cream
   m_Shader: {fileID: 4800000, guid: 2a230514c860643f69b6a4d1871d3825, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - DR_OUTLINE_ON
   - DR_RIM_ON
+  - _BASEMAP_PREMULTIPLY
   - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _TEXTUREBLENDINGMODE_MULTIPLY
   m_InvalidKeywords: []
@@ -35,6 +38,7 @@ Material:
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -109,6 +113,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _BaseMapPremultiply: 1
     - _Blend: 0
     - _BumpScale: 1
     - _CameraDistanceImpact: 0.5
@@ -189,7 +194,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: z__GradientRampTex{"mode":0,"colorKeys":[{"color":{"r":0.800000011920929,"g":0.6666666865348816,"b":0.5215686559677124,"a":1.0},"time":0.0},{"color":{"r":0.800000011920929,"g":0.6666666865348816,"b":0.5215686559677124,"a":1.0},"time":0.9970549941062927}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
+  m_Name: z__GradientRampTex{"mode":0,"colorKeys":[{"color":{"r":1.0,"g":0.8333333730697632,"b":0.6519608497619629,"a":1.0},"time":0.0},{"color":{"r":0.800000011920929,"g":0.6666666865348816,"b":0.5215686559677124,"a":1.0},"time":0.9970549941062927}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -205,7 +210,8 @@ Texture2D:
   m_MipCount: 1
   m_IsReadable: 1
   m_IsPreProcessed: 0
-  m_IgnoreMasterTextureLimit: 0
+  m_IgnoreMipmapLimit: 0
+  m_MipmapLimitGroupName: 
   m_StreamingMipmaps: 0
   m_StreamingMipmapsPriority: 0
   m_VTOnly: 0
@@ -224,7 +230,7 @@ Texture2D:
   m_ColorSpace: 1
   m_PlatformBlob: 
   image data: 1024
-  _typelessdata: ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85ffccaa85
+  _typelessdata: ffffd5a6ffffd4a6ffffd4a6fffed4a6fffed4a6fffed4a6fffed3a5fffed3a5fffdd3a5fffdd3a5fffdd3a5fffdd3a5fffdd2a5fffcd2a5fffcd2a4fffcd2a4fffcd2a4fffcd2a4fffbd1a4fffbd1a4fffbd1a4fffbd1a4fffbd1a3fffad1a3fffad0a3fffad0a3fffad0a3fffad0a3fff9d0a3fff9d0a2fff9cfa2fff9cfa2fff9cfa2fff8cfa2fff8cfa2fff8cfa2fff8cea2fff8cea1fff7cea1fff7cea1fff7cea1fff7cea1fff7cda1fff6cda1fff6cda0fff6cda0fff6cda0fff6cda0fff5cca0fff5cca0fff5cca0fff5cca0fff5cc9ffff4cc9ffff4cb9ffff4cb9ffff4cb9ffff4cb9ffff3cb9ffff3cb9ffff3ca9efff3ca9efff3ca9efff2ca9efff2ca9efff2ca9efff2c99efff2c99dfff1c99dfff1c99dfff1c99dfff1c99dfff1c89dfff0c89dfff0c89dfff0c89cfff0c89cfff0c89cffefc79cffefc79cffefc79cffefc79cffefc79cffeec79bffeec69bffeec69bffeec69bffeec69bffedc69bffedc69bffedc59affedc59affedc59affecc59affecc59affecc59affecc49affecc49affebc499ffebc499ffebc499ffebc499ffebc399ffeac399ffeac399ffeac399ffeac398ffeac398ffe9c298ffe9c298ffe9c298ffe9c298ffe9c298ffe8c297ffe8c197ffe8c197ffe8c197ffe8c197ffe7c197ffe7c197ffe7c097ffe7c096ffe7c096ffe6c096ffe6c096ffe6c096ffe6bf96ffe6bf96ffe5bf96ffe5bf95ffe5bf95ffe5bf95ffe5be95ffe4be95ffe4be95ffe4be95ffe4be94ffe4be94ffe3bd94ffe3bd94ffe3bd94ffe3bd94ffe3bd94ffe2bd94ffe2bc93ffe2bc93ffe2bc93ffe2bc93ffe1bc93ffe1bc93ffe1bb93ffe1bb93ffe1bb92ffe0bb92ffe0bb92ffe0bb92ffe0ba92ffe0ba92ffdfba92ffdfba91ffdfba91ffdfba91ffdfb991ffdeb991ffdeb991ffdeb991ffdeb991ffdeb990ffddb890ffddb890ffddb890ffddb890ffdcb890ffdcb890ffdcb78fffdcb78fffdcb78fffdbb78fffdbb78fffdbb78fffdbb68fffdbb68fffdab68effdab68effdab68effdab68effdab58effd9b58effd9b58effd9b58effd9b58dffd9b58dffd8b48dffd8b48dffd8b48dffd8b48dffd8b48dffd7b48cffd7b38cffd7b38cffd7b38cffd7b38cffd6b38cffd6b38cffd6b28cffd6b28bffd6b28bffd5b28bffd5b28bffd5b28bffd5b18bffd5b18bffd4b18bffd4b18affd4b18affd4b18affd4b08affd3b08affd3b08affd3b08affd3b089ffd3b089ffd2af89ffd2af89ffd2af89ffd2af89ffd2af89ffd1af89ffd1ae88ffd1ae88ffd1ae88ffd1ae88ffd0ae88ffd0ae88ffd0ad88ffd0ad88ffd0ad87ffcfad87ffcfad87ffcfad87ffcfac87ffcfac87ffceac87ffceac86ffceac86ffceac86ffceab86ffcdab86ffcdab86ffcdab86ffcdab86ffcdab85ffccaa85ffccaa85ffccaa85ffccaa85
   m_StreamData:
     serializedVersion: 2
     offset: 0

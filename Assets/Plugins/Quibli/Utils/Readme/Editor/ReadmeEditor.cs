@@ -128,17 +128,9 @@ public class ReadmeEditor : Editor {
             DrawUILine(Color.gray, 1, 20);
             EditorGUILayout.LabelField("Package Manager", EditorStyles.label);
 
-            GUILayout.BeginHorizontal();
-
             if (GUILayout.Button("Clear cache")) {
                 ClearPackageCache();
             }
-
-            if (GUILayout.Button($"Select {AssetName}")) {
-                OpenPackageManager();
-            }
-
-            GUILayout.EndHorizontal();
 
             if (GUILayout.Button($"Reimport {AssetName} files")) {
                 ReimportAsset();

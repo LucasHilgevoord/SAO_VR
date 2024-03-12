@@ -16,37 +16,38 @@ inline half NdotLTransitionPrimary(half3 normal, half3 lightDir) {
     return NdotLTransition(normal, lightDir, _SelfShadingSize);
 }
 
-half3 LightingPhysicallyBased_DSTRM(Light light, half3 normalWS, half3 viewDirectionWS, half3 positionWS) {
+half3 LightingPhysicallyBased_DSTRM(Light light, InputData inputData, half4 albedo, half4 detail) {
     // If all light in the scene is baked, we use custom light direction for the cel shading.
     light.direction = lerp(light.direction, _LightmapDirection, _OverrideLightmapDir);
 
-    const half NdotLTPrimary = NdotLTransitionPrimary(normalWS, light.direction);
+    const half NdotLTPrimary = NdotLTransitionPrimary(inputData.normalWS, light.direction);
     const half2 gradient_uv = half2(NdotLTPrimary, 0.5);
     half4 c = SAMPLE_TEXTURE2D(_GradientRamp, sampler_GradientRamp, gradient_uv);
 
 #if defined(DR_GRADIENT_ON)
     const half angleRadians = _GradientAngle / 180.0 * PI;
-    const half posGradRotated = (positionWS.x - _GradientCenterX) * sin(angleRadians) +
-        (positionWS.y - _GradientCenterY) * cos(angleRadians);
+    const half posGradRotated = (inputData.positionWS.x - _GradientCenterX) * sin(angleRadians) +
+        (inputData.positionWS.y - _GradientCenterY) * cos(angleRadians);
     const half gradientTop = _GradientCenterY + _GradientSize * 0.5;
     const half gradientFactor = saturate((gradientTop - posGradRotated) / _GradientSize);
     c = lerp(c, _ColorGradient, gradientFactor);
 #endif  // DR_GRADIENT_ON
 
-    const half NdotL = dot(normalWS, light.direction);
+    const half NdotL = dot(inputData.normalWS, light.direction);
 
 #if defined(DR_RIM_ON)
-    const half rim = 1.0 - dot(viewDirectionWS, normalWS);
+    const half rim = 1.0 - dot(inputData.viewDirectionWS, inputData.normalWS);
     const half rimSpread = 1.0 - _FlatRimSize - NdotL * _FlatRimLightAlign;
     const half rimEdgeSmooth = _FlatRimEdgeSmoothness;
     const half rimTransition = smoothstep(rimSpread - rimEdgeSmooth * 0.5, rimSpread + rimEdgeSmooth * 0.5, rim);
     c = lerp(c, _FlatRimColor, rimTransition);
+    // 0d344651-d8d3-46d2-b91c-031a0a12d4e8
 #endif  // DR_RIM_ON
 
 #if defined(DR_SPECULAR_ON)
     // Halfway between lighting direction and view vector.
-    const half3 halfVector = normalize(light.direction + viewDirectionWS);
-    const half NdotH = dot(normalWS, halfVector) * 0.5 + 0.5;
+    const half3 halfVector = normalize(light.direction + inputData.viewDirectionWS);
+    const half NdotH = dot(inputData.normalWS, halfVector) * 0.5 + 0.5;
     const half specular = saturate(pow(abs(NdotH), 100.0 * (1.0 - _FlatSpecularSize) * (1.0 - _FlatSpecularSize)));
     const half specularTransition = smoothstep(0.5 - _FlatSpecularEdgeSmoothness * 0.1,
                                                0.5 + _FlatSpecularEdgeSmoothness * 0.1, specular);
@@ -59,7 +60,7 @@ half3 LightingPhysicallyBased_DSTRM(Light light, half3 normalWS, half3 viewDirec
     light.distanceAttenuation *= occludedAttenuation;
 #endif
 
-    half shadowAttenuation = light.shadowAttenuation * light.distanceAttenuation;
+    float shadowAttenuation = light.shadowAttenuation * light.distanceAttenuation;
 #if defined(DR_LIGHT_ATTENUATION)
     shadowAttenuation = RangeRemap(_LightAttenuation.x, _LightAttenuation.y, shadowAttenuation);
     const half3 unityShaded = c.rgb * shadowAttenuation;
@@ -71,7 +72,6 @@ half3 LightingPhysicallyBased_DSTRM(Light light, half3 normalWS, half3 viewDirec
 #endif
 
     c.rgb *= light.color;
-
     return c.rgb;
 }
 
@@ -82,7 +82,7 @@ void StylizeLight(inout Light light) {
     const half shadowAttenuation = saturate(light.shadowAttenuation * 10.0);
     light.shadowAttenuation = shadowAttenuation;
 
-    const half distanceAttenuation = smoothstep(0, 0.001, light.distanceAttenuation);
+    const float distanceAttenuation = smoothstep(0, 0.001, light.distanceAttenuation);
     light.distanceAttenuation = distanceAttenuation;
 #endif
 
@@ -90,7 +90,7 @@ void StylizeLight(inout Light light) {
     light.color = lightColor;
 }
 
-half4 UniversalFragment_DSTRM(InputData inputData, half3 albedo, half3 emission, half alpha) {
+half4 UniversalFragment_DSTRM(InputData inputData, SurfaceData surfaceData, float2 uv) {
     // To ensure backward compatibility we have to avoid using shadowMask input, as it is not present in older shaders
 #if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)
     const half4 shadowMask = inputData.shadowMask;
@@ -123,11 +123,18 @@ half4 UniversalFragment_DSTRM(InputData inputData, half3 albedo, half3 emission,
     inputData.bakedGI = SAMPLE_TEXTURE2D(_BakedGIRamp, sampler_BakedGIRamp, rampUV);
 #endif
 
+    const half4 albedo = half4(surfaceData.albedo, surfaceData.alpha);
+    const half4 detail = SAMPLE_TEXTURE2D(_DetailMap, sampler_DetailMap, uv);
+
+    half3 brdf = _LightContribution;
+#if defined(_BASEMAP_PREMULTIPLY)
+    brdf *= albedo.rgb;
+#endif
+
     BRDFData brdfData;
-    InitializeBRDFData(albedo, 1.0 - 1.0 / kDieletricSpec.a, 0, 0, alpha, brdfData);
+    InitializeBRDFData(brdf, 1.0 - 1.0 / kDielectricSpec.a, 0, 0, surfaceData.alpha, brdfData);
     half3 color = GlobalIllumination(brdfData, inputData.bakedGI, 1.0, inputData.normalWS, inputData.viewDirectionWS);
-    color += LightingPhysicallyBased_DSTRM(mainLight, inputData.normalWS, inputData.viewDirectionWS,
-                                           inputData.positionWS);
+    color += LightingPhysicallyBased_DSTRM(mainLight, inputData, albedo, detail);
 
 #ifdef _ADDITIONAL_LIGHTS
     const uint pixelLightCount = GetAdditionalLightsCount();
@@ -140,7 +147,7 @@ half4 UniversalFragment_DSTRM(InputData inputData, half3 albedo, half3 emission,
 #endif
 
         StylizeLight(light);
-        color += LightingPhysicallyBased_DSTRM(light, inputData.normalWS, inputData.viewDirectionWS, inputData.positionWS);
+        color += LightingPhysicallyBased_DSTRM(light, inputData, albedo, detail);
     }
 #endif
 
@@ -148,8 +155,42 @@ half4 UniversalFragment_DSTRM(InputData inputData, half3 albedo, half3 emission,
     color += inputData.vertexLighting * brdfData.diffuse;
 #endif
 
-    color += emission;
-    return half4(color, alpha);
+    // Base map.
+    {
+        // Workaround to render decals without requiring the _BaseMap texture.
+#ifdef _DBUFFER
+        _TextureImpact = 1.0;
+#endif
+
+#if defined(_TEXTUREBLENDINGMODE_ADD)
+        color += lerp(half3(0.0f, 0.0f, 0.0f), albedo.rgb, _TextureImpact);
+#else  // _TEXTUREBLENDINGMODE_MULTIPLY
+        color *= lerp(half3(1.0f, 1.0f, 1.0f), albedo.rgb, _TextureImpact);
+#endif
+    }
+
+    // Detail map.
+    {
+        #if defined(_DETAILMAPBLENDINGMODE_ADD)
+        color += lerp(0, _DetailMapColor.rgb, detail.rgb * _DetailMapImpact).rgb;
+        #endif
+        #if defined(_DETAILMAPBLENDINGMODE_MULTIPLY)
+        color *= lerp(1, _DetailMapColor.rgb, detail.rgb * _DetailMapImpact).rgb;
+        #endif
+        #if defined(_DETAILMAPBLENDINGMODE_INTERPOLATE)
+        color = lerp(color, detail.rgb, _DetailMapImpact * _DetailMapColor.rgb * detail.a).rgb;
+        #endif
+    }
+
+    // Vertex color.
+    {
+        #if defined(DR_VERTEX_COLORS_ON)
+        color *= inputData.vertexLighting;
+        #endif
+    }
+
+    color += surfaceData.emission;
+    return half4(color, surfaceData.alpha);
 }
 
 #endif // LIGHTING_DR_INCLUDED

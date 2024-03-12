@@ -4,7 +4,6 @@
     {
         [Gradient] _GradientRamp("Gradient", 2D) = "white" {}
 
-        [Space]
         _SelfShadingSize ("[]Shading Offset", Range(0, 1.0)) = 0.0
 
         [Space(10)]
@@ -40,11 +39,12 @@
         _OutlineDepthOffset("[DR_OUTLINE_ON]Depth Offset", Range(0, 1)) = 0.0
         _CameraDistanceImpact("[DR_OUTLINE_ON]Camera Distance Impact", Range(0, 1)) = 0.5
 
-        [MainTexture] _BaseMap("[FOLDOUT(Texture maps){10}]Albedo", 2D) = "white" {}
+        [MainTexture] _BaseMap("[FOLDOUT(Texture maps){11}]Albedo", 2D) = "black" {}
+    	[Toggle(_BASEMAP_PREMULTIPLY)]_BaseMapPremultiply("[_]Mix Into Shading", Int) = 0
         [KeywordEnum(Multiply, Add)]_TextureBlendingMode("[]Blending Mode", Float) = 0
         _TextureImpact("[]Texture Impact", Range(0, 1)) = 1.0
 
-        _DetailMap("Detail Map", 2D) = "white" {}
+        _DetailMap("Detail Map", 2D) = "black" {}
         _DetailMapColor("[]Detail Color", Color) = (1,1,1,1)
         [KeywordEnum(Multiply, Add, Interpolate)]_DetailMapBlendingMode("[]Blending Mode", Float) = 0
         _DetailMapImpact("[]Detail Impact", Range(0, 1)) = 0.0
@@ -119,6 +119,7 @@
             #pragma shader_feature_local DR_ENABLE_LIGHTMAP_DIR
             #pragma shader_feature_local _TEXTUREBLENDINGMODE_MULTIPLY _TEXTUREBLENDINGMODE_ADD
             #pragma shader_feature_local _UNITYSHADOW_OCCLUSION
+            #pragma shader_feature_local _BASEMAP_PREMULTIPLY
 
             // -------------------------------------
             // Material Keywords
@@ -130,39 +131,31 @@
             #pragma shader_feature_local_fragment _EMISSION
             #pragma shader_feature_local _RECEIVE_SHADOWS_OFF
 
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Version.hlsl"
 
             // -------------------------------------
             // Universal Pipeline keywords
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Version.hlsl"
-            #if VERSION_GREATER_EQUAL(11, 0)
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #else
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            #endif
             #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
             #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
             #pragma multi_compile_fragment _ _SHADOWS_SOFT
             #pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
             #pragma multi_compile _ SHADOWS_SHADOWMASK
             #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
-            #if VERSION_GREATER_EQUAL(12, 0)
             #pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
             #pragma multi_compile_fragment _ _LIGHT_LAYERS
             #pragma multi_compile_fragment _ _LIGHT_COOKIES
             #pragma multi_compile _ _CLUSTERED_RENDERING
-            #endif
+            #pragma multi_compile _ _FORWARD_PLUS
+            #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
 
             // -------------------------------------
             // Unity defined keywords
             #pragma multi_compile _ DIRLIGHTMAP_COMBINED
             #pragma multi_compile _ LIGHTMAP_ON
             #pragma multi_compile_fog
-            #if VERSION_GREATER_EQUAL(12, 0)
-            // #pragma multi_compile _ DYNAMICLIGHTMAP_ON
+            #pragma multi_compile _ DYNAMICLIGHTMAP_ON
             #pragma multi_compile_fragment _ DEBUG_DISPLAY
-            #endif
+            #pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
 
             //--------------------------------------
             // GPU Instancing
@@ -306,17 +299,73 @@
             // -------------------------------------
             // Universal Pipeline keywords
 
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Version.hlsl"
-            #if VERSION_GREATER_EQUAL(11, 0)
+            // -------------------------------------
+            // Unity defined keywords
+            #pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
+            
             // This is used during shadow map generation to differentiate between directional and punctual light shadows, as they use different formulas to apply Normal Bias
             #pragma multi_compile_vertex _ _CASTING_PUNCTUAL_LIGHT_SHADOW
-            #endif
 
             #pragma vertex ShadowPassVertex
             #pragma fragment ShadowPassFragment
 
             #include "LibraryUrp/StylizedInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/ShadowCasterPass.hlsl"
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "GBuffer"
+            Tags{"LightMode" = "UniversalGBuffer"}
+
+            ZWrite[_ZWrite]
+            ZTest LEqual
+            Cull[_Cull]
+
+            HLSLPROGRAM
+            // -------------------------------------
+            // Material Keywords
+            #pragma shader_feature_local_fragment _ALPHATEST_ON
+            // #pragma shader_feature _ALPHAPREMULTIPLY_ON
+            // #pragma shader_feature_local_fragment _ _SPECGLOSSMAP _SPECULAR_COLOR
+            // #pragma shader_feature_local_fragment _GLOSSINESS_FROM_BASE_ALPHA
+            #pragma shader_feature_local _NORMALMAP
+            #pragma shader_feature_local_fragment _EMISSION
+            #pragma shader_feature_local _RECEIVE_SHADOWS_OFF
+
+            // -------------------------------------
+            // Universal Pipeline keywords
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            //#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            //#pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            #pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
+            #pragma multi_compile_fragment _ _LIGHT_LAYERS
+
+            // -------------------------------------
+            // Unity defined keywords
+            #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+            #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile _ DYNAMICLIGHTMAP_ON
+            #pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
+            #pragma multi_compile _ SHADOWS_SHADOWMASK
+            #pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
+            #pragma multi_compile_fragment _ _RENDER_PASS_ENABLED
+
+            //--------------------------------------
+            // GPU Instancing
+            #pragma multi_compile_instancing
+            #pragma instancing_options renderinglayer
+            #pragma multi_compile _ DOTS_INSTANCING_ON
+
+            #pragma vertex LitPassVertexSimple
+            #pragma fragment LitPassFragmentSimple
+
+            #define BUMP_SCALE_NOT_SUPPORTED 1
+
+            #include "LibraryUrp/StylizedInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/SimpleLitGBufferPass.hlsl"
             ENDHLSL
         }
 
@@ -340,6 +389,10 @@
             // Material Keywords
             #pragma shader_feature_local_fragment _ALPHATEST_ON
             #pragma shader_feature_local_fragment _GLOSSINESS_FROM_BASE_ALPHA
+
+            // -------------------------------------
+            // Unity defined keywords
+            #pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
 
             //--------------------------------------
             // GPU Instancing
@@ -373,6 +426,12 @@
             #pragma shader_feature_local_fragment _ALPHATEST_ON
             // #pragma shader_feature_local_fragment _GLOSSINESS_FROM_BASE_ALPHA
 
+            // -------------------------------------
+            // Unity defined keywords
+            #pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
+            // Universal Pipeline keywords
+            #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
+
             //--------------------------------------
             // GPU Instancing
             #pragma multi_compile_instancing
@@ -401,6 +460,7 @@
 
             #pragma vertex UniversalVertexMeta
             #pragma fragment UniversalFragmentMetaSimple
+            #pragma shader_feature EDITOR_VISUALIZATION
 
             #pragma shader_feature_local_fragment _EMISSION
             // #pragma shader_feature_local_fragment _SPECGLOSSMAP
@@ -433,5 +493,7 @@
             ENDHLSL
         }
     }
+
+    Fallback "Hidden/Universal Render Pipeline/FallbackError"
     CustomEditor "Quibli.QuibliEditor"
 }
