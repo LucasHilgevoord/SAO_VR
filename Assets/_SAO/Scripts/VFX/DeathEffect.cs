@@ -5,17 +5,15 @@ using UnityEngine.InputSystem;
 public class DeathEffect : MonoBehaviour
 {
     [SerializeField] private Renderer[] objectRenderers = new Renderer[0];
-    [SerializeField] private GameObject deathTriangleVFXPrefab;
 
     private float currentColorChangeValue;
-    private float targetColorChangeValue;
     private ParticleSystem trianglePS;
     private MeshRenderer meshRenderer;
 
     private void Start()
-	{
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        trianglePS = deathTriangleVFXPrefab.GetComponent<ParticleSystem>();
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+        trianglePS = GetComponentInChildren<ParticleSystem>();
 
         var sh = trianglePS.shape;
         sh.meshRenderer = meshRenderer;
@@ -27,32 +25,34 @@ public class DeathEffect : MonoBehaviour
         {
             TriggerDeathEffect();
         }
-
-        currentColorChangeValue = Mathf.Lerp(currentColorChangeValue, targetColorChangeValue, 2f * Time.deltaTime);
-
-        foreach (Renderer renderer in objectRenderers)
-        {
-            Material[] materials = renderer.materials;
-
-            for (int i = 0; i < materials.Length; i++)
-            {
-                materials[i].SetFloat("_amount", currentColorChangeValue);
-            }
-
-            renderer.materials = materials;
-        }
-
-        if(currentColorChangeValue > 0.95f)
-		{
-            var deathTriangleVFX = Instantiate(deathTriangleVFXPrefab, transform.position, transform.rotation);
-
-            //gameObject.SetActive(false);
-            //Destroy(gameObject,2f);
-        }
     }
 
     public void TriggerDeathEffect()
-	{
-        targetColorChangeValue = 1;
+    {
+        StartCoroutine(DeathEffectCoroutine());
+    }
+
+    private IEnumerator DeathEffectCoroutine()
+    {
+        while (currentColorChangeValue < 0.95f)
+        {
+            currentColorChangeValue = Mathf.Lerp(currentColorChangeValue, 1, 2f * Time.deltaTime);
+
+            foreach (Renderer renderer in objectRenderers)
+            {
+                Material[] materials = renderer.materials;
+
+                for (int i = 0; i < materials.Length; i++)
+                {
+                    materials[i].SetFloat("_amount", currentColorChangeValue);
+                }
+                renderer.materials = materials;
+            }
+            yield return null;
+        }
+
+        if (!trianglePS.isPlaying) trianglePS.Play();
+        meshRenderer.enabled = false;
+        Destroy(gameObject, 2);
     }
 }
