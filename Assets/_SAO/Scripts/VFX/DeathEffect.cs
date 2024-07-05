@@ -19,8 +19,6 @@ public class DeathEffect : MonoBehaviour
 
         var sh = trianglePS.shape;
         sh.meshRenderer = meshRenderer;
-
-        Debug.Log(sh.meshRenderer);
     }
 
     private void Update()
@@ -48,8 +46,8 @@ public class DeathEffect : MonoBehaviour
 		{
             var deathTriangleVFX = Instantiate(deathTriangleVFXPrefab, transform.position, transform.rotation);
 
-            gameObject.SetActive(false);
-            Destroy(gameObject,2f);
+            //gameObject.SetActive(false);
+            //Destroy(gameObject,2f);
         }
     }
 
