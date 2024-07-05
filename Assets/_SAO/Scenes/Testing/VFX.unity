@@ -3199,5 +3199,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExcaliburDieEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 1984326222427446392, guid: 2ac01646ee9dc8e4caef5b07f9fff31c,
+        type: 3}
+      propertyPath: m_Name
+      value: TriangleDeathEffect
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac01646ee9dc8e4caef5b07f9fff31c, type: 3}

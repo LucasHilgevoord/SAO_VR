@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1984326222427446393}
+  - {fileID: 2230054470655093937}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: -90}
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectRenderers:
   - {fileID: 175544915558000180}
---- !u!1001 &1562252685359005822
+--- !u!1001 &1212941765994459318
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -111,12 +111,7 @@ PrefabInstance:
     - target: {fileID: 1019927489536760838, guid: 5f56d43eeb914d5499b8c9c28659c7c6,
         type: 3}
       propertyPath: m_Name
-      value: TriangleSplatter
-      objectReference: {fileID: 0}
-    - target: {fileID: 1019927489536760838, guid: 5f56d43eeb914d5499b8c9c28659c7c6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: TriangleDeathSplatter
       objectReference: {fileID: 0}
     - target: {fileID: 1019927489536760839, guid: 5f56d43eeb914d5499b8c9c28659c7c6,
         type: 3}
@@ -173,36 +168,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 28.491
       objectReference: {fileID: 0}
-    - target: {fileID: 1019927489536760841, guid: 5f56d43eeb914d5499b8c9c28659c7c6,
-        type: 3}
-      propertyPath: stopAction
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1019927489536760841, guid: 5f56d43eeb914d5499b8c9c28659c7c6,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1019927489536760841, guid: 5f56d43eeb914d5499b8c9c28659c7c6,
-        type: 3}
-      propertyPath: autoRandomSeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1019927489536760841, guid: 5f56d43eeb914d5499b8c9c28659c7c6,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1019927489536760841, guid: 5f56d43eeb914d5499b8c9c28659c7c6,
-        type: 3}
-      propertyPath: ShapeModule.m_MeshRenderer
-      value: 
-      objectReference: {fileID: 175544915558000180}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f56d43eeb914d5499b8c9c28659c7c6, type: 3}
---- !u!4 &1984326222427446393 stripped
+--- !u!4 &2230054470655093937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1019927489536760839, guid: 5f56d43eeb914d5499b8c9c28659c7c6,
     type: 3}
-  m_PrefabInstance: {fileID: 1562252685359005822}
+  m_PrefabInstance: {fileID: 1212941765994459318}
   m_PrefabAsset: {fileID: 0}
