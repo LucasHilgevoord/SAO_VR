@@ -17,6 +17,7 @@ namespace PlayerInterface
         /// List of all the opened sub-menu's
         /// </summary>
         private List<MenuItem> openItemList = new List<MenuItem>();
+        private List<MenuItem> menuItemsCollection = new List<MenuItem>();
 
         [SerializeField] private Canvas interfaceCanvas;
         [SerializeField] private CategorieMenu categorieMenu;
@@ -29,7 +30,39 @@ namespace PlayerInterface
 
         private void Awake()
         {
-            MenuItem.IsPressed += OnMenuItemPressed;
+            menuItemsCollection = GetAllMenuItems();
+            foreach (MenuItem item in menuItemsCollection)
+            {
+                item.IsPressed += OnMenuItemPressed;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (MenuItem item in menuItemsCollection)
+            {
+                item.IsPressed -= OnMenuItemPressed;
+            }
+        }
+
+        private List<MenuItem> GetAllMenuItems()
+        {
+            List<MenuItem> allItems = new List<MenuItem>();
+
+            void Traverse(List<MenuItem> items)
+            {
+                foreach (var item in items)
+                {
+                    allItems.Add(item);
+                    if (item.subMenu && item.subMenu.items != null && item.subMenu.items.Count > 0)
+                    {
+                        Traverse(item.subMenu.items);
+                    }
+                }
+            }
+
+            Traverse(categorieMenu.items);
+            return allItems;
         }
 
         private void OnMenuItemPressed(MenuItem newItem, bool isSelected)

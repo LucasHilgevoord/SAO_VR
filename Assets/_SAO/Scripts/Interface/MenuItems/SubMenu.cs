@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace PlayerInterface
 {
@@ -24,12 +23,18 @@ namespace PlayerInterface
         private void OnEnable()
         {
             // Idk why I made this a static event
-            MenuItem.IsPressed += OnMenuItemPressed;
+            foreach (MenuItem item in items)
+            {
+                item.IsPressed += OnMenuItemPressed;
+            }
         }
 
         private void OnDisable()
         {
-            MenuItem.IsPressed -= OnMenuItemPressed;
+            foreach (MenuItem item in items)
+            {
+                item.IsPressed -= OnMenuItemPressed;
+            }
         }
 
         private void Start()

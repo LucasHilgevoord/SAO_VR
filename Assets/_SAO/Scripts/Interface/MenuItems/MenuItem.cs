@@ -10,7 +10,7 @@ namespace PlayerInterface
     public class MenuItem : MonoBehaviour
     {
         [Header(" Actions when triggered")]
-        public static Action<MenuItem, bool> IsPressed;
+        public Action<MenuItem, bool> IsPressed;
         public UnityEvent OnSelectEvents;
         public UnityEvent OnDeselectEvents;
         public Action<MenuItem> DestroyItem;
