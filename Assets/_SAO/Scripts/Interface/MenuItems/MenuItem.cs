@@ -33,7 +33,14 @@ namespace PlayerInterface
         [Header(" Links")]
         /// Submenu's that will be opened when this item is selected
         public SubMenu subMenu;
-        internal bool isSelected;
+        private bool isSelected;
+        internal bool IsSelected { 
+            get { return isSelected; } 
+            set { 
+                isSelected = value; 
+                EnableArrowImage(value); 
+            }
+        }
 
         public void Start()
         {
@@ -66,14 +73,14 @@ namespace PlayerInterface
         /// </summary>
         public virtual void ToggleItem()
         {
-            isSelected = !isSelected;
-            ToggleVisuals(isSelected);
+            IsSelected = !IsSelected;
+            ToggleVisuals(IsSelected);
         }
 
         public virtual void Select()
         {
             // Make sure the item is selected
-            isSelected = true;
+            IsSelected = true;
 
             // Show the right visuals
             ToggleVisuals(isSelected);
@@ -88,12 +95,13 @@ namespace PlayerInterface
 
         public IEnumerator Deselect()
         {
+            Debug.Log("Deselect: " + gameObject.name + " - Submenu " + (subMenu != null));
             // Close the submenu's
             if (subMenu != null)
                 yield return StartCoroutine(subMenu.CloseMenu());
 
             // Make sure the item is deselected
-            isSelected = false;
+            IsSelected = false;
 
             // Show the right visuals
             ToggleVisuals(isSelected);
@@ -108,12 +116,16 @@ namespace PlayerInterface
             Debug.Log("Interact: " + gameObject.name);
 
             // Fire the event that this object has been clicked. The InterfaceManager will decide what to do with it and when.
-            IsPressed?.Invoke(this, !isSelected);
+            IsPressed?.Invoke(this, !IsSelected);
         }
 
         internal void EnableArrowImage(bool enable)
         {
-            selectArrow.gameObject.SetActive(enable);
+            // TODO: Idk if this is the right way to do this, because catergory items also execute this while not having an arrow.
+            if (selectArrow != null)
+            {
+                selectArrow.gameObject.SetActive(enable);
+            }
         }
 
         internal virtual void RemoveItem() {

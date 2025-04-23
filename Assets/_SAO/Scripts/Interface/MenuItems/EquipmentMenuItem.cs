@@ -28,7 +28,7 @@ namespace PlayerInterface
 
         public void SendDataEvent()
         {
-            EquipmentItemPressed?.Invoke(equipmentData, isSelected);
+            EquipmentItemPressed?.Invoke(equipmentData, IsSelected);
         }
 
         /// <summary>

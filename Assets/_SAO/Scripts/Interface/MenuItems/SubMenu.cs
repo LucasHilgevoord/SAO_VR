@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace PlayerInterface
 {
@@ -65,17 +66,21 @@ namespace PlayerInterface
                 HideLineArrow();
             }
 
-            // TODO: This system does not really work whenever there is no submenu existing..? and somehow only with the profile one.
-            // TODO: This stuff ugly, But it should handle that when one of the submenu's has been chosen, that it gets centered
             if (currentSelectedItem != null)
             {
-                // Wait until all their submenu's are closed.
                 prevSelectedItem = currentSelectedItem;
-                prevSelectedItem.OnDeselectEvents.AddListener(WaitUntilCenterSelectItem);
+
+                // Wait until all their submenu's are closed.
+                if (prevSelectedItem.subMenu != null)
+                {
+                    prevSelectedItem.OnDeselectEvents.AddListener(WaitUntilCenterSelectItem);
+                } else
+                {
+                    CenterSelectedItem(item);
+                }
             } else
             {
                 CenterSelectedItem(item);
-                SetSideArrow(item, isSelected);
             }
 
             currentSelectedItem = isSelected ? item : null;
@@ -87,10 +92,6 @@ namespace PlayerInterface
             if (currentSelectedItem != null)
             {
                 CenterSelectedItem(currentSelectedItem);
-                SetSideArrow(currentSelectedItem, currentSelectedItem.isSelected);
-            } else if (prevSelectedItem != null)
-            {
-                SetSideArrow(prevSelectedItem, prevSelectedItem.isSelected);
             }
         }
 
@@ -119,16 +120,6 @@ namespace PlayerInterface
             for (int i = 0; i < items.Count; i++)
             {
                 items[i].transform.SetSiblingIndex(i);
-            }
-        }
-
-
-        private void SetSideArrow(MenuItem item, bool isSelected)
-        {
-            // Set the side arrow for the items
-            foreach (MenuItem i in items)
-            {
-                i.EnableArrowImage(item == i ? isSelected : false);
             }
         }
 

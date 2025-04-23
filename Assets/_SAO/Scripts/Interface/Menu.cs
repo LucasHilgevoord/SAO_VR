@@ -32,7 +32,7 @@ namespace PlayerInterface
             // Close the current selected items
             foreach (MenuItem item in items)
             {
-                if (item.isSelected)
+                if (item.IsSelected)
                     yield return StartCoroutine(item.Deselect());
             }
         }
