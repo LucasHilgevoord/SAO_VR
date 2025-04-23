@@ -105,7 +105,8 @@ namespace PlayerInterface
         public void Interact()
         {
             //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_button_press");
-            
+            Debug.Log("Interact: " + gameObject.name);
+
             // Fire the event that this object has been clicked. The InterfaceManager will decide what to do with it and when.
             IsPressed?.Invoke(this, !isSelected);
         }

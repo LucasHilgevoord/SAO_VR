@@ -47,6 +47,7 @@ namespace PlayerInterface
 
         internal virtual void OnMenuItemPressed(MenuItem item, bool isSelected)
         {
+            Debug.Log("Item Pressed: " + item.gameObject.name + " - isSelected: " + isSelected);
             if (!items.Contains(item)) { return; }
 
             if (isSelected == false)
@@ -90,38 +91,32 @@ namespace PlayerInterface
 
         private void CenterSelectedItem(MenuItem item)
         {
-            if (centerItemOnSelect)
+            Debug.Log("Centering item: " + item.gameObject.name);
+            if (!centerItemOnSelect || !items.Contains(item)) return;
+
+            int selectedIndex = items.IndexOf(item);
+            int centerIndex = items.Count / 2;
+
+            // Calculate the offset to move the selected item to the center
+            int offset = centerIndex - selectedIndex;
+
+            // Rotate the list
+            List<MenuItem> reordered = new List<MenuItem>();
+            for (int i = 0; i < items.Count; i++)
             {
-                // Find the index of the item that was pressed in the list of items
-                int selectedIndex = items.IndexOf(item);
-                int centerItemIndex = items.Count / 2;
-                List<MenuItem> itemsCopy = new List<MenuItem>();
+                int rotatedIndex = (i - offset + items.Count) % items.Count;
+                reordered.Add(items[rotatedIndex]);
+            }
 
-                // Move the selected item to the center
-                for (int i = 0; i < items.Count; i++)
-                {
-                    int newIndex = (i + selectedIndex) % items.Count;
-                    itemsCopy.Add(items[newIndex]);
-                }
+            items = reordered;
 
-                items = itemsCopy;
-
-                // Find the new index of the selected item in the modified list
-                int newSelectedIndex = items.IndexOf(item);
-
-                // Calculate the offset needed to move the selected item to the center
-                int offset = centerItemIndex - newSelectedIndex;
-
-                // Adjust the list so that the selected item becomes the center item
-                for (int i = 0; i < items.Count; i++)
-                {
-                    int newIndex = (i + offset + items.Count) % items.Count;
-
-                    // SetSiblingIndex to rearrange the order of items
-                    items[i].transform.SetSiblingIndex(newIndex);
-                }
+            // Update UI order using SetSiblingIndex
+            for (int i = 0; i < items.Count; i++)
+            {
+                items[i].transform.SetSiblingIndex(i);
             }
         }
+
 
         private void SetSideArrow(MenuItem item, bool isSelected)
         {

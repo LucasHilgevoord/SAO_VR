@@ -22,6 +22,8 @@ namespace PlayerInterface
 
         [SerializeField] private RectMask2D moveSelectMask;
 
+        private float itemMoveDuration = 0.1f;
+
         private void Awake()
         {
         }
@@ -130,7 +132,6 @@ namespace PlayerInterface
             moveSelectMask.enabled = true;
 
             List<GameObject> itemPlaceholders = new List<GameObject>();
-            float duration = 0.5f;
 
             // Lerp with dotween all the items to the top until the selected item is on top
             float offsetY = selectedIndex * (itemHeight + vGroup.spacing);
@@ -150,10 +151,10 @@ namespace PlayerInterface
                     clone.transform.localPosition = new Vector3(0, items.Count * -(itemHeight + vGroup.spacing), 0);
 
                     RectTransform cloneRect = clone.GetComponent<RectTransform>();
-                    cloneRect.DOAnchorPosY(cloneRect.anchoredPosition.y + offsetY, duration);
+                    cloneRect.DOAnchorPosY(cloneRect.anchoredPosition.y + offsetY, itemMoveDuration);
                 }
 
-                item.DOAnchorPosY(item.anchoredPosition.y + offsetY, duration).OnComplete(() =>
+                item.DOAnchorPosY(item.anchoredPosition.y + offsetY, itemMoveDuration).OnComplete(() =>
                 {
                     if (clone != null)
                     {
@@ -163,7 +164,7 @@ namespace PlayerInterface
                 });
             }
 
-            yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(itemMoveDuration);
 
             //Put the menu items in the right position, the selected item should be on top, the item below the second one is now the second one and so on
             List<MenuItem> itemsCopy = new List<MenuItem>();

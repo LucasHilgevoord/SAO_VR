@@ -78,8 +78,8 @@ namespace PlayerInterface
                     openItemList.RemoveAt(i);
 
                     // Lerp the interface each time to the center of the last opened menu after we closed the previous one
-                    if (_lerpLastMenuRoutine != null) StopCoroutine(_lerpLastMenuRoutine);
-                    _lerpLastMenuRoutine = StartCoroutine(LerpLastMenuToCenter());
+                    //if (_lerpLastMenuRoutine != null) StopCoroutine(_lerpLastMenuRoutine);
+                    //_lerpLastMenuRoutine = StartCoroutine(LerpLastMenuToCenter());
                 }
             }
 
@@ -102,7 +102,7 @@ namespace PlayerInterface
             }
 
             // Lerp the whole interface to so that the last opened menu is in the center of the screen
-            if (_lerpLastMenuRoutine != null) StopCoroutine(_lerpLastMenuRoutine);
+            if (_lerpLastMenuRoutine != null) { StopCoroutine(_lerpLastMenuRoutine); }
             _lerpLastMenuRoutine = StartCoroutine(LerpLastMenuToCenter());
             yield return _lerpLastMenuRoutine;
 
