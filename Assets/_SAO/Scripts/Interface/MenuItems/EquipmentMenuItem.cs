@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using DG.Tweening;
+using JetBrains.Annotations;
 
 namespace PlayerInterface
 {
@@ -26,8 +27,10 @@ namespace PlayerInterface
             }
         }
 
+        [UsedImplicitly]
         public void SendDataEvent()
         {
+            Debug.Log("Send Data Event");
             EquipmentItemPressed?.Invoke(equipmentData, IsSelected);
         }
 

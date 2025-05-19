@@ -48,6 +48,7 @@ public class DescriptionWindow : InfoItem
     }
     private void OnDescriptionItemClicked(DescriptionData data, bool enable)
     {
+        Debug.Log("biep");
         if (enable)
         {
             // Clicking on the same item that is already open should close it

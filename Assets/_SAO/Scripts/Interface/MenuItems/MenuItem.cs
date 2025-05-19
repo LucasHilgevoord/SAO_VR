@@ -121,7 +121,7 @@ namespace PlayerInterface
 
         internal void EnableArrowImage(bool enable)
         {
-            // TODO: Idk if this is the right way to do this, because catergory items also execute this while not having an arrow.
+            // TODO: Idk if this is the right way to do this, because catergory items also execute this while not having an arrow. Maybe a seperate class with an OnSelect Method which can be overwritten
             if (selectArrow != null)
             {
                 selectArrow.gameObject.SetActive(enable);
