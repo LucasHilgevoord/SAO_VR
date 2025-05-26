@@ -103,8 +103,10 @@ namespace PlayerInterface
             else
             {
                 // The item should be closed
-                yield return StartCoroutine(newItem.Deselect());
-                openItemList.Remove(newItem);
+                if (newItem != null) { 
+                    yield return StartCoroutine(newItem.Deselect());
+                    openItemList.Remove(newItem);
+                }
             }
 
             // Lerp the whole interface to so that the last opened menu is in the center of the screen

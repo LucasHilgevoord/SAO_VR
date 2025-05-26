@@ -152,6 +152,7 @@ namespace PlayerInterface
         public override IEnumerator CloseMenu()
         {
             yield return StartCoroutine(base.CloseMenu());
+
             closeMenuCoroutine = StartCoroutine(HideItems());
             yield return closeMenuCoroutine;
 
