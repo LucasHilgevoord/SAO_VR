@@ -1,4 +1,4 @@
-Shader "Custom/RadialBrickAltHeightURP"
+Shader "Custom/RadialBrickAltHeightVariationURP"
 {
     Properties
     {
@@ -11,6 +11,8 @@ Shader "Custom/RadialBrickAltHeightURP"
         _RingHeightOdd("Ring Height Odd", Float) = 0.06
 
         _MortarSize("Mortar Thickness (X=Angle, Y=Radius)", Vector) = (0.05, 0.05, 0, 0)
+
+        _BrickColorVariation("Brick Brightness Variation", Range(0, 0.5)) = 0.15
     }
 
     SubShader
@@ -46,8 +48,8 @@ Shader "Custom/RadialBrickAltHeightURP"
             float _AngleScale;
             float _RingHeightEven;
             float _RingHeightOdd;
-
             float4 _MortarSize;
+            float _BrickColorVariation;
 
             Varyings vert(Attributes IN)
             {
@@ -65,7 +67,7 @@ Shader "Custom/RadialBrickAltHeightURP"
                 float angle = atan2(centeredUV.y, centeredUV.x);
                 angle = angle / (2.0 * 3.14159265) + 0.5;
 
-                // Simulate stepping through rings to find index
+                // Ring index detection
                 float acc = 0;
                 float ringIndex = 0;
                 [loop]
@@ -73,7 +75,6 @@ Shader "Custom/RadialBrickAltHeightURP"
                 {
                     float height = (fmod(i, 2.0) == 0.0) ? _RingHeightEven : _RingHeightOdd;
                     acc += height;
-
                     if (radius <= acc)
                     {
                         ringIndex = i;
@@ -84,21 +85,36 @@ Shader "Custom/RadialBrickAltHeightURP"
                 float isEvenRing = fmod(ringIndex, 2.0) == 0.0;
                 float ringHeight = isEvenRing ? _RingHeightEven : _RingHeightOdd;
 
-                // Local position inside the current ring (0–1)
+                // Local radius inside ring
                 float ringStart = acc - ringHeight;
                 float localRadiusInRing = (radius - ringStart) / ringHeight;
 
-                // Offset bricks every other ring
+                // Stagger bricks
                 float rowOffset = fmod(ringIndex, 2.0) * 0.5;
                 float scaledAngle = angle * _AngleScale + rowOffset;
 
+                // Brick UV and mortar
                 float2 brickUV = float2(scaledAngle, localRadiusInRing);
                 float2 cellUV = frac(brickUV);
 
                 float2 mortar = step(_MortarSize.xy, cellUV);
                 float mask = mortar.x * mortar.y;
 
-                float4 finalColor = lerp(_MortarColor, _BrickColor, mask);
+// Clean, per-brick ID based on angle and ring index
+float2 brickID = float2(floor(scaledAngle), ringIndex);
+
+// Hash it with a stable integer-noise function
+float seed = dot(brickID, float2(73.156, 47.853));
+float randVal = frac(sin(seed) * 43758.5453);
+
+// Smooth it to avoid sharp shifts
+randVal = smoothstep(0.0, 1.0, randVal);
+
+
+
+float brightness = lerp(1.0 - _BrickColorVariation, 1.0 + _BrickColorVariation, randVal);
+float4 finalColor = lerp(_MortarColor, _BrickColor * brightness, mask);
+
                 return finalColor;
             }
 

@@ -40,6 +40,7 @@ Material:
     m_Floats:
     - _AltAngleScale: 16
     - _AngleScale: 32
+    - _BrickColorVariation: 0.184
     - _RadiusScaleEven: 30
     - _RadiusScaleOdd: 15
     - _RingHeightEven: 0.005
@@ -47,5 +48,5 @@ Material:
     m_Colors:
     - _BrickColor: {r: 0.6392157, g: 0.6392157, b: 0.5568628, a: 1}
     - _MortarColor: {r: 0.26666668, g: 0.20000002, b: 0.13333334, a: 1}
-    - _MortarSize: {r: 0.05, g: 0.04, b: 0, a: 0}
+    - _MortarSize: {r: 0.05, g: 0.05, b: 0, a: 0}
   m_BuildTextureStacks: []
