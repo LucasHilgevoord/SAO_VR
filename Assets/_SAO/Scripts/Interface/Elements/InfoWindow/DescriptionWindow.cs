@@ -48,17 +48,20 @@ public class DescriptionWindow : InfoItem
     }
     private void OnDescriptionItemClicked(DescriptionData data, bool enable)
     {
-        Debug.Log("biep");
+        Debug.Log("OnDescriptionItemClicked " + enable);
+        Debug.Log(data);
         if (enable)
         {
             // Clicking on the same item that is already open should close it
             if (data == lastOpened && isEnabled)
             {
+                Debug.Log("Close window");
                 CloseWindow();
                 isEnabled = false;
             }
             else
             {
+                Debug.Log("Open window");
                 // Assign new values and open the window
                 SetDescriptionData(data);
                 OpenWindow();
@@ -71,12 +74,14 @@ public class DescriptionWindow : InfoItem
             // Clicking on the same item that is already closed should do nothing
             if (data == lastOpened && !isEnabled)
             {
+                Debug.Log("idk");
                 return;
             }
 
             // Clicking on another item while the current one is open should close it
             if (isEnabled)
             {
+                Debug.Log("close because other item");
                 CloseWindow();
                 isEnabled = false;
             }

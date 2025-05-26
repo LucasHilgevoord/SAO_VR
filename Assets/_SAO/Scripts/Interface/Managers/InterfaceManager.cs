@@ -4,11 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Progress;
 
 namespace PlayerInterface
 {
-    public class InterfaceManager : MonoBehaviour
+    public class InterfaceManager : Singleton<InterfaceManager>
     {
         public static event Action CatogoryMenuOpened;
         public static event Action CatogoryMenuClosed;
@@ -17,7 +16,6 @@ namespace PlayerInterface
         /// List of all the opened sub-menu's
         /// </summary>
         private List<MenuItem> openItemList = new List<MenuItem>();
-        private List<MenuItem> menuItemsCollection = new List<MenuItem>();
 
         [SerializeField] private Canvas interfaceCanvas;
         [SerializeField] private CategorieMenu categorieMenu;
@@ -28,41 +26,16 @@ namespace PlayerInterface
         private float _closeSideDelay = 0f;
         private bool _allowInteraction = true;
 
-        private void Awake()
+
+        public void RegisterMenuItem(MenuItem item)
         {
-            menuItemsCollection = GetAllMenuItems();
-            foreach (MenuItem item in menuItemsCollection)
-            {
-                item.IsPressed += OnMenuItemPressed;
-            }
+            item.IsPressed -= OnMenuItemPressed;
+            item.IsPressed += OnMenuItemPressed;
         }
 
-        private void OnDestroy()
+        public void DeregisterMenuItem(MenuItem item)
         {
-            foreach (MenuItem item in menuItemsCollection)
-            {
-                item.IsPressed -= OnMenuItemPressed;
-            }
-        }
-
-        private List<MenuItem> GetAllMenuItems()
-        {
-            List<MenuItem> allItems = new List<MenuItem>();
-
-            void Traverse(List<MenuItem> items)
-            {
-                foreach (var item in items)
-                {
-                    allItems.Add(item);
-                    if (item.subMenu && item.subMenu.items != null && item.subMenu.items.Count > 0)
-                    {
-                        Traverse(item.subMenu.items);
-                    }
-                }
-            }
-
-            Traverse(categorieMenu.items);
-            return allItems;
+            item.IsPressed -= OnMenuItemPressed;
         }
 
         private void OnMenuItemPressed(MenuItem newItem, bool isSelected)

@@ -33,7 +33,6 @@ RectTransform:
   - {fileID: 4248929433391977178}
   - {fileID: 8367128090046124275}
   m_Father: {fileID: 4950419699182773892}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -97,7 +96,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4950419699182773892}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -174,7 +172,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6919103919151539339}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -307,7 +304,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6919103919151539339}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -440,7 +436,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6919103919151539339}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -572,7 +567,6 @@ RectTransform:
   m_Children:
   - {fileID: 4950419699182773892}
   m_Father: {fileID: 3156925495635255957}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -626,7 +620,6 @@ RectTransform:
   - {fileID: 5713068513008053711}
   - {fileID: 6919103919151539339}
   m_Father: {fileID: 1627934205879405774}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -696,7 +689,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4950419699182773892}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -746,6 +738,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2109079031699993111, guid: 969ad06d97651244e8bcbf658969d5f8,
@@ -942,6 +935,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2109079031699993111, guid: 969ad06d97651244e8bcbf658969d5f8, type: 3}
     - {fileID: 6057616889451307332, guid: 969ad06d97651244e8bcbf658969d5f8, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4955837543474087378, guid: 969ad06d97651244e8bcbf658969d5f8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627934205879405774}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4955837543474087379, guid: 969ad06d97651244e8bcbf658969d5f8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 456493178394977242}
   m_SourcePrefab: {fileID: 100100000, guid: 969ad06d97651244e8bcbf658969d5f8, type: 3}
 --- !u!224 &1287467231388093325 stripped
 RectTransform:
@@ -1027,6 +1031,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _waitOnPressSignal: 0
   selectButton: {fileID: 5552289554661713847}
   titleLabel: {fileID: 3156925495755348614}
   titleString: 

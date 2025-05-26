@@ -14,6 +14,7 @@ namespace PlayerInterface
         public UnityEvent OnSelectEvents;
         public UnityEvent OnDeselectEvents;
         public Action<MenuItem> DestroyItem;
+        [SerializeField] private bool _waitOnPressSignal = true;
 
         [Header(" References")]
         public Button selectButton;
@@ -44,6 +45,8 @@ namespace PlayerInterface
 
         public void Start()
         {
+            InterfaceManager.Instance.RegisterMenuItem(this);
+
             // Set the title label to the correct name if it is not empty
             if (!string.IsNullOrEmpty(titleString))
                 titleLabel.text = titleString;
@@ -87,6 +90,7 @@ namespace PlayerInterface
 
             // Start the OnSelectEvents
             OnSelectEvents?.Invoke();
+            Debug.Log("OnSelectEvent");
 
             // Open the submenu if there is one
             if (subMenu != null)
@@ -117,6 +121,15 @@ namespace PlayerInterface
 
             // Fire the event that this object has been clicked. The InterfaceManager will decide what to do with it and when.
             IsPressed?.Invoke(this, !IsSelected);
+
+            //if (!_waitOnPressSignal)
+            //{
+            //    IsSelected = !IsSelected;
+            //    if (IsSelected)
+            //        Select();
+            //    else
+            //        StartCoroutine(Deselect());
+            //}
         }
 
         internal void EnableArrowImage(bool enable)
@@ -131,6 +144,11 @@ namespace PlayerInterface
         internal virtual void RemoveItem() {
             Debug.Log("RemoveItem");
             DestroyItem?.Invoke(this);
+        }
+
+        public void OnDestroy()
+        {
+            InterfaceManager.Instance.DeregisterMenuItem(this);
         }
     }
 }

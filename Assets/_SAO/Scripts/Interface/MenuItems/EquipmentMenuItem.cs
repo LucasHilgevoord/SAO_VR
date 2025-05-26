@@ -38,6 +38,7 @@ namespace PlayerInterface
         /// Open the options overlay
         /// Called from the inspector
         /// </summary>
+        [UsedImplicitly]
         public void OpenOptions()
         { 
             options.OpenOptions();
