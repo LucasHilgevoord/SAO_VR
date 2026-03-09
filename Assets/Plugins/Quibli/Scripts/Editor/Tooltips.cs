@@ -22,6 +22,18 @@ public static class Tooltips {
                         "Specular highlight adds a glare to the object. It can be used for adding a small sharp ‘metallic’ specular, a matte diffused one or anything in between."
                     },
                     {
+                        "Specular Color",
+                        "Tint of the specular highlight when Specular is enabled."
+                    },
+                    {
+                        "Specular Size",
+                        "Controls the size of the specular lobe; lower values keep the highlight tight, higher values spread it out."
+                    },
+                    {
+                        "Specular Edge Smoothness",
+                        "Softens the transition at the edge of the specular highlight."
+                    },
+                    {
                         "Enable Rim",
                         "Toggles a set of Rim parameters. In some cases it can be used as a contouring pseudo-outline effect, it can accentuate the edges of the models on the scene. Rim depends on the main light’s rotation and the normals of the shaded model."
                     },
@@ -56,16 +68,51 @@ public static class Tooltips {
                         "Enable Vertex Colors",
                         "If enabled, the final shading of the object is multiplied by the mesh’s vertex color values. It is a debug parameter, usually this is not used for changing the look."
                     },
+                    {
+                        "Enable Outline",
+                        "Toggles the outline render pass that draws a silhouette around geometry."
+                    },
+                    { "Color", "Outline tint when the outline pass is enabled." },
+                    { "Width", "Thickness of the outline in screen space." },
+                    { "Scale", "Scales vertex positions before outlining to preserve silhouette thickness." },
+                    {
+                        "Depth Offset",
+                        "Moves the outline slightly in depth to reduce z-fighting with the base mesh."
+                    },
+                    {
+                        "Camera Distance Impact",
+                        "Blends between constant outline width and one that grows with camera distance."
+                    },
                     { "Albedo", "Main texture of the material. It is also known as 'Diffuse'." },
                     {
                         "Mix Into Shading",
                         "Uses the main texture when calculating lighting and shading colors. When disabled, the Environment Lighting of the scene has a greater impact on the material."
                     },
                     {
+                        "Blending Mode",
+                        "Defines how the texture contributes to shading. For Albedo choose between Multiply and Add; for Detail Map adds an Interpolate option."
+                    },
+                    {
+                        "Texture Impact",
+                        "Scales how strongly the Albedo texture influences the stylized lighting."
+                    },
+                    {
+                        "Decals Paint Over Shading",
+                        "Allows URP decals to overwrite the stylized lighting result instead of blending with it."
+                    },
+                    {
                         "Detail Map",
                         "Additional texture slot, usually used for small details. This one has two additional blending modes, which is useful for adding different kinds of details to the material."
                     },
-                    { "Bump Map", "The input for normal maps." },
+                    {
+                        "Detail Color",
+                        "Tint applied to the sampled detail texture."
+                    },
+                    {
+                        "Detail Impact",
+                        "Controls how strongly the detail texture affects the final color."
+                    },
+                    { "Normal Map", "The input for normal maps." },
                     {
                         "Light Color Impact",
                         "Defines how much of an influence the main light’s color has onto the material. Having this parameter allows you to add a night/day/morning/sunset feel to the scene. By automating the light’s color it is possible to achieve the day cycle effect."
@@ -74,9 +121,9 @@ public static class Tooltips {
                         "Receive Shadows",
                         "Once enabled, the material will receive the shadows cast from itself and other objects."
                     },
-                    { "Override Realtime Shadow", "Toggles changing the default shadow parameters." },
+                    { "Customize Light", "Toggles changing the default shadow parameters." },
                     {
-                        "Shadow Attenuation Remap",
+                        "Attenuation Remap",
                         "This range slider is a multi-tool, which can control the tightness, intensity and the scale of the cast shadow. Drag the left and right brackets of the range slider to tighten up or loosen down the shadow edges, move the slider by clicking and dragging its center in order to adjust the intensity."
                     },
                     {
@@ -98,6 +145,14 @@ public static class Tooltips {
                     {
                         "Override Light Direction",
                         "Sets custom light rotation from the main light (usually Directional Light) and lets you control the lighting/shading positions manually and independently per material."
+                    },
+                    {
+                        "Pitch",
+                        "Elevation angle for the overridden light direction, in degrees."
+                    },
+                    {
+                        "Yaw",
+                        "Horizontal rotation for the overridden light direction, in degrees."
                     },
                     {
                         "Surface Type",

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 121e6e3d43fc80149b8cc63724271dc1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167725
+  packageName: AZURE Nature
+  packageVersion: 1.2.0
+  assetPath: Assets/Plugins/AZURE Nature/Scripts/PlayerController.cs
+  uploadId: 821202

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class Wearable : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class Wearable : MonoBehaviour
 
     private Transform _parent;
     private Rigidbody _rigidbody;
-    private XRGrabInteractable _grabInteractable;
+    private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable _grabInteractable;
     [SerializeField] private Vector3 _positionOffset;
     [SerializeField] private Vector3 _rotationOffset;
 
@@ -24,7 +24,7 @@ public class Wearable : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _grabInteractable = GetComponent<XRGrabInteractable>();
+        _grabInteractable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
 
         colliders = GetComponentsInChildren<Collider>();
         

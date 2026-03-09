@@ -14,10 +14,11 @@ Material:
   - _COLOR2OVERLAYTYPE_UV_BASED
   - _FIXTHEBASEOFFOLIAGE_ON
   - _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED
+  - _TRANCLUSENCYENABLE_ON
   - _WIND_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -61,6 +62,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SmoothnessTexture1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SmoothnessTexture3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SnowMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -73,9 +82,21 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaCutoff: 0.5
+    - _AlphaCutoff: 0.35
     - _BumpScale: 1
     - _Color2Enable: 1
     - _Color2Fade: -1
@@ -83,38 +104,46 @@ Material:
     - _Color2OverlayType: 1
     - _Cutoff: 0.35
     - _DetailNormalMapScale: 1
+    - _DirectLightInt: 1
+    - _DirectLightInt1: 1
+    - _DirectLightOffset: 0
+    - _DirectLightOffset1: 0
     - _DstBlend: 0
+    - _EnvironmentReflections: 1
     - _Fixthebaseoffoliage: 1
+    - _Float2: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _IndirectLightInt: 1
+    - _IndirectLightInt1: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _SNOW: 0
     - _Smoothness: 0.054
+    - _Smoothness1: 0.1
     - _SmoothnessTextureChannel: 0
     - _SnowAmount: 0.5
     - _SnowFade: 1
     - _SnowOverlayType: 0
+    - _SnowTiling: 0.15
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TessEdgeLength: 16
-    - _TessMax: 25
-    - _TessMaxDisp: 25
-    - _TessMin: 10
-    - _TessPhongStrength: 0.5
-    - _TessValue: 16
+    - _Tiling: 1
+    - _TranclusencyEnable: 1
     - _TransAmbient: 0.2
     - _TransDirect: 1
-    - _TransNormal: 0.5
     - _TransNormalDistortion: 0.1
     - _TransScattering: 2
     - _TransShadow: 0.9
-    - _TransStrength: 2
-    - _Translucency: 1
-    - _TransmissionShadow: 0.5
+    - _Translucency: 2
+    - _TranslucencyInt: 1
+    - _TranslucencyInt1: 1
     - _UVSec: 0
     - _WIND: 1
     - _WindForce: 0.6

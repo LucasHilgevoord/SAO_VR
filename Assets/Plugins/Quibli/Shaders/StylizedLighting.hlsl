@@ -18,11 +18,11 @@ void MainLight_half(float3 WorldPosition, out half3 Direction, out half3 Color, 
     ShadowAttenuation = 1;
     #else
 
-    #if SHADOWS_SCREEN
+    #if defined(_MAIN_LIGHT_SHADOWS_SCREEN) && !defined(_SURFACE_TYPE_TRANSPARENT)
     half4 clipPos = TransformWorldToHClip(WorldPosition);
     half4 shadowCoord = ComputeScreenPos(clipPos);
     #else
-    float4 shadowCoord = TransformWorldToShadowCoord(WorldPosition);
+    half4 shadowCoord = TransformWorldToShadowCoord(WorldPosition);
     #endif
 
     Light light = GetMainLight(shadowCoord);
@@ -32,6 +32,11 @@ void MainLight_half(float3 WorldPosition, out half3 Direction, out half3 Color, 
     ShadowAttenuation = light.shadowAttenuation;
 
     #endif
+}
+
+void NDotL_half(half3 Normal, half3 LightDirection, out half Shading) {
+    const half nDotL = saturate(dot(Normal, LightDirection) * 0.5 + 0.5);
+    Shading = nDotL;
 }
 
 void NDotL_half(half3 Normal, half3 LightDirection, half ShadingFactor, out half Shading) {

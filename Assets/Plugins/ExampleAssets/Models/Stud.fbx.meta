@@ -139,3 +139,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203178
+  packageName: 'Quibli: Anime Shaders and Tools'
+  packageVersion: 2.6.2
+  assetPath: Assets/Plugins/ExampleAssets/Models/Stud.fbx
+  uploadId: 864282

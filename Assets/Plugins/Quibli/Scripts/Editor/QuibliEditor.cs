@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
@@ -10,7 +11,10 @@ public class QuibliEditor : BaseShaderGUI {
     private Material _target;
     private MaterialProperty[] _properties;
 
-    private static readonly Dictionary<string, bool> FoldoutStates = new Dictionary<string, bool> {{"Rendering options", false}};
+    private static readonly Dictionary<string, bool> FoldoutStates =
+        new Dictionary<string, bool> { { "Rendering options", false } };
+
+    private const string UnityVersion = "NLC6GN";
 
     void DrawStandard(MaterialEditor editor, MaterialProperty property) {
         string displayName = property.displayName;
@@ -22,8 +26,13 @@ public class QuibliEditor : BaseShaderGUI {
         var tooltip = Tooltips.Get(editor, displayName);
         var guiContent = new GUIContent(displayName, tooltip);
 
-        if (property.type == MaterialProperty.PropType.Texture && !property.displayName.Contains("Gradient")
-            && !property.name.Contains("Ramp")) {
+        bool isTexture;
+#if UNITY_6000_1_OR_NEWER
+        isTexture = property.propertyType == ShaderPropertyType.Texture;
+#else
+        isTexture = property.type == MaterialProperty.PropType.Texture;
+#endif
+        if (isTexture && !property.displayName.Contains("Gradient") && !property.name.Contains("Ramp")) {
             if (!property.name.Contains("_BaseMap") && !property.name.Contains("_EmissionMap")) {
                 EditorGUILayout.Space(15);
             }
@@ -42,6 +51,14 @@ public class QuibliEditor : BaseShaderGUI {
         return _target != null && _target.HasProperty(name);
     }
 
+    bool IsTextureImpactLocked() {
+        return HasProperty("_TextureImpact") && HasProperty("_BaseMap") && _target.GetTexture("_BaseMap") == null;
+    }
+
+    bool HasTextureAssigned(string name) {
+        return HasProperty(name) && _target.GetTexture(name) != null;
+    }
+
 
 #if UNITY_2021_2_OR_NEWER
     public override void ValidateMaterial(Material material) {
@@ -57,13 +74,104 @@ public class QuibliEditor : BaseShaderGUI {
         _properties = properties;
         _target = editor.target as Material;
         Debug.Assert(_target != null);
-        
+
         FindProperties(properties);
 
+        if (!Application.unityVersion.Contains(Rev(UnityVersion)) && !Application.unityVersion.Contains('b') &&
+            !Application.unityVersion.Contains('a') && !Application.unityVersion.Replace('.', '^').Contains("23^2")) {
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            EditorGUILayout.BeginHorizontal();
+
+            // Icon.
+            {
+                EditorGUILayout.BeginVertical();
+                GUILayout.FlexibleSpace();
+                var icon = EditorGUIUtility.IconContent("console.erroricon@2x").image;
+                var iconSize = Mathf.Min(Mathf.Min(60, icon.width), EditorGUIUtility.currentViewWidth - 100);
+                GUILayout.Label(icon,
+                                new GUIStyle {
+                                    alignment = TextAnchor.MiddleCenter,
+                                    imagePosition = ImagePosition.ImageLeft,
+                                    fixedWidth = iconSize,
+                                    fixedHeight = iconSize,
+                                    padding = new RectOffset(0, 0, 5, 5),
+                                    margin = new RectOffset(0, 0, 0, 0),
+                                });
+                GUILayout.FlexibleSpace();
+                EditorGUILayout.EndVertical();
+            }
+
+            var unityMajorVersion = Application.unityVersion.Substring(0, Application.unityVersion.LastIndexOf('.'));
+            var m = $"This version of <b>Quibli</b> is designed for <b>Unity {Rev(UnityVersion)}</b>. " +
+                    $"You are currently using <b>Unity {unityMajorVersion}</b>.\n" +
+                    "<i>The shader and the UI below may not work correctly.</i>\n" +
+                    "Please <b>re-download Quibli</b> to get the compatible version.";
+            var style = new GUIStyle(EditorStyles.wordWrappedLabel) {
+                alignment = TextAnchor.MiddleLeft,
+                richText = true,
+                fontSize = 12,
+                padding = new RectOffset(0, 5, 5, 5),
+                margin = new RectOffset(0, 0, 0, 0),
+            };
+            EditorGUILayout.LabelField(m, style);
+            EditorGUILayout.EndHorizontal();
+
+            // Unity version help buttons.
+            {
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                const float buttonWidth = 120;
+
+                if (GUILayout.Button("Package Manager", EditorStyles.miniButton, GUILayout.Width(buttonWidth))) {
+                    const string packageName = "Quibli: Anime Shaders and Tools";
+
+                    var type = typeof(UnityEditor.PackageManager.UI.Window);
+                    var method = type.GetMethod("OpenFilter",
+                                                System.Reflection.BindingFlags.NonPublic |
+                                                System.Reflection.BindingFlags.Static);
+                    if (method != null) {
+                        method.Invoke(null, new object[] { $"AssetStore/{packageName}" });
+                    } else {
+                        UnityEditor.PackageManager.UI.Window.Open(packageName);
+                    }
+                }
+
+                if (GUILayout.Button("Asset Store", EditorStyles.miniButton, GUILayout.Width(buttonWidth))) {
+                    const string assetStoreUrl =
+                        "https://assetstore.unity.com/packages/vfx/quibli-anime-shaders-and-tools-203178";
+                    Application.OpenURL(assetStoreUrl);
+                }
+
+                if (GUILayout.Button("Support", EditorStyles.miniButton, GUILayout.Width(buttonWidth))) {
+                    const string contactUrl = "https://quibli.dustyroom.com/contact-details/";
+                    Application.OpenURL(contactUrl);
+                }
+
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.Space(2);
+            }
+
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.Space();
+
+            foreach (var property in properties) {
+                DrawStandard(editor, property);
+            }
+
+            return;
+        }
+
         if (_target.IsKeywordEnabled("DR_OUTLINE_ON") && _target.IsKeywordEnabled("_ALPHATEST_ON")) {
-            EditorGUILayout.HelpBox("The 'Outline' and 'Alpha Clip' features are usually " +
-                                    "incompatible. The outline shader pass will not be using alpha " +
-                                    "clipping.", MessageType.Warning);
+            const string m = "The 'Outline' and 'Alpha Clip' features are usually incompatible. The outline shader " +
+                             "pass will not be using alpha clipping.";
+            EditorGUILayout.HelpBox(m, MessageType.Warning);
+        }
+
+        bool textureImpactLocked = IsTextureImpactLocked();
+        bool baseMapLocked = textureImpactLocked;
+        bool detailMapLocked = HasProperty("_DetailMap") && !HasTextureAssigned("_DetailMap");
+        if (textureImpactLocked) {
+            _target.SetFloat("_TextureImpact", 0f);
         }
 
         int originalIntentLevel = EditorGUI.indentLevel;
@@ -96,12 +204,6 @@ public class QuibliEditor : BaseShaderGUI {
                 _target.SetVector("_LightmapDirection", direction);
             }
 
-            // TODO: Disable texture impact via keyword.
-            if (_target.HasProperty("_TextureImpact") && _target.HasProperty("_BaseMap") &&
-                _target.GetTexture("_BaseMap") == null) {
-                _target.SetFloat("_TextureImpact", 0f);
-            }
-
             if (displayName.Contains("FOLDOUT")) {
                 string foldoutName = displayName.Split('(', ')')[1];
                 string foldoutItemCount = displayName.Split('{', '}')[1];
@@ -121,16 +223,54 @@ public class QuibliEditor : BaseShaderGUI {
                 --foldoutRemainingItems;
             }
 
-            bool hideInInspector = (property.flags & MaterialProperty.PropFlags.HideInInspector) != 0;
+            bool hideInInspector;
+#if UNITY_6000_1_OR_NEWER
+            hideInInspector = (property.propertyFlags & ShaderPropertyFlags.HideInInspector) != 0;
+#else
+            hideInInspector = (property.flags & MaterialProperty.PropFlags.HideInInspector) != 0;
+#endif
             if (!hideInInspector && !skipProperty) {
+                bool disableGroup = false;
+
+                if (baseMapLocked && (property.name == "_TextureImpact" ||
+                                      property.name == "_TextureBlendingMode" ||
+                                      property.name == "_BaseMapPremultiply")) {
+                    disableGroup = true;
+                }
+
+                if (detailMapLocked && (property.name == "_DetailMapColor" ||
+                                        property.name == "_DetailMapBlendingMode" ||
+                                        property.name == "_DetailMapImpact")) {
+                    disableGroup = true;
+                }
+
                 EditorGUI.BeginChangeCheck();
+                if (disableGroup) {
+                    EditorGUI.BeginDisabledGroup(true);
+                }
                 DrawStandard(editor, property);
+                if (disableGroup) {
+                    EditorGUI.EndDisabledGroup();
+                }
                 if (EditorGUI.EndChangeCheck()) {
 #if UNITY_2021_2_OR_NEWER
                     ValidateMaterial(_target);
 #else
                     MaterialChanged(_target);
 #endif
+                }
+
+                string helpBoxAfterProperty = null;
+                if (baseMapLocked && property.name == "_BaseMap") {
+                    helpBoxAfterProperty = "Assign an Albedo texture to enable related shading controls.";
+                }
+
+                if (detailMapLocked && property.name == "_DetailMap") {
+                    helpBoxAfterProperty = "Assign a Detail Map texture to enable its blending controls.";
+                }
+
+                if (!string.IsNullOrEmpty(helpBoxAfterProperty)) {
+                    EditorGUILayout.HelpBox(helpBoxAfterProperty, MessageType.Info);
                 }
             }
 
@@ -179,54 +319,54 @@ public class QuibliEditor : BaseShaderGUI {
             EditorGUI.BeginChangeCheck();
             var surfaceProp = FindProperty("_Surface");
             EditorGUI.showMixedValue = surfaceProp.hasMixedValue;
-            var surfaceType = (SurfaceType) surfaceProp.floatValue;
+            var surfaceType = (SurfaceType)surfaceProp.floatValue;
             EditorGUILayout.Separator();
-            surfaceType = (SurfaceType) EditorGUILayout.EnumPopup("Surface Type", surfaceType);
+            surfaceType = (SurfaceType)EditorGUILayout.EnumPopup("Surface Type", surfaceType);
             if (EditorGUI.EndChangeCheck()) {
                 materialEditor.RegisterPropertyChangeUndo("Surface Type");
-                surfaceProp.floatValue = (float) surfaceType;
+                surfaceProp.floatValue = (float)surfaceType;
             }
 
             if (surfaceType == SurfaceType.Opaque) {
                 if (alphaClip) {
-                    material.renderQueue = (int) UnityEngine.Rendering.RenderQueue.AlphaTest;
+                    material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.AlphaTest;
                     material.SetOverrideTag("RenderType", "TransparentCutout");
                 } else {
-                    material.renderQueue = (int) UnityEngine.Rendering.RenderQueue.Geometry;
+                    material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry;
                     material.SetOverrideTag("RenderType", "Opaque");
                 }
 
                 material.renderQueue +=
-                    material.HasProperty("_QueueOffset") ? (int) material.GetFloat("_QueueOffset") : 0;
-                material.SetInt("_SrcBlend", (int) UnityEngine.Rendering.BlendMode.One);
-                material.SetInt("_DstBlend", (int) UnityEngine.Rendering.BlendMode.Zero);
+                    material.HasProperty("_QueueOffset") ? (int)material.GetFloat("_QueueOffset") : 0;
+                material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
                 material.SetInt("_ZWrite", 1);
                 material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
                 material.SetShaderPassEnabled("ShadowCaster", true);
             } else // Transparent
             {
-                BlendMode blendMode = (BlendMode) material.GetFloat("_Blend");
+                BlendMode blendMode = (BlendMode)material.GetFloat("_Blend");
 
                 // Specific Transparent Mode Settings
                 switch (blendMode) {
                     case BlendMode.Alpha:
-                        material.SetInt("_SrcBlend", (int) UnityEngine.Rendering.BlendMode.SrcAlpha);
-                        material.SetInt("_DstBlend", (int) UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
                         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
                         break;
                     case BlendMode.Premultiply:
-                        material.SetInt("_SrcBlend", (int) UnityEngine.Rendering.BlendMode.One);
-                        material.SetInt("_DstBlend", (int) UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+                        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
                         material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
                         break;
                     case BlendMode.Additive:
-                        material.SetInt("_SrcBlend", (int) UnityEngine.Rendering.BlendMode.SrcAlpha);
-                        material.SetInt("_DstBlend", (int) UnityEngine.Rendering.BlendMode.One);
+                        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.One);
                         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
                         break;
                     case BlendMode.Multiply:
-                        material.SetInt("_SrcBlend", (int) UnityEngine.Rendering.BlendMode.DstColor);
-                        material.SetInt("_DstBlend", (int) UnityEngine.Rendering.BlendMode.Zero);
+                        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.DstColor);
+                        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
                         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
                         material.EnableKeyword("_ALPHAMODULATE_ON");
                         break;
@@ -235,9 +375,9 @@ public class QuibliEditor : BaseShaderGUI {
                 // General Transparent Material Settings
                 material.SetOverrideTag("RenderType", "Transparent");
                 material.SetInt("_ZWrite", 0);
-                material.renderQueue = (int) UnityEngine.Rendering.RenderQueue.Transparent;
+                material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
                 material.renderQueue +=
-                    material.HasProperty("_QueueOffset") ? (int) material.GetFloat("_QueueOffset") : 0;
+                    material.HasProperty("_QueueOffset") ? (int)material.GetFloat("_QueueOffset") : 0;
                 material.SetShaderPassEnabled("ShadowCaster", false);
             }
 
@@ -246,11 +386,11 @@ public class QuibliEditor : BaseShaderGUI {
                 EditorGUI.BeginChangeCheck();
                 var blendModeProp = FindProperty("_Blend");
                 EditorGUI.showMixedValue = blendModeProp.hasMixedValue;
-                var blendMode = (BlendMode) blendModeProp.floatValue;
-                blendMode = (BlendMode) EditorGUILayout.EnumPopup("Blend Mode", blendMode);
+                var blendMode = (BlendMode)blendModeProp.floatValue;
+                blendMode = (BlendMode)EditorGUILayout.EnumPopup("Blend Mode", blendMode);
                 if (EditorGUI.EndChangeCheck()) {
                     materialEditor.RegisterPropertyChangeUndo("Blend Mode");
-                    blendModeProp.floatValue = (float) blendMode;
+                    blendModeProp.floatValue = (float)blendMode;
                 }
             }
         }
@@ -261,12 +401,12 @@ public class QuibliEditor : BaseShaderGUI {
             EditorGUI.BeginChangeCheck();
             var cullingProp = FindProperty("_Cull");
             EditorGUI.showMixedValue = cullingProp.hasMixedValue;
-            var culling = (RenderFace) cullingProp.floatValue;
-            culling = (RenderFace) EditorGUILayout.EnumPopup("Render Faces", culling);
+            var culling = (RenderFace)cullingProp.floatValue;
+            culling = (RenderFace)EditorGUILayout.EnumPopup("Render Faces", culling);
             if (EditorGUI.EndChangeCheck()) {
                 materialEditor.RegisterPropertyChangeUndo("Render Faces");
-                cullingProp.floatValue = (float) culling;
-                material.doubleSidedGI = (RenderFace) cullingProp.floatValue != RenderFace.Front;
+                cullingProp.floatValue = (float)culling;
+                material.doubleSidedGI = (RenderFace)cullingProp.floatValue != RenderFace.Front;
             }
         }
 
@@ -284,6 +424,18 @@ public class QuibliEditor : BaseShaderGUI {
                 materialEditor.ShaderProperty(alphaCutoffProp, "Threshold", 1);
             }
         }
+    }
+
+    private static string Rev(string a) {
+        StringBuilder b = new StringBuilder(a.Length);
+        int i = 0;
+
+        foreach (char c in a) {
+            b.Append((char)(c - "8<3F9="[i] % 32));
+            i = (i + 1) % 6;
+        }
+
+        return b.ToString();
     }
 
     // Adapted from BaseShaderGUI.cs.

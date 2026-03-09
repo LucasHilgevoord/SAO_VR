@@ -6,3 +6,10 @@ NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203178
+  packageName: 'Quibli: Anime Shaders and Tools'
+  packageVersion: 2.6.2
+  assetPath: Assets/Plugins/Quibli/Demos/Plants/Foliage Generator Presets/ExamplePlant_5.preset
+  uploadId: 864282

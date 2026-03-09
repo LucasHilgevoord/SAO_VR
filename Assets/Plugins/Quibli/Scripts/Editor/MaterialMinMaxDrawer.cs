@@ -17,7 +17,11 @@ public class MaterialMinMaxDrawer : MaterialPropertyDrawer {
     }
 
     private static bool IsPropertyTypeSuitable(MaterialProperty prop) {
+#if UNITY_6000_1_OR_NEWER
+        return prop.propertyType == UnityEngine.Rendering.ShaderPropertyType.Vector;
+#else
         return prop.type == MaterialProperty.PropType.Vector;
+#endif
     }
 
     public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor) {
@@ -42,8 +46,9 @@ public class MaterialMinMaxDrawer : MaterialPropertyDrawer {
                     // Failsafe for non-asset materials - should never trigger.
                     continue;
                 }
+
                 Undo.RecordObject(target, "Change Material MinMax");
-                var material = (Material) target;
+                var material = (Material)target;
                 material.SetVector(prop.name, _value);
                 EditorUtility.SetDirty(material);
             }

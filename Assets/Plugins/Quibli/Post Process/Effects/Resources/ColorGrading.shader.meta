@@ -8,3 +8,10 @@ ShaderImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203178
+  packageName: 'Quibli: Anime Shaders and Tools'
+  packageVersion: 2.6.2
+  assetPath: Assets/Plugins/Quibli/Post Process/Effects/Resources/ColorGrading.shader
+  uploadId: 864282

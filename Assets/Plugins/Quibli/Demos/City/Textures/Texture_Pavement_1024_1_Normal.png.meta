@@ -106,3 +106,10 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203178
+  packageName: 'Quibli: Anime Shaders and Tools'
+  packageVersion: 2.6.2
+  assetPath: Assets/Plugins/Quibli/Demos/City/Textures/Texture_Pavement_1024_1_Normal.png
+  uploadId: 864282

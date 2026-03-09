@@ -5,3 +5,10 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167725
+  packageName: AZURE Nature
+  packageVersion: 1.2.0
+  assetPath: Assets/Plugins/AZURE Nature/Demo/AN_Demo.unity
+  uploadId: 821202

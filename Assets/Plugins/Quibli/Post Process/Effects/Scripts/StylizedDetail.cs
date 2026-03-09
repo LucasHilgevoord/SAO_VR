@@ -1,6 +1,10 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Rendering;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.RenderGraphModule.Util;
+#endif
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering.Universal.PostProcessing;
 
@@ -28,6 +32,16 @@ public class StylizedDetailRenderer : CompoundRenderer {
     private StylizedDetail _volumeComponent;
 
     private Material _effectMaterial;
+
+#if UNITY_6000_0_OR_NEWER
+    // Pass data for the final combine in RenderGraph
+    private class CombinePassData {
+        public TextureHandle src;
+        public TextureHandle blur1;
+        public TextureHandle blur2;
+        public Material mat;
+    }
+#endif
 
     static class PropertyIDs {
         internal static readonly int Input = Shader.PropertyToID("_MainTex");
@@ -91,23 +105,132 @@ public class StylizedDetailRenderer : CompoundRenderer {
 
         cmd.SetGlobalFloat(PropertyIDs.BlurStrength, edgePreserve);
         cmd.SetGlobalTexture(PropertyIDs.Input, source);
-        CoreUtils.DrawFullScreen(cmd, _effectMaterial, PropertyIDs.PingTexture, null, 1);
+        CoreUtils.DrawFullScreen(cmd, _effectMaterial, PropertyIDs.PingTexture, properties: null, shaderPassId: 1);
         cmd.SetGlobalTexture(PropertyIDs.Input, PropertyIDs.PingTexture);
-        CoreUtils.DrawFullScreen(cmd, _effectMaterial, PropertyIDs.Blur1, null, 2);
+        CoreUtils.DrawFullScreen(cmd, _effectMaterial, PropertyIDs.Blur1, properties: null, shaderPassId: 2);
 
         cmd.SetGlobalFloat(PropertyIDs.BlurStrength, blurRadius);
         cmd.SetGlobalTexture(PropertyIDs.Input, PropertyIDs.Blur1);
-        CoreUtils.DrawFullScreen(cmd, _effectMaterial, PropertyIDs.PingTexture, null, 1);
+        CoreUtils.DrawFullScreen(cmd, _effectMaterial, PropertyIDs.PingTexture, properties: null, shaderPassId: 1);
         cmd.SetGlobalTexture(PropertyIDs.Input, PropertyIDs.PingTexture);
-        CoreUtils.DrawFullScreen(cmd, _effectMaterial, PropertyIDs.Blur2, null, 2);
+        CoreUtils.DrawFullScreen(cmd, _effectMaterial, PropertyIDs.Blur2, properties: null, shaderPassId: 2);
 
         cmd.SetGlobalTexture(PropertyIDs.Input, source);
-        CoreUtils.DrawFullScreen(cmd, _effectMaterial, destination, null, 0);
+        CoreUtils.DrawFullScreen(cmd, _effectMaterial, destination, properties: null, shaderPassId: 0);
 
         cmd.ReleaseTemporaryRT(PropertyIDs.PingTexture);
         cmd.ReleaseTemporaryRT(PropertyIDs.Blur1);
         cmd.ReleaseTemporaryRT(PropertyIDs.Blur2);
     }
+
+#if UNITY_6000_0_OR_NEWER
+    public override void RenderWithGraph(RenderGraph renderGraph, TextureHandle source, TextureHandle destination,
+                                         RenderTextureDescriptor intermediateDescriptor) {
+        if (!source.IsValid() || !destination.IsValid()) return;
+        if (_effectMaterial == null) return;
+        const int downSample = 1;
+
+        int wh = intermediateDescriptor.width / downSample;
+        int hh = intermediateDescriptor.height / downSample;
+
+        // Provide _SourceSize for shaders (parity with non-RenderGraph path)
+        float w = intermediateDescriptor.width;
+        float h = intermediateDescriptor.height;
+        if (intermediateDescriptor.useDynamicScale) {
+            w *= ScalableBufferManager.widthScaleFactor;
+            h *= ScalableBufferManager.heightScaleFactor;
+        }
+
+        Shader.SetGlobalVector(Shader.PropertyToID("_SourceSize"), new Vector4(w, h, 1.0f / w, 1.0f / h));
+
+        // Assumes a radius of 1 is 1 at 1080p. Past a certain radius our gaussian kernel will look very bad so we'll
+        // clamp it for very high resolutions (4K+).
+        float blurRadius = _volumeComponent.blur.value * (wh / 1080f);
+        blurRadius = Mathf.Min(blurRadius, 2f);
+        float edgePreserve = _volumeComponent.edgePreserve.value * (wh / 1080f);
+        edgePreserve = Mathf.Min(edgePreserve, 2f);
+
+        var rangeStart = _volumeComponent.rangeStart.overrideState ? _volumeComponent.rangeStart.value : 0;
+        var rangeEnd = _volumeComponent.rangeEnd.overrideState ? _volumeComponent.rangeEnd.value : -1;
+        _effectMaterial.SetVector(PropertyIDs.CoCParams, new Vector2(rangeStart, rangeEnd));
+
+        _effectMaterial.SetFloat(PropertyIDs.Intensity, _volumeComponent.intensity.value);
+
+        _effectMaterial.SetVector(PropertyIDs.DownSampleScaleFactor,
+                                  new Vector4(1.0f / downSample, 1.0f / downSample, downSample, downSample));
+
+        // Allocate downsampled blur intermediates (parity with non-RG path intent)
+        var smallDesc = intermediateDescriptor;
+        smallDesc.width = wh;
+        smallDesc.height = hh;
+        smallDesc.msaaSamples = 1;
+        smallDesc.depthBufferBits = 0;
+
+        TextureHandle blur1 =
+            UniversalRenderer.CreateRenderGraphTexture(renderGraph, smallDesc, "_BlurTex1", clear: true);
+        TextureHandle blur2 =
+            UniversalRenderer.CreateRenderGraphTexture(renderGraph, smallDesc, "_BlurTex2", clear: true);
+
+        RenderGraphUtils.BlitMaterialParameters blit;
+        {
+            _effectMaterial.SetFloat(PropertyIDs.BlurStrength, edgePreserve);
+
+            blit = new(source, destination, _effectMaterial, shaderPass: 1) {
+                sourceTexturePropertyID = PropertyIDs.Input,
+                geometry = RenderGraphUtils.FullScreenGeometryType.ProceduralTriangle
+            };
+            renderGraph.AddBlitPass(blit, passName: $"{_effectMaterial.name}_Pass{blit.shaderPass}");
+
+            blit.source = destination;
+            blit.destination = blur1;
+            blit.shaderPass = 2;
+            blit.sourceTexturePropertyID = PropertyIDs.Input;
+            blit.geometry = RenderGraphUtils.FullScreenGeometryType.ProceduralTriangle;
+            renderGraph.AddBlitPass(blit, passName: $"{_effectMaterial.name}_Pass{blit.shaderPass}");
+        }
+
+        {
+            _effectMaterial.SetFloat(PropertyIDs.BlurStrength, blurRadius);
+
+            blit.source = blur1;
+            blit.destination = destination;
+            blit.shaderPass = 1;
+            blit.geometry = RenderGraphUtils.FullScreenGeometryType.ProceduralTriangle;
+            renderGraph.AddBlitPass(blit, passName: $"{_effectMaterial.name}_Pass{blit.shaderPass}");
+
+            blit.source = destination;
+            blit.destination = blur2;
+            blit.shaderPass = 2;
+            blit.sourceTexturePropertyID = PropertyIDs.Input;
+            blit.geometry = RenderGraphUtils.FullScreenGeometryType.ProceduralTriangle;
+            renderGraph.AddBlitPass(blit, passName: $"{_effectMaterial.name}_Pass{blit.shaderPass}");
+        }
+
+        {
+            // Final combine needs multiple textures (source, blur1, blur2). Use a raster pass.
+            // Example: MrtRendererFeature in URP Samples for RenderGraph.
+            using (var builder =
+                   renderGraph.AddRasterRenderPass<CombinePassData>("StylizedDetail_Combine", out var passData)) {
+                passData.src = source;
+                passData.blur1 = blur1;
+                passData.blur2 = blur2;
+                passData.mat = _effectMaterial;
+
+                builder.UseTexture(passData.src);
+                builder.UseTexture(passData.blur1);
+                builder.UseTexture(passData.blur2);
+                builder.SetRenderAttachment(destination, 0);
+
+                builder.SetRenderFunc((CombinePassData data, RasterGraphContext ctx) => {
+                    data.mat.SetTexture(PropertyIDs.Input, data.src);
+                    data.mat.SetTexture(PropertyIDs.Blur1, data.blur1);
+                    data.mat.SetTexture(PropertyIDs.Blur2, data.blur2);
+                    ctx.cmd.DrawProcedural(Matrix4x4.identity, data.mat, 0, MeshTopology.Triangles, 3);
+                });
+            }
+        }
+    }
+#endif
 
     public override void Dispose(bool disposing) { }
 }

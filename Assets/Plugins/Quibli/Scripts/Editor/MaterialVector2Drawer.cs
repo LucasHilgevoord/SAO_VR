@@ -14,7 +14,11 @@ public class MaterialVector2Drawer : MaterialPropertyDrawer {
     }
 
     private static bool IsPropertyTypeSuitable(MaterialProperty prop) {
+#if UNITY_6000_1_OR_NEWER
+        return prop.propertyType == UnityEngine.Rendering.ShaderPropertyType.Vector;
+#else
         return prop.type == MaterialProperty.PropType.Vector;
+#endif
     }
 
     public override void OnGUI(Rect position, MaterialProperty prop, string label, MaterialEditor editor) {

@@ -1,6 +1,10 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Rendering;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.RenderGraphModule.Util;
+#endif
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering.Universal.PostProcessing;
 
@@ -60,7 +64,36 @@ public class ColorGradingRenderer : CompoundRenderer {
 
     public override void Render(CommandBuffer cmd, RTHandle source, RTHandle destination,
                                 ref RenderingData renderingData, InjectionPoint injectionPoint) {
+        _effectMaterial.SetFloat(PropertyIDs.Intensity, _volumeComponent.intensity.value);
+        _effectMaterial.SetVector(PropertyIDs.ShadowBezierPoints,
+                                  new Vector4(_volumeComponent.blueShadows.value, _volumeComponent.greenShadows.value));
+        _effectMaterial.SetVector(PropertyIDs.HighlightBezierPoints,
+                                  new Vector4(_volumeComponent.redHighlights.value, 0, 0, 0));
+        _effectMaterial.SetFloat(PropertyIDs.Contrast, _volumeComponent.contrast.value);
+        _effectMaterial.SetFloat(PropertyIDs.Vibrance, _volumeComponent.vibrance.value * 0.5f);
+        _effectMaterial.SetFloat(PropertyIDs.Saturation, _volumeComponent.saturation.value * 0.5f);
+
         RenderTextureDescriptor descriptor = GetTempRTDescriptor(renderingData);
+        SetSourceSize(cmd, descriptor);
+
+        cmd.SetGlobalTexture(PropertyIDs.Input, source);
+        CoreUtils.DrawFullScreen(cmd, _effectMaterial, destination);
+    }
+
+#if UNITY_6000_0_OR_NEWER
+    public override void RenderWithGraph(RenderGraph renderGraph, TextureHandle source, TextureHandle destination,
+                                         RenderTextureDescriptor intermediateDescriptor) {
+        if (!source.IsValid() || !destination.IsValid()) return;
+        if (_effectMaterial == null) return;
+        // Provide _SourceSize for shaders (parity with non-RenderGraph path)
+        float w = intermediateDescriptor.width;
+        float h = intermediateDescriptor.height;
+        if (intermediateDescriptor.useDynamicScale) {
+            w *= ScalableBufferManager.widthScaleFactor;
+            h *= ScalableBufferManager.heightScaleFactor;
+        }
+
+        Shader.SetGlobalVector(Shader.PropertyToID("_SourceSize"), new Vector4(w, h, 1.0f / w, 1.0f / h));
 
         _effectMaterial.SetFloat(PropertyIDs.Intensity, _volumeComponent.intensity.value);
         _effectMaterial.SetVector(PropertyIDs.ShadowBezierPoints,
@@ -71,11 +104,13 @@ public class ColorGradingRenderer : CompoundRenderer {
         _effectMaterial.SetFloat(PropertyIDs.Vibrance, _volumeComponent.vibrance.value * 0.5f);
         _effectMaterial.SetFloat(PropertyIDs.Saturation, _volumeComponent.saturation.value * 0.5f);
 
-        SetSourceSize(cmd, descriptor);
-
-        cmd.SetGlobalTexture(PropertyIDs.Input, source);
-        CoreUtils.DrawFullScreen(cmd, _effectMaterial, destination);
+        RenderGraphUtils.BlitMaterialParameters blit = new(source, destination, _effectMaterial, shaderPass: 0) {
+            sourceTexturePropertyID = PropertyIDs.Input,
+            geometry = RenderGraphUtils.FullScreenGeometryType.ProceduralTriangle
+        };
+        renderGraph.AddBlitPass(blit, passName: $"{_effectMaterial.name}_Pass{blit.shaderPass}");
     }
+#endif
 
     public override void Dispose(bool disposing) { }
 }

@@ -16,7 +16,7 @@ inline half NdotLTransitionPrimary(half3 normal, half3 lightDir) {
     return NdotLTransition(normal, lightDir, _SelfShadingSize);
 }
 
-half3 LightingPhysicallyBased_DSTRM(Light light, InputData inputData, half4 albedo, half4 detail) {
+half3 LightingPhysicallyBased_DSTRM(Light light, InputData inputData) {
     // If all light in the scene is baked, we use custom light direction for the cel shading.
     light.direction = lerp(light.direction, _LightmapDirection, _OverrideLightmapDir);
 
@@ -124,7 +124,6 @@ half4 UniversalFragment_DSTRM(InputData inputData, SurfaceData surfaceData, floa
 #endif
 
     const half4 albedo = half4(surfaceData.albedo, surfaceData.alpha);
-    const half4 detail = SAMPLE_TEXTURE2D(_DetailMap, sampler_DetailMap, uv);
 
     half3 brdf = _LightContribution;
 #if defined(_BASEMAP_PREMULTIPLY)
@@ -134,12 +133,30 @@ half4 UniversalFragment_DSTRM(InputData inputData, SurfaceData surfaceData, floa
     BRDFData brdfData;
     InitializeBRDFData(brdf, 1.0 - 1.0 / kDielectricSpec.a, 0, 0, surfaceData.alpha, brdfData);
     half3 color = GlobalIllumination(brdfData, inputData.bakedGI, 1.0, inputData.normalWS, inputData.viewDirectionWS);
-    color += LightingPhysicallyBased_DSTRM(mainLight, inputData, albedo, detail);
+    color += LightingPhysicallyBased_DSTRM(mainLight, inputData);
 
 #ifdef _ADDITIONAL_LIGHTS
     const uint pixelLightCount = GetAdditionalLightsCount();
-    for (uint lightIndex = 0u; lightIndex < pixelLightCount; ++lightIndex)
+    uint meshRenderingLayers = GetMeshRenderingLayer();
+
+    #if USE_FORWARD_PLUS
+    for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
     {
+        FORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK
+
+        Light light = GetAdditionalLight(lightIndex, inputData.positionWS, shadowMask);//, aoFactor);
+        StylizeLight(light);
+
+        #ifdef _LIGHT_LAYERS
+        if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
+            #endif
+        {
+            color += LightingPhysicallyBased_DSTRM(light, inputData);
+        }
+    }
+    #endif
+    
+    LIGHT_LOOP_BEGIN(pixelLightCount)
         Light light = GetAdditionalLight(lightIndex, inputData.positionWS, shadowMask);
 
 #if defined(_SCREEN_SPACE_OCCLUSION)
@@ -147,8 +164,14 @@ half4 UniversalFragment_DSTRM(InputData inputData, SurfaceData surfaceData, floa
 #endif
 
         StylizeLight(light);
-        color += LightingPhysicallyBased_DSTRM(light, inputData, albedo, detail);
-    }
+    
+        #ifdef _LIGHT_LAYERS
+        if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
+        #endif
+        {
+            color += LightingPhysicallyBased_DSTRM(light, inputData);
+        }
+    LIGHT_LOOP_END
 #endif
 
 #ifdef _ADDITIONAL_LIGHTS_VERTEX
@@ -158,19 +181,25 @@ half4 UniversalFragment_DSTRM(InputData inputData, SurfaceData surfaceData, floa
     // Base map.
     {
         // Workaround to render decals without requiring the _BaseMap texture.
+        half textureImpact = _TextureImpact;
 #ifdef _DBUFFER
-        _TextureImpact = 1.0;
+        textureImpact = 1.0;
 #endif
 
-#if defined(_TEXTUREBLENDINGMODE_ADD)
-        color += lerp(half3(0.0f, 0.0f, 0.0f), albedo.rgb, _TextureImpact);
-#else  // _TEXTUREBLENDINGMODE_MULTIPLY
-        color *= lerp(half3(1.0f, 1.0f, 1.0f), albedo.rgb, _TextureImpact);
+#if defined(DR_DECAL_PAINT_OVER) && defined(_DBUFFER)
+        color = lerp(color, albedo.rgb, textureImpact);
+#else
+    #if defined(_TEXTUREBLENDINGMODE_ADD)
+        color += lerp(half3(0.0f, 0.0f, 0.0f), albedo.rgb, textureImpact);
+    #else  // _TEXTUREBLENDINGMODE_MULTIPLY
+        color *= lerp(half3(1.0f, 1.0f, 1.0f), albedo.rgb, textureImpact);
+    #endif
 #endif
     }
 
     // Detail map.
     {
+        const half4 detail = SAMPLE_TEXTURE2D(_DetailMap, sampler_DetailMap, uv);
         #if defined(_DETAILMAPBLENDINGMODE_ADD)
         color += lerp(0, _DetailMapColor.rgb, detail.rgb * _DetailMapImpact).rgb;
         #endif

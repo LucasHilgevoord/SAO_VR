@@ -39,7 +39,7 @@
         _OutlineDepthOffset("[DR_OUTLINE_ON]Depth Offset", Range(0, 1)) = 0.0
         _CameraDistanceImpact("[DR_OUTLINE_ON]Camera Distance Impact", Range(0, 1)) = 0.5
 
-        [MainTexture] _BaseMap("[FOLDOUT(Texture maps){11}]Albedo", 2D) = "black" {}
+        [MainTexture] _BaseMap("[FOLDOUT(Texture maps){9}]Albedo", 2D) = "black" {}
     	[Toggle(_BASEMAP_PREMULTIPLY)]_BaseMapPremultiply("[_]Mix Into Shading", Int) = 0
         [KeywordEnum(Multiply, Add)]_TextureBlendingMode("[]Blending Mode", Float) = 0
         _TextureImpact("[]Texture Impact", Range(0, 1)) = 1.0
@@ -55,9 +55,10 @@
         [HideInInspector][HDR]_EmissionColor("Emission Color", Color) = (0,0,0)
         [HideInInspector][NoScaleOffset]_EmissionMap("Emission Map", 2D) = "white" {}
 
-        _LightContribution("[FOLDOUT(Lighting){11}]Light Color Impact", Range(0, 1)) = 1
+        _LightContribution("[FOLDOUT(Lighting){12}]Light Color Impact", Range(0, 1)) = 1
         [Space][ToggleOff] _ReceiveShadows("Receive Shadows", Float) = 0
         [Toggle(_UNITYSHADOW_OCCLUSION)]_UnityShadowOcclusion("[_RECEIVE_SHADOWS_OFF]Shadow Occlusion", Int) = 0
+        [Toggle(DR_DECAL_PAINT_OVER)] _DecalPaintOver("Decals Paint Over Shading", Int) = 0
         [Space][Toggle(DR_LIGHT_ATTENUATION)]_OverrideLightAttenuation("Customize Light", Int) = 0
         [MinMax]_LightAttenuation("[DR_LIGHT_ATTENUATION][]Attenuation Remap", Vector) = (0, 1, 0, 0)
         _ShadowColor("[DR_LIGHT_ATTENUATION][]Shadow Color", Color) = (0, 0, 0, 1)
@@ -97,6 +98,11 @@
         }
         LOD 300
 
+    	HLSLINCLUDE
+    	// #define DR_DOTS_INSTANCING_ON // Uncomment to enable DOTS instancing
+    	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Version.hlsl"
+    	ENDHLSL
+
         Pass
         {
             Name "ForwardLit"
@@ -117,6 +123,7 @@
             #pragma shader_feature_local DR_RIM_ON
             #pragma shader_feature_local DR_VERTEX_COLORS_ON
             #pragma shader_feature_local DR_ENABLE_LIGHTMAP_DIR
+            #pragma shader_feature_local DR_DECAL_PAINT_OVER
             #pragma shader_feature_local _TEXTUREBLENDINGMODE_MULTIPLY _TEXTUREBLENDINGMODE_ADD
             #pragma shader_feature_local _UNITYSHADOW_OCCLUSION
             #pragma shader_feature_local _BASEMAP_PREMULTIPLY
@@ -131,37 +138,56 @@
             #pragma shader_feature_local_fragment _EMISSION
             #pragma shader_feature_local _RECEIVE_SHADOWS_OFF
 
-
             // -------------------------------------
             // Universal Pipeline keywords
+            #if VERSION_GREATER_EQUAL(11, 0)
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            #else
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+            #endif
             #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
             #pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
             #pragma multi_compile _ SHADOWS_SHADOWMASK
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT
             #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
+            #if VERSION_GREATER_EQUAL(12, 0)
             #pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
             #pragma multi_compile_fragment _ _LIGHT_LAYERS
             #pragma multi_compile_fragment _ _LIGHT_COOKIES
             #pragma multi_compile _ _CLUSTERED_RENDERING
+            #endif
+            #if UNITY_VERSION >= 202220 && UNITY_VERSION < 600000
             #pragma multi_compile _ _FORWARD_PLUS
             #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
+            #endif
+            #if UNITY_VERSION >= 600000
+            #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+            #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
+            #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/RenderingLayers.hlsl"
+            #endif
 
             // -------------------------------------
             // Unity defined keywords
             #pragma multi_compile _ DIRLIGHTMAP_COMBINED
             #pragma multi_compile _ LIGHTMAP_ON
             #pragma multi_compile_fog
+            #if UNITY_VERSION >= 202220
             #pragma multi_compile _ DYNAMICLIGHTMAP_ON
             #pragma multi_compile_fragment _ DEBUG_DISPLAY
             #pragma multi_compile_fragment _ LOD_FADE_CROSSFADE
+            #endif
 
             //--------------------------------------
             // GPU Instancing
             #pragma multi_compile_instancing
             #pragma instancing_options renderinglayer
-            #pragma multi_compile _ DOTS_INSTANCING_ON
+            #if defined(DR_DOTS_INSTANCING_ON)
+            #pragma target 4.5							// Uncomment to enable DOTs instancing
+            #pragma multi_compile _ DOTS_INSTANCING_ON	// Uncomment to enable DOTs instancing
+            #endif
 
             #define BUMP_SCALE_NOT_SUPPORTED 1
             #define REQUIRES_WORLD_SPACE_TANGENT_INTERPOLATOR 1
@@ -294,7 +320,10 @@
             //--------------------------------------
             // GPU Instancing
             #pragma multi_compile_instancing
-            #pragma multi_compile _ DOTS_INSTANCING_ON
+            #if defined(DR_DOTS_INSTANCING_ON)
+            #pragma target 4.5							// Uncomment to enable DOTs instancing
+            #pragma multi_compile _ DOTS_INSTANCING_ON	// Uncomment to enable DOTs instancing
+            #endif
 
             // -------------------------------------
             // Universal Pipeline keywords
@@ -357,7 +386,10 @@
             // GPU Instancing
             #pragma multi_compile_instancing
             #pragma instancing_options renderinglayer
+            #if defined(DR_DOTS_INSTANCING_ON)
+            #pragma target 4.5
             #pragma multi_compile _ DOTS_INSTANCING_ON
+            #endif
 
             #pragma vertex LitPassVertexSimple
             #pragma fragment LitPassFragmentSimple
@@ -435,7 +467,10 @@
             //--------------------------------------
             // GPU Instancing
             #pragma multi_compile_instancing
+            #if defined(DR_DOTS_INSTANCING_ON)
+            #pragma target 4.5
             #pragma multi_compile _ DOTS_INSTANCING_ON
+            #endif
 
             #include "LibraryUrp/StylizedInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthNormalsPass.hlsl"

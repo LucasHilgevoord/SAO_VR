@@ -1,7 +1,8 @@
-﻿#pragma warning disable 618
-
-using System;
+﻿using System;
 using UnityEngine.Experimental.Rendering;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine.Rendering.RenderGraphModule;
+#endif
 
 namespace UnityEngine.Rendering.Universal.PostProcessing {
 /// <summary>
@@ -26,7 +27,6 @@ public enum InjectionPoint {
 public abstract class CompoundRenderer : IDisposable {
     private bool _initialized = false;
     protected GraphicsFormat _defaultHDRFormat;
-    protected bool _useRGBM;
 
     /// <summary>
     /// True if you want your custom post process to be visible in the scene view. False otherwise.
@@ -57,15 +57,19 @@ public abstract class CompoundRenderer : IDisposable {
     /// </summary>
     public virtual void Initialize() {
         // Texture format pre-lookup
-        if (SystemInfo.IsFormatSupported(GraphicsFormat.B10G11R11_UFloatPack32,
-                                         FormatUsage.Linear | FormatUsage.Render)) {
+#if UNITY_6000_0_OR_NEWER
+        var isFormatSupported = SystemInfo.IsFormatSupported(GraphicsFormat.B10G11R11_UFloatPack32,
+                                                             GraphicsFormatUsage.Linear | GraphicsFormatUsage.Render);
+#else
+        var isFormatSupported = SystemInfo.IsFormatSupported(GraphicsFormat.B10G11R11_UFloatPack32,
+                                                             FormatUsage.Linear | FormatUsage.Render);
+#endif
+        if (isFormatSupported) {
             _defaultHDRFormat = GraphicsFormat.B10G11R11_UFloatPack32;
-            _useRGBM = false;
         } else {
             _defaultHDRFormat = QualitySettings.activeColorSpace == ColorSpace.Linear
                 ? GraphicsFormat.R8G8B8A8_SRGB
                 : GraphicsFormat.R8G8B8A8_UNorm;
-            _useRGBM = true;
         }
     }
 
@@ -144,13 +148,18 @@ public abstract class CompoundRenderer : IDisposable {
     static class ShaderConstants {
         public static readonly int _SourceSize = Shader.PropertyToID("_SourceSize");
     }
+
+#if UNITY_6000_0_OR_NEWER
+    public abstract void RenderWithGraph(RenderGraph renderGraph, TextureHandle source, TextureHandle destination,
+                                         RenderTextureDescriptor intermediateDescriptor);
+#endif
 }
 
 /// <summary>
 /// Use this attribute to mark classes that can be used as a custom post-processing renderer
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-public sealed class CompoundRendererFeatureAttribute : Attribute {
+public sealed class CompoundRendererFeatureAttribute : System.Attribute {
     // Name of the effect in the custom post-processing render feature editor
     readonly string name;
 

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a3595d1e91ba7dd4da3e9249b1d7d67b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167725
+  packageName: AZURE Nature
+  packageVersion: 1.2.0
+  assetPath: Assets/Raygeas/AZURE Nature/Settings/AN_UniversalRenderPipelineAsset.asset
+  uploadId: 821202

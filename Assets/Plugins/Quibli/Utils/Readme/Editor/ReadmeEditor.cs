@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace Quibli {
 [CustomEditor(typeof(Readme))]
@@ -69,7 +71,7 @@ public class ReadmeEditor : Editor {
                                                 MessageType.Info);
                     } else {
                         EditorGUILayout
-                            .HelpBox($"Update needed. " + $"The latest version is {_versionLatest}, but you have {_readme.AssetVersion}.",
+                            .HelpBox($"Update needed. The latest version is {{_versionLatest}}, but you have {{_readme.AssetVersion}}.",
                                      MessageType.Warning);
                     }
                 }
@@ -110,12 +112,12 @@ public class ReadmeEditor : Editor {
 
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("On Trello")) {
-                OpenSupportTicketTrello();
+            if (GUILayout.Button("Open support ticket on GitHub")) {
+                OpenSupportTicketGitHub();
             }
 
-            if (GUILayout.Button("On GitHub")) {
-                OpenSupportTicketGitHub();
+            if (GUILayout.Button("Contact us")) {
+                OpenContactUs();
             }
 
             GUILayout.EndHorizontal();
@@ -147,7 +149,7 @@ public class ReadmeEditor : Editor {
                 }
             }
         }
-        
+
         DrawColorSpaceCheck();
 
         {
@@ -195,13 +197,45 @@ public class ReadmeEditor : Editor {
     }
 
     private string[] GetDebugInfo() {
+        var renderPipelineAsset = GraphicsSettings.currentRenderPipeline;
+        if (renderPipelineAsset == null) {
+            renderPipelineAsset = GraphicsSettings.defaultRenderPipeline;
+        }
+
+        var rpAssetName = renderPipelineAsset == null ? "N/A" : renderPipelineAsset.name;
+        var urpAsset = (UniversalRenderPipelineAsset)renderPipelineAsset;
+
+        ScriptableRendererData[] renderers = Array.Empty<ScriptableRendererData>();
+        if (urpAsset != null) {
+            var rendererDataListField = typeof(UniversalRenderPipelineAsset).GetField("m_RendererDataList",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (rendererDataListField != null) {
+                renderers = (ScriptableRendererData[])rendererDataListField.GetValue(urpAsset);
+            }
+        }
+
+        string renderingModeName = "N/A";
+        UniversalRendererData urpRenderer = renderers.Length > 0 ? (UniversalRendererData)renderers[0] : null;
+        if (urpRenderer != null) {
+            var renderingModeField = typeof(UniversalRendererData).GetField("m_RenderingMode",
+                                                                            System.Reflection.BindingFlags.NonPublic |
+                                                                            System.Reflection.BindingFlags.Instance);
+            if (renderingModeField != null) {
+                var renderingMode = (RenderingMode)renderingModeField.GetValue(urpRenderer);
+                renderingModeName = renderingMode.ToString();
+            }
+        }
+
         var info = new List<string> {
             $"{AssetName} version {_readme.AssetVersion}",
             $"Unity {_readme.UnityVersion}",
             $"Dev platform: {Application.platform}",
             $"Target platform: {EditorUserBuildSettings.activeBuildTarget}",
-            $"URP installed: {_readme.UrpInstalled}, version {_readme.UrpVersionInstalled}",
             $"Render pipeline: {Shader.globalRenderPipeline}",
+            $"URP installed: {_readme.UrpInstalled}, version {_readme.UrpVersionInstalled}",
+            $"Render pipeline asset: {rpAssetName}",
+            $"Renderers: {string.Join(", ", renderers.Select(r => r.name))}",
+            $"Rendering path: {renderingModeName}",
             $"Color space: {PlayerSettings.colorSpace}"
         };
 
@@ -293,7 +327,7 @@ public class ReadmeEditor : Editor {
 
         Debug.Log($"<b>[{AssetName}]</b> Set the render pipeline asset in the Graphics settings " +
                   "to the bundled example.");
-        GraphicsSettings.renderPipelineAsset = pipelineAsset;
+        GraphicsSettings.defaultRenderPipeline = pipelineAsset;
         GraphicsSettings.defaultRenderPipeline = pipelineAsset;
 
         ChangePipelineAssetAllQualityLevels(pipelineAsset);
@@ -316,27 +350,29 @@ public class ReadmeEditor : Editor {
     }
 
     private void CheckVersion() {
-        NetworkManager.GetVersion(version => { _versionLatest = version; });
+        NetworkManager.GetVersion(version => { _versionLatest = version.Trim(); });
     }
 
     private void OpenSupportTicketGitHub() {
         Application.OpenURL("https://github.com/dustyroom-studio/quibli-doc/issues/new/choose");
     }
 
-    private void OpenSupportTicketTrello() {
-        Application.OpenURL("https://trello.com/b/tOhjxOib/quibli-support");
-    }
-
     private void OpenDocumentation() {
         Application.OpenURL("https://quibli.dustyroom.com/");
+    }
+
+    private void OpenContactUs() {
+        Application.OpenURL("https://quibli.dustyroom.com/contact-details");
     }
 
     private void DrawColorSpaceCheck() {
         if (PlayerSettings.colorSpace != ColorSpace.Linear) {
             DrawUILine(Color.gray, 1, 20);
-            EditorGUILayout
-                .HelpBox($"{AssetName} demo scenes were created for the Linear color space, but your project is using {PlayerSettings.colorSpace}.\nThis may result in the demo scenes appearing slightly different compared to the Asset Store screenshots.\nOptionally, you may switch the color space using the button below.",
-                         MessageType.Warning);
+            var m = $"{AssetName} demo scenes were created for the Linear color space, but your project is using " +
+                    $"{PlayerSettings.colorSpace}.\nThis may result in the demo scenes appearing slightly different " +
+                    $"compared to the Asset Store screenshots.\nOptionally, you may switch the color space using the " +
+                    $"button below.";
+            EditorGUILayout.HelpBox(m, MessageType.Warning);
 
             if (GUILayout.Button("Switch player settings to Linear color space")) {
                 PlayerSettings.colorSpace = ColorSpace.Linear;

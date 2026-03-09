@@ -6,3 +6,10 @@ NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167725
+  packageName: AZURE Nature
+  packageVersion: 1.2.0
+  assetPath: Assets/Plugins/AZURE Nature/Terrain Layers/Autumn/AN_Aut_Grass_4.terrainlayer
+  uploadId: 821202

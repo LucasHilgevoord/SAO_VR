@@ -103,3 +103,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167725
+  packageName: AZURE Nature
+  packageVersion: 1.2.0
+  assetPath: Assets/Plugins/AZURE Nature/Models/AN_Fir_1.fbx
+  uploadId: 821202

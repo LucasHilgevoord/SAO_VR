@@ -1,6 +1,5 @@
 ﻿#if UNITY_EDITOR
 
-using System;
 using ExternalPropertyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,12 +9,13 @@ namespace Dustyroom {
 [RequireComponent(typeof(MeshFilter))]
 [ExecuteInEditMode]
 public class CurveRenderer : MonoBehaviour {
-    [Required()]
+    [Required]
     public Transform end1;
-    [Required()]
+    [Required]
     public Transform end2;
 
     [Space]
+    [Min(2)]
     public int points = 20;
 
     public AnimationCurve curve = AnimationCurve.EaseInOut(0, 0, 1, 0);
@@ -24,13 +24,17 @@ public class CurveRenderer : MonoBehaviour {
     [Space]
     public float thickness = 0.02f;
 
-    [Space, BoxGroup("Multiple Curves")]
+    [Space]
+    [BoxGroup("Multiple Curves")]
+    [Min(1)]
     public int quantity = 1;
 
     [EnableIf(nameof(IsMultipleWires)), BoxGroup("Multiple Curves")]
+    [Min(0)]
     public float curveVariability = 0.2f;
 
-    [EnableIf(nameof(IsMultipleWires)), BoxGroup("Multiple Curves")] [Range(0, 1)]
+    [EnableIf(nameof(IsMultipleWires)), BoxGroup("Multiple Curves")]
+    [Range(0, 1)]
     public float thicknessVariability = 0.1f;
 
     [EnableIf(nameof(IsMultipleWires)), BoxGroup("Multiple Curves")]
@@ -47,18 +51,16 @@ public class CurveRenderer : MonoBehaviour {
     private Mesh _mesh;
     private Vector3 _lastPositionEnd1;
     private Vector3 _lastPositionEnd2;
+    private bool _refreshPending;
 
     private void OnValidate() {
-        points = Mathf.Max(points, 2);
-        quantity = Mathf.Max(quantity, 1);
-        curveVariability = Mathf.Max(curveVariability, 0);
-        Refresh();
+        _refreshPending = true;
     }
 
     private void Update() {
 #if UNITY_EDITOR
         if (!end1 || !end2) return;
-        if (end1.position != _lastPositionEnd1 || end2.position != _lastPositionEnd2) {
+        if (_refreshPending || end1.position != _lastPositionEnd1 || end2.position != _lastPositionEnd2) {
             Refresh();
         }
 
@@ -83,6 +85,20 @@ public class CurveRenderer : MonoBehaviour {
             _mesh.name = "Curve Mesh";
         }
 
+        if (!_mesh.isReadable) {
+            if (gameObject.isStatic) {
+                gameObject.isStatic = false;
+                var m = $"<b>[Quibli]</b> Curve Renderer mesh on the object ${gameObject.name} was marked as static. " +
+                        $"Attempting to unmark it.";
+                Debug.LogWarning(m);
+            } else {
+                var m = $"<b>[Quibli]</b> Curve Renderer mesh on the object ${gameObject.name} is not readable. " +
+                        $"Cannot update the mesh.";
+                Debug.LogWarning(m);
+                return;
+            }
+        }
+
         var numPathPoints = (points + 1) * quantity;
         const int numVerticesPerPathPoint = 4;
         Vector3[] verts = new Vector3[numPathPoints * numVerticesPerPathPoint];
@@ -103,7 +119,7 @@ public class CurveRenderer : MonoBehaviour {
         // @formatter:on
 
         // Fix the random seed for deterministic output.
-        var state = Random.state;
+        var originalRandomState = Random.state;
         Random.InitState(randomSeed);
 
         for (int line = 0; line < quantity; line++) {
@@ -112,7 +128,7 @@ public class CurveRenderer : MonoBehaviour {
             for (int i = 0; i <= points; ++i) {
                 float alpha = i / (float)points;
                 var positionLine = Vector3.Lerp(end1.position, end2.position, alpha) +
-                                   Vector3.up * curve.Evaluate(alpha) * scale;
+                                   Vector3.up * (curve.Evaluate(alpha) * scale);
                 var pointPosition = transform.InverseTransformPoint(positionLine + line * interval);
 
                 {
@@ -140,10 +156,16 @@ public class CurveRenderer : MonoBehaviour {
             }
         }
 
-        Random.state = state;
+        Random.state = originalRandomState;
+
+        // Safety check.
+        if (!_mesh.isReadable) {
+            Debug.LogWarning("<b>[Quibli]</b> Curve Renderer mesh is not readable. Cannot update the mesh.");
+            return;
+        }
 
         _mesh.Clear();
-        _mesh.vertices = verts;
+        _mesh.SetVertices(verts);
         _mesh.SetTriangles(triangles, 0);
 
         var uvs = new Vector2[verts.Length];

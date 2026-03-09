@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 42232636e76cd754d8b2b4e37d26c125
+guid: 69fe7908d90821d439766ca2ac705353
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167725
+  packageName: AZURE Nature
+  packageVersion: 1.2.0
+  assetPath: Assets/Plugins/AZURE Nature/Prefabs/Controller.prefab
+  uploadId: 821202

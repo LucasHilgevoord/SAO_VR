@@ -1,22 +1,17 @@
-// CompoundPass.cs(276,13): warning CS0618:
-// 'ScriptableRenderPass.Blit(CommandBuffer, RTHandle, RTHandle, Material, int)' is obsolete:
-// 'This rendering path is for compatibility mode only (when Render Graph is disabled). Use Render Graph API instead.'
-#pragma warning disable 618
-
-// CompoundPass.cs(197,26): warning CS0672: Member 'CompoundPass.Execute(ScriptableRenderContext, ref RenderingData)'
-// overrides obsolete member 'ScriptableRenderPass.Execute(ScriptableRenderContext, ref RenderingData)'.
-// Add the Obsolete attribute to 'CompoundPass.Execute(ScriptableRenderContext, ref RenderingData)'.
-#pragma warning disable 672
-
+using System;
 using System.Collections.Generic;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine.Rendering.RenderGraphModule;
+#endif
 
 // ReSharper disable InconsistentNaming
 
 namespace UnityEngine.Rendering.Universal.PostProcessing {
 /// <summary>
-/// A render pass for executing custom post processing renderers.
+/// A render pass for executing custom post-processing renderers.
 /// </summary>
 public class CompoundPass : ScriptableRenderPass {
+    private static readonly int ScreenSizeProperty = Shader.PropertyToID("_ScreenSize");
     /// <summary>
     /// The injection point of the pass.
     /// </summary>
@@ -88,7 +83,7 @@ public class CompoundPass : ScriptableRenderPass {
         }
 
         // Pre-allocate a list for active renderers
-        this.m_ActivePostProcessRenderers = new List<int>(renderers.Count);
+        m_ActivePostProcessRenderers = new List<int>(renderers.Count);
         // Set render pass event and name based on the injection point.
         switch (injectionPoint) {
             case InjectionPoint.AfterOpaqueAndSky:
@@ -109,6 +104,8 @@ public class CompoundPass : ScriptableRenderPass {
 #endif
                 m_PassName = "[Dustyroom] PostProcess after PostProcess";
                 break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(injectionPoint), injectionPoint, null);
         }
 
         // Initialize the IDs and allocation state of the intermediate render targets
@@ -164,21 +161,17 @@ public class CompoundPass : ScriptableRenderPass {
     /// <returns>True if any renderer will be executed for the given camera. False Otherwise.</returns>
     public bool PrepareRenderers(in RenderingData renderingData) {
         if (renderingData.cameraData.cameraType == CameraType.Preview) return false;
+        if (renderingData.cameraData.renderType == CameraRenderType.Overlay) return false;
 
-        // See if current camera is a scene view camera to skip renderers with "visibleInSceneView" = false.
-        bool isSceneView = renderingData.cameraData.cameraType == CameraType.SceneView;
-
-        // Here, we will collect the inputs needed by all the custom post processing effects.
         ScriptableRenderPassInput passInput = ScriptableRenderPassInput.None;
 
         // Collect the active renderers
         m_ActivePostProcessRenderers.Clear();
         for (int index = 0; index < m_PostProcessRenderers.Count; index++) {
             var ppRenderer = m_PostProcessRenderers[index];
-            // Skips current renderer if "visibleInSceneView" = false and the current camera is a scene view camera.
-            if ((isSceneView && !ppRenderer.visibleInSceneView) || renderingData.cameraData.isPreviewCamera) continue;
-            // Setup the camera for the renderer and if it will render anything, add to active renderers and get
-            // its required inputs.
+
+            if (renderingData.cameraData.isSceneViewCamera && !ppRenderer.visibleInSceneView) continue;
+
             if (ppRenderer.Setup(in renderingData, _injectionPoint)) {
                 m_ActivePostProcessRenderers.Add(index);
                 passInput |= ppRenderer.input;
@@ -192,11 +185,62 @@ public class CompoundPass : ScriptableRenderPass {
         return m_ActivePostProcessRenderers.Count != 0;
     }
 
-    /// <summary>
-    /// Execute the custom post processing renderers.
-    /// </summary>
-    /// <param name="context">The scriptable render context</param>
-    /// <param name="renderingData">Current rendering data</param>
+#if UNITY_6000_0_OR_NEWER
+    public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData) {
+        // using (var builder = renderGraph.AddRasterRenderPass("GrabPass", out GrabPassData passData)) {
+        UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
+        UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
+
+        // The following line ensures that the render pass doesn't blit from the back buffer.
+        if (resourceData.isActiveTargetBackBuffer) {
+            return;
+        }
+
+        _intermediateDescriptor = cameraData.cameraTargetDescriptor;
+        _intermediateDescriptor.depthBufferBits = 0;
+        _intermediateDescriptor.msaaSamples = 1;
+
+        TextureHandle srcCamColor = resourceData.activeColorTexture;
+        // Create two intermediates and ping-pong between them. Never write directly to the camera color during the chain.
+        TextureHandle intermediate0 =
+            UniversalRenderer.CreateRenderGraphTexture(renderGraph, _intermediateDescriptor, "_IntermediateRT0", false);
+        TextureHandle intermediate1 =
+            UniversalRenderer.CreateRenderGraphTexture(renderGraph, _intermediateDescriptor, "_IntermediateRT1", false);
+        TextureHandle src = srcCamColor;
+        TextureHandle dst = intermediate0;
+        bool usingIntermediate0AsDst = true;
+
+        // This check is to avoid an error from the material preview in the scene.
+        if (!src.IsValid() || !dst.IsValid()) {
+            return;
+        }
+
+        int width = _intermediateDescriptor.width;
+        int height = _intermediateDescriptor.height;
+        Shader.SetGlobalVector(ScreenSizeProperty, new Vector4(width, height, 1.0f / width, 1.0f / height));
+
+        // Ping-pong between intermediates for each renderer.
+        for (int index = 0; index < m_ActivePostProcessRenderers.Count; ++index) {
+            var rendererIndex = m_ActivePostProcessRenderers[index];
+            var renderer = m_PostProcessRenderers[rendererIndex];
+            if (!renderer.Initialized) renderer.InitializeInternal();
+            renderer.RenderWithGraph(renderGraph, src, dst, _intermediateDescriptor);
+            // After each pass, read from what we just wrote and flip destination to the other intermediate.
+            src = dst;
+            usingIntermediate0AsDst = !usingIntermediate0AsDst;
+            dst = usingIntermediate0AsDst ? intermediate0 : intermediate1;
+        }
+
+        // If any effect ran and the latest result lives in an intermediate, copy it back to the camera color.
+        if (m_ActivePostProcessRenderers.Count > 0 && src.IsValid()) {
+            // At least one pass ran, so the latest result is in an intermediate (never camera color).
+            // Swap the camera color to point to our latest result to avoid MSAA mismatches and extra blits.
+            resourceData.cameraColor = src;
+        }
+    }
+
+    [Obsolete("This rendering path is for compatibility mode only (when Render Graph is disabled).", false)]
+#endif
     public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData) {
         // Copy camera target description for intermediate RTs. Disable multisampling and depth buffer for the
         // intermediate targets.
@@ -211,7 +255,7 @@ public class CompoundPass : ScriptableRenderPass {
 
         int width = _intermediateDescriptor.width;
         int height = _intermediateDescriptor.height;
-        cmd.SetGlobalVector("_ScreenSize", new Vector4(width, height, 1.0f / width, 1.0f / height));
+        cmd.SetGlobalVector(ScreenSizeProperty, new Vector4(width, height, 1.0f / width, 1.0f / height));
 
         // The variable will be true if the last renderer couldn't blit to destination.
         // This happens if there is only 1 renderer and the source is the same as the destination.
@@ -228,13 +272,6 @@ public class CompoundPass : ScriptableRenderPass {
                 // If this is the first renderers then the source will be the external source (not intermediate).
                 source = m_Source;
                 if (m_ActivePostProcessRenderers.Count == 1) {
-
-/*
-#if UNITY_2023_1_OR_NEWER
-                    destination = m_Destination;
-#else
-*/
-
                     // There is only one renderer, check if the source is the same as the destination
                     if (m_Source == m_Destination) {
                         // Since we can't bind the same RT as a texture and a render target at the same time,
@@ -246,9 +283,6 @@ public class CompoundPass : ScriptableRenderPass {
                         // Otherwise, we can directly blit from source to destination.
                         destination = m_Destination;
                     }
-/*
-#endif
-*/
                 } else {
                     // If there is more than one renderer, we will need to the intermediate RT anyway.
                     destination = GetIntermediate(cmd, intermediateIndex);

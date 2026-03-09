@@ -1,7 +1,3 @@
-// QuibliPostProcess.cs(91,28): warning CS0618: 'ScriptableRenderer.cameraColorTargetHandle' is obsolete:
-// 'This rendering path is for compatibility mode only (when Render Graph is disabled). Use Render Graph API instead.'
-#pragma warning disable 0618
-
 using System;
 using System.Collections.Generic;
 
@@ -19,24 +15,18 @@ namespace UnityEngine.Rendering.Universal.PostProcessing {
 /// </summary>
 public class QuibliPostProcess : ScriptableRendererFeature {
     /// <summary>
-    /// The settings for the custom post processing render feature.
+    /// The settings for the custom post-processing render feature.
     /// </summary>
     [Serializable]
     public class Settings {
         [SerializeField]
-        public List<string> renderersAfterOpaqueAndSky;
+        public List<string> renderersAfterOpaqueAndSky = new();
 
         [SerializeField]
-        public List<string> renderersBeforePostProcess;
+        public List<string> renderersBeforePostProcess = new();
 
         [SerializeField]
-        public List<string> renderersAfterPostProcess;
-
-        public Settings() {
-            renderersAfterOpaqueAndSky = new List<string>();
-            renderersBeforePostProcess = new List<string>();
-            renderersAfterPostProcess = new List<string>();
-        }
+        public List<string> renderersAfterPostProcess = new();
     }
 
     /// <summary>
@@ -63,7 +53,7 @@ public class QuibliPostProcess : ScriptableRendererFeature {
     /// <param name="renderer">The renderer</param>
     /// <param name="renderingData">Rendering state. Use this to setup render passes.</param>
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData) {
-        // Only inject passes if post processing is enabled
+        // Only inject passes if post-processing is enabled
         if (renderingData.cameraData.postProcessEnabled) {
             // For each pass, only inject if there is at least one custom post-processing renderer class in it.
             if (_afterOpaqueAndSky.HasPostProcessRenderers && _afterOpaqueAndSky.PrepareRenderers(in renderingData)) {
@@ -85,6 +75,9 @@ public class QuibliPostProcess : ScriptableRendererFeature {
     }
 
 #if UNITY_2022_1_OR_NEWER
+#if UNITY_6000_0_OR_NEWER
+    [Obsolete("This rendering path is for compatibility mode only (when Render Graph is disabled). Use Render Graph API instead.", false)]
+#endif
     public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData) {
         SetupRenderPassesCore(renderer, renderingData);
     }
@@ -92,7 +85,9 @@ public class QuibliPostProcess : ScriptableRendererFeature {
 
     void SetupRenderPassesCore(ScriptableRenderer renderer, in RenderingData renderingData) {
 #if UNITY_2022_1_OR_NEWER
+#pragma warning disable CS0618 // Type or member is obsolete
         var cameraTarget = renderer.cameraColorTargetHandle;
+#pragma warning restore CS0618 // Type or member is obsolete
 #else
         var cameraTarget = renderer.cameraColorTarget;
 #endif
@@ -119,7 +114,6 @@ public class QuibliPostProcess : ScriptableRendererFeature {
 #endif
         }
     }
-
 
     /// <summary>
     /// Initializes the custom post-processing render passes.
