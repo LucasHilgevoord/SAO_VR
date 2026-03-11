@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e1e64696df7da9048bb7ac1df8ee93cb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Materials/HVR_Charcoal.mat
+  uploadId: 829252

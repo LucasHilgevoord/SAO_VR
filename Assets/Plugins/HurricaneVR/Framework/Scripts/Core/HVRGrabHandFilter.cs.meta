@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 9cf9028b057d4b7db0423f5d0a26074b
+timeCreated: 1674090737
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/HVRGrabHandFilter.cs
+  uploadId: 829252

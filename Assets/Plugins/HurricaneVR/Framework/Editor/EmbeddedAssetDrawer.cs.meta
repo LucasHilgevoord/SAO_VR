@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: d3003c99effe439d9d06c4e9334443ba
+timeCreated: 1666146629
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Editor/EmbeddedAssetDrawer.cs
+  uploadId: 829252

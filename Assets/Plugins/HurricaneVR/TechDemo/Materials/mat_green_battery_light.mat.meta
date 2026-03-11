@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a7ecef8a87dd5df408e7462059571bca
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Materials/mat_green_battery_light.mat
+  uploadId: 829252

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 79cd113ec3a24073b5bab8cbfb533d1e
+timeCreated: 1597627021
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/HandPoser/HVRPosableGrabPoint.cs
+  uploadId: 829252

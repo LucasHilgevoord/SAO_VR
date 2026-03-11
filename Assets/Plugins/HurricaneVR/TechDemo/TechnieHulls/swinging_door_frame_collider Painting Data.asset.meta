@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 82f3c150b9e18134aafd69f0bd09d736
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/TechnieHulls/swinging_door_frame_collider
+    Painting Data.asset
+  uploadId: 829252

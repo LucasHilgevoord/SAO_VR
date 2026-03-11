@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0d4b0daee6f3b314189b5f10f9a04b5e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/GlobalCameraFade.prefab
+  uploadId: 829252

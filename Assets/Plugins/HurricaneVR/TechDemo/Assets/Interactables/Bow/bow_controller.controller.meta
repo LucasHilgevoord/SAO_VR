@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2a7624869671cb14c9a84618ff434d04
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Bow/bow_controller.controller
+  uploadId: 829252

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: e3a136a7446f490f8b8ea029750f54f7
+timeCreated: 1602444281
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/Player/HVRScreenFade.cs
+  uploadId: 829252

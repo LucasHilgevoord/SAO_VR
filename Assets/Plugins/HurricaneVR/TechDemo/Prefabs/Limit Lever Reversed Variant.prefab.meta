@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6dfb9516951cd564dbfe5d3be9c5948d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Prefabs/Limit Lever Reversed Variant.prefab
+  uploadId: 829252

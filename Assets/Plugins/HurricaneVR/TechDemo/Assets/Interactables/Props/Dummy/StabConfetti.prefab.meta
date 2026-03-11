@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b6642446dfc234e48935b58918019977
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Props/Dummy/StabConfetti.prefab
+  uploadId: 829252

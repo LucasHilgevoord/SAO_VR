@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 791dc4b8f346c2b4b96cf8ac5847961d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Environment/Pipes/pipe_endcap.prefab
+  uploadId: 829252

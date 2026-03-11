@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 58fd73742002bc743864492ebb663a4d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Doors/hatch.prefab
+  uploadId: 829252

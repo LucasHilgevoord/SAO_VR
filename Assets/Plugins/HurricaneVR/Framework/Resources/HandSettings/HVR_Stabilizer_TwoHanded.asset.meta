@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 984d36eac3c1854408dbc8f5493acd6d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Resources/HandSettings/HVR_Stabilizer_TwoHanded.asset
+  uploadId: 829252

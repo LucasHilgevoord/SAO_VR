@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6209da6b7a224b9429947e30e7aacfd4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/PullLevers/PullLever2.prefab
+  uploadId: 829252

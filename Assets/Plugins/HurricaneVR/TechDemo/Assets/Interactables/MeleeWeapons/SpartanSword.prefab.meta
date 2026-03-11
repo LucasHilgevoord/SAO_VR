@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ff598cdf329129d46933a4a34f329bee
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/MeleeWeapons/SpartanSword.prefab
+  uploadId: 829252

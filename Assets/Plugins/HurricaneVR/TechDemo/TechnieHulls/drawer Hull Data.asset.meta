@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2bef56c99be47524ca762f63f4ce64e3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/TechnieHulls/drawer Hull Data.asset
+  uploadId: 829252

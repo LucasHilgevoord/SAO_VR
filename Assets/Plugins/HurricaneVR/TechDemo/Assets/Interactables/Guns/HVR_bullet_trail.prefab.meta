@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 416e18e376860fc499add1ebea2501b4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Guns/HVR_bullet_trail.prefab
+  uploadId: 829252

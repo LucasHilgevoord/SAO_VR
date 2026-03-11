@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bade6ad8ab66bb447b43711d8d42782c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Resources/StabSettings/stabber_medium_sharp.asset
+  uploadId: 829252

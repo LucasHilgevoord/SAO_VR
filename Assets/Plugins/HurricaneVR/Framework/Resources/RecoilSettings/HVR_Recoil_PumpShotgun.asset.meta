@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2e757127ef5897b4dac7e845a253395f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Resources/RecoilSettings/HVR_Recoil_PumpShotgun.asset
+  uploadId: 829252

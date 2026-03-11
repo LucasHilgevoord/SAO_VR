@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ae9c778a04be47e4c94cac36942730a9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Materials/mat_spear_tip.mat
+  uploadId: 829252

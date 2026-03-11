@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7d889ae919411714e883c5702a42a9ff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/PhysicsSettings/HVR_HandPullingSettings3kg.asset
+  uploadId: 829252

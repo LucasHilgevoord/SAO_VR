@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8d2457a80f7d17e46b9298c2dfa2eed4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Scripts/DemoLeverDisplay.cs
+  uploadId: 829252

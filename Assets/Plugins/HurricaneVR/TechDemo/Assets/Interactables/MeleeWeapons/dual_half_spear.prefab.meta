@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8de1a29ec9cf3c645b5ded4732827929
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/MeleeWeapons/dual_half_spear.prefab
+  uploadId: 829252

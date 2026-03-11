@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5adcd9b3b3ab61c4c8936757d2e04308
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Environment/DemoScene/window_frames.prefab
+  uploadId: 829252

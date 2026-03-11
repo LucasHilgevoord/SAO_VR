@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e745a7c2f3288f949b9bf7b7f9db87fa
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/BarebonesRig.prefab
+  uploadId: 829252

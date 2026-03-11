@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a7215a94d42371c4d9893186c0b97aa4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Buttons/Button.prefab
+  uploadId: 829252

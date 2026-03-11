@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e3fe7ed56d17b90498f73b89dca4e917
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Poses/arrow_shaft.asset
+  uploadId: 829252

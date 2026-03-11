@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 4c0ffcacdaf04dc59ce5bad65e3d452e
+timeCreated: 1597029386
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/HandPoser/HVRHandPoseBlend.cs
+  uploadId: 829252

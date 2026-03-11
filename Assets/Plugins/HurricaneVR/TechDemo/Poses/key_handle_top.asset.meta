@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a564ee3170adcaf479ef76aadd5d91ce
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Poses/key_handle_top.asset
+  uploadId: 829252

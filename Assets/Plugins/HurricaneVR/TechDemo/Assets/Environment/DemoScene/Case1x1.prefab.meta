@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ccbe446e1c7fb3d4bac231215c32f0b6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Environment/DemoScene/Case1x1.prefab
+  uploadId: 829252

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 466e8e1eec83d714285f8658dc75bc57
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/TechnieHulls/Collision 3 Painting Data.asset
+  uploadId: 829252

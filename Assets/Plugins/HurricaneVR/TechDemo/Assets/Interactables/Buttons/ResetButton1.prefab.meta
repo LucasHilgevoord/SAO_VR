@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0dff1938cf1f65d45bcb10704bb824f8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Buttons/ResetButton1.prefab
+  uploadId: 829252

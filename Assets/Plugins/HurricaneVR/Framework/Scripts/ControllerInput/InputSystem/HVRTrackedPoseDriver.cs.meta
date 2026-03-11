@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 590ae77d131f4448894cbe1df6373c2b
+timeCreated: 1635272558
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/ControllerInput/InputSystem/HVRTrackedPoseDriver.cs
+  uploadId: 829252

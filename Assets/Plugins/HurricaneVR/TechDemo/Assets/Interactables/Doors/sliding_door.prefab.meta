@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c81084ceaa136184aa94942517084e94
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Doors/sliding_door.prefab
+  uploadId: 829252

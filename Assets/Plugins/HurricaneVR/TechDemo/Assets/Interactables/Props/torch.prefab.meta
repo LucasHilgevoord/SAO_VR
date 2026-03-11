@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a3d1bddcf3b96fc449e7bd79bd31057a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Props/torch.prefab
+  uploadId: 829252

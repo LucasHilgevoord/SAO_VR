@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 023dc2ee66c645b46a5db436a91f5e95
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/EasyColliderHulls/smg_body_ConvexHull_23.asset
+  uploadId: 829252

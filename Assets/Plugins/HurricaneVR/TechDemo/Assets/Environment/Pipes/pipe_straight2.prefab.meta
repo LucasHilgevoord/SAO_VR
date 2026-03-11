@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e2f07a64a6a1a38428d15632772731a1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Environment/Pipes/pipe_straight2.prefab
+  uploadId: 829252

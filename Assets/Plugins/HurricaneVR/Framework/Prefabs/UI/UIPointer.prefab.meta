@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 03293afe730054c439705d132b87e054
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/UI/UIPointer.prefab
+  uploadId: 829252

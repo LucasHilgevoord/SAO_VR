@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 64418a9651c34e40ab41adb93a2b052b
+timeCreated: 1599782661
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/Sockets/HVREnumFlagsSocketFilter.cs
+  uploadId: 829252

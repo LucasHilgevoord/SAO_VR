@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 53400f52deabce9428ad2c6269395850
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Materials/RingSelectMaterial.mat
+  uploadId: 829252
