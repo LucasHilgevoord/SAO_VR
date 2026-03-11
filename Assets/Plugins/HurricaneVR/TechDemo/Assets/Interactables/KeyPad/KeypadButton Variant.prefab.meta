@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 401617cbcd20280469233efd17f261d9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/KeyPad/KeypadButton
+    Variant.prefab
+  uploadId: 829252

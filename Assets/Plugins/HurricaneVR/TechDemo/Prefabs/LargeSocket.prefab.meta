@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b92df1423cac43545913fee931baaa82
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Prefabs/LargeSocket.prefab
+  uploadId: 829252

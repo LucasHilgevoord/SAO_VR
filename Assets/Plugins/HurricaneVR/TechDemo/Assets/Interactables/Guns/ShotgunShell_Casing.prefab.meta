@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0fe24bc21d1128f4a9d03e6570062a93
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Guns/ShotgunShell_Casing.prefab
+  uploadId: 829252

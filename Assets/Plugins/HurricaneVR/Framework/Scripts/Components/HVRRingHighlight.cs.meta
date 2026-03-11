@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 3f12566bd4f6404580f543211008456c
+timeCreated: 1600292559
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Components/HVRRingHighlight.cs
+  uploadId: 829252

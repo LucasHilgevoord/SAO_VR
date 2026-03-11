@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a79f342c0ec6853469d5ee95d4e0163f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Editor/HVRTriggerAnimatorEditor.cs
+  uploadId: 829252

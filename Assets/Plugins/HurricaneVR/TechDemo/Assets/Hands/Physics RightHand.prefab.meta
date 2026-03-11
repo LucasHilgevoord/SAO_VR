@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 844a8eb585cbc34429696dd0a02d9a44
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Hands/Physics RightHand.prefab
+  uploadId: 829252

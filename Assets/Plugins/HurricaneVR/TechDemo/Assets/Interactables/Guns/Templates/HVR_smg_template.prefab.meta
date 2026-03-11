@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 588e47f5b24022046affcda41226425d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Guns/Templates/HVR_smg_template.prefab
+  uploadId: 829252

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2b98dcb1ca8a3be4999be6c93fff5d07
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/ControllerInput/InputEvents/HVRPrimaryButtonEvents.cs
+  uploadId: 829252

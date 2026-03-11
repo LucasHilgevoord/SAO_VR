@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8b66b714c761be843a501cf31acdeb29
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Environment/PowerUnit/power_unit_cell.prefab
+  uploadId: 829252

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 124009afce8494b46b50a7b8e468ed5b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Resources/InputSettings/WMR.asset
+  uploadId: 829252

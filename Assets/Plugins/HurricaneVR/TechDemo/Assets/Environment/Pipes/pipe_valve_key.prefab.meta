@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ec42fda0821a9d64e842d4bc6e16c314
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Environment/Pipes/pipe_valve_key.prefab
+  uploadId: 829252

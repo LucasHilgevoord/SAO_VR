@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 203d545f2b6cc724aa3a0d6e4fafd082
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/PhysicsSettings/HVR_LineGrabSettings.asset
+  uploadId: 829252

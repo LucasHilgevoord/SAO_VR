@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ed9956e3d3a22b14dbbc8a64bfcb0629
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/GrabIndicator.prefab
+  uploadId: 829252

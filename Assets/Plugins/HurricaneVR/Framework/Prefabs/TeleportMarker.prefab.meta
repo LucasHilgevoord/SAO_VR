@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 435f1b08e0f62474baf456e504b11bd8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/TeleportMarker.prefab
+  uploadId: 829252

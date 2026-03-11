@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 52bf3cf5802c7cd4b8985dd28e5a40c8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Guns/HVR_bullet_casing.prefab
+  uploadId: 829252

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a5e3f22af5069694aa86b11cc47fe55a
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Scenes/scene_barebones.unity
+  uploadId: 829252

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 1d73b26c803e4bbb886b5776121804b2
+timeCreated: 1600231143
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Components/HVRDestroyListener.cs
+  uploadId: 829252

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fc0ccfb8c6e4d374594e4c07f7b53a00
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Props/Dummy/Dummy.prefab
+  uploadId: 829252

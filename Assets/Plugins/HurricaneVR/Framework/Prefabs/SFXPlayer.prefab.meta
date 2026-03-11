@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d979b720b0ea0aa4fbee62ad582bea0d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/SFXPlayer.prefab
+  uploadId: 829252

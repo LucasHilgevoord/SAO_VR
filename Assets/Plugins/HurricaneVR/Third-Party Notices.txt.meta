@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e1857899285da184596bedaf4790ca25
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Third-Party Notices.txt
+  uploadId: 829252

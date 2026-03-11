@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1ba7b2eef341dad4da3f5ff12480db09
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Doors/key_door_setup.prefab
+  uploadId: 829252

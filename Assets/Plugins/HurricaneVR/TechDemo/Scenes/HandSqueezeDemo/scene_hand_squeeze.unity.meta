@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 356a691ec81ea0c44a8a8a0dfeaaf9f3
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Scenes/HandSqueezeDemo/scene_hand_squeeze.unity
+  uploadId: 829252

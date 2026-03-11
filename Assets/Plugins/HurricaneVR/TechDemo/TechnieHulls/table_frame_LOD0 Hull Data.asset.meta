@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 46367d3b52fb1544fa9860c88c85a30b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/TechnieHulls/table_frame_LOD0 Hull Data.asset
+  uploadId: 829252

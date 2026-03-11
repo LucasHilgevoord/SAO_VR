@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 950c673c9cf3b8444b0d5dd2f84370d9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Hands/HVR_left_hand_variant.prefab
+  uploadId: 829252

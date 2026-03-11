@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 55dd4e3cff92c2a4cbdc8bc3897fa0ae
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Props/Lock.prefab
+  uploadId: 829252

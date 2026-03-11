@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: d2c9568b7cab450d9687b8b607c93867
+timeCreated: 1603040352
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/Player/HVRCamera.cs
+  uploadId: 829252

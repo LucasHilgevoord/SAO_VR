@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c525ea7fd95c1c441bcab7267d3856c3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/ControllerInput/InputEvents/HVRThumbTouchEvents.cs
+  uploadId: 829252

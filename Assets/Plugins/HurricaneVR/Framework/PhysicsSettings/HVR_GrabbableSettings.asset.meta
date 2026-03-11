@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d420bd8890e2c264eb9ec97c4963f6ce
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/PhysicsSettings/HVR_GrabbableSettings.asset
+  uploadId: 829252

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bc36540bd205306498eb139aef2f3e6f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Materials/ValidSocketRing.mat
+  uploadId: 829252

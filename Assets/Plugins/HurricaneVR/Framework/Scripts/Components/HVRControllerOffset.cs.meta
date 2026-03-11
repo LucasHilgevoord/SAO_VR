@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 59ef9bc5899042d588a09adb8a254aa9
+timeCreated: 1601145324
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Components/HVRControllerOffset.cs
+  uploadId: 829252

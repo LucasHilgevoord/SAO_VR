@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ad25ae34c349a74429318673d8665e68
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Materials/HVR_Grid_LightPurple.mat
+  uploadId: 829252

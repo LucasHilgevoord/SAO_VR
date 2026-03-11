@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 68de445e84f40634a88269d30d897cef
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Environment/DemoScene/interior_full.prefab
+  uploadId: 829252

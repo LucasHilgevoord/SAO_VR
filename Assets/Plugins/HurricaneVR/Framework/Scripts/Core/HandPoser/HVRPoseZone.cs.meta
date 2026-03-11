@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 81ed24babdf5471dbf0b20a8d9f02ba1
+timeCreated: 1661109513
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/HandPoser/HVRPoseZone.cs
+  uploadId: 829252

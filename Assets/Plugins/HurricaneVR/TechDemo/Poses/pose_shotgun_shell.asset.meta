@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d9426f37c169c9341b8baa8c84fc2b4e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Poses/pose_shotgun_shell.asset
+  uploadId: 829252

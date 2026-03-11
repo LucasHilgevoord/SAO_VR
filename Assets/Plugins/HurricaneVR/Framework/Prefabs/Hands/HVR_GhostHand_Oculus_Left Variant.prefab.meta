@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2129a6f1b8941d24e92b678b399fc27a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/Hands/HVR_GhostHand_Oculus_Left
+    Variant.prefab
+  uploadId: 829252

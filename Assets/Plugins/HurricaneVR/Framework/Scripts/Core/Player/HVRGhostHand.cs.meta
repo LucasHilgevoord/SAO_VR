@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: db95619e91bf4fb981b3b0352fed7dcd
+timeCreated: 1602126538
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/Player/HVRGhostHand.cs
+  uploadId: 829252

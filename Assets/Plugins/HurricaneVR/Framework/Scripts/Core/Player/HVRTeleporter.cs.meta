@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: ddcc26ecb5c24116a2b1c03eaeeef771
+timeCreated: 1601130279
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/Player/HVRTeleporter.cs
+  uploadId: 829252

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b12c3f7f37233934f96dd9eaf0878672
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Resources/HandSettings/HVR_LargeWeapon_TwoHanded_Strength.asset
+  uploadId: 829252

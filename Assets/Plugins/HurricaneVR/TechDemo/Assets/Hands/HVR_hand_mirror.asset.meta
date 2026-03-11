@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 711f7ec35b80a774ca0f6f3a9dc9281b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Hands/HVR_hand_mirror.asset
+  uploadId: 829252

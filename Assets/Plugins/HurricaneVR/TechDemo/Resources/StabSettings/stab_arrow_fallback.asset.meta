@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cb0448833f4a1e545bd77ffff4e9f27f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Resources/StabSettings/stab_arrow_fallback.asset
+  uploadId: 829252

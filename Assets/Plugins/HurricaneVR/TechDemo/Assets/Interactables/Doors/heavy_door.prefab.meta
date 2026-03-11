@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b38acbc762c80cb4387a528dc9e0a8ff
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/Doors/heavy_door.prefab
+  uploadId: 829252

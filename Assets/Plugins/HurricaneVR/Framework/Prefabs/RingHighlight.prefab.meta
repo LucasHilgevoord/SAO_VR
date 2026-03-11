@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9c947a50565fd2a4f96255015a28f032
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/RingHighlight.prefab
+  uploadId: 829252

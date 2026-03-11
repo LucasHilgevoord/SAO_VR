@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f110609b6e8cdb7458dd5f39db25f9ad
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Environment/Pipes/pipe_90bend.prefab
+  uploadId: 829252

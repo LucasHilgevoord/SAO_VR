@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 2bd806c5a56644919d2f1d17e7c6b02e
+timeCreated: 1601773369
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Shared/Utilities/CoroutineExtensions.cs
+  uploadId: 829252

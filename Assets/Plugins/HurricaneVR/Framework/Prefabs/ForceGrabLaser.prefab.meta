@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a787072d7cda3074d8e11d131d772f27
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/ForceGrabLaser.prefab
+  uploadId: 829252

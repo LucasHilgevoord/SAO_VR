@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 78fb76ea7e8c3554c91ce43e0abfe0b8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Assets/Interactables/TurnLevers/TurnLever2Handle.prefab
+  uploadId: 829252

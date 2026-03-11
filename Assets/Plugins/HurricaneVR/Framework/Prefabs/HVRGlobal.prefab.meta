@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a03ed519be01d1440a8ec63d2ac101f7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/HVRGlobal.prefab
+  uploadId: 829252

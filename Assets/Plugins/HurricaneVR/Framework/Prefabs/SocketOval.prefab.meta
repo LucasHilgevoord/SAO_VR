@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 96968a14563c3a946878e675a6204468
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Prefabs/SocketOval.prefab
+  uploadId: 829252

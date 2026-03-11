@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b422c600f1c3941b8bc7e95db33476ad
+timeCreated: 1491670591
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/Materials/mat_hologram.mat
+  uploadId: 829252

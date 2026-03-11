@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d55e7dbb51eb1824ba366c6c892d969e
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/Framework/Scripts/HurricaneVR.Framework.asmdef
+  uploadId: 829252

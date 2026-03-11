@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 51389b74666d0e3488c8f462d0294d62
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/TechnieHulls/pipe_valve_body_collision Hull
+    Data.asset
+  uploadId: 829252

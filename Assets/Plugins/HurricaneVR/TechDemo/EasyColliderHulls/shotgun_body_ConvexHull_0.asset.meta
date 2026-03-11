@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7e1dc5b411932004fac45e4d433bf802
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.3.c
+  assetPath: Assets/HurricaneVR/TechDemo/EasyColliderHulls/shotgun_body_ConvexHull_0.asset
+  uploadId: 829252
