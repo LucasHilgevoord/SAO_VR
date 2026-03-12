@@ -1,9 +1,6 @@
 using DG.Tweening;
-using PlayerInterface;
+using JetBrains.Annotations;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,9 +51,16 @@ public class InfoWindow : MonoBehaviour
     public void OpenInfoItem(InfoItem item)
     {
         if (item == _currentMenu) { return; }
-        Action openMenu = () => { item.OpenWindow(); };
 
-        if (!isOpen) { OpenWindow(openMenu); }
+        // Create an action to open the menu after the window is opened
+        Action openMenu = () => {
+            _currentMenu = item;
+            item.OpenWindow(); 
+        };
+
+        if (!isOpen) { 
+            OpenWindow(openMenu);
+        }
         else
         {
             // Close the previous one
@@ -70,6 +74,7 @@ public class InfoWindow : MonoBehaviour
         }
     }
 
+    [UsedImplicitly]
     public void CloseItem()
     {
         if (_currentMenu != null)
@@ -79,7 +84,7 @@ public class InfoWindow : MonoBehaviour
 
     private void OpenWindow(Action OnOpenComplete = null)
     {
-        Debug.Log("open window");
+        Debug.Log("Info Window: Open Window");
         DOTween.Kill(window.transform, true);
         DOTween.Kill(canvasGroup, true);
 
@@ -100,6 +105,7 @@ public class InfoWindow : MonoBehaviour
 
     public void CloseWindow()
     {
+        Debug.Log("Info Window: Close Window");
         DOTween.Kill(window.transform);
         DOTween.Kill(canvasGroup);
 
