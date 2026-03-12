@@ -24,9 +24,9 @@ public class SlotHandler : MonoBehaviour
     
     internal void ShowAllSlots()
     {
-        //Color c = _lineMat.color;
-        //c.a = 1;
-        //_lineMat.color = c;
+        Color c = _lineMat.color;
+        c.a = 1;
+        _lineMat.color = c;
         _showSlotsCoroutine = StartCoroutine(ShowSlotsCoroutine());
     }
 
@@ -128,6 +128,6 @@ public class SlotHandler : MonoBehaviour
 
     internal void FadeLine(float duration, float alpha)
     {
-        //_lineMat.DOFade(alpha, duration);
+        _lineMat.DOFade(alpha, duration);
     }
 }
