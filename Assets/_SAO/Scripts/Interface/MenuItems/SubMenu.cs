@@ -36,6 +36,24 @@ namespace PlayerInterface
             {
                 item.IsPressed -= OnMenuItemPressed;
             }
+
+            if (closeMenuCoroutine != null)
+            {
+                StopCoroutine(closeMenuCoroutine);
+                closeMenuCoroutine = null;
+            }
+
+            if (lineArrowCanvas != null)
+                DOTween.Kill(lineArrowCanvas);
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    if (item != null && item.canvasGroup != null)
+                        DOTween.Kill(item.canvasGroup);
+                }
+            }
         }
 
         private void Start()
@@ -90,9 +108,7 @@ namespace PlayerInterface
         {
             prevSelectedItem.OnDeselectEvents.RemoveListener(WaitUntilCenterSelectItem);
             if (currentSelectedItem != null)
-            {
                 CenterSelectedItem(currentSelectedItem);
-            }
         }
 
         private void CenterSelectedItem(MenuItem item)
@@ -153,9 +169,12 @@ namespace PlayerInterface
         {
             yield return StartCoroutine(base.CloseMenu());
 
+            if (!isActiveAndEnabled)
+                yield break;
+
             closeMenuCoroutine = StartCoroutine(HideItems());
             yield return closeMenuCoroutine;
-
+            closeMenuCoroutine = null;
         }
 
         private IEnumerator HideItems()
@@ -169,12 +188,17 @@ namespace PlayerInterface
             // Hide the items
             for (int i = items.Count - 1; i >= 0; i--)
             {
-                //items[i].IsPressed -= OnMenuItemPressed;
+                if (!isActiveAndEnabled)
+                    yield break;
+
                 DOTween.Kill(items[i].canvasGroup, true);
                 yield return new WaitForSeconds(hideDelay);
                 items[i].canvasGroup.DOFade(0, hideDuration);
             }
             yield return new WaitForSeconds(hideDuration);
+            if (!isActiveAndEnabled)
+                yield break;
+
             for (int i = 0; i < items.Count; i++)
                 items[i].gameObject.SetActive(false);
         }
@@ -203,7 +227,8 @@ namespace PlayerInterface
             DOTween.Kill(lineArrowCanvas);
             lineArrowCanvas.DOFade(0, (fadeDuration / 2) * items.Count).OnComplete(() =>
             {
-                lineArrow.SetActive(false);
+                if (lineArrow != null)
+                    lineArrow.SetActive(false);
             });
         }
 

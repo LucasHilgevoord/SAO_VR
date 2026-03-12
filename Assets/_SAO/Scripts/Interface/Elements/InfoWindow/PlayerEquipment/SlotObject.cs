@@ -89,8 +89,6 @@ public class SlotObject : MonoBehaviour
             StopCoroutine(_hideRoutine);
             _hideRoutine = null;
         }
-
-        // Prevent overlapping tweens on these targets
         DOTween.Kill(_icon);
         DOTween.Kill(_icon.transform);
         

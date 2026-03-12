@@ -63,12 +63,14 @@ namespace PlayerInterface
                     {
                         //Debug.Log("New Tree: Closing Item: " + j + " of " + (openItemList.Count - 1) + " | " + openItemList[j].gameObject.name);
                         var item = openItemList[j];
-                        openItemList.RemoveAt(j);
-
                         if (item != null)
                             yield return StartCoroutine(item.Deselect());
+                        openItemList.RemoveAt(j);
 
-                        if (_lerpLastMenuRoutine != null) StopCoroutine(_lerpLastMenuRoutine);
+
+                        if (_lerpLastMenuRoutine != null) 
+                            StopCoroutine(_lerpLastMenuRoutine);
+
                         _lerpLastMenuRoutine = StartCoroutine(LerpLastMenuToCenter());
                     }
                     break;

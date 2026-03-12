@@ -101,7 +101,7 @@ namespace PlayerInterface
         {
             Debug.Log("Deselect: " + gameObject.name + " - Submenu " + (subMenu != null));
             // Close the submenu's
-            if (subMenu != null)
+            if (subMenu != null && isActiveAndEnabled)
                 yield return StartCoroutine(subMenu.CloseMenu());
 
             // Make sure the item is deselected
