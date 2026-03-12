@@ -24,14 +24,6 @@ namespace PlayerInterface
 
         private float itemMoveDuration = 0.1f;
 
-        private void Awake()
-        {
-        }
-
-        private void OnDestroy()
-        {
-        }
-
         private void Start()
         {
             moveSelectMask.enabled = false;

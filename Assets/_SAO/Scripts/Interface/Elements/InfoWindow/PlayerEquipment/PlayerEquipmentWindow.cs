@@ -10,6 +10,7 @@ namespace PlayerInterface
         [Header("Player Equipment")]
         [SerializeField] private SlotHandler _slotHandler;
         private float openingDuration = 0.5f;
+        private Coroutine _closeRoutine;
 
         private void Start()
         {
@@ -18,6 +19,15 @@ namespace PlayerInterface
 
         internal override void OpenWindow()
         {
+            // Cancel any in-progress close on this window
+            if (_closeRoutine != null)
+            {
+                StopCoroutine(_closeRoutine);
+                _closeRoutine = null;
+            }
+
+            DOTween.Kill(windowCanvasGroup);
+
             window.gameObject.SetActive(true);
             windowCanvasGroup.DOFade(1, openingDuration).OnComplete(() => {
                 _slotHandler.ShowAllSlots();
@@ -37,11 +47,16 @@ namespace PlayerInterface
 
         internal override void CloseWindow()
         {
-            StartCoroutine(CloseWindowRoutine());
+            if (_closeRoutine != null)
+            {
+                StopCoroutine(_closeRoutine);
+            }
+            _closeRoutine = StartCoroutine(CloseWindowRoutine());
         }
 
         private IEnumerator CloseWindowRoutine()
         {
+
             DOTween.Kill(windowCanvasGroup);
             _slotHandler.FadeLine(openingDuration, 0);
             _slotHandler.HideAllSlots();
@@ -50,6 +65,8 @@ namespace PlayerInterface
             windowCanvasGroup.DOFade(0, openingDuration).OnComplete(() => {
                 window.gameObject.SetActive(false);
             });
+
+            _closeRoutine = null;
         }
 
 

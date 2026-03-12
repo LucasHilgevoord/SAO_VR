@@ -13,6 +13,35 @@ public class SlotHandler : MonoBehaviour
     private float _slotAppearDelay = 0.05f;
     [SerializeField] private Material _lineMat;
     private Coroutine _showSlotsCoroutine;
+    private Coroutine _selectCoroutine;
+    private Coroutine _hideSlotsCoroutine;
+
+    private void OnDisable()
+    {
+        if (_showSlotsCoroutine != null)
+        {
+            StopCoroutine(_showSlotsCoroutine);
+            _showSlotsCoroutine = null;
+        }
+
+        if (_selectCoroutine != null)
+        {
+            StopCoroutine(_selectCoroutine);
+            _selectCoroutine = null;
+        }
+
+        if (_hideSlotsCoroutine != null)
+        {
+            StopCoroutine(_hideSlotsCoroutine);
+            _hideSlotsCoroutine = null;
+        }
+
+        // Kill any running tweens on the line material
+        if (_lineMat != null)
+        {
+            DOTween.Kill(_lineMat);
+        }
+    }
 
     private void Update()
     {
@@ -24,9 +53,18 @@ public class SlotHandler : MonoBehaviour
     
     internal void ShowAllSlots()
     {
+        if (!isActiveAndEnabled)
+        {
+            return;
+        }
+
         Color c = _lineMat.color;
         c.a = 1;
         _lineMat.color = c;
+        if (_showSlotsCoroutine != null)
+        {
+            StopCoroutine(_showSlotsCoroutine);
+        }
         _showSlotsCoroutine = StartCoroutine(ShowSlotsCoroutine());
     }
 
@@ -70,6 +108,11 @@ public class SlotHandler : MonoBehaviour
 
     internal void SelectSlots(PlayerWindowSlot[] slotTypes)
     {   
+        if (!isActiveAndEnabled)
+        {
+            return;
+        }
+
         // Check which slots to highlight
         _selectedSlots = new List<SlotObject>();
         foreach (PlayerWindowSlot type in slotTypes)
@@ -85,7 +128,11 @@ public class SlotHandler : MonoBehaviour
             }
         }
 
-        StartCoroutine(SelectCoroutine());
+        if (_selectCoroutine != null)
+        {
+            StopCoroutine(_selectCoroutine);
+        }
+        _selectCoroutine = StartCoroutine(SelectCoroutine());
     }
 
     private IEnumerator SelectCoroutine()
@@ -111,7 +158,16 @@ public class SlotHandler : MonoBehaviour
 
     internal void HideAllSlots()
     {
-        StartCoroutine(HideSlotsCoroutine());
+        if (!isActiveAndEnabled)
+        {
+            return;
+        }
+
+        if (_hideSlotsCoroutine != null)
+        {
+            StopCoroutine(_hideSlotsCoroutine);
+        }
+        _hideSlotsCoroutine = StartCoroutine(HideSlotsCoroutine());
     }
 
     private IEnumerator HideSlotsCoroutine()
@@ -128,6 +184,13 @@ public class SlotHandler : MonoBehaviour
 
     internal void FadeLine(float duration, float alpha)
     {
+        if (_lineMat == null)
+        {
+            return;
+        }
+
+        // Prevent overlapping fades on the same material
+        DOTween.Kill(_lineMat);
         _lineMat.DOFade(alpha, duration);
     }
 }

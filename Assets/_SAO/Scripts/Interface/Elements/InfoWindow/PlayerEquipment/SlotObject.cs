@@ -22,6 +22,9 @@ public class SlotObject : MonoBehaviour
     private float _lineSpeed = .1f;
     private Vector3 _iconPosition;
     private Coroutine _showRoutine, _hideRoutine;
+    private Tween _iconFadeTween;
+    private Tween _smallIconFadeTween;
+    private Tween _iconScaleTween;
 
     private void Start()
     {
@@ -37,6 +40,23 @@ public class SlotObject : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_showRoutine != null)
+        {
+            StopCoroutine(_showRoutine);
+            _showRoutine = null;
+        }
+
+        if (_hideRoutine != null)
+        {
+            StopCoroutine(_hideRoutine);
+            _hideRoutine = null;
+        }
+
+        // Kill all tweens targeting this slot visuals to avoid dangling animations
+        DOTween.Kill(_icon);
+        DOTween.Kill(_smallIcon);
+        DOTween.Kill(_icon.transform);
+
         HideVisuals();
     }
 
@@ -65,7 +85,14 @@ public class SlotObject : MonoBehaviour
     internal void Show()
     {
         if (_hideRoutine != null)
+        {
             StopCoroutine(_hideRoutine);
+            _hideRoutine = null;
+        }
+
+        // Prevent overlapping tweens on these targets
+        DOTween.Kill(_icon);
+        DOTween.Kill(_icon.transform);
         
         _line.gameObject.SetActive(false);
         _smallIcon.gameObject.SetActive(false);
@@ -77,7 +104,7 @@ public class SlotObject : MonoBehaviour
         _line.SetPosition(0, _linePositions[0]);
 
         // First show the big icon
-        _icon.DOFade(1, 0.5f).OnComplete(() => {
+        _iconFadeTween = _icon.DOFade(1, 0.5f).OnComplete(() => {
             // Once the icon has been faded in, start the line from the big icon to the small icon
             _line.gameObject.SetActive(true);
             _showRoutine = StartCoroutine(MoveLineCoroutineQueue());
@@ -95,7 +122,7 @@ public class SlotObject : MonoBehaviour
 
         // All the lines have been moved
         _smallIcon.gameObject.SetActive(true);
-        _smallIcon.DOFade(1, 0.5f);
+        _smallIconFadeTween = _smallIcon.DOFade(1, 0.5f);
     }
 
     private IEnumerator MoveLineCoroutine(Vector3 newPosition)
@@ -117,7 +144,10 @@ public class SlotObject : MonoBehaviour
     internal void Hide()
     {
         if (_showRoutine != null)
+        {
             StopCoroutine(_showRoutine);
+            _showRoutine = null;
+        }
 
         // Move the _icon over the path of the line
         _hideRoutine = StartCoroutine(MoveIconCoroutineQueue());
@@ -131,8 +161,11 @@ public class SlotObject : MonoBehaviour
             yield return StartCoroutine(MoveIconOverLine(i));
         }
 
-        _icon.DOFade(0, 0.5f);
-        _smallIcon.DOFade(0, 0.5f);
+        // Cancel any previous fade tweens and fade out at the end
+        DOTween.Kill(_icon);
+        DOTween.Kill(_smallIcon);
+        _iconFadeTween = _icon.DOFade(0, 0.5f);
+        _smallIconFadeTween = _smallIcon.DOFade(0, 0.5f);
     }
 
     private IEnumerator MoveIconOverLine(int nextLineIndex)
@@ -190,7 +223,8 @@ public class SlotObject : MonoBehaviour
         _line.gameObject.SetActive(false);
         _smallIcon.gameObject.SetActive(false);
         _icon.sprite = _selectedSprite;
-        _icon.transform.DOScale(1.5f, 0.5f);
+        DOTween.Kill(_icon.transform);
+        _iconScaleTween = _icon.transform.DOScale(1.5f, 0.5f);
     }
 
     internal void Deselect()
@@ -198,7 +232,8 @@ public class SlotObject : MonoBehaviour
         if (!_isSelected) { return; }
 
         _isSelected = false;
-        _icon.transform.DOScale(1f, 0.5f).OnComplete(() => {
+        DOTween.Kill(_icon.transform);
+        _iconScaleTween = _icon.transform.DOScale(1f, 0.5f).OnComplete(() => {
             _icon.sprite = _deselectedSprite;
             _line.gameObject.SetActive(true);
             _smallIcon.gameObject.SetActive(true);
