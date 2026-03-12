@@ -46,6 +46,7 @@ namespace PlayerInterface
         private IEnumerator UpdateOpenMenu(MenuItem newItem, bool isSelected)
         {
             _allowInteraction = false;
+            bool closedByCategorySwitch = false;
             //Debug.Log("Pressed item: " + newItem.name + " - isSelected: " + isSelected);
 
             // Check if the item is part of a submenu of one of the already selected menuItems, if not close all so we can open the new one
@@ -61,8 +62,11 @@ namespace PlayerInterface
                     for (int j = openItemList.Count - 1; j > i; j--)
                     {
                         //Debug.Log("New Tree: Closing Item: " + j + " of " + (openItemList.Count - 1) + " | " + openItemList[j].gameObject.name);
-                        yield return StartCoroutine(openItemList[j].Deselect());
+                        var item = openItemList[j];
                         openItemList.RemoveAt(j);
+
+                        if (item != null)
+                            yield return StartCoroutine(item.Deselect());
 
                         if (_lerpLastMenuRoutine != null) StopCoroutine(_lerpLastMenuRoutine);
                         _lerpLastMenuRoutine = StartCoroutine(LerpLastMenuToCenter());
@@ -74,14 +78,18 @@ namespace PlayerInterface
             // Check if we pressed a category button, if there is no category open yet skip it
             if (openItemList.Count > 0 && categorieMenu.items.Contains(newItem))
             {
+                closedByCategorySwitch = true;
+
                 //Debug.Log("Close current category (" + openItemList[0].gameObject.name + ") and open new category (" + newItem.gameObject.name + ")");
                 // If it is not part of a menu then it is part of the categorie menu and the categorie menu should be closed and the new menu should be opened
                 for (int i = openItemList.Count - 1; i >= 0; i--)
                 {
                     //Debug.Log("Closing Item to open new category: " + openItemList[i].gameObject.name);
-                    if (openItemList[i] == null) { continue; }
-                    yield return StartCoroutine(openItemList[i].Deselect());
+                    var item = openItemList[i];
                     openItemList.RemoveAt(i);
+
+                    if (item != null)
+                        yield return StartCoroutine(item.Deselect());
 
                     // Lerp the interface each time to the center of the last opened menu after we closed the previous one
                     //if (_lerpLastMenuRoutine != null) StopCoroutine(_lerpLastMenuRoutine);
@@ -103,9 +111,10 @@ namespace PlayerInterface
             else
             {
                 // The item should be closed
-                if (newItem != null) { 
-                    yield return StartCoroutine(newItem.Deselect());
+                if (!closedByCategorySwitch && newItem != null) {
                     openItemList.Remove(newItem);
+
+                    yield return StartCoroutine(newItem.Deselect());
                 }
             }
 
