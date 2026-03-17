@@ -33,11 +33,10 @@ RectTransform:
   m_Children:
   - {fileID: 5010497539152036531}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -23, y: 78}
+  m_AnchoredPosition: {x: 265, y: 78}
   m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &122324769470839893
@@ -82,6 +81,9 @@ MonoBehaviour:
   items: []
   lineArrow: {fileID: 6952227160077672100}
   lineArrowCanvas: {fileID: 6911219692862687785}
+  line: {fileID: 0}
+  centerItemOnSelect: 1
+  centerItemIndex: 1
 --- !u!114 &1551345860242999382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +127,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5010497539152036531}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -204,7 +205,6 @@ RectTransform:
   m_Children:
   - {fileID: 3073185494676937722}
   m_Father: {fileID: 122324769470839892}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
