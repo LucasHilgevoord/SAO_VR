@@ -106,9 +106,26 @@ namespace PlayerInterface
                 if (categorieMenu.items.Contains(newItem))
                     yield return StartCoroutine(categorieMenu.OnCategoryItemSelected(categorieMenu.items.FindIndex(x => x.Equals(newItem))));
 
+                // Get the parent submenu of the new item
+                Menu parentSubmenu = null;
+                if (openItemList.Count > 0)
+                    parentSubmenu = openItemList[openItemList.Count - 1].subMenu;
+                else
+                    parentSubmenu = categorieMenu;
+
                 // Add the item to the openItems en select it
                 openItemList.Add(newItem);
                 newItem.Select();
+
+                // Fade out all the other items in the same menu from its parent
+                if (parentSubmenu != null)
+                {
+                    for (int i = 0; i < parentSubmenu.items.Count; i++)
+                    {
+                        if (parentSubmenu.items[i] != newItem)
+                            parentSubmenu.items[i].FadeOut();
+                    }
+                }
             }
             else
             {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -25,6 +25,8 @@ namespace PlayerInterface
         [SerializeField] private Image background;
         [SerializeField] private Image selectArrow;
         private Color selectedColor = new Color(0.92f, 0.67f, 0.05f, 0.9f);
+        public float fadeDuration = 0.5f;
+        public float notSelectedAlpha = 0.3f;
 
         public CanvasGroup canvasGroup;
         [SerializeField] private Image iconImage;
@@ -35,11 +37,13 @@ namespace PlayerInterface
         /// Submenu's that will be opened when this item is selected
         public SubMenu subMenu;
         private bool isSelected;
-        internal bool IsSelected { 
-            get { return isSelected; } 
-            set { 
-                isSelected = value; 
-                EnableArrowImage(value); 
+        internal bool IsSelected
+        {
+            get { return isSelected; }
+            set
+            {
+                isSelected = value;
+                EnableArrowImage(value);
             }
         }
 
@@ -53,7 +57,7 @@ namespace PlayerInterface
 
             // Start the icon with the off sprite
             iconImage.sprite = iconSpriteOff;
-            
+
             if (selectArrow != null)
             {
                 selectArrow.gameObject.SetActive(false);
@@ -95,6 +99,21 @@ namespace PlayerInterface
             // Open the submenu if there is one
             if (subMenu != null)
                 subMenu.OpenMenu();
+        }
+
+        public void FadeOut()
+        {
+            // Fade out the item using DoTween and the canvas group
+            DOTween.Kill(canvasGroup);
+            Debug.Log(gameObject.name + " FadeOut");
+            canvasGroup.DOFade(notSelectedAlpha, fadeDuration);
+        }
+
+        public void FadeIn()
+        {
+            // Fade in the item
+            DOTween.Kill(canvasGroup);
+            canvasGroup.DOFade(1, fadeDuration);
         }
 
         public IEnumerator Deselect()
@@ -141,14 +160,21 @@ namespace PlayerInterface
             }
         }
 
-        internal virtual void RemoveItem() {
+        internal virtual void RemoveItem()
+        {
             Debug.Log("RemoveItem");
             DestroyItem?.Invoke(this);
         }
 
         public void OnDestroy()
         {
+            DOTween.Kill(canvasGroup);
             InterfaceManager.Instance.DeregisterMenuItem(this);
+        }
+
+        public void OnDisable()
+        {
+            DOTween.Kill(canvasGroup);
         }
     }
 }
