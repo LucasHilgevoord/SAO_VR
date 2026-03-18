@@ -19,6 +19,7 @@ namespace PlayerInterface
 
         [SerializeField] private Canvas interfaceCanvas;
         [SerializeField] private CategorieMenu categorieMenu;
+        private MenuItem _currentSelectedItem, _prevSelectedItem;
         private bool _isOpen;
 
         private Coroutine _lerpLastMenuRoutine;
@@ -45,6 +46,9 @@ namespace PlayerInterface
         
         private IEnumerator UpdateOpenMenu(MenuItem newItem, bool isSelected)
         {
+            _prevSelectedItem = _currentSelectedItem;
+            _currentSelectedItem = newItem;
+
             _allowInteraction = false;
             bool closedByCategorySwitch = false;
             //Debug.Log("Pressed item: " + newItem.name + " - isSelected: " + isSelected);
@@ -52,16 +56,15 @@ namespace PlayerInterface
             // Check if the item is part of a submenu of one of the already selected menuItems, if not close all so we can open the new one
             for (int i = 0; i < openItemList.Count; i++)
             {
-                //Debug.Log("New tree check: Checking Item: " + i + " of " + (openItemList.Count - 1) + " | " + openItemList[i].gameObject.name);
-
                 // If it is part of a menu, then the menus after that should be closed and the new menu should be opened
                 if (openItemList[i].subMenu == null) { continue; }
                 if (openItemList[i].subMenu.items.Contains(newItem))
                 {
+                    Debug.Log($"InterfaceManager: Item ({newItem.name}) is part of the same submenu as: {openItemList[i].gameObject.name}");
+
                     // The item is part of the same submenu of the previous item
                     for (int j = openItemList.Count - 1; j > i; j--)
                     {
-                        //Debug.Log("New Tree: Closing Item: " + j + " of " + (openItemList.Count - 1) + " | " + openItemList[j].gameObject.name);
                         var item = openItemList[j];
                         if (item != null)
                             yield return StartCoroutine(item.Deselect());
@@ -116,14 +119,16 @@ namespace PlayerInterface
                 // Add the item to the openItems en select it
                 openItemList.Add(newItem);
                 newItem.Select();
+                newItem.FadeIn(true);
 
                 // Fade out all the other items in the same menu from its parent
                 if (parentSubmenu != null)
                 {
                     for (int i = 0; i < parentSubmenu.items.Count; i++)
                     {
+                        bool snapAlpha = parentSubmenu.items[i] == _prevSelectedItem;
                         if (parentSubmenu.items[i] != newItem)
-                            parentSubmenu.items[i].FadeOut();
+                            parentSubmenu.items[i].FadeOut(snapAlpha);
                     }
                 }
             }

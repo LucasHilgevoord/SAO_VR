@@ -101,19 +101,31 @@ namespace PlayerInterface
                 subMenu.OpenMenu();
         }
 
-        public void FadeOut()
+        public void FadeOut(bool snap = false)
         {
-            // Fade out the item using DoTween and the canvas group
             DOTween.Kill(canvasGroup);
-            Debug.Log(gameObject.name + " FadeOut");
-            canvasGroup.DOFade(notSelectedAlpha, fadeDuration);
+
+            if (snap)
+            {
+                canvasGroup.alpha = notSelectedAlpha;
+            }
+            else
+            {
+                canvasGroup.DOFade(notSelectedAlpha, fadeDuration);
+            }
         }
 
-        public void FadeIn()
+        public void FadeIn(bool snap = false)
         {
-            // Fade in the item
             DOTween.Kill(canvasGroup);
-            canvasGroup.DOFade(1, fadeDuration);
+
+            if (snap)
+            {
+                canvasGroup.alpha = 1;
+            } else
+            {
+                canvasGroup.DOFade(1, fadeDuration);
+            }
         }
 
         public IEnumerator Deselect()
