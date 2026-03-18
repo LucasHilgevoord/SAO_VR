@@ -71,7 +71,7 @@ namespace PlayerInterface
 
         internal virtual void OnMenuItemPressed(MenuItem item, bool isSelected)
         {
-            Debug.Log("Item Pressed: " + item.gameObject.name + " - isSelected: " + isSelected);
+            //Debug.Log($"SubMenu: Item {(isSelected ? "selected" : "deselected")}: {item.gameObject.name}");
             if (!items.Contains(item)) { return; }
 
             if (isSelected == false)
@@ -113,7 +113,7 @@ namespace PlayerInterface
 
         private void CenterSelectedItem(MenuItem item)
         {
-            Debug.Log("Centering item: " + item.gameObject.name);
+            //Debug.Log("SubMenu: Centering item: " + item.gameObject.name);
             if (!centerItemOnSelect || !items.Contains(item)) return;
 
             int selectedIndex = items.IndexOf(item);

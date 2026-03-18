@@ -94,7 +94,6 @@ namespace PlayerInterface
 
             // Start the OnSelectEvents
             OnSelectEvents?.Invoke();
-            Debug.Log("OnSelectEvent");
 
             // Open the submenu if there is one
             if (subMenu != null)
@@ -130,7 +129,7 @@ namespace PlayerInterface
 
         public IEnumerator Deselect()
         {
-            Debug.Log("Deselect: " + gameObject.name + " - Submenu " + (subMenu != null));
+            //Debug.Log("MenuItem: Deselected " + gameObject.name);
             // Close the submenu's
             if (subMenu != null && isActiveAndEnabled)
                 yield return StartCoroutine(subMenu.CloseMenu());
@@ -148,7 +147,7 @@ namespace PlayerInterface
         public void Interact()
         {
             //AudioManager.Instance.PlayAudio(AudioGroupType.Interface, "interface_button_press");
-            Debug.Log("Interact: " + gameObject.name);
+            //Debug.Log("MenuItem: Interacted with " + gameObject.name);
 
             // Fire the event that this object has been clicked. The InterfaceManager will decide what to do with it and when.
             IsPressed?.Invoke(this, !IsSelected);

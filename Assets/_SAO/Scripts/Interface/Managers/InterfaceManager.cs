@@ -51,7 +51,7 @@ namespace PlayerInterface
 
             _allowInteraction = false;
             bool closedByCategorySwitch = false;
-            //Debug.Log("Pressed item: " + newItem.name + " - isSelected: " + isSelected);
+            Debug.Log($"InterfaceManager: {(isSelected? "Selected" : "Deselected")} item: {newItem.name}");
 
             // Check if the item is part of a submenu of one of the already selected menuItems, if not close all so we can open the new one
             for (int i = 0; i < openItemList.Count; i++)
@@ -109,12 +109,8 @@ namespace PlayerInterface
                 if (categorieMenu.items.Contains(newItem))
                     yield return StartCoroutine(categorieMenu.OnCategoryItemSelected(categorieMenu.items.FindIndex(x => x.Equals(newItem))));
 
-                // Get the parent submenu of the new item
-                Menu parentSubmenu = null;
-                if (openItemList.Count > 0)
-                    parentSubmenu = openItemList[openItemList.Count - 1].subMenu;
-                else
-                    parentSubmenu = categorieMenu;
+                // Get the parent submenu of the new item, if there is no parent submenu then the parent submenu is the categorie menu
+                Menu parentSubmenu = openItemList.Count > 0 ? openItemList[openItemList.Count - 1].subMenu : categorieMenu;
 
                 // Add the item to the openItems en select it
                 openItemList.Add(newItem);
@@ -136,8 +132,17 @@ namespace PlayerInterface
             {
                 // The item should be closed
                 if (!closedByCategorySwitch && newItem != null) {
-                    openItemList.Remove(newItem);
+                    Debug.Log($"InterfaceManager: Deselected Item {newItem.gameObject.name}");
 
+                    // Fade in all the other items in the same menu from its parent
+                    Menu parentSubmenu = openItemList.Count > 0 ? openItemList[openItemList.Count - 1].subMenu : categorieMenu;
+                    for (int i = 0; i < parentSubmenu.items.Count; i++)
+                    {
+                        if (parentSubmenu.items[i] != newItem)
+                            parentSubmenu.items[i].FadeIn();
+                    }
+
+                    openItemList.Remove(newItem);
                     yield return StartCoroutine(newItem.Deselect());
                 }
             }
